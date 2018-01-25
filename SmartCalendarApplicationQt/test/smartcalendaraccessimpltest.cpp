@@ -14,6 +14,13 @@ void SmartCalendarAccessImplTest::GetAllAvailableDevicesInNetworkTest()
     qDebug() << mSmartcalendarAccessImpl.GetAllAvailableDevicesInNetwork();
 }
 
+void SmartCalendarAccessImplTest::GetControllerInNetworkFromBroadcastTest()
+{
+    qDebug() << "printing controller in network";
+
+    qDebug() << mSmartcalendarAccessImpl.GetControllerInNetworkFromBroadcast(2000);
+}
+
 void SmartCalendarAccessImplTest::cleanupTestCase()
 { qDebug("called after myFirstTest and mySecondTest"); }
 

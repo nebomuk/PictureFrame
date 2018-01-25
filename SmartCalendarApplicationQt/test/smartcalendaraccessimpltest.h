@@ -10,7 +10,7 @@ private slots:
     void initTestCase();
     void myFirstTest();
     void mySecondTest();
-
+    void GetControllerInNetworkFromBroadcastTest();
     void GetAllAvailableDevicesInNetworkTest();
     void cleanupTestCase();
 

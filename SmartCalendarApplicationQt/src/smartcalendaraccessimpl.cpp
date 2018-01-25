@@ -59,11 +59,11 @@ bool SmartCalendarAccessImpl::IsCurrentlyRoaming()
 
 QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast(int timeOut)
 {
-    QUdpSocket udpSocket;
+    QUdpSocket senderSocket;
 
 
 
-    udpSocket.writeDatagram(BROADCASTMESSAGE.toLatin1(),QHostAddress::Broadcast,BROADCASTPORT);
+    senderSocket.writeDatagram(BROADCASTMESSAGE.toLatin1(),QHostAddress::Broadcast,BROADCASTPORT);
 
     int RECEIVINGBROADCASTPORT = 3913;
 
@@ -81,8 +81,8 @@ QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast
     QByteArray datagram;
     while(receiver.hasPendingDatagrams())
     {
-        datagram.resize(int(udpSocket.pendingDatagramSize()));
-         udpSocket.readDatagram(datagram.data(), datagram.size());
+        datagram.resize(int(receiver.pendingDatagramSize()));
+         receiver.readDatagram(datagram.data(), datagram.size());
          auto splitted = datagram.split(';');
          auto hostName = splitted[0];
          QByteArray ipAddress = splitted[1];
