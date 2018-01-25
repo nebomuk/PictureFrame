@@ -1,4 +1,4 @@
-QT += quick core gui widgets
+QT += quick core gui widgets network
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -15,7 +15,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += src/main.cpp \
     src/smartcalendaraccessimpl.cpp
 
-
 RESOURCES += qml.qrc
 
 # in QtCreator/Projects clone Debug configuration, name it Test and add the following qmake arguments: "CONFIG+=test" including the ""
@@ -26,7 +25,9 @@ test {
 
     SOURCES -= src/main.cpp
 
-    SOURCES += test/testmain.cpp
+    SOURCES += test/testmain.cpp \
+    test/smartcalendaraccessimpltest.cpp
+
 
     HEADERS +=  test/smartcalendaraccessimpltest.h
 
