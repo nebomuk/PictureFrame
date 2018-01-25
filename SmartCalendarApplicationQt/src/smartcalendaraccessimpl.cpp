@@ -83,10 +83,10 @@ QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast
     {
         datagram.resize(int(udpSocket.pendingDatagramSize()));
          udpSocket.readDatagram(datagram.data(), datagram.size());
-         auto splitted = datagram.split(";");
+         auto splitted = datagram.split(';');
          auto hostName = splitted[0];
-         auto ipAddress = splitted[1];
-         resultAddresses << QHostAddress(splitted[1]);
+         QByteArray ipAddress = splitted[1];
+         resultAddresses << QHostAddress(QString(ipAddress));
 
     }
 
