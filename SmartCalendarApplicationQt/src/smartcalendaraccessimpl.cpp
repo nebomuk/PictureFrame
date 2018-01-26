@@ -1,3 +1,4 @@
+#include "responderclient.h"
 #include "smartcalendaraccessimpl.h"
 
 #include <QCoreApplication>
@@ -57,7 +58,7 @@ bool SmartCalendarAccessImpl::IsCurrentlyRoaming()
 
 }
 
-QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast(int timeOut)
+QList<ResponderClient> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast(int timeOut)
 {
     QUdpSocket senderSocket;
 
@@ -77,7 +78,7 @@ QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast
         QCoreApplication::processEvents();
     }
 
-    QList<QHostAddress> resultAddresses;
+    QList<ResponderClient> resultAddresses;
     QByteArray datagram;
     while(receiver.hasPendingDatagrams())
     {
@@ -86,7 +87,7 @@ QList<QHostAddress> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast
          auto splitted = datagram.split(';');
          auto hostName = splitted[0];
          QByteArray ipAddress = splitted[1];
-         resultAddresses << QHostAddress(QString(ipAddress));
+         resultAddresses << ResponderClient(QString(hostName),QString(ipAddress));
 
     }
 

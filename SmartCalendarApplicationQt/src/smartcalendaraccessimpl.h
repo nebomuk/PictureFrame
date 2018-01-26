@@ -1,6 +1,8 @@
 #ifndef SMARTCALENDARACCESSIMPL_H
 #define SMARTCALENDARACCESSIMPL_H
 
+#include "responderclient.h"
+
 #include <QHostAddress>
 #include <QObject>
 
@@ -20,7 +22,7 @@ public:
 
     QList<QHostAddress> GetAllAvailableDevicesInNetwork();
 
-    QList<QHostAddress> GetControllerInNetworkFromBroadcast(int timeOut);
+    QList<ResponderClient> GetControllerInNetworkFromBroadcast(int timeOut);
 
     QString GetCurrentTargetConnectionAddress();
 
