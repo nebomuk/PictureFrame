@@ -1,3 +1,4 @@
+#include "mqtttest.h"
 #include "smartcalendaraccessimpltest.h"
 
 #include <QtTest>
@@ -14,6 +15,10 @@ int main(int argc, char** argv) {
 
 
     SmartCalendarAccessImplTest scait;
+    MqttTest mqtttest;
+
     // multiple test suites can be ran like this
-    return QTest::qExec(&scait, argc, argv);
+
+    return QTest::qExec(&scait, argc, argv)
+            | QTest::qExec(&mqtttest,argc,argv);
 }

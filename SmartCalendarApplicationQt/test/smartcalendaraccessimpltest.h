@@ -8,8 +8,6 @@ class SmartCalendarAccessImplTest : public QObject
     Q_OBJECT
 private slots:
     void initTestCase();
-    void myFirstTest();
-    void mySecondTest();
     void GetControllerInNetworkFromBroadcastTest();
     void GetAllAvailableDevicesInNetworkTest();
     void cleanupTestCase();

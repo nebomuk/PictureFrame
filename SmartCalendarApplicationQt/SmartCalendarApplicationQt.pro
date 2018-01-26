@@ -16,21 +16,30 @@ SOURCES += src/main.cpp \
     src/smartcalendaraccessimpl.cpp \
     src/responderclient.cpp
 
+HEADERS += \
+    src/smartcalendaraccessimpl.h \
+    src/smartcalendaraccessimpl.h \
+    src/controllerconnectionconstants.h \
+    src/responderclient.h
+
 RESOURCES += qml.qrc
 
 # in QtCreator/Projects clone Debug configuration, name it Test and add the following qmake arguments: "CONFIG+=test" including the ""
 test {
     message(Test build)
+
+    SOURCES += test/testmain.cpp \
+    test/smartcalendaraccessimpltest.cpp \
+    test/mqtttest.cpp
+
+    HEADERS +=  test/smartcalendaraccessimpltest.h \
+    test/mqtttest.h
+
     QT += testlib
     TARGET = UnitTests
 
-    SOURCES -= src/main.cpp
-
-    SOURCES += test/testmain.cpp \
-    test/smartcalendaraccessimpltest.cpp
-
-
-    HEADERS +=  test/smartcalendaraccessimpltest.h
+ # test main
+    SOURCES -= src/main.cpp ## add test sources above
 
 } else {
     message(Normal build)
@@ -47,8 +56,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    src/smartcalendaraccessimpl.h \
-    src/smartcalendaraccessimpl.h \
-    src/controllerconnectionconstants.h \
-    src/responderclient.h
+
