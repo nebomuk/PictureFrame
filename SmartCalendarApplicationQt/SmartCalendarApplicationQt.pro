@@ -14,13 +14,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += src/main.cpp \
     src/smartcalendaraccessimpl.cpp \
-    src/responderclient.cpp
+    src/responderclient.cpp \
+    src/controllerconnectionmanagerimpl.cpp \
+    src/controllerdatacontainer.cpp
 
 HEADERS += \
     src/smartcalendaraccessimpl.h \
     src/smartcalendaraccessimpl.h \
     src/controllerconnectionconstants.h \
-    src/responderclient.h
+    src/responderclient.h \
+    src/controllerconnectionmanagerimpl.h \
+    src/controllerdatacontainer.h
 
 RESOURCES += qml.qrc
 
