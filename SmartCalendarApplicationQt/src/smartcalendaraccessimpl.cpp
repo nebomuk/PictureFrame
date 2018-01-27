@@ -7,6 +7,7 @@
 #include <QHostInfo>
 #include <QNetworkDatagram>
 #include <QNetworkInterface>
+#include <QTimer>
 #include <QUdpSocket>
 
 SmartCalendarAccessImpl::SmartCalendarAccessImpl(QObject *parent) : QObject(parent)
@@ -71,12 +72,14 @@ QList<ResponderClient> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadc
     QUdpSocket receiver;
     receiver.bind(RECEIVINGBROADCASTPORT,QUdpSocket::ShareAddress);
 
-     QElapsedTimer timer;
-     timer.start();
-    while(timer.elapsed() < timeOut && !receiver.hasPendingDatagrams())
-    {
-        QCoreApplication::processEvents();
-    }
+     QTimer timer;
+     timer.setInterval(timeOut);
+     timer.setSingleShot(true);
+     QEventLoop eventLoop;
+
+     connect(&timer,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
+     connect(&receiver,&QUdpSocket::readyRead,&eventLoop,&QEventLoop::quit);
+     eventLoop.exec();
 
     QList<ResponderClient> resultAddresses;
     QByteArray datagram;

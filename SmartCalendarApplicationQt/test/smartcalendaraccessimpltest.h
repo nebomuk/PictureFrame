@@ -1,7 +1,10 @@
+#ifndef SMARTCALENDARACCESSIMPLTEST_H
+#define SMARTCALENDARACCESSIMPLTEST_H
+
 #include <QObject>
 #include <QTest>
 
-#include <src/smartcalendaraccessimpl.h>
+#include "../src/smartcalendaraccessimpl.h"
 
 class SmartCalendarAccessImplTest : public QObject
 {
@@ -16,4 +19,4 @@ private:
     SmartCalendarAccessImpl mSmartcalendarAccessImpl;
 };
 
-
+#endif // SMARTCALENDARACCESSIMPLTEST_H

@@ -10,7 +10,7 @@ class ControllerConnectionManagerImpl : public QObject
 {
     Q_OBJECT
 public:
-    explicit ControllerConnectionManagerImpl(QString brokerAddress, ControllerDataContainer dataContainer, QObject *parent = nullptr);
+    explicit ControllerConnectionManagerImpl(QString brokerAddress, ControllerDataContainer *dataContainer, QObject *parent = nullptr);
 
      bool establishConnection(QString clientId);
 
@@ -20,13 +20,17 @@ public:
 
      void publishJSONMessage(QString jsonObjectString, QString objectPath);
 
+     void registerSubscriptions();
+
+     void testConnection();
+
 
 signals:
 
 public slots:
 
 private slots:
-    void onConnected();
+     void onClientError(QMQTT::ClientError error);
 
 private:
 
