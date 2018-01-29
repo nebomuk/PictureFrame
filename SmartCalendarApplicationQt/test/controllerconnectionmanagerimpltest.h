@@ -2,6 +2,8 @@
 #define CONTROLLERCONNECTIONMANAGERIMPLTEST_H
 
 #include <QObject>
+#include <QTest>
+#include "../src/controllerconnectionmanagerimpl.h"
 
 class ControllerConnectionManagerImplTest : public QObject
 {
@@ -9,9 +11,13 @@ class ControllerConnectionManagerImplTest : public QObject
 public:
     explicit ControllerConnectionManagerImplTest(QObject *parent = nullptr);
 
-signals:
+private slots:
+    void initTestCase();
+    void establishConnectionTest();
+    void cleanupTestCase();
 
-public slots:
+private:
+    ControllerConnectionManagerImpl * mControllerConnectionManagerImpl;
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPLTEST_H

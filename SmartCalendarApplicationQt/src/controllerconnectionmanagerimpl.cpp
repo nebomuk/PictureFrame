@@ -28,10 +28,12 @@ bool ControllerConnectionManagerImpl::establishConnection(QString clientId)
     connectionTimeout.setSingleShot(true);
     QEventLoop eventLoop;
     connect(client,&QMQTT::Client::connected,&eventLoop,&QEventLoop::quit);
+    connect(client,&QMQTT::Client::error,&eventLoop,&QEventLoop::quit);
     connect(&connectionTimeout,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
     connectionTimeout.start();
     eventLoop.exec();
-    if(client->connectionState() == QMQTT::ConnectionState::STATE_CONNECTED)
+    // connection state may still be INIT but DISCONNECTED when there was an error
+    if(client->connectionState() == QMQTT::ConnectionState::STATE_DISCONNECTED)
     {
         registerSubscriptions();
         testConnection();

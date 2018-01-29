@@ -25,6 +25,8 @@ THE SOFTWARE.
 #ifndef PROPERTYHELPER_H
 #define PROPERTYHELPER_H
 
+/// creates Q_PROPERTY macro, setter, getter (all lowercase, without "set" and "get") and member field
+
 #include <QObject>
 #define AUTO_PROPERTY(TYPE, NAME) \
     Q_PROPERTY(TYPE NAME READ NAME WRITE NAME NOTIFY NAME ## Changed ) \

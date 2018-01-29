@@ -12,6 +12,7 @@ class MqttTest : public QObject
 
 private slots:
     void initTestCase();
+    void connectToHostTest();
     void cleanupTestCase();
 
 public:

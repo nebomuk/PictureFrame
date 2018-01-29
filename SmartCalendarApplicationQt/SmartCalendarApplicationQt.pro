@@ -18,8 +18,7 @@ SOURCES += src/main.cpp \
     src/controllerconnectionmanagerimpl.cpp \
     src/propertyhelper.cpp \
     src/controllerdatacontainernomacro.cpp \
-    src/controllerdatacontainer.cpp \
-    test/controllerconnectionmanagerimpltest.cpp
+    src/controllerdatacontainer.cpp
 
 HEADERS += \
     src/smartcalendaraccessimpl.h \
@@ -29,8 +28,7 @@ HEADERS += \
     src/controllerconnectionmanagerimpl.h \
     src/propertyhelper.h \
     src/controllerdatacontainernomacro.h \
-    src/controllerdatacontainer.h \
-    test/controllerconnectionmanagerimpltest.h
+    src/controllerdatacontainer.h
 
 RESOURCES += qml.qrc
 
@@ -40,10 +38,13 @@ test {
 
     SOURCES += test/testmain.cpp \
     test/smartcalendaraccessimpltest.cpp \
-    test/mqtttest.cpp
+    test/mqtttest.cpp\
+    test/controllerconnectionmanagerimpltest.cpp
+
 
     HEADERS +=  test/smartcalendaraccessimpltest.h \
-    test/mqtttest.h
+    test/mqtttest.h \
+    test/controllerconnectionmanagerimpltest.h
 
     QT += testlib
     TARGET = UnitTests
