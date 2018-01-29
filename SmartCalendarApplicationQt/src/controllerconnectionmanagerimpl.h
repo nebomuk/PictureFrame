@@ -24,6 +24,12 @@ public:
 
      void testConnection();
 
+     void listenToPublishes(QMQTT::Message msg);
+
+     void storeIncomingMessageLocally(QMQTT::Message msg);
+
+     void storeSendingMessageLocally(QString subscriptionPath, QString jsonString);
+
 
 signals:
 

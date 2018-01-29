@@ -76,9 +76,9 @@ QList<ResponderClient> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadc
      timer.setInterval(timeOut);
      timer.setSingleShot(true);
      QEventLoop eventLoop;
-
      connect(&timer,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
      connect(&receiver,&QUdpSocket::readyRead,&eventLoop,&QEventLoop::quit);
+     timer.start();
      eventLoop.exec();
 
     QList<ResponderClient> resultAddresses;

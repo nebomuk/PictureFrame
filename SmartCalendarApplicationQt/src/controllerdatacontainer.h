@@ -42,6 +42,9 @@ class ControllerDataContainer : public QObject
     Q_PROPERTY(QJsonArray  naslFallFootballTeams MEMBER naslFallFootballTeams)
     Q_PROPERTY(QJsonArray  uslProFootballTeams MEMBER uslProFootballTeams)
 
+    Q_PROPERTY(bool birthdayTableReceived MEMBER birthdayTableReceived)
+    Q_PROPERTY(bool trashTableReceived MEMBER trashTableReceived)
+
 
 
 public:
@@ -81,8 +84,6 @@ public:
     QJsonArray naslFallFootballTeams;
     QJsonArray uslProFootballTeams;
 
-
-private:
 
     bool birthdayTableReceived;
     bool trashTableReceived;

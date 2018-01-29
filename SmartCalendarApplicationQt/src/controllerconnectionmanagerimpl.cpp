@@ -1,6 +1,7 @@
 #include "controllerconnectionmanagerimpl.h"
 
 #include <QEventLoop>
+#include <QJsonDocument>
 #include <QTimer>
 #include <qmqtt_message.h>
 #include "controllerconnectionconstants.h"
@@ -12,6 +13,8 @@ ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QString brokerA
     client = new QMQTT::Client(brokerAddress,brokerPort,false, true,this);
 
     connect(client,&QMQTT::Client::error,this,&ControllerConnectionManagerImpl::onClientError);
+
+    connect(client,&QMQTT::Client::received,this,&ControllerConnectionManagerImpl::listenToPublishes);
 }
 
 bool ControllerConnectionManagerImpl::establishConnection(QString clientId)
@@ -25,6 +28,7 @@ bool ControllerConnectionManagerImpl::establishConnection(QString clientId)
     QEventLoop eventLoop;
     connect(client,&QMQTT::Client::connected,&eventLoop,&QEventLoop::quit);
     connect(&connectionTimeout,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
+    connectionTimeout.start();
     eventLoop.exec();
     if(client->connectionState() == QMQTT::ConnectionState::STATE_CONNECTED)
     {
@@ -65,6 +69,7 @@ void ControllerConnectionManagerImpl::publishJSONMessage(QString jsonObjectStrin
     message.setTopic(objectPath);
     message.setPayload(jsonObjectString.toUtf8());
     client->publish(message);
+    storeSendingMessageLocally(objectPath,jsonObjectString);
 
 }
 
@@ -104,6 +109,26 @@ void ControllerConnectionManagerImpl::testConnection()
     message.setTopic(ControllerConnectionConstants::TESTCONNECTIONPATH);
     message.setPayload(QByteArray("Connection successfull"));
     client->publish(message);
+}
+
+void ControllerConnectionManagerImpl::listenToPublishes(QMQTT::Message msg)
+{
+    storeIncomingMessageLocally(msg);
+}
+
+void ControllerConnectionManagerImpl::storeIncomingMessageLocally(QMQTT::Message msg)
+{
+//    if (ControllerConnectionConstants::BIRTHDAYPLANSUBSCRIPTIONPATH == msg.topic())
+//               {
+//                   dataContainer->birthdayPlan = QJsonDocument::fromJson( msg.payload()).array();
+//                   dataContainer->birthdayTableReceived = true;
+//               }
+
+}
+
+void ControllerConnectionManagerImpl::storeSendingMessageLocally(QString subscriptionPath, QString jsonString)
+{
+
 }
 
 void ControllerConnectionManagerImpl::onClientError(QMQTT::ClientError error)
