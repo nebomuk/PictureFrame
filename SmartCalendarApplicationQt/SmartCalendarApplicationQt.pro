@@ -18,7 +18,8 @@ SOURCES += src/main.cpp \
     src/controllerconnectionmanagerimpl.cpp \
     src/propertyhelper.cpp \
     src/controllerdatacontainernomacro.cpp \
-    src/controllerdatacontainer.cpp
+    src/controllerdatacontainer.cpp \
+    test/controllerconnectionmanagerimpltest.cpp
 
 HEADERS += \
     src/smartcalendaraccessimpl.h \
@@ -28,7 +29,8 @@ HEADERS += \
     src/controllerconnectionmanagerimpl.h \
     src/propertyhelper.h \
     src/controllerdatacontainernomacro.h \
-    src/controllerdatacontainer.h
+    src/controllerdatacontainer.h \
+    test/controllerconnectionmanagerimpltest.h
 
 RESOURCES += qml.qrc
 

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QJsonValue>
+#include <QJsonObject>
 #include <QJsonArray>
 #include "propertyhelper.h"
 
@@ -14,8 +15,11 @@ public:
 
 private:
 
-    AUTO_PROPERTY(QJsonValue,baseOptions)
-    AUTO_PROPERTY(QJsonValue,smartCalendarDeviceOptionsDisplayOptions)
+    // example write: container->baseOptions(myJsonValue);
+    // example read: container->baseOptions();
+
+    AUTO_PROPERTY(QJsonObject,baseOptions)
+    AUTO_PROPERTY(QJsonObject,smartCalendarDeviceOptionsDisplayOptions)
 
 
     AUTO_PROPERTY(QJsonArray, trashPlan)

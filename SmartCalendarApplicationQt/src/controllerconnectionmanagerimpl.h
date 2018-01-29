@@ -18,7 +18,7 @@ public:
 
      void publishSimpleStringMessage(QString path, QString simpleMessage);
 
-     void publishJSONMessage(QString jsonObjectString, QString objectPath);
+     void publishJSONMessage(QByteArray jsonObjectString, QString objectPath);
 
      void registerSubscriptions();
 
@@ -28,7 +28,7 @@ public:
 
      void storeIncomingMessageLocally(QMQTT::Message msg);
 
-     void storeSendingMessageLocally(QString subscriptionPath, QString jsonString);
+     void storeSendingMessageLocally(QString subscriptionPath, QByteArray jsonString);
 
 
 signals:
@@ -44,6 +44,11 @@ private:
     QMQTT::Client * client;
     QString currentClientId;
     ControllerDataContainer * dataContainer;
+    bool messageContainsSendingImage(QString topic);
+    bool messageContainsIncomingImage(QString topic);
+    void storeImage(QByteArray jsonString, QString topic);
+
+    QJsonArray convertMessageToArray(QByteArray msg);
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPL_H
