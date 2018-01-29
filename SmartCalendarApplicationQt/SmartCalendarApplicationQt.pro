@@ -16,6 +16,8 @@ SOURCES += src/main.cpp \
     src/smartcalendaraccessimpl.cpp \
     src/responderclient.cpp \
     src/controllerconnectionmanagerimpl.cpp \
+    src/propertyhelper.cpp \
+    src/controllerdatacontainernomacro.cpp \
     src/controllerdatacontainer.cpp
 
 HEADERS += \
@@ -24,6 +26,8 @@ HEADERS += \
     src/controllerconnectionconstants.h \
     src/responderclient.h \
     src/controllerconnectionmanagerimpl.h \
+    src/propertyhelper.h \
+    src/controllerdatacontainernomacro.h \
     src/controllerdatacontainer.h
 
 RESOURCES += qml.qrc

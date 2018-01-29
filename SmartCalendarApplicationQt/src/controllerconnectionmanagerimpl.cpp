@@ -2,6 +2,7 @@
 
 #include <QEventLoop>
 #include <QJsonDocument>
+#include <QJsonDocument>
 #include <QTimer>
 #include <qmqtt_message.h>
 #include "controllerconnectionconstants.h"
@@ -118,11 +119,11 @@ void ControllerConnectionManagerImpl::listenToPublishes(QMQTT::Message msg)
 
 void ControllerConnectionManagerImpl::storeIncomingMessageLocally(QMQTT::Message msg)
 {
-//    if (ControllerConnectionConstants::BIRTHDAYPLANSUBSCRIPTIONPATH == msg.topic())
-//               {
-//                   dataContainer->birthdayPlan = QJsonDocument::fromJson( msg.payload()).array();
-//                   dataContainer->birthdayTableReceived = true;
-//               }
+    if (ControllerConnectionConstants::BIRTHDAYPLANSUBSCRIPTIONPATH == msg.topic())
+               {
+                   dataContainer->birthdayPlan(QJsonDocument::fromJson( msg.payload()).array());
+                   dataContainer->birthdayTableReceived(true);
+               }
 
 }
 

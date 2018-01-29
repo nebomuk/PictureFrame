@@ -1,8 +1,6 @@
 #include "controllerdatacontainer.h"
 
-
-ControllerDataContainer::ControllerDataContainer()
+ControllerDataContainer::ControllerDataContainer(QObject *parent) : QObject(parent)
 {
-    birthdayTableReceived = false;
-    trashTableReceived = false;
+
 }
