@@ -14,7 +14,8 @@ void ControllerConnectionManagerImplTest::initTestCase()
 
 void ControllerConnectionManagerImplTest::establishConnectionTest()
 {
-    QVERIFY2(mControllerConnectionManagerImpl->establishConnection(QUuid::createUuid().toString()),"establishConnection() failed");
+    auto uuid = QUuid::createUuid().toString().mid(1, 36).toUpper();
+    QVERIFY2(mControllerConnectionManagerImpl->establishConnection(uuid),"establishConnection() failed");
 }
 
 void ControllerConnectionManagerImplTest::cleanupTestCase()

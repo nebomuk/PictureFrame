@@ -29,6 +29,7 @@ bool ControllerConnectionManagerImpl::establishConnection(QString clientId)
     QEventLoop eventLoop;
     connect(client,&QMQTT::Client::connected,&eventLoop,&QEventLoop::quit);
     connect(client,&QMQTT::Client::error,&eventLoop,&QEventLoop::quit);
+
     connect(&connectionTimeout,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
     connectionTimeout.start();
     eventLoop.exec();
@@ -464,7 +465,7 @@ QJsonArray ControllerConnectionManagerImpl::convertMessageToArray(QByteArray msg
 
 void ControllerConnectionManagerImpl::onClientError(QMQTT::ClientError error)
 {
-    qDebug(qPrintable("FIXME: ClientError enum number " + QString::number(error) + " received"));
+    qDebug(qPrintable(QString("FIXME: ClientError enum enum %1 received").arg(error)));
 }
 
 

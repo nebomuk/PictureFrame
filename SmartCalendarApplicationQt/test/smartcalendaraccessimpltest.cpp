@@ -3,21 +3,29 @@
 
 void SmartCalendarAccessImplTest::initTestCase()
 {
-    qDebug("called before everything else"); }
+}
 
 
 void SmartCalendarAccessImplTest::GetAllAvailableDevicesInNetworkTest()
 {
-    qDebug() << "printing all devices in network";
-    qDebug() << mSmartcalendarAccessImpl.GetAllAvailableDevicesInNetwork();
+    auto devices =  mSmartcalendarAccessImpl.GetAllAvailableDevicesInNetwork();
+
+    QVERIFY2(!devices.empty(),"no devices found");
+    if(!devices.empty())
+    {
+        qDebug() << "found devices: " << devices;
+    }
 }
 
 void SmartCalendarAccessImplTest::GetControllerInNetworkFromBroadcastTest()
 {
-    qDebug() << "printing controller in network";
-
-    qDebug() << mSmartcalendarAccessImpl.GetControllerInNetworkFromBroadcast(2000);
+    auto controllers = mSmartcalendarAccessImpl.GetControllerInNetworkFromBroadcast(2000);
+    if(controllers.empty())
+    {
+        QWARN("No Controllers found, java MQTT Client not running?");
+    }
 }
 
 void SmartCalendarAccessImplTest::cleanupTestCase()
-{ qDebug("called after myFirstTest and mySecondTest"); }
+{
+}
