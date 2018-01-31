@@ -36,6 +36,7 @@ void MqttTest::connectToHostTest()
     eventLoop.exec();
 
     QVERIFY(client->connectionState() != QMQTT::ConnectionState::STATE_DISCONNECTED);
+    client->disconnectFromHost();
 }
 
 void MqttTest::cleanupTestCase()
