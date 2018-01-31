@@ -9,40 +9,47 @@
 class DeviceAccessorImpl : public QObject
 {
     Q_OBJECT
-public:
-    explicit DeviceAccessorImpl(ControllerConnectionManagerImpl  *controllerConnectionManager, QObject *parent = nullptr);
 
+    Q_PROPERTY(ControllerConnectionManagerImpl controllerConnectionManager READ controllerConnectionManager)
+
+    Q_PROPERTY(bool isConnectedToBroker READ isConnectedToBroker)
+
+public:
+    explicit DeviceAccessorImpl(ControllerConnectionManagerImpl  *mControllerConnectionManager, QObject *parent = nullptr);
+
+
+    ControllerConnectionManagerImpl *controllerConnectionManager() const;
 
 public slots:
 
-    bool IsConnectedToBroker();
-    void SendCalendarImage(QJsonObject calendarImage);
+    bool isConnectedToBroker();
+    void sendCalendarImage(QJsonObject calendarImage);
 
-    void SendWeatherImage(QJsonObject weatherImage);
-    void SendNewsImage(QJsonObject newsImage);
-    void SendFootballImage(QJsonObject footballImage);
-    void SendCinemaImage(QJsonObject cinemaImage);
-    void SendImageFile(QJsonObject imageFile);
-    void SendCalendarBaseOptions(QJsonObject baseOptions);
-    void SendSmartCalendarDeviceOptions(QJsonObject deviceOptions);
-    void SendMasterAccount(QJsonObject masterAccount);
-    void SendDefinedPersonsData(QJsonArray accountList);
-    void SendBirthdayTable(QJsonArray birthdayList);
-    void SendTrashTable(QJsonArray trashList);
-    void SendImageCount(int imageCount);
-    void SendDeviceLanguage(QString language);
-    void SendCallBackAdress(QString callBackAddress);
-    void SendCalendarToken(QJsonObject refreshToken);
-    void SendFirstConfigurationOption(QJsonObject firstConfigOption);
+    void sendWeatherImage(QJsonObject weatherImage);
+    void sendNewsImage(QJsonObject newsImage);
+    void sendFootballImage(QJsonObject footballImage);
+    void sendCinemaImage(QJsonObject cinemaImage);
+    void sendImageFile(QJsonObject imageFile);
+    void sendCalendarBaseOptions(QJsonObject baseOptions);
+    void sendSmartCalendarDeviceOptions(QJsonObject deviceOptions);
+    void sendMasterAccount(QJsonObject masterAccount);
+    void sendDefinedPersonsData(QJsonArray accountList);
+    void sendBirthdayTable(QJsonArray birthdayList);
+    void sendTrashTable(QJsonArray trashList);
+    void sendImageCount(int imageCount);
+    void sendDeviceLanguage(QString language);
+    void sendCallBackAdress(QString callBackAddress);
+    void sendCalendarToken(QJsonObject refreshToken);
+    void sendFirstConfigurationOption(QJsonObject firstConfigOption);
 private:
 
     QJsonArray addClientID(QJsonArray jsonArray);
 
 
-    ControllerConnectionManagerImpl  *controllerConnectionManager;
+    ControllerConnectionManagerImpl  *mControllerConnectionManager;
 
-    QString clientID;
-    bool isConnectedToBroker;
+    QString mClientID;
+    bool mIsConnectedToBroker;
 
 
 

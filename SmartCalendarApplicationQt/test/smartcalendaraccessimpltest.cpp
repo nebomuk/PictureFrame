@@ -8,7 +8,7 @@ void SmartCalendarAccessImplTest::initTestCase()
 
 void SmartCalendarAccessImplTest::GetAllAvailableDevicesInNetworkTest()
 {
-    auto devices =  mSmartcalendarAccessImpl.GetAllAvailableDevicesInNetwork();
+    auto devices =  mSmartcalendarAccessImpl.getAllAvailableDevicesInNetwork();
 
     QVERIFY2(!devices.empty(),"no devices found");
     if(!devices.empty())
@@ -19,7 +19,7 @@ void SmartCalendarAccessImplTest::GetAllAvailableDevicesInNetworkTest()
 
 void SmartCalendarAccessImplTest::GetControllerInNetworkFromBroadcastTest()
 {
-    auto controllers = mSmartcalendarAccessImpl.GetControllerInNetworkFromBroadcast(2000);
+    auto controllers = mSmartcalendarAccessImpl.getControllerInNetworkFromBroadcast(2000);
     if(controllers.empty())
     {
         QWARN("No Controllers found, java MQTT Client not running?");

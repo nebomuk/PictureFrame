@@ -12,28 +12,30 @@ class SmartCalendarAccessImpl : public QObject
 public:
     explicit SmartCalendarAccessImpl(QObject *parent = nullptr);
 
+
+    void checkNetworkConnection();
+
+    QList<QHostAddress> getAllAvailableDevicesInNetwork();
+
+    QList<ResponderClient> getControllerInNetworkFromBroadcast(int timeOut);
+
+    QString getCurrentTargetConnectionAddress();
+
+    bool isConnectedToActiveNetwork();
+
+    bool isConnectedToWifi();
+
+    bool isCurrentlyRoaming();
+
+
+public slots:
+
+private:
+    bool mIsConnected;
     const QString BROADCASTMESSAGE = "Broadcast controller";
 
     const int BROADCASTPORT = 3912;
     const int BUFFERTIMEOUT = 100;
-
-    bool IsConnected;
-    void CheckNetworkConnection();
-
-    QList<QHostAddress> GetAllAvailableDevicesInNetwork();
-
-    QList<ResponderClient> GetControllerInNetworkFromBroadcast(int timeOut);
-
-    QString GetCurrentTargetConnectionAddress();
-
-    bool IsConnectedToActiveNetwork();
-
-    bool IsConnectedToWifi();
-
-    bool IsCurrentlyRoaming();
-
-
-public slots:
 };
 
 #endif // SMARTCALENDARACCESSIMPL_H

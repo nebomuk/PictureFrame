@@ -15,29 +15,29 @@ SmartCalendarAccessImpl::SmartCalendarAccessImpl(QObject *parent) : QObject(pare
 
 }
 
-void SmartCalendarAccessImpl::CheckNetworkConnection()
+void SmartCalendarAccessImpl::checkNetworkConnection()
 {
 
-    if ( IsConnectedToWifi())
+    if ( isConnectedToWifi())
     {
-        IsConnected = true;
+        mIsConnected = true;
     }
-    else if (IsCurrentlyRoaming()|| IsConnectedToActiveNetwork() )
+    else if (isCurrentlyRoaming()|| isConnectedToActiveNetwork() )
     {
-        IsConnected= false;
+        mIsConnected= false;
     }
     else
     {
-        IsConnected = false;
+        mIsConnected = false;
     }
 
 }
 
-QList<QHostAddress> SmartCalendarAccessImpl::GetAllAvailableDevicesInNetwork()
+QList<QHostAddress> SmartCalendarAccessImpl::getAllAvailableDevicesInNetwork()
 {
-    CheckNetworkConnection();
+    checkNetworkConnection();
 
-    if (!IsConnected)
+    if (!mIsConnected)
     {
         return QList<QHostAddress>();
     }
@@ -53,13 +53,13 @@ bool IsConnectedToWifi()
     return true;
 }
 
-bool SmartCalendarAccessImpl::IsCurrentlyRoaming()
+bool SmartCalendarAccessImpl::isCurrentlyRoaming()
 {
     return false;
 
 }
 
-QList<ResponderClient> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadcast(int timeOut)
+QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadcast(int timeOut)
 {
     QUdpSocket senderSocket;
 
@@ -97,17 +97,17 @@ QList<ResponderClient> SmartCalendarAccessImpl::GetControllerInNetworkFromBroadc
     return resultAddresses;
 }
 
-QString SmartCalendarAccessImpl::GetCurrentTargetConnectionAddress()
+QString SmartCalendarAccessImpl::getCurrentTargetConnectionAddress()
 {
     return "";
 }
 
-bool SmartCalendarAccessImpl::IsConnectedToActiveNetwork()
+bool SmartCalendarAccessImpl::isConnectedToActiveNetwork()
 {
     return true;
 }
 
-bool SmartCalendarAccessImpl::IsConnectedToWifi()
+bool SmartCalendarAccessImpl::isConnectedToWifi()
 {
     return true;
 }
