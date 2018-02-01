@@ -5,5 +5,18 @@
         <file>src/main.qml</file>
         <file>src/BaseOptionsPage.ui.qml</file>
         <file>src/DeviceManagerPage.ui.qml</file>
+        <file>src/BaseDisplayOptionsPage.ui.qml</file>
+        <file>src/CalendarImagePage.ui.qml</file>
+        <file>src/CalendarMainPage.ui.qml</file>
+        <file>src/CinemaImagePage.ui.qml</file>
+        <file>src/DefinePersonsPage.ui.qml</file>
+        <file>src/DynamicPicturePage.ui.qml</file>
+        <file>src/FirstConfigurationPage.ui.qml</file>
+        <file>src/FootballImagePage.ui.qml</file>
+        <file>src/ManageBirthdaysPage.ui.qml</file>
+        <file>src/ManageTrashPlanPage.ui.qml</file>
+        <file>src/MasterAccountPage.ui.qml</file>
+        <file>src/NewsImagePage.ui.qml</file>
+        <file>src/WeatherImage.ui.qml</file>
     </qresource>
 </RCC>
