@@ -3,6 +3,7 @@ import QtQuick.Controls 2.3
 import QtGraphicalEffects 1.0
 
 Page {
+    id: page
     width: 600
     height: 400
 
@@ -14,6 +15,7 @@ Page {
            font.letterSpacing: 0.9
            color: "red"
            text: "Hello World"
+           anchors.horizontalCenter: parent.horizontalCenter
 
            layer.enabled: true
            layer.effect: DropShadow {

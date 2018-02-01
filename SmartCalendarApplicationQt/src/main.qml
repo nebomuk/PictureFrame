@@ -40,6 +40,13 @@ ApplicationWindow {
                }
         }
 
+    footer: Label {
+            text : "Copyright © 2018 ViTec - Visual Solutions"
+            horizontalAlignment:  Text.AlignHCenter
+            bottomPadding: 10
+
+    }
+
 
     Drawer {
         id: drawer
