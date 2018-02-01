@@ -1,12 +1,13 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import QtGraphicalEffects 1.0
 
 ApplicationWindow {
     id: window
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Stack")
+    width: 480
+    height: 640
+    title: qsTr("SmartCalendar")
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -27,8 +28,18 @@ ApplicationWindow {
         Label {
             text: stackView.currentItem.title
             anchors.centerIn: parent
+            font.pointSize: 20
+
+                   layer.enabled: true
+                   layer.effect: DropShadow {
+                       verticalOffset: 2
+                       color: "#80000000"
+                       radius: 2
+                       samples: 3
+                   }
+               }
         }
-    }
+
 
     Drawer {
         id: drawer
@@ -39,18 +50,18 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("Device Manager")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page1Form.ui.qml")
+                    stackView.push("BaseOptionsPage.ui.qml")
                     drawer.close()
                 }
             }
             ItemDelegate {
-                text: qsTr("Page 2")
+                text: qsTr("Base Options")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push("DeviceManagerPage.ui.qml")
                     drawer.close()
                 }
             }
@@ -59,7 +70,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: "MainPage.ui.qml"
         anchors.fill: parent
     }
 }

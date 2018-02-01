@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
-        <file>src/HomeForm.ui.qml</file>
+        <file>src/MainPage.ui.qml</file>
         <file>src/main.qml</file>
-        <file>src/Page1Form.ui.qml</file>
-        <file>src/Page2Form.ui.qml</file>
+        <file>src/BaseOptionsPage.ui.qml</file>
+        <file>src/DeviceManagerPage.ui.qml</file>
     </qresource>
 </RCC>
