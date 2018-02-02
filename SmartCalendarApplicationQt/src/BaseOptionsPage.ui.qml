@@ -30,7 +30,7 @@ Page {
         x: 121
         y: 85
         height: 50
-        width: 600
+        width: 480
         spacing: 20
         Button {
             id: button
@@ -53,7 +53,7 @@ Page {
         x: 114
         y: 303
         width: 200
-        height: 400
+        height: 800
 
         Button {
             id: button3

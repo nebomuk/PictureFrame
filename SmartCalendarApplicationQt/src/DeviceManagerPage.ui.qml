@@ -4,8 +4,8 @@ import QtGraphicalEffects 1.0
 
 Page {
     id: page
-    width: 600
-    height: 400
+    width: 480
+    height: 800
 
     title: qsTr("Page 1")
 

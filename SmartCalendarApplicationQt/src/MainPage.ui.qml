@@ -12,7 +12,7 @@ Page {
         x: 80
         y: 120
         width: 303
-        height: 400
+        height: 800
 
         Button {
             id: button

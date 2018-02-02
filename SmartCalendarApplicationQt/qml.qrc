@@ -18,5 +18,6 @@
         <file>src/MasterAccountPage.ui.qml</file>
         <file>src/NewsImagePage.ui.qml</file>
         <file>src/WeatherImage.ui.qml</file>
+        <file>src/Style.qml</file>
     </qresource>
 </RCC>
