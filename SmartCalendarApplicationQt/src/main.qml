@@ -15,11 +15,6 @@ ApplicationWindow {
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
-        background: Rectangle {
-                        anchors.fill: parent
-                        color : "transparent"
-                    }
-
         ToolButton {
             id: toolButton
             text: stackView.depth > 1 ? "\u25C0" : "\u2630"
@@ -37,38 +32,8 @@ ApplicationWindow {
             id : titleLabel
             text: stackView.currentItem.title
             anchors.centerIn: parent
-            font.pointSize: 12
-            color: Style.colorHeading1
-
-                   layer.enabled: true
-                   layer.effect: DropShadow {
-                       verticalOffset: 2
-                       color: "#80000000"
-                       radius: 2
-                       samples: 3
-                   }
+            font.pointSize: 20
                }
-        Label {
-            id : heading2Label
-            text: "no device selected"
-            anchors.topMargin: 20
-            anchors.top: titleLabel.bottom
-            anchors.horizontalCenter: titleLabel.horizontalCenter
-            font.pointSize: 24
-            color: Style.colorHeading1
-
-               }
-        Rectangle {
-            id: rectangle
-            anchors.topMargin: 20
-            anchors.top: heading2Label.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 10
-            color: Style.colorHeading2
-            anchors.rightMargin: 0
-            anchors.leftMargin: 0
-        }
         }
 
     footer: Label {
