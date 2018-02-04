@@ -71,9 +71,11 @@ ApplicationWindow {
         }
     }
 
+
     StackView {
         id: stackView
-        initialItem: "MainPage.ui.qml"
         anchors.fill: parent
-    }
+        initialItem: MainPage {}
+
+       }
 }

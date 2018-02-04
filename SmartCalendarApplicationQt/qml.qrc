@@ -1,11 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
-        <file>src/MainPage.ui.qml</file>
         <file>src/main.qml</file>
-        <file>src/BaseOptionsPage.ui.qml</file>
         <file>src/DeviceManagerPage.ui.qml</file>
-        <file>src/BaseDisplayOptionsPage.ui.qml</file>
         <file>src/CalendarImagePage.ui.qml</file>
         <file>src/CalendarMainPage.ui.qml</file>
         <file>src/CinemaImagePage.ui.qml</file>
@@ -19,5 +16,16 @@
         <file>src/NewsImagePage.ui.qml</file>
         <file>src/WeatherImage.ui.qml</file>
         <file>src/Style.qml</file>
+        <file>src/DeviceManagerComponent.qml</file>
+        <file>src/CalendarMainComponent.qml</file>
+        <file>src/BaseCalendarOptionsPage.qml</file>
+        <file>src/BaseCalendarOptionsPageForm.ui.qml</file>
+        <file>src/BaseDisplayOptionsPage.qml</file>
+        <file>src/BaseDisplayOptionsPageForm.ui.qml</file>
+        <file>src/BaseOptionsPage.qml</file>
+        <file>src/BaseOptionsPageForm.ui.qml</file>
+        <file>src/CenterButton.qml</file>
+        <file>src/MainPageForm.ui.qml</file>
+        <file>src/MainPage.qml</file>
     </qresource>
 </RCC>
