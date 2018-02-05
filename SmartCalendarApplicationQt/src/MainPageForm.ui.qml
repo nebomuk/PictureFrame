@@ -3,7 +3,7 @@ import QtQuick.Controls 2.3
 
 Page {
     width: 480
-    height: 640
+    height: 800
 
     title: qsTr("Smart Calendar")
 
@@ -13,12 +13,11 @@ Page {
 
     property alias buttonBaseConfiguration : baseConfigurationButton
 
-    Column {
+    CenterColumn {
         id: column
-        x: 80
-        y: 120
+
         width: 303
-        height: 800
+        height: 600
 
         Label {
             id: label

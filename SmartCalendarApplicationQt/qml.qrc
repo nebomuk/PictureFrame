@@ -38,5 +38,6 @@
         <file>src/NewsImagePage.qml</file>
         <file>src/WeatherImagePageForm.ui.qml</file>
         <file>src/WeatherImagePage.qml</file>
+        <file>src/CenterColumn.qml</file>
     </qresource>
 </RCC>

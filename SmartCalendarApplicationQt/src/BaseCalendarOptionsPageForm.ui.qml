@@ -1,28 +1,52 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.3
 
-Column {
-    id: column
-    width: 200
-    height: 800
 
-    CenterButton {
-        id: button3
-        text: qsTr("Master Account")
+Page {
+    width: 480
+    height: 640
+
+    title: qsTr("Calendar Options")
+
+
+    CenterColumn {
+        id: column
+
+        width: 200
+        height: 512
+
+
+        CenterButton {
+            id: button3
+            text: qsTr("Master Account")
+        }
+
+        CenterButton {
+            id: button4
+            text: qsTr("Define Persons")
+        }
+
+        CenterButton {
+            id: button5
+            text: qsTr("Manage Birthdays")
+        }
+
+        CenterButton {
+            id: button6
+            text: qsTr("Manage Trash")
+        }
+        CheckBox {
+            checked: false
+            text: qsTr("Show birthdays")
+        }
+        CheckBox {
+            checked: false
+            text: qsTr("Show public holidays")
+        }
+        CheckBox {
+            checked: false
+            text: qsTr("Show trash plan")
+        }
     }
 
-    CenterButton {
-        id: button4
-        text: qsTr("Define Persons")
-    }
-
-    CenterButton {
-        id: button5
-        text: qsTr("Manage Birthdays")
-    }
-
-    CenterButton {
-        id: button6
-        text: qsTr("Manage Trash")
-    }
 }
