@@ -1,7 +1,5 @@
 import QtQuick 2.0
 
-
-DeviceManagerPage {
+NewsImagePageForm {
 
 }
-

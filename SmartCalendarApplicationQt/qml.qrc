@@ -2,22 +2,7 @@
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
         <file>src/main.qml</file>
-        <file>src/DeviceManagerPage.ui.qml</file>
-        <file>src/CalendarImagePage.ui.qml</file>
-        <file>src/CalendarMainPage.ui.qml</file>
-        <file>src/CinemaImagePage.ui.qml</file>
-        <file>src/DefinePersonsPage.ui.qml</file>
-        <file>src/DynamicPicturePage.ui.qml</file>
-        <file>src/FirstConfigurationPage.ui.qml</file>
-        <file>src/FootballImagePage.ui.qml</file>
-        <file>src/ManageBirthdaysPage.ui.qml</file>
-        <file>src/ManageTrashPlanPage.ui.qml</file>
-        <file>src/MasterAccountPage.ui.qml</file>
-        <file>src/NewsImagePage.ui.qml</file>
-        <file>src/WeatherImage.ui.qml</file>
         <file>src/Style.qml</file>
-        <file>src/DeviceManagerComponent.qml</file>
-        <file>src/CalendarMainComponent.qml</file>
         <file>src/BaseCalendarOptionsPage.qml</file>
         <file>src/BaseCalendarOptionsPageForm.ui.qml</file>
         <file>src/BaseDisplayOptionsPage.qml</file>
@@ -27,5 +12,31 @@
         <file>src/CenterButton.qml</file>
         <file>src/MainPageForm.ui.qml</file>
         <file>src/MainPage.qml</file>
+        <file>src/DeviceManagerPage.qml</file>
+        <file>src/DeviceManagerPageForm.ui.qml</file>
+        <file>src/CalendarMainPage.qml</file>
+        <file>src/CalendarMainPageForm.ui.qml</file>
+        <file>src/CinemaImagePageForm.ui.qml</file>
+        <file>src/DefinePersonsPageForm.ui.qml</file>
+        <file>src/DynamicPicturePageForm.ui.qml</file>
+        <file>src/FirstConfigurationPageForm.ui.qml</file>
+        <file>src/FootballImagePageForm.ui.qml</file>
+        <file>src/ManageBirthdaysPageForm.ui.qml</file>
+        <file>src/ManageTrashPlanPageForm.ui.qml</file>
+        <file>src/MasterAccountPageForm.ui.qml</file>
+        <file>src/NewsImagePageForm.ui.qml</file>
+        <file>src/CalendarImagePageForm.ui.qml</file>
+        <file>src/CalendarImagePage.qml</file>
+        <file>src/CinemaImagePage.qml</file>
+        <file>src/DefinePersonsPage.qml</file>
+        <file>src/DynamicPicturePage.qml</file>
+        <file>src/FirstConfigurationPage.qml</file>
+        <file>src/FootballImagePage.qml</file>
+        <file>src/ManageBirthdaysPage.qml</file>
+        <file>src/ManageTrashPlanPage.qml</file>
+        <file>src/MasterAccountPage.qml</file>
+        <file>src/NewsImagePage.qml</file>
+        <file>src/WeatherImagePageForm.ui.qml</file>
+        <file>src/WeatherImagePage.qml</file>
     </qresource>
 </RCC>
