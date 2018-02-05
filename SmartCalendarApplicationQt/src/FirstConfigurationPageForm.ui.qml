@@ -7,7 +7,7 @@ Page {
     width: 480
     height: 800
 
-    title: qsTr("Page 1")
+    title: qsTr("First Configuration")
 
     Text {
            id: textId
