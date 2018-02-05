@@ -1,9 +1,12 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import Qt.labs.settings 1.0
 
 Page {
     width: 480
     height: 800
+
+    id : page
 
     title: qsTr("Smart Calendar")
 
@@ -12,6 +15,13 @@ Page {
     property alias buttonCalendarView : calendarViewButton
 
     property alias buttonBaseConfiguration : baseConfigurationButton
+
+    property string selectedDevice : qsTr("No Device Selected")
+
+    Settings
+    {
+        property alias selectedDevice : page.selectedDevice
+    }
 
     CenterColumn {
         id: column
@@ -25,7 +35,7 @@ Page {
         Label {
             id: label
             font.pointSize: 20
-            text: qsTr("No Device Selected")
+            text: selectedDevice
             anchors.horizontalCenter: parent.horizontalCenter
             bottomPadding: 8
         }

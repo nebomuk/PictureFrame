@@ -50,4 +50,11 @@ Page {
         }
     }
 
+    Button {
+        id: button
+        x: 337
+        y: 443
+        text: qsTr("Confirm")
+    }
+
 }

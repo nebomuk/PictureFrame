@@ -19,7 +19,8 @@ SOURCES += src/main.cpp \
     src/propertyhelper.cpp \
     src/controllerdatacontainernomacro.cpp \
     src/controllerdatacontainer.cpp \
-    src/deviceaccessorimpl.cpp
+    src/deviceaccessorimpl.cpp \
+    src/devicemanagermodel.cpp
 
 HEADERS += \
     src/smartcalendaraccessimpl.h \
@@ -30,7 +31,8 @@ HEADERS += \
     src/propertyhelper.h \
     src/controllerdatacontainernomacro.h \
     src/controllerdatacontainer.h \
-    src/deviceaccessorimpl.h
+    src/deviceaccessorimpl.h \
+    src/devicemanagermodel.h
 
 RESOURCES += qml.qrc
 
