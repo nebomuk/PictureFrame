@@ -12,9 +12,10 @@ Page {
     CenterColumn {
         id: column
 
+        anchors.topMargin: 80
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         width: 200
-        height: 512
-
 
         CenterButton {
             id: button3

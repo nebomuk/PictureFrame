@@ -16,8 +16,11 @@ Page {
     CenterColumn {
         id: column
 
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: 140
+
         width: 303
-        height: 600
 
         Label {
             id: label
