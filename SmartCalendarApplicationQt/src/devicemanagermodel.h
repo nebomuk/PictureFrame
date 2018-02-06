@@ -6,12 +6,29 @@
 class DeviceManagerModel : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QStringList availableDevices READ availableDevices WRITE setAvailableDevices NOTIFY availableDevicesChanged)
+    Q_PROPERTY(QStringList savedDevices READ savedDevices WRITE setSavedDevices NOTIFY savedDevicesChanged)
+
+
 public:
     explicit DeviceManagerModel(QObject *parent = nullptr);
 
-signals:
+    QStringList availableDevices() const;
+    void setAvailableDevices(const QStringList &availableDevices);
 
-public slots:
+    QStringList savedDevices() const;
+    void setSavedDevices(const QStringList &savedDevices);
+
+signals:
+    void availableDevicesChanged();
+    void savedDevicesChanged();
+
+private:
+    // TODO replace with QQmlListProperty if notify does not work
+    QStringList mAvailableDevices;
+    QStringList mSavedDevices;
+
 };
 
 #endif // DEVICEMANAGERMODEL_H
