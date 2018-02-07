@@ -8,6 +8,14 @@ Page {
 
     title: qsTr("Calendar Options")
 
+    property alias buttonMasterAccount: buttonMasterAccount
+
+    property alias buttonDefinePersons: buttonDefinePersons
+
+    property alias buttonManageBirthdays: buttonManageBirthdays
+
+    property alias buttonManageTrash: buttonManageTrash
+
 
     CenterColumn {
         id: column
@@ -18,22 +26,22 @@ Page {
         width: 200
 
         CenterButton {
-            id: button3
+            id: buttonMasterAccount
             text: qsTr("Master Account")
         }
 
         CenterButton {
-            id: button4
+            id: buttonDefinePersons
             text: qsTr("Define Persons")
         }
 
         CenterButton {
-            id: button5
+            id: buttonManageBirthdays
             text: qsTr("Manage Birthdays")
         }
 
         CenterButton {
-            id: button6
+            id: buttonManageTrash
             text: qsTr("Manage Trash")
         }
         CheckBox {
@@ -52,9 +60,11 @@ Page {
 
     Button {
         id: button
-        x: 337
-        y: 443
         text: qsTr("Confirm")
+        anchors.right: parent.right
+        anchors.rightMargin: 80
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 80
     }
 
 }

@@ -9,20 +9,66 @@ Page {
 
     title: qsTr("Manage Birthdays")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    Grid {
+        id: grid
+        x: 11
+        y: 71
+        width: 400
+        height: 178
+        spacing: 10
+        rows: 3
+        columns: 2
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+        Label {
+            id: label
+            text: qsTr("First Name")
+        }
+
+        TextField {
+            id: textFieldFirstName
+            text: qsTr("Text Field")
+        }
+
+        Label {
+            id: label1
+            text: qsTr("Last Name")
+        }
+
+        TextField {
+            id: textFieldLastName
+            text: qsTr("Text Field")
+        }
+
+        Label {
+            id: label2
+            text: qsTr("Birthdate")
+        }
+
+        Label {
+            id: datePickerBirthday
+            text: "birthday picker placeholder"
+            width: 60
+            height: 20
+        }
+    }
+
+    Button {
+        id: button
+        x: 35
+        y: 268
+        text: qsTr("Confirm")
+    }
+
+    Label {
+        id: label3
+        x: 85
+        y: 424
+        text: qsTr("Remove Birthday")
+    }
+
+    ComboBox {
+        id: comboBox
+        x: 56
+        y: 488
+    }
 }

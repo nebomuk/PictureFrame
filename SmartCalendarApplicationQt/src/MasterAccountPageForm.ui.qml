@@ -9,20 +9,48 @@ Page {
 
     title: qsTr("Master Account")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    Grid {
+        id: grid
+        rows : 2
+        columns : 2
+        rowSpacing: 10
+        columnSpacing: 20
+        x: 93
+        y: 185
+        width: 276
+        height: 188
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+        Label {
+            id: label
+            text: qsTr("Name")
+        }
+
+        Label {
+            id: label1
+            text: qsTr("Email-Address")
+        }
+
+        TextField {
+            id: textField
+            text: qsTr("Text Field")
+        }
+
+        TextField {
+            id: textField1
+            text: qsTr("Text Field")
+        }
+    }
+
+
+
+    Button {
+        id: button
+        text: qsTr("Confirm")
+        anchors.right: parent.right
+        anchors.rightMargin: 80
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 80
+    }
+
+
 }
