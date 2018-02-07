@@ -10,6 +10,8 @@ class ResponderClient
 {
 public:
 
+    // only used for meta object system
+    ResponderClient();
 
    ResponderClient(QString hostName, QString hostIpAdress);
 
@@ -26,6 +28,8 @@ public:
     QString hostName;
    QString hostIpAdress;
 };
+
+Q_DECLARE_METATYPE(ResponderClient)
 
 
 

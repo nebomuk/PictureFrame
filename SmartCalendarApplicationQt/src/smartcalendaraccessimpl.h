@@ -5,6 +5,7 @@
 
 #include <QHostAddress>
 #include <QObject>
+#include <QUdpSocket>
 
 class SmartCalendarAccessImpl : public QObject
 {
@@ -17,7 +18,9 @@ public:
 
     QList<QHostAddress> getAllAvailableDevicesInNetwork();
 
-    QList<ResponderClient> getControllerInNetworkFromBroadcast(int timeOut);
+    QList<ResponderClient> getControllerInNetworkFromBroadcastBlocking(int timeOut);
+
+    void getControllerInNetworkFromBroadcast();
 
     QString getCurrentTargetConnectionAddress();
 
@@ -26,6 +29,9 @@ public:
     bool isConnectedToWifi();
 
     bool isCurrentlyRoaming();
+
+signals:
+    void controllerInNetworkReceived(QList<ResponderClient> controllers);
 
 
 public slots:
@@ -36,6 +42,7 @@ private:
 
     const int BROADCASTPORT = 3912;
     const int BUFFERTIMEOUT = 100;
+    QList<ResponderClient> readResponderClientsFromUdpSocket(QUdpSocket *socket);
 };
 
 #endif // SMARTCALENDARACCESSIMPL_H

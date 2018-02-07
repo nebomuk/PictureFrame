@@ -11,6 +11,7 @@ class SmartCalendarAccessImplTest : public QObject
     Q_OBJECT
 private slots:
     void initTestCase();
+    void GetControllerInNetworkFromBroadcastBlockingTest();
     void GetControllerInNetworkFromBroadcastTest();
     void GetAllAvailableDevicesInNetworkTest();
     void cleanupTestCase();

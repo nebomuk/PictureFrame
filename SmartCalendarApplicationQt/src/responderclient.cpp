@@ -1,6 +1,12 @@
 #include "responderclient.h"
 
 
+ResponderClient::ResponderClient()
+{
+    this->hostName = "";
+    this->hostIpAdress = "";
+}
+
 ResponderClient::ResponderClient(QString hostName, QString hostIpAdress)
 {
     this->hostName = hostName;

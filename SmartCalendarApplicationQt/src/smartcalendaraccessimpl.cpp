@@ -59,12 +59,9 @@ bool SmartCalendarAccessImpl::isCurrentlyRoaming()
 
 }
 
-QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadcast(int timeOut)
+QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadcastBlocking(int timeOut)
 {
     QUdpSocket senderSocket;
-
-
-
     senderSocket.writeDatagram(BROADCASTMESSAGE.toLatin1(),QHostAddress::Broadcast,BROADCASTPORT);
 
     int RECEIVINGBROADCASTPORT = 3913;
@@ -81,20 +78,43 @@ QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadc
      timer.start();
      eventLoop.exec();
 
+     QList<ResponderClient> resultAddresses = readResponderClientsFromUdpSocket(&receiver);
+
+    return resultAddresses;
+}
+
+QList<ResponderClient> SmartCalendarAccessImpl::readResponderClientsFromUdpSocket(QUdpSocket * socket)
+{
     QList<ResponderClient> resultAddresses;
     QByteArray datagram;
-    while(receiver.hasPendingDatagrams())
+    while(socket->hasPendingDatagrams())
     {
-        datagram.resize(int(receiver.pendingDatagramSize()));
-         receiver.readDatagram(datagram.data(), datagram.size());
+        datagram.resize(int(socket->pendingDatagramSize()));
+         socket->readDatagram(datagram.data(), datagram.size());
          auto splitted = datagram.split(';');
          auto hostName = splitted[0];
          QByteArray ipAddress = splitted[1];
          resultAddresses << ResponderClient(QString(hostName),QString(ipAddress));
 
     }
-
     return resultAddresses;
+}
+
+void SmartCalendarAccessImpl::getControllerInNetworkFromBroadcast()
+{
+    QUdpSocket senderSocket;
+    senderSocket.writeDatagram(BROADCASTMESSAGE.toLatin1(),QHostAddress::Broadcast,BROADCASTPORT);
+
+    int RECEIVINGBROADCASTPORT = 3913;
+
+    QUdpSocket * receiver = new QUdpSocket();
+    receiver->bind(RECEIVINGBROADCASTPORT,QUdpSocket::ShareAddress);
+
+    connect(receiver,&QUdpSocket::readyRead,this,[receiver,this]{
+         QList<ResponderClient> resultAddresses = readResponderClientsFromUdpSocket(receiver);
+         emit controllerInNetworkReceived(resultAddresses);
+        receiver->deleteLater();
+    });
 }
 
 QString SmartCalendarAccessImpl::getCurrentTargetConnectionAddress()
