@@ -2,6 +2,7 @@
 
 DeviceManagerModel::DeviceManagerModel(QObject *parent) : QObject(parent)
 {
+    mSmartcalendarAccess = new SmartCalendarAccessImpl(this);
 
 }
 
@@ -25,4 +26,15 @@ void DeviceManagerModel::setSavedDevices(const QStringList &savedDevices)
 {
     emit savedDevicesChanged();
     mSavedDevices = savedDevices;
+}
+
+void DeviceManagerModel::populateAvailableDevices()
+{
+    mSmartcalendarAccess->getControllerInNetworkFromBroadcast();
+    connect(mSmartcalendarAccess,&SmartCalendarAccessImpl::controllerInNetworkReceived,this,&DeviceManagerModel::addAvailableDevices);
+}
+
+void DeviceManagerModel::addAvailableDevices(QList<ResponderClient> devices)
+{
+    // TODO make ResponderClient available to qml, notify
 }

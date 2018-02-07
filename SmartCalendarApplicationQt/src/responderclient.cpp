@@ -3,27 +3,27 @@
 
 ResponderClient::ResponderClient()
 {
-    this->hostName = "";
-    this->hostIpAdress = "";
+    this->mHostName = "";
+    this->mHostIpAdress = "";
 }
 
 ResponderClient::ResponderClient(QString hostName, QString hostIpAdress)
 {
-    this->hostName = hostName;
-    this->hostIpAdress = hostIpAdress;
+    this->mHostName = hostName;
+    this->mHostIpAdress = hostIpAdress;
 }
 
-QString ResponderClient::GetHostName() const
+QString ResponderClient::hostName() const
 {
-    return this->hostName;
+    return this->mHostName;
 }
 
-QString ResponderClient::GetHostIpAdress() const
+QString ResponderClient::hostIpAdress() const
 {
-    return this->hostIpAdress;
+    return this->mHostIpAdress;
 }
 
 ResponderClient::operator QString() const
 {
-    return QString() + '(' + this->GetHostName() + ", " + this->GetHostIpAdress() + ')';
+    return QString() + '(' + this->hostName() + ", " + this->hostIpAdress() + ')';
 }

@@ -8,6 +8,12 @@
 
 class ResponderClient
 {
+//    Q_GADGET
+
+//    Q_PROPERTY(QString hostName READ hostName)
+
+//    Q_PROPERTY(QString hostIpAdress READ hostIpAdress)
+
 public:
 
     // only used for meta object system
@@ -15,9 +21,9 @@ public:
 
    ResponderClient(QString hostName, QString hostIpAdress);
 
-   QString GetHostName() const;
+   QString hostName() const;
 
-   QString GetHostIpAdress() const;
+   QString hostIpAdress() const;
 
    // for qDebug output
    operator QString() const;
@@ -25,8 +31,8 @@ public:
 
  private:
 
-    QString hostName;
-   QString hostIpAdress;
+    QString mHostName;
+   QString mHostIpAdress;
 };
 
 Q_DECLARE_METATYPE(ResponderClient)
