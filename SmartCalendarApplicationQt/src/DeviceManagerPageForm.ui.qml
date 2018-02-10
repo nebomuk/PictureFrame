@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import Qt.labs.settings 1.0
+import de.vitecvisual.model 1.0
 
 Page {
     id: page
@@ -11,20 +12,51 @@ Page {
 
     property string selectedDevice
 
-    Settings
-    {
+    Settings {
         property alias selectedDevice: page.selectedDevice
+    }
+
+    DeviceManagerModel
+    {
+        id : deviceManagerModel
+
+//        onAvailableDevicesChanged: console.log("availableDevicesChanged " + availableDevices[0].hostName)
+//        onAvailableDeviceCountChanged:  console.log("onAvailableDeviceCountChanged " + availableDeviceCount)
+
+    }
+
+    Column
+    {
+        spacing: 50
+
+    Label {
+        id: label1
+        text: qsTr("Configured Devices")
     }
 
 
     Label {
         id: label
-        x: 120
-        y: 161
-        width: 160
-        height: 39
-        text: selectedDevice
-        font.pointSize: 17
+        text: qsTr("Configure New Device")
     }
 
+    ListView {
+        id: listView
+        width: 110
+        height: 117
+        delegate:
+            Frame
+                {
+
+                    Label
+                    {
+                        text : deviceManagerModel.availableDevices[modelData].hostName
+                    }
+                }
+
+        model: deviceManagerModel.availableDeviceCount
+    }
+
+
+    }
 }

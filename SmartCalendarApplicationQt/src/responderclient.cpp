@@ -26,4 +26,5 @@ QString ResponderClient::hostIpAdress() const
 ResponderClient::operator QString() const
 {
     return QString() + '(' + this->hostName() + ", " + this->hostIpAdress() + ')';
+
 }

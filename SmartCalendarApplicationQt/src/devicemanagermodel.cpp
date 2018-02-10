@@ -1,40 +1,68 @@
 #include "devicemanagermodel.h"
 
+#include <QTimer>
+
+
+#include "qvariantlistconversion.h"
+
 DeviceManagerModel::DeviceManagerModel(QObject *parent) : QObject(parent)
 {
     mSmartcalendarAccess = new SmartCalendarAccessImpl(this);
-
+    populateAvailableDevices();
 }
 
-QStringList DeviceManagerModel::availableDevices() const
+QList<ResponderClient> DeviceManagerModel::availableDevices() const
 {
     return mAvailableDevices;
 }
 
-void DeviceManagerModel::setAvailableDevices(const QStringList &availableDevices)
+void DeviceManagerModel::setAvailableDevices(const QList<ResponderClient> &availableDevices)
 {
-    emit availableDevicesChanged();
     mAvailableDevices = availableDevices;
+    emit availableDevicesChanged();
 }
 
-QStringList DeviceManagerModel::savedDevices() const
+QList<ResponderClient> DeviceManagerModel::savedDevices() const
 {
     return mSavedDevices;
 }
 
-void DeviceManagerModel::setSavedDevices(const QStringList &savedDevices)
+int DeviceManagerModel::availableDeviceCount() const { return mAvailableDevices.size(); }
+
+int DeviceManagerModel::savedDeviceCount() const { return mSavedDevices.size(); }
+
+QVariantList DeviceManagerModel::availableDevicesVariantList() const {
+    QVariantList list;
+
+    for(auto client : availableDevices())
+    {
+        list.append(QVariant::fromValue(client));
+    }
+    return list;
+}
+
+QVariantList DeviceManagerModel::savedDevicesVariantList() const
 {
-    emit savedDevicesChanged();
+    return QVariantListConversion::toVariantList(savedDevices());
+}
+
+void DeviceManagerModel::setSavedDevices(const QList<ResponderClient> &savedDevices)
+{
     mSavedDevices = savedDevices;
+    emit savedDevicesChanged();
 }
 
 void DeviceManagerModel::populateAvailableDevices()
 {
     mSmartcalendarAccess->getControllerInNetworkFromBroadcast();
-    connect(mSmartcalendarAccess,&SmartCalendarAccessImpl::controllerInNetworkReceived,this,&DeviceManagerModel::addAvailableDevices);
+    connect(mSmartcalendarAccess,&SmartCalendarAccessImpl::controllerInNetworkReceived,this,[=](QList<ResponderClient> controllers)
+    {
+        QList<ResponderClient> availableDevicesList;
+        for(auto client : controllers)
+        {
+            availableDevicesList.append(client);
+        }
+        setAvailableDevices(availableDevicesList);
+    });
 }
 
-void DeviceManagerModel::addAvailableDevices(QList<ResponderClient> devices)
-{
-    // TODO make ResponderClient available to qml, notify
-}
