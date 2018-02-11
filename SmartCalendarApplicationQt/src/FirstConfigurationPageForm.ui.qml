@@ -7,22 +7,63 @@ Page {
     width: 480
     height: 800
 
-    title: qsTr("First Configuration")
+    title: qsTr("Configure New Device")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+
+    property alias textFieldDeviceName: textFieldDeviceName
+
+    property alias textFieldSsid: textFieldSsid
+
+    property alias textFieldPassword : textFieldPassword
+
+    property alias buttonConfirm: confirmButton
+
+    Grid {
+        id: grid
+        x: 11
+        y: 71
+        width: 400
+        height: 178
+        spacing: 10
+        rows: 3
+        columns: 2
+
+        Label {
+            id: label
+            text: qsTr("Device Name")
+        }
+
+        TextField {
+            id: textFieldDeviceName
+        }
+
+        Label {
+            id: label1
+            text: qsTr("SSID (Network Name)")
+        }
+
+        TextField {
+            id: textFieldSsid
+        }
+
+        Label {
+            id: label2
+            text: qsTr("Password")
+        }
+
+        TextField {
+            id: textFieldPassword
+            echoMode: TextInput.Password
+
+        }
+    }
+
+    Button {
+        id: confirmButton
+        x: 35
+        y: 268
+        text: qsTr("Confirm")
+        enabled: textFieldPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldDeviceName.text.length > 0
+    }
 }

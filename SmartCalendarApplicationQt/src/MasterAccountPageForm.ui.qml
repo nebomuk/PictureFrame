@@ -31,25 +31,34 @@ Page {
         }
 
         TextField {
-            id: textField
-            text: qsTr("Text Field")
+            id: textFieldName
+            placeholderText: qsTr( "Enter name" )
         }
 
         TextField {
-            id: textField1
-            text: qsTr("Text Field")
+            id: textFieldEmail
+            placeholderText: qsTr( "Enter email" )
+
+            validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
         }
     }
 
+    Connections
+    {
+        target: confirmButton
 
+    }
 
     Button {
-        id: button
+        id: confirmButton
+        x: 313
+        y: 442
         text: qsTr("Confirm")
         anchors.right: parent.right
-        anchors.rightMargin: 80
+        anchors.rightMargin: 87
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 80
+        anchors.bottomMargin: 310
+        enabled: textFieldName.text.length > 0 && textFieldEmail.length > 0
     }
 
 

@@ -7,7 +7,10 @@ DeviceManagerPageForm {
 
     id : page
 
-    onAvailableDevicesClicked:  console.log("clicked avail index : " + index);
+    onAvailableDevicesClicked:
+    {
+        stackView.push("FirstConfigurationPage.qml")
+    }
 
     onSavedDevicesClicked: {
         NotifyingSettings.selectedDevice = deviceManagerModel.savedDevices[index].hostName
