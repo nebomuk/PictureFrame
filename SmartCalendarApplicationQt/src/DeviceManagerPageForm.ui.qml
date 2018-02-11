@@ -10,11 +10,8 @@ Page {
 
     title: qsTr("Device Selection")
 
-    property string selectedDevice
-
-    Settings {
-        property alias selectedDevice: page.selectedDevice
-    }
+    signal availableDevicesClicked(int index)
+    signal savedDevicesClicked(int index)
 
     DeviceManagerModel
     {
@@ -27,11 +24,46 @@ Page {
 
     Column
     {
-        spacing: 50
+        id: column
+        y: 99
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 20
 
     Label {
         id: label1
         text: qsTr("Configured Devices")
+    }
+
+    ListView {
+        id: savedDevicesListView
+        height: 50
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        delegate:
+            Frame
+            {
+                MouseArea
+                {
+                    id : savedDevicesMouseArea
+                    anchors.fill: parent
+
+                }
+                Connections {
+                   target: savedDevicesMouseArea
+                   onClicked: savedDevicesClicked(index)
+                 }
+
+
+                Label
+                {
+                    text : deviceManagerModel.savedDevices[modelData].hostName
+                }
+            }
+
+        model: deviceManagerModel.savedDeviceCount
     }
 
 
@@ -40,21 +72,32 @@ Page {
         text: qsTr("Configure New Device")
     }
 
+
+
     ListView {
-        id: listView
-        width: 110
-        height: 117
-        delegate:
-            Frame
+        id: availableDevicesListView
+        height: 50
+        anchors.leftMargin: 0
+        delegate: Frame {
+
+            Label {
+
+                MouseArea
                 {
-
-                    Label
-                    {
-                        text : deviceManagerModel.availableDevices[modelData].hostName
-                    }
+                    id : availableDevicesMouseArea
+                    anchors.fill: parent
                 }
-
+                Connections {
+                   target: availableDevicesMouseArea
+                   onClicked: availableDevicesClicked(index)
+                 }
+                text: deviceManagerModel.availableDevices[modelData].hostName
+            }
+        }
+        anchors.rightMargin: 0
         model: deviceManagerModel.availableDeviceCount
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
 

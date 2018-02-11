@@ -32,13 +32,7 @@ int DeviceManagerModel::availableDeviceCount() const { return mAvailableDevices.
 int DeviceManagerModel::savedDeviceCount() const { return mSavedDevices.size(); }
 
 QVariantList DeviceManagerModel::availableDevicesVariantList() const {
-    QVariantList list;
-
-    for(auto client : availableDevices())
-    {
-        list.append(QVariant::fromValue(client));
-    }
-    return list;
+    return QVariantListConversion::toVariantList(availableDevices());
 }
 
 QVariantList DeviceManagerModel::savedDevicesVariantList() const
