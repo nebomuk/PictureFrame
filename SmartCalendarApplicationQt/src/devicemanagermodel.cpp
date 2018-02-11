@@ -9,6 +9,9 @@ DeviceManagerModel::DeviceManagerModel(QObject *parent) : QObject(parent)
 {
     mSmartcalendarAccess = new SmartCalendarAccessImpl(this);
     populateAvailableDevices();
+
+    mSavedDevices.append(ResponderClient("client1","192.168.1.201"));
+    mSavedDevices.append(ResponderClient("client2","192.168.1.201"));
 }
 
 QList<ResponderClient> DeviceManagerModel::availableDevices() const

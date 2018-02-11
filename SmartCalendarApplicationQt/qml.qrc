@@ -39,5 +39,6 @@
         <file>src/WeatherImagePageForm.ui.qml</file>
         <file>src/WeatherImagePage.qml</file>
         <file>src/CenterColumn.qml</file>
+        <file>src/NotifyingSettings.qml</file>
     </qresource>
 </RCC>

@@ -1,5 +1,6 @@
 import QtQuick 2.0
-import Qt.labs.settings 1.0
+import de.vitecvisual.util 1.0
+
 
 
 DeviceManagerPageForm {
@@ -8,11 +9,9 @@ DeviceManagerPageForm {
 
     onAvailableDevicesClicked:  console.log("clicked avail index : " + index);
 
-    property string selectedDevice
-
-
-    Settings {
-        property alias selectedDevice: page.selectedDevice
+    onSavedDevicesClicked: {
+        NotifyingSettings.selectedDevice = deviceManagerModel.savedDevices[index].hostName
+        stackView.pop();
     }
 
 

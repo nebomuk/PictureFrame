@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import Qt.labs.settings 1.0
+import de.vitecvisual.util 1.0
 
 Page {
     width: 480
@@ -16,12 +17,8 @@ Page {
 
     property alias buttonBaseConfiguration : baseConfigurationButton
 
-    property string selectedDevice : qsTr("No Device Selected")
+    property string selectedDevice : NotifyingSettings.selectedDevice
 
-    Settings
-    {
-        property alias selectedDevice : page.selectedDevice
-    }
 
     CenterColumn {
         id: column

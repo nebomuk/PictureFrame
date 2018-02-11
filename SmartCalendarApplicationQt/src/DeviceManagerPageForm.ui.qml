@@ -13,6 +13,8 @@ Page {
     signal availableDevicesClicked(int index)
     signal savedDevicesClicked(int index)
 
+    property alias deviceManagerModel: deviceManagerModel
+
     DeviceManagerModel
     {
         id : deviceManagerModel
@@ -45,20 +47,21 @@ Page {
         delegate:
             Frame
             {
-                MouseArea
-                {
-                    id : savedDevicesMouseArea
-                    anchors.fill: parent
 
-                }
-                Connections {
-                   target: savedDevicesMouseArea
-                   onClicked: savedDevicesClicked(index)
-                 }
 
 
                 Label
                 {
+                    MouseArea
+                    {
+                        id : savedDevicesMouseArea
+                        anchors.fill: parent
+
+                    }
+                    Connections {
+                       target: savedDevicesMouseArea
+                       onClicked: savedDevicesClicked(index)
+                     }
                     text : deviceManagerModel.savedDevices[modelData].hostName
                 }
             }

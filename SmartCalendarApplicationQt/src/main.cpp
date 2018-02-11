@@ -1,4 +1,5 @@
 #include "devicemanagermodel.h"
+#include "notifyingsettings.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -13,6 +14,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterSingletonType( QUrl("qrc:/src/Style.qml"), "de.vitecvisual.style", 1, 0, "Style" );
     qRegisterMetaType<ResponderClient>();
+    qmlRegisterSingletonType(QUrl("qrc:/src/NotifyingSettings.qml"),"de.vitecvisual.util",1,0,"NotifyingSettings");
     qmlRegisterType<DeviceManagerModel>("de.vitecvisual.model",1,0,"DeviceManagerModel");
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/src/main.qml")));
