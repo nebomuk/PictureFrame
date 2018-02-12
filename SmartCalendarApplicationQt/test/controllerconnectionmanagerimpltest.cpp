@@ -16,6 +16,8 @@ void ControllerConnectionManagerImplTest::establishConnectionTest()
 {
     auto uuid = QUuid::createUuid().toString().mid(1, 36).toUpper();
     QVERIFY2(mControllerConnectionManagerImpl->establishConnection(uuid),"establishConnection() failed");
+
+    QTest::qWait(1000); // wait until stuff received
     mControllerConnectionManagerImpl->closeConnection();
 }
 
