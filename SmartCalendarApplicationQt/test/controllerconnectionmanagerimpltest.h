@@ -18,6 +18,7 @@ private slots:
 
 private:
     ControllerConnectionManagerImpl * mControllerConnectionManagerImpl;
+    ControllerDataContainer * mControllerDataContainer;
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPLTEST_H

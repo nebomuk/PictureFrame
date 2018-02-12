@@ -4,7 +4,8 @@
 
 ControllerConnectionManagerImplTest::ControllerConnectionManagerImplTest(QObject *parent) : QObject(parent)
 {
-    mControllerConnectionManagerImpl = new ControllerConnectionManagerImpl(QHostAddress(QHostAddress::LocalHost).toString(),new ControllerDataContainer(),this);
+    mControllerDataContainer =  new ControllerDataContainer();
+    mControllerConnectionManagerImpl = new ControllerConnectionManagerImpl(QHostAddress(QHostAddress::LocalHost).toString(),mControllerDataContainer,this);
 }
 
 void ControllerConnectionManagerImplTest::initTestCase()
@@ -18,6 +19,12 @@ void ControllerConnectionManagerImplTest::establishConnectionTest()
     QVERIFY2(mControllerConnectionManagerImpl->establishConnection(uuid),"establishConnection() failed");
 
     QTest::qWait(1000); // wait until stuff received
+
+    QVERIFY(!mControllerDataContainer->personList().isEmpty());
+    QVERIFY(!mControllerDataContainer->baseOptions().isEmpty());
+    QVERIFY(!mControllerDataContainer->smartCalendarDeviceOptionsDisplayOptions().isEmpty());
+
+
     mControllerConnectionManagerImpl->closeConnection();
 }
 
