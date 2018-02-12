@@ -1,5 +1,4 @@
 #include "devicemanagermodel.h"
-#include "notifyingsettings.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
