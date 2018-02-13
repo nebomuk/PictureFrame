@@ -24,17 +24,18 @@ Page {
         height: 150
 
         RadioButton {
-            id: radioButton
+            id: radioButtonScreenBrightnessFixed
             text: qsTr("Fixed")
         }
 
         SpinBox {
+            enabled: radioButtonScreenBrightnessFixed.checked
             value: 80
             id: spinBox
         }
 
         RadioButton {
-            id: radioButton1
+            id: radioButtonScreenBrightnessAutomatic
             text: qsTr("Automatic")
         }
     }
@@ -53,18 +54,19 @@ Page {
         width: 400
         height: 150
         RadioButton {
-            id: radioButton2
+            id: radioButtonSensibility
             text: qsTr("Sensibility")
         }
 
         ComboBox {
-            model: ["Low", "Average", "High"]
-            id: comboBox
+            model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
+            id: comboBoxSensibility
+            enabled: radioButtonSensibility.checked
         }
 
         RadioButton {
-            id: radioButton3
-            text: qsTr("Permament activation")
+            id: radioButtonPermanentlyActivated
+            text: qsTr("Permamently Activated")
         }
 
         rows: 2
@@ -93,12 +95,12 @@ Page {
         {
             Tumbler {
                 id: tumblerWorkingDayStart
-                model: ["Low", "Average", "High"]
+                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
             }
 
             Tumbler {
                 id: tumblerWorkingDayEnd
-                model: ["Low", "Average", "High"]
+                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
             }
 
         }
@@ -112,12 +114,12 @@ Page {
         {
             Tumbler {
                 id: tumblerWeekendStart
-                model: ["Low", "Average", "High"]
+                model: [qsTr(qsTr("Low")), qsTr(qsTr("Average")), qsTr("High")]
             }
 
             Tumbler {
                 id: tumblerWeekendEnd
-                model: ["Low", "Average", "High"]
+                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
             }
 
         }

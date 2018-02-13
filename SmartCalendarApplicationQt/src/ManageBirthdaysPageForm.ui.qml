@@ -27,9 +27,9 @@ Page {
         TextField {
             id: textFieldFirstName
             placeholderText: qsTr("Enter First Name")
-//            validator: RegExpValidator {
-//                regExp: /^[\p{L}\s'.-]+$/
-//            }
+            validator: RegExpValidator {
+                regExp: /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/
+            }
         }
 
         Label {
@@ -40,9 +40,9 @@ Page {
         TextField {
             id: textFieldLastName
             placeholderText:  qsTr("Enter Last Name")
-//            validator: RegExpValidator {
-//                regExp: /^[\p{L}\s'.-]+$/
-//            }
+            validator: RegExpValidator {
+                regExp:  /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/
+            }
         }
 
         Label {
