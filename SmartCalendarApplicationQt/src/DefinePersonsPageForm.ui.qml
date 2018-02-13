@@ -8,21 +8,4 @@ Page {
     height: 800
 
     title: qsTr("Define Persons")
-
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
-
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
 }

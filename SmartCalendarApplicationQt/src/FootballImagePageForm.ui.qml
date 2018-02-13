@@ -9,20 +9,107 @@ Page {
 
     title: qsTr("Football Image")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    Column {
+        spacing: 10
+        Row {
+            spacing: 10
+            TextField {
+                placeholderText: "Favorite Team"
+            }
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+            TextField {
+                placeholderText: "Top 5"
+            }
+
+            TextField {
+                placeholderText: "Least 5"
+            }
+        }
+        Column {
+            spacing: 10
+            Row {
+                id: row2
+                spacing: 10
+                Label {
+                    text: "Design"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                ComboBox {
+                    model: ["Design-1-x"]
+                }
+            }
+            Label {
+                text: "Select Favorite Team"
+            }
+            Column {
+                spacing: 10
+                Row {
+                    id: row
+                    spacing: 10
+
+                    Label {
+                        text: "Leage"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    ComboBox {
+                    }
+                }
+                Row {
+                    id: row1
+                    spacing: 10
+                    Label {
+                        text: "Team"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    ComboBox {
+                    }
+                }
+            }
+        }
+    }
+
+    Grid {
+        id: grid
+        x: 61
+        y: 391
+        width: 400
+        height: 400
+        rows: 4
+        columns: 2
+
+        Label {
+            text: "Design"
+        }
+
+        ComboBox {
+            model: ["Design-1-x"]
+        }
+
+
+        Label {
+            text: "Select Favorite Team"
+        }
+
+        Label
+        {
+            text : "."
+        }
+
+        Label {
+            text: "Leage"
+        }
+
+
+
+        ComboBox {
+        }
+
+        Label {
+            text: "Team"
+        }
+
+        ComboBox {
+        }
+    }
 }
