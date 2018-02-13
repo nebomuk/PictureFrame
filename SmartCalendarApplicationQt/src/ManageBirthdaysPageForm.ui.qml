@@ -26,7 +26,10 @@ Page {
 
         TextField {
             id: textFieldFirstName
-            text: qsTr("Text Field")
+            placeholderText: qsTr("Enter First Name")
+//            validator: RegExpValidator {
+//                regExp: /^[\p{L}\s'.-]+$/
+//            }
         }
 
         Label {
@@ -36,7 +39,10 @@ Page {
 
         TextField {
             id: textFieldLastName
-            text: qsTr("Text Field")
+            placeholderText:  qsTr("Enter Last Name")
+//            validator: RegExpValidator {
+//                regExp: /^[\p{L}\s'.-]+$/
+//            }
         }
 
         Label {
@@ -57,6 +63,7 @@ Page {
         x: 35
         y: 268
         text: qsTr("Confirm")
+        enabled: textFieldFirstName.text.length > 0 && textFieldLastName.text.length > 0
     }
 
     Label {
