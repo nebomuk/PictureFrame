@@ -1,6 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
@@ -9,15 +9,16 @@ Page {
 
     title: qsTr("Manage Birthdays")
 
-    Grid {
+    GridLayout {
         id: grid
-        x: 11
-        y: 71
-        width: 400
-        height: 178
-        spacing: 10
-        rows: 3
-        columns: 2
+        x: 59
+        y: 133
+        width: 391
+        height: 294
+        rowSpacing: 10
+        columnSpacing: 10
+        rows: 6
+        columns: 3
 
         Label {
             id: label
@@ -32,6 +33,11 @@ Page {
             }
         }
 
+        Item {
+            // spacer item
+            Layout.fillWidth: true
+        }
+
         Label {
             id: label1
             text: qsTr("Last Name")
@@ -39,10 +45,15 @@ Page {
 
         TextField {
             id: textFieldLastName
-            placeholderText:  qsTr("Enter Last Name")
+            placeholderText: qsTr("Enter Last Name")
             validator: RegExpValidator {
-                regExp:  /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/
+                regExp: /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/
             }
+        }
+
+        Item {
+            // spacer item
+            Layout.fillWidth: true
         }
 
         Label {
@@ -52,30 +63,42 @@ Page {
 
         Label {
             id: datePickerBirthday
-            text: "birthday picker placeholder"
-            width: 60
-            height: 20
+            text: "14.02.1985"
+            fontSizeMode: Text.FixedSize
+            wrapMode: Text.WordWrap
         }
-    }
 
-    Button {
-        id: button
-        x: 35
-        y: 268
-        text: qsTr("Confirm")
-        enabled: textFieldFirstName.text.length > 0 && textFieldLastName.text.length > 0
-    }
+        Item {
+            // spacer item
+            Layout.fillWidth: true
+        }
 
-    Label {
-        id: label3
-        x: 85
-        y: 424
-        text: qsTr("Remove Birthday")
-    }
+        Button {
 
-    ComboBox {
-        id: comboBox
-        x: 56
-        y: 488
+            Layout.rowSpan: 2
+            Layout.columnSpan: 3
+            id: buttonConfirm
+            text: qsTr("Confirm")
+            enabled: textFieldFirstName.text.length > 0
+                     && textFieldLastName.text.length > 0
+        }
+
+        Label {
+            Layout.columnSpan: 3
+            id: label3
+            text: qsTr("Remove Birthday")
+        }
+
+        TextField {
+            placeholderText: qsTr("First Name")
+        }
+
+        TextField {
+            placeholderText: qsTr("Last Name")
+        }
+
+        TextField {
+            placeholderText: qsTr("Birthdate")
+        }
     }
 }

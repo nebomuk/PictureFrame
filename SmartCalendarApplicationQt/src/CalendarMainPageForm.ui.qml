@@ -1,6 +1,8 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import de.vitecvisual.util 1.0
+
+
 
 Page {
     id: page
@@ -9,20 +11,13 @@ Page {
 
     title: qsTr("Calendar Main")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    property string selectedDevice: NotifyingSettings.selectedDevice
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+    Label {
+        id: label
+        font.pointSize: 20
+        text: selectedDevice
+        anchors.horizontalCenter: parent.horizontalCenter
+        bottomPadding: 8
+    }
 }

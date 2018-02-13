@@ -1,6 +1,9 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
+import de.vitecvisual.util 1.0
+
+
 
 Page {
     id: page
@@ -9,20 +12,125 @@ Page {
 
     title: qsTr("Calendar Image")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    property string selectedDevice: NotifyingSettings.selectedDevice
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+    Column
+    {
+        x: 50
+        y: 67
+        width: 367
+        height: 314
+        Label {
+        id: label
+        font.pointSize: 20
+        text: selectedDevice
+        anchors.horizontalCenter: parent.horizontalCenter
+        bottomPadding: 8
+    }
+
+    GridLayout
+    {
+        id : gridLayout
+        columnSpacing: 10
+        rowSpacing: 10
+        rows : 3
+        columns :4
+
+        CheckBox
+        {
+
+        }
+
+        Button
+        {
+            text: "Picture"
+
+        }
+
+        Label
+        {
+            text : qsTr("Picture Category")
+        }
+
+        Column
+        {
+            Label
+            {
+                text : qsTr("Duration in s")
+            }
+
+            TextField
+            {
+                placeholderText: qsTr("s")
+            }
+        }
+
+        CheckBox
+        {
+
+        }
+
+        Button
+        {
+            text: "Picture"
+
+        }
+
+        Label
+        {
+            text : qsTr("Picture Category")
+        }
+
+        Column
+        {
+            Label
+            {
+                text : qsTr("Duration in s")
+            }
+
+            TextField
+            {
+                placeholderText: qsTr("s")
+            }
+        }
+
+        CheckBox
+        {
+
+        }
+
+        Button
+        {
+            text: "Picture"
+
+        }
+
+        Label
+        {
+            text : qsTr("Picture Category")
+        }
+
+        Column
+        {
+            Label
+            {
+                text : qsTr("Duration in s")
+            }
+
+            TextField
+            {
+                placeholderText: qsTr("s")
+            }
+        }
+
+        Button
+        {
+            Layout.columnSpan: gridLayout.columns
+            id : buttonAddMorePictures
+            text : qsTr("Add more pictures")
+
+          }
+    }
+    }
 }
+

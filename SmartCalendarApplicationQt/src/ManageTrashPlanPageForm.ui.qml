@@ -1,6 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
@@ -9,28 +9,25 @@ Page {
 
     title: qsTr("Manage Trash Plan")
 
-    Grid {
+    GridLayout {
         id: grid
-        x: 33
-        y: 67
-        width: 400
-        height: 116
-        anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 10
-        rows: 2
+        x: 59
+        y: 133
+        width: 391
+        height: 294
+        rowSpacing: 10
+        columnSpacing: 10
+        rows: 5
         columns: 2
 
         Label {
             id: label
             text: qsTr("Trash Type")
-            fontSizeMode: Text.FixedSize
-            verticalAlignment: Text.AlignTop
-            horizontalAlignment: Text.AlignLeft
         }
 
         TextField {
             id: textField
-            text: qsTr("Organic")
+            placeholderText: qsTr("Type")
         }
 
         Label {
@@ -38,37 +35,29 @@ Page {
             text: qsTr("Date")
         }
 
-        Label {
+        TextField {
             id: label2
-            text: qsTr("Date Picker Place Holder")
+            placeholderText: qsTr("Enter date")
+        }
+        Button {
+            Layout.columnSpan: 2
+            id: buttonConfirm
+            text: qsTr("Confirm")
+        }
+
+        Label {
+            Layout.columnSpan: 2
+            id: label3
+            text: qsTr("Remove Trash Plan Entry")
+        }
+
+        TextField {
+            placeholderText: qsTr("Trash Type")
+        }
+
+        TextField {
+            placeholderText: qsTr("Date")
         }
     }
 
-    Button {
-        id: button
-        text: qsTr("Confirm")
-        anchors.top: grid.bottom
-        anchors.topMargin: 22
-        anchors.left: parent.left
-        anchors.leftMargin: 57
-    }
-
-    Label {
-        id: label3
-        x: 163
-        y: 367
-        text: qsTr("Remove Trash Plan Entry")
-    }
-
-    ComboBox {
-        id: comboBox
-        x: 48
-        y: 416
-    }
-
-    ComboBox {
-        id: comboBox1
-        x: 278
-        y: 416
-    }
 }

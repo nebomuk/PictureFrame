@@ -1,28 +1,55 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
     width: 480
     height: 800
 
-    title: qsTr("News Image")
+    title: qsTr("News")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    GridLayout
+    {
+        id : gridLayout
+        y: 110
+        width: 222
+        height: 205
+        anchors.horizontalCenter: parent.horizontalCenter
+        columnSpacing: 10
+        rowSpacing: 10
+        rows : 3
+        columns :2
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+        Label
+        {
+            text : qsTr("Option")
+        }
+
+        ComboBox
+        {
+
+        }
+
+        Label
+        {
+            text : qsTr("Sources")
+        }
+
+        ComboBox
+        {
+
+        }
+
+        Label
+        {
+            text : qsTr("Design")
+        }
+
+        ComboBox
+        {
+
+        }
+
+    }
 }
