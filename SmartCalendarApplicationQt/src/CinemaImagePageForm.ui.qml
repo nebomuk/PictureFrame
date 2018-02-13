@@ -1,28 +1,77 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
     width: 480
     height: 800
 
-    title: qsTr("Cinema Image")
+    title: qsTr("Cinema")
 
-    Text {
-           id: textId
-           font.pixelSize: 36
-           font.letterSpacing: 0.9
-           color: "red"
-           text: "Hello World"
-           anchors.horizontalCenter: parent.horizontalCenter
+    GridLayout
+    {
+        x: 124
+        y: 128
+        columns : 2
+        rows : 5
+        rowSpacing: 5
+        columnSpacing: 5
 
-           layer.enabled: true
-           layer.effect: DropShadow {
-               verticalOffset: 2
-               color: "#80000000"
-               radius: 2
-               samples: 3
-           }
-       }
+        Label
+        {
+            text : qsTr("Appearance")
+        }
+
+        ComboBox
+        {
+
+        }
+
+        Label
+        {
+            text : qsTr("Genre")
+        }
+
+        ComboBox
+        {
+            id : comboBoxGenres
+            model : ["Genre1", "Genre2", "Genre3"]
+            // TODO must be a checkable combo box
+            delegate: CheckBox{
+
+            }
+
+        }
+
+        Label
+        {
+            Layout.columnSpan: 2
+            id : labelCheckedGenres
+
+        }
+
+        Label
+        {
+            text : qsTr("Country")
+        }
+
+        ComboBox
+        {
+
+        }
+
+        Label
+        {
+            text : qsTr("Design")
+        }
+
+        ComboBox
+        {
+
+        }
+
+    }
+
+
 }

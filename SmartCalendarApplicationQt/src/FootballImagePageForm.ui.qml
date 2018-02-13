@@ -1,6 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
@@ -25,58 +25,18 @@ Page {
                 placeholderText: "Least 5"
             }
         }
-        Column {
-            spacing: 10
-            Row {
-                id: row2
-                spacing: 10
-                Label {
-                    text: "Design"
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-
-                ComboBox {
-                    model: ["Design-1-x"]
-                }
-            }
-            Label {
-                text: "Select Favorite Team"
-            }
-            Column {
-                spacing: 10
-                Row {
-                    id: row
-                    spacing: 10
-
-                    Label {
-                        text: "Leage"
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                    ComboBox {
-                    }
-                }
-                Row {
-                    id: row1
-                    spacing: 10
-                    Label {
-                        text: "Team"
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                    ComboBox {
-                    }
-                }
-            }
-        }
     }
 
-    Grid {
+    GridLayout {
         id: grid
-        x: 61
-        y: 391
-        width: 400
-        height: 400
+        x: 102
+        y: 172
+        width: 250
+        height: 219
         rows: 4
         columns: 2
+        rowSpacing: 5
+        columnSpacing: 5
 
         Label {
             text: "Design"
@@ -88,13 +48,11 @@ Page {
 
 
         Label {
+
+            Layout.columnSpan: 2
             text: "Select Favorite Team"
         }
 
-        Label
-        {
-            text : "."
-        }
 
         Label {
             text: "Leage"
