@@ -1,4 +1,6 @@
 #include "smartcalendaraccessimpltest.h"
+#include <QNetworkConfiguration>
+#include <QNetworkConfigurationManager>
 #include <QSignalSpy>
 #include <QtDebug>
 
@@ -59,4 +61,17 @@ void SmartCalendarAccessImplTest::GetControllerInNetworkFromBroadcastTest()
 
 void SmartCalendarAccessImplTest::cleanupTestCase()
 {
+}
+
+void SmartCalendarAccessImplTest::IsConnectedToWifiTest()
+{
+    QVERIFY(mSmartcalendarAccessImpl.isConnectedToWifi());
+//    QNetworkConfigurationManager manager;
+//    for(QNetworkConfiguration man : manager.allConfigurations(QNetworkConfiguration::Active))
+//    {
+
+//    qDebug() << man.bearerTypeName();
+//    qDebug() << man.bearerType();
+//    qDebug() << man.bearerTypeFamily();
+//    }
 }

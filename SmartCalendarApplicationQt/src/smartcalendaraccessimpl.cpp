@@ -5,6 +5,7 @@
 #include <QElapsedTimer>
 #include <QHostAddress>
 #include <QHostInfo>
+#include <QNetworkConfigurationManager>
 #include <QNetworkDatagram>
 #include <QNetworkInterface>
 #include <QTimer>
@@ -47,14 +48,11 @@ QList<QHostAddress> SmartCalendarAccessImpl::getAllAvailableDevicesInNetwork()
     return addresses;
 }
 
-bool IsConnectedToWifi()
-{
-
-    return true;
-}
-
 bool SmartCalendarAccessImpl::isCurrentlyRoaming()
 {
+    // would require QNetworkSession https://stackoverflow.com/questions/24864092/test-a-local-connection-with-qt
+    // which can be constructed using the QNetworkConfiguration, but is asynchronous
+
     return false;
 
 }
@@ -124,10 +122,19 @@ QString SmartCalendarAccessImpl::getCurrentTargetConnectionAddress()
 
 bool SmartCalendarAccessImpl::isConnectedToActiveNetwork()
 {
-    return true;
+    QNetworkConfigurationManager manager;
+    return !manager.allConfigurations(QNetworkConfiguration::Active).isEmpty();
 }
 
 bool SmartCalendarAccessImpl::isConnectedToWifi()
 {
-    return true;
+    QNetworkConfigurationManager manager;
+    for(QNetworkConfiguration man : manager.allConfigurations(QNetworkConfiguration::Active))
+    {
+        if(man.bearerTypeFamily() == QNetworkConfiguration::BearerWLAN)
+        {
+            return true;
+        }
+    }
+    return false;
 }

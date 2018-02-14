@@ -16,6 +16,8 @@ private slots:
     void GetAllAvailableDevicesInNetworkTest();
     void cleanupTestCase();
 
+    void IsConnectedToWifiTest();
+
 private:
     SmartCalendarAccessImpl mSmartcalendarAccessImpl;
 };
