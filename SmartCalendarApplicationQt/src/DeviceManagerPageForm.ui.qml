@@ -1,5 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 import de.vitecvisual.model 1.0
 
@@ -24,13 +25,12 @@ Page {
 
     }
 
-    Column
+    ColumnLayout
     {
         id: column
         y: 99
-        anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 20
+        spacing: 10
 
     Label {
         id: label1
@@ -39,17 +39,10 @@ Page {
 
     ListView {
         id: savedDevicesListView
-        height: 50
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
+        height: 200
         delegate:
             Frame
             {
-
-
-
                 Label
                 {
                     MouseArea
@@ -79,8 +72,7 @@ Page {
 
     ListView {
         id: availableDevicesListView
-        height: 50
-        anchors.leftMargin: 0
+        height: 200
         delegate: Frame {
 
             Label {
@@ -97,10 +89,7 @@ Page {
                 text: deviceManagerModel.availableDevices[modelData].hostName
             }
         }
-        anchors.rightMargin: 0
         model: deviceManagerModel.availableDeviceCount
-        anchors.left: parent.left
-        anchors.right: parent.right
     }
 
 

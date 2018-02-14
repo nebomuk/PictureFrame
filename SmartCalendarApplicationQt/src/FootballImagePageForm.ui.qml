@@ -10,6 +10,7 @@ Page {
     title: qsTr("Football Image")
 
     Column {
+        anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
         Row {
             spacing: 10
@@ -29,10 +30,10 @@ Page {
 
     GridLayout {
         id: grid
-        x: 102
         y: 172
         width: 250
         height: 219
+        anchors.horizontalCenter: parent.horizontalCenter
         rows: 4
         columns: 2
         rowSpacing: 5
@@ -46,19 +47,15 @@ Page {
             model: ["Design-1-x"]
         }
 
-
         Label {
 
             Layout.columnSpan: 2
             text: "Select Favorite Team"
         }
 
-
         Label {
             text: "Leage"
         }
-
-
 
         ComboBox {
         }
