@@ -1,5 +1,6 @@
 #include "devicemanagermodel.h"
 #include "platformhelper.h"
+#include "smartcalendaraccessimpl.h"
 
 #if defined(Q_OS_WIN) || defined(Q_OS_LINUX) || defined(Q_OS_OSX)
 #include <QApplication>
@@ -19,7 +20,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 #endif
 
-    qmlRegisterSingletonType<PlatformHelper>("de.vitecvisual.native",1,0,"PlatformHelper",&PlatformHelper::platform_helper_singletontype_provider);
+    qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &SmartCalendarAccessImpl::singletontype_provider);
+    qmlRegisterSingletonType<PlatformHelper>("de.vitecvisual.native",1,0,"PlatformHelper",&PlatformHelper::singletontype_provider);
+
     qmlRegisterSingletonType( QUrl("qrc:/src/Style.qml"), "de.vitecvisual.style", 1, 0, "Style" );
     qRegisterMetaType<ResponderClient>();
     qmlRegisterSingletonType(QUrl("qrc:/src/NotifyingSettings.qml"),"de.vitecvisual.util",1,0,"NotifyingSettings");

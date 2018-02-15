@@ -13,7 +13,8 @@
 
 SmartCalendarAccessImpl::SmartCalendarAccessImpl(QObject *parent) : QObject(parent)
 {
-
+    auto manager = new QNetworkConfigurationManager(this);
+    connect(manager,&QNetworkConfigurationManager::configurationChanged,this,&SmartCalendarAccessImpl::networkConfigurationChanged);
 }
 
 void SmartCalendarAccessImpl::checkNetworkConnection()
@@ -55,6 +56,15 @@ bool SmartCalendarAccessImpl::isCurrentlyRoaming()
 
     return false;
 
+}
+
+QObject *SmartCalendarAccessImpl::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    QObject *object = new SmartCalendarAccessImpl();
+    return object;
 }
 
 QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadcastBlocking(int timeOut)

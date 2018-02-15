@@ -3,6 +3,8 @@ import QtQuick.Controls 2.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Styles 1.4
 import de.vitecvisual.style 1.0
+import Qt.labs.platform 1.0
+import de.vitecvisual.core 1.0;
 
 
 ApplicationWindow {
@@ -78,4 +80,38 @@ ApplicationWindow {
         initialItem: MainPage {}
 
        }
+
+
+    MessageDialog {
+          id : msgDialogWifi
+          title:  qsTr("Wifi is disabled")
+          text: qsTr("Please enable WiFi")
+
+          onAccepted: {
+              if(typeof PlatformHelper.showWifiSettings === "function")
+              {
+                  PlatformHelper.showWifiSettings()
+              }
+          }
+
+          Connections {
+
+              target : SmartCalendarAccess
+
+              onIsConnectedToWifiChanged : {
+                  if(!SmartCalendarAccess.isConnectedToWifi)
+                  {
+                      msgDialogWifi.open()
+                  }
+
+              }
+
+              Component.onCompleted: {
+                  if(!SmartCalendarAccess.isConnectedToWifi)
+                  {
+                      msgDialogWifi.open()
+                  }
+              }
+          }
+      }
 }

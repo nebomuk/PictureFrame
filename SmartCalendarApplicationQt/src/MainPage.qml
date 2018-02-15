@@ -1,5 +1,6 @@
 import QtQuick 2.0
-import Qt.labs.platform 1.0
+
+import de.vitecvisual.native 1.0;
 //import QtQuick.Dialogs 1.2
 
 MainPageForm {
@@ -13,16 +14,10 @@ MainPageForm {
         stackView.push("CalendarMainPage.qml")
     }
 
-    property alias msgDialogWifi : msgDialogWifi
 
-    MessageDialog {
-          id : msgDialogWifi
-          title:  qsTr("Wifi is disabled")
-          text: qsTr("Please enable WiFi")
-      }
 
-    Component.onCompleted: {
-        msgDialogWifi.open()
-    }
+
+
+
 }
 

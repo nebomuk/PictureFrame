@@ -5,36 +5,41 @@
 
 #include <QHostAddress>
 #include <QObject>
+#include <QQmlEngine>
 #include <QUdpSocket>
 
 class SmartCalendarAccessImpl : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(bool isConnectedToWifi READ isConnectedToWifi NOTIFY networkConfigurationChanged)
+
 public:
     explicit SmartCalendarAccessImpl(QObject *parent = nullptr);
 
 
-    void checkNetworkConnection();
+    Q_INVOKABLE void checkNetworkConnection();
 
-    QList<QHostAddress> getAllAvailableDevicesInNetwork();
+    Q_INVOKABLE QList<QHostAddress> getAllAvailableDevicesInNetwork();
 
-    QList<ResponderClient> getControllerInNetworkFromBroadcastBlocking(int timeOut);
+    Q_INVOKABLE QList<ResponderClient> getControllerInNetworkFromBroadcastBlocking(int timeOut);
 
-    void getControllerInNetworkFromBroadcast();
+    Q_INVOKABLE void getControllerInNetworkFromBroadcast();
 
-    QString getCurrentTargetConnectionAddress();
+    Q_INVOKABLE QString getCurrentTargetConnectionAddress();
 
-    bool isConnectedToActiveNetwork();
+    Q_INVOKABLE bool isConnectedToActiveNetwork();
 
     bool isConnectedToWifi();
 
-    bool isCurrentlyRoaming();
+    Q_INVOKABLE bool isCurrentlyRoaming();
+
+    static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 signals:
     void controllerInNetworkReceived(QList<ResponderClient> controllers);
 
-
-public slots:
+    void networkConfigurationChanged(); // QNetworkConfigurationManager::configurationChanged forward
 
 private:
     bool mIsConnected;
@@ -44,5 +49,9 @@ private:
     const int BUFFERTIMEOUT = 100;
     QList<ResponderClient> readResponderClientsFromUdpSocket(QUdpSocket *socket);
 };
+
+
+
+
 
 #endif // SMARTCALENDARACCESSIMPL_H

@@ -9,6 +9,7 @@
 #endif
 
 /// instantiates the android (or other platform) singleton in the qml environment
+/// FIXME this only provides the object but does not provide typesafe method calls in javascript
 
 class PlatformHelper : public QObject
 {
@@ -19,21 +20,7 @@ public:
 
 
 // singleton type provider function (callback).
-static QObject *platform_helper_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-  Q_UNUSED(engine)
-  Q_UNUSED(scriptEngine)
-
-  QObject *object;
-
-#ifdef Q_O_ANDROID
-  object = new AndroidHelper();
-#else
-  object = new QObject();
-#endif
-
-  return object;
-}
+static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 };
 
 #endif // PLATFORMHELPER_H
