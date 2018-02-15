@@ -1,4 +1,9 @@
-QT += quick core gui widgets network mqtt
+QT += quick core gui network mqtt
+
+win32|macx|linux {
+QT += widgets # for native message dialog in Qt quick labs
+}
+
 CONFIG += c++11
 CONFIG += qtquickcompiler
 
@@ -13,6 +18,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+android {
+    HEADERS += src/androidhelper.h
+    SOURCES += src/androidhelper.cpp
+    QT += androidextras
+}
+
 SOURCES += src/main.cpp \
     src/smartcalendaraccessimpl.cpp \
     src/responderclient.cpp \
@@ -22,7 +33,9 @@ SOURCES += src/main.cpp \
     src/controllerdatacontainer.cpp \
     src/deviceaccessorimpl.cpp \
     src/devicemanagermodel.cpp \
-    src/qvariantlistconversion.cpp
+    src/qvariantlistconversion.cpp \
+    src/platformhelper.cpp
+
 
 HEADERS += \
     src/smartcalendaraccessimpl.h \
@@ -35,7 +48,8 @@ HEADERS += \
     src/controllerdatacontainer.h \
     src/deviceaccessorimpl.h \
     src/devicemanagermodel.h \
-    src/qvariantlistconversion.h
+    src/qvariantlistconversion.h \
+    src/platformhelper.h
 
 RESOURCES += qml.qrc
 

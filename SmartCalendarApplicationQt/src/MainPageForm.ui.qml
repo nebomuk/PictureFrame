@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import Qt.labs.settings 1.0
+
 import de.vitecvisual.util 1.0
 
 Page {
@@ -18,7 +19,6 @@ Page {
     property alias buttonBaseConfiguration : baseConfigurationButton
 
     property string selectedDevice : NotifyingSettings.selectedDevice
-
 
     CenterColumn {
         id: column
