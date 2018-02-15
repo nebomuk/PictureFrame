@@ -32,18 +32,35 @@ Page {
 
         ListView
         {
+            id : listView
             // TODO change model to support removal of individual rows
-            model : listViewRowCount
+            model : ListModel
+            {
+                id : listModel
+                ListElement
+                {
+                    buttonText : "Image"
+
+                }
+            }
 
             height:  300
             delegate: RowLayout
                         {
-                            spacing : 10
+                        spacing : 10
 
                         Button
                         {
-                            text: qsTr("Image")
+                            id : button
+                            text: buttonText
+                        }
 
+                        Connections
+                        {
+                            target : button
+                            onClicked : {
+                                stackView.push("PictureTypeSelectionPage.qml")
+                            }
                         }
 
                         Label
@@ -66,7 +83,6 @@ Page {
 
                     }
 
-
     }
         Button
         {
@@ -79,9 +95,11 @@ Page {
         {
             target: buttonAddMorePictures
             onClicked : {
+
                 if(listViewRowCount <4)
                 {
                     listViewRowCount++;
+                    listModel.append({"buttonText": "Item" + listViewRowCount})
                 }
                 else
                 {
@@ -92,6 +110,7 @@ Page {
             }
 
         }
+
 
     }
 }
