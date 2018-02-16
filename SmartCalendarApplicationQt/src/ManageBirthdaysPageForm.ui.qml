@@ -9,6 +9,8 @@ Page {
 
     title: qsTr("Manage Birthdays")
 
+    property alias buttonBirthdate: buttonBirthdate
+
     GridLayout {
         id: grid
         x: 59
@@ -61,11 +63,8 @@ Page {
             text: qsTr("Birthdate")
         }
 
-        Label {
-            id: datePickerBirthday
-            text: "14.02.1985"
-            fontSizeMode: Text.FixedSize
-            wrapMode: Text.WordWrap
+        Button {
+            id: buttonBirthdate
         }
 
         Item {

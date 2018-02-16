@@ -42,5 +42,7 @@
         <file>src/NotifyingSettings.qml</file>
         <file>src/PictureTypeSelectionPage.qml</file>
         <file>src/PictureTypeSelectionPageForm.ui.qml</file>
+        <file>src/DatePicker.qml</file>
+        <file>src/TimePicker.qml</file>
     </qresource>
 </RCC>
