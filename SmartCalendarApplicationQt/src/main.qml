@@ -11,7 +11,7 @@ ApplicationWindow {
     id: window
     visible: true
     width: 480
-    height: 640
+    height: 800
     title: qsTr("SmartCalendar")
 
     header: ToolBar {

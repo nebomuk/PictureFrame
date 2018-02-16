@@ -1,27 +1,40 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 
 Page {
+    id: page
     height: 800
     width: 480
 
     title: qsTr("Display Options")
 
-    Label {
-        id: label
-        x: 186
-        y: 23
-        text: qsTr("Screen Brightness")
-    }
+    property alias buttonWorkingDayStart  : buttonWorkingDayStart
 
-    Grid {
+    property alias buttonWorkingDayEnd    : buttonWorkingDayEnd
+
+    property alias buttonWeekendStart     : buttonWeekendStart
+
+    property alias buttonWeekendEnd       : buttonWeekendEnd
+
+
+    GridLayout {
+        x: 51
+        width: 402
+        height: 507
+        anchors.top: parent.top
+        anchors.topMargin: 33
+        columnSpacing: 10
+        rowSpacing: 10
         columns: 2
-        rows: 2
-        id: grid1
-        x: 40
-        y: 99
-        width: 400
-        height: 150
+        rows: 9
+
+        Label {
+            Layout.columnSpan: 2
+            id: label
+            text: qsTr("Display Brightness")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        }
 
         RadioButton {
             id: radioButtonScreenBrightnessFixed
@@ -35,24 +48,18 @@ Page {
         }
 
         RadioButton {
+            Layout.columnSpan: 2
             id: radioButtonScreenBrightnessAutomatic
             text: qsTr("Automatic")
         }
-    }
 
-    Label {
-        id: label1
-        x: 215
-        y: 262
-        text: qsTr("Screen activation")
-    }
+        Label {
+            Layout.columnSpan: 2
+            id: label1
+            text: qsTr("Display activation")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        }
 
-    Grid {
-        id: grid2
-        x: 31
-        y: 314
-        width: 400
-        height: 150
         RadioButton {
             id: radioButtonSensibility
             text: qsTr("Sensibility")
@@ -65,44 +72,31 @@ Page {
         }
 
         RadioButton {
+            Layout.columnSpan: 2
             id: radioButtonPermanentlyActivated
             text: qsTr("Permamently Activated")
         }
 
-        rows: 2
-        columns: 2
-    }
+        Label {
+            Layout.columnSpan: 2
+            id: label2
+            text: qsTr("Screen activation")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        }
 
-    Label {
-        id: label2
-        x: 215
-        y: 499
-        text: qsTr("Screen activation")
-    }
-
-    Grid {
-        id: grid3
-        x: 31
-        y: 551
-        width: 400
-        height: 150
         CheckBox {
             id: radioButton4
             text: qsTr("Working Day")
         }
 
-        Row
-        {
-            Tumbler {
-                id: tumblerWorkingDayStart
-                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
+        RowLayout {
+            Button {
+                id: buttonWorkingDayStart
             }
 
-            Tumbler {
-                id: tumblerWorkingDayEnd
-                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
+            Button {
+                id: buttonWorkingDayEnd
             }
-
         }
 
         CheckBox {
@@ -110,21 +104,14 @@ Page {
             text: qsTr("Weekend")
         }
 
-        Row
-        {
-            Tumbler {
-                id: tumblerWeekendStart
-                model: [qsTr(qsTr("Low")), qsTr(qsTr("Average")), qsTr("High")]
+        RowLayout {
+            Button {
+                id: buttonWeekendStart
             }
 
-            Tumbler {
-                id: tumblerWeekendEnd
-                model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
+            Button {
+                id: buttonWeekendEnd
             }
-
         }
-
-        rows: 2
-        columns: 2
     }
 }
