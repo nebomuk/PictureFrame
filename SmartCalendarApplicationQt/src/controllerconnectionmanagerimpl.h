@@ -3,6 +3,8 @@
 
 #include "controllerdatacontainer.h"
 
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QObject>
 #include <qmqtt_client.h>
 #include <qqmlengine.h>
@@ -17,7 +19,7 @@ public:
 
      bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
 
-     void establishConnection(const QString &brokerAddress, const QString &clientId);
+     void establishConnection(QString brokerAddress, QString clientId);
 
      bool closeConnection();
 
@@ -63,6 +65,9 @@ private:
     QJsonArray convertMessageToArray(QByteArray msg);
     bool waitForMqttConnected();
     bool waitForInitialDataReceived();
+
+    QFuture<bool> establishConnectionFuture;
+    QFutureWatcher<bool> establishConnectionFutureWatcher;
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPL_H

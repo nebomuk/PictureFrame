@@ -1,4 +1,4 @@
-QT += quick core gui network mqtt
+QT += quick core gui network concurrent mqtt
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -34,7 +34,8 @@ SOURCES += src/main.cpp \
     src/deviceaccessorimpl.cpp \
     src/devicemanagermodel.cpp \
     src/qvariantlistconversion.cpp \
-    src/platformhelper.cpp
+    src/platformhelper.cpp \
+    src/mqttconnection.cpp
 
 
 HEADERS += \
@@ -49,7 +50,8 @@ HEADERS += \
     src/deviceaccessorimpl.h \
     src/devicemanagermodel.h \
     src/qvariantlistconversion.h \
-    src/platformhelper.h
+    src/platformhelper.h \
+    src/mqttconnection.h
 
 RESOURCES += qml.qrc
 

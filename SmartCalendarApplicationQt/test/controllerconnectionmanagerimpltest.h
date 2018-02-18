@@ -13,6 +13,7 @@ public:
 
 private slots:
     void initTestCase();
+    void establishConnectionBlockingTest();
     void establishConnectionTest();
     void cleanupTestCase();
 

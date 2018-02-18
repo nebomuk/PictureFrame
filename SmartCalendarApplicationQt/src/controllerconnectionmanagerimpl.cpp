@@ -1,9 +1,13 @@
 #include "controllerconnectionmanagerimpl.h"
 
 #include <QEventLoop>
+#include <QFutureWatcher>
 #include <QJsonDocument>
 #include <QJsonDocument>
+#include <QPointer>
+#include <QThreadPool>
 #include <QTimer>
+#include <QtConcurrent>
 #include <qmqtt_message.h>
 #include "controllerconnectionconstants.h"
 
@@ -12,6 +16,13 @@ ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QObject *parent
     this->mDataContainer = new ControllerDataContainer(this);
 
     client = nullptr;
+
+    qRegisterMetaType<QMQTT::Message>("QMQTT::Message");
+
+    connect(&establishConnectionFutureWatcher,&QFutureWatcher<bool>::finished,this,[this]
+    {
+        emit establishConnectionResult(establishConnectionFuture.resultAt(0));
+    });
 }
 
 bool ControllerConnectionManagerImpl::waitForMqttConnected()
@@ -84,6 +95,17 @@ bool ControllerConnectionManagerImpl::establishConnectionBlocking(const QString&
     qDebug("initialDataReceived");
     currentClientId = clientId;
     return true;
+
+}
+
+void ControllerConnectionManagerImpl::establishConnection(QString brokerAddress,QString clientId)
+{
+    establishConnectionFuture = QtConcurrent::run([=]{
+                  bool result =  establishConnectionBlocking(brokerAddress,clientId);
+                  client->moveToThread(QCoreApplication::instance()->thread());
+                  return result
+    });
+    establishConnectionFutureWatcher.setFuture(establishConnectionFuture);
 
 }
 
@@ -404,7 +426,7 @@ void ControllerConnectionManagerImpl::storeSendingMessageLocally(QString subscri
 
 QMQTT::Client *ControllerConnectionManagerImpl::createMqttClient(QString brokerAddress)
 {
-    auto mqttClient = new QMQTT::Client(brokerAddress,brokerPort,false, true,this);
+    auto mqttClient = new QMQTT::Client(brokerAddress,brokerPort,false, true);
 
     connect(mqttClient,&QMQTT::Client::error,this,&ControllerConnectionManagerImpl::onClientError);
 
