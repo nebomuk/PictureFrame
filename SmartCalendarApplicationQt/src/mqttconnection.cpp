@@ -2,10 +2,10 @@
 
 #include <qmqtt_client.h>
 
-MqttConnection::MqttConnection(QMQTT::Client * client, const QString &brokerAddress, const QString &clientId,
+MqttConnection::MqttConnection(const QString &brokerAddress, const QString &clientId,
                                QObject *parent) : QObject(parent)
 {
-    mClient = client;
+    mClient =  new QMQTT::Client();
 
     timeout = new QTimer(this);
     timeout->setInterval(3000);
@@ -16,15 +16,15 @@ MqttConnection::MqttConnection(QMQTT::Client * client, const QString &brokerAddr
         establishConnectionResult(false);
     });
 
-    connect(client,&QMQTT::Client::error,this,&MqttConnection::onClientError);
+    connect(mClient,&QMQTT::Client::error,this,&MqttConnection::onClientError);
 
-    connect(client,&QMQTT::Client::connected,this,&MqttConnection::onConnected);
+    connect(mClient,&QMQTT::Client::connected,this,&MqttConnection::onConnected);
 
 
-    connect(client,&QMQTT::Client::received,this,&MqttConnection::onReceived);
+    connect(mClient,&QMQTT::Client::received,this,&MqttConnection::onReceived);
 
-    client->setClientId(clientId);
-    client->connectToHost();
+    mClient->setClientId(clientId);
+    mClient->connectToHost();
 
     timeout->start();
 

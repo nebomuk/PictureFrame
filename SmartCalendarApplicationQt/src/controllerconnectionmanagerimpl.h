@@ -1,6 +1,7 @@
 #ifndef CONTROLLERCONNECTIONMANAGERIMPL_H
 #define CONTROLLERCONNECTIONMANAGERIMPL_H
 
+#include "blockingmqttconnection.h"
 #include "controllerdatacontainer.h"
 #include "mqttmessageparser.h"
 
@@ -18,7 +19,7 @@ class ControllerConnectionManagerImpl : public QObject
 public:
     explicit ControllerConnectionManagerImpl(QObject *parent = nullptr);
 
-     bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
+    bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
 
      void establishConnection(QString brokerAddress, QString clientId);
 
@@ -38,38 +39,19 @@ public slots:
 
 private slots:
 
-     void onClientError(QMQTT::ClientError error);
      void listenToPublishes(QMQTT::Message msg);
 
 private:
-
-     void testConnection();
-
-     void registerSubscriptions();
 
 
      void storeIncomingMessageLocally(QMQTT::Message msg);
 
      void storeSendingMessageLocally(QString subscriptionPath, QByteArray jsonString);
 
-
-     QMQTT::Client* createMqttClient(QString brokerAddress);
-
-    const int brokerPort = 1337;
-    QMQTT::Client * client;
-    QString currentClientId;
     ControllerDataContainer * mDataContainer;
-    bool messageContainsSendingImage(QString topic);
-    bool messageContainsIncomingImage(QString topic);
-    void storeImage(QByteArray jsonString, QString topic);
-
-    QJsonArray convertMessageToArray(QByteArray msg);
-    bool waitForMqttConnected();
-    bool waitForInitialDataReceived();
+    BlockingMqttConnection * blockingMqttConnection;
 
 
-    QFuture<bool> establishConnectionFuture;
-    QFutureWatcher<bool> establishConnectionFutureWatcher;
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPL_H

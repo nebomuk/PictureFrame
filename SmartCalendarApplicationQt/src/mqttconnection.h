@@ -9,7 +9,7 @@ class MqttConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit MqttConnection(QMQTT::Client *client, const QString& brokerAddress, const QString& clientId,
+    explicit MqttConnection(const QString& brokerAddress, const QString& clientId,
                             QObject *parent = nullptr);
 
 signals:

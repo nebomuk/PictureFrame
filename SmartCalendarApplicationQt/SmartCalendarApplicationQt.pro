@@ -36,7 +36,8 @@ SOURCES += src/main.cpp \
     src/qvariantlistconversion.cpp \
     src/platformhelper.cpp \
     src/mqttconnection.cpp \
-    src/mqttmessageparser.cpp
+    src/mqttmessageparser.cpp \
+    src/blockingmqttconnection.cpp
 
 
 HEADERS += \
@@ -53,7 +54,8 @@ HEADERS += \
     src/qvariantlistconversion.h \
     src/platformhelper.h \
     src/mqttconnection.h \
-    src/mqttmessageparser.h
+    src/mqttmessageparser.h \
+    src/blockingmqttconnection.h
 
 RESOURCES += qml.qrc
 
