@@ -35,7 +35,8 @@ SOURCES += src/main.cpp \
     src/devicemanagermodel.cpp \
     src/qvariantlistconversion.cpp \
     src/platformhelper.cpp \
-    src/mqttconnection.cpp
+    src/mqttconnection.cpp \
+    src/mqttmessageparser.cpp
 
 
 HEADERS += \
@@ -51,7 +52,8 @@ HEADERS += \
     src/devicemanagermodel.h \
     src/qvariantlistconversion.h \
     src/platformhelper.h \
-    src/mqttconnection.h
+    src/mqttconnection.h \
+    src/mqttmessageparser.h
 
 RESOURCES += qml.qrc
 

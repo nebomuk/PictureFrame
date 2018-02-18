@@ -2,6 +2,7 @@
 #define CONTROLLERCONNECTIONMANAGERIMPL_H
 
 #include "controllerdatacontainer.h"
+#include "mqttmessageparser.h"
 
 #include <QFuture>
 #include <QFutureWatcher>
@@ -38,6 +39,7 @@ public slots:
 private slots:
 
      void onClientError(QMQTT::ClientError error);
+     void listenToPublishes(QMQTT::Message msg);
 
 private:
 
@@ -45,7 +47,6 @@ private:
 
      void registerSubscriptions();
 
-     void listenToPublishes(QMQTT::Message msg);
 
      void storeIncomingMessageLocally(QMQTT::Message msg);
 
@@ -65,6 +66,7 @@ private:
     QJsonArray convertMessageToArray(QByteArray msg);
     bool waitForMqttConnected();
     bool waitForInitialDataReceived();
+
 
     QFuture<bool> establishConnectionFuture;
     QFutureWatcher<bool> establishConnectionFutureWatcher;
