@@ -5,24 +5,43 @@
 
 #include <QObject>
 #include <qmqtt_client.h>
+#include <qqmlengine.h>
 
 class ControllerConnectionManagerImpl : public QObject
 {
+    Q_PROPERTY(ControllerDataContainer controllerDataContainer READ dataContainer)
+
     Q_OBJECT
 public:
-    explicit ControllerConnectionManagerImpl(QString brokerAddress, ControllerDataContainer *dataContainer, QObject *parent = nullptr);
+    explicit ControllerConnectionManagerImpl(QObject *parent = nullptr);
 
-     bool establishConnection(QString clientId);
+     bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
+
+     void establishConnection(const QString &brokerAddress, const QString &clientId);
 
      bool closeConnection();
 
-     void publishSimpleStringMessage(QString path, QString simpleMessage);
+     void publishSimpleStringMessage(const QString& path, const QString& simpleMessage);
 
-     void publishJSONMessage(QByteArray jsonObjectString, QString objectPath);
+     void publishJSONMessage(const QByteArray &jsonObjectString, const QString &objectPath);
 
-     void registerSubscriptions();
+     ControllerDataContainer *dataContainer() const;
+
+signals:
+
+     void establishConnectionResult(bool isEstablished);
+
+public slots:
+
+private slots:
+
+     void onClientError(QMQTT::ClientError error);
+
+private:
 
      void testConnection();
+
+     void registerSubscriptions();
 
      void listenToPublishes(QMQTT::Message msg);
 
@@ -31,24 +50,19 @@ public:
      void storeSendingMessageLocally(QString subscriptionPath, QByteArray jsonString);
 
 
-signals:
-
-public slots:
-
-private slots:
-     void onClientError(QMQTT::ClientError error);
-
-private:
+     QMQTT::Client* createMqttClient(QString brokerAddress);
 
     const int brokerPort = 1337;
     QMQTT::Client * client;
     QString currentClientId;
-    ControllerDataContainer * dataContainer;
+    ControllerDataContainer * mDataContainer;
     bool messageContainsSendingImage(QString topic);
     bool messageContainsIncomingImage(QString topic);
     void storeImage(QByteArray jsonString, QString topic);
 
     QJsonArray convertMessageToArray(QByteArray msg);
+    bool waitForMqttConnected();
+    bool waitForInitialDataReceived();
 };
 
 #endif // CONTROLLERCONNECTIONMANAGERIMPL_H

@@ -7,59 +7,98 @@
 #include <qmqtt_message.h>
 #include "controllerconnectionconstants.h"
 
-ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QString brokerAddress, ControllerDataContainer * dataContainer, QObject *parent) : QObject(parent)
+ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QObject *parent) : QObject(parent)
 {
-    this->dataContainer = dataContainer;
+    this->mDataContainer = new ControllerDataContainer(this);
 
-    client = new QMQTT::Client(brokerAddress,brokerPort,false, true,this);
-
-    connect(client,&QMQTT::Client::error,this,&ControllerConnectionManagerImpl::onClientError);
-
-    connect(client,&QMQTT::Client::received,this,&ControllerConnectionManagerImpl::listenToPublishes);
+    client = nullptr;
 }
 
-bool ControllerConnectionManagerImpl::establishConnection(QString clientId)
+bool ControllerConnectionManagerImpl::waitForMqttConnected()
 {
-    client->setClientId(clientId);
-    client->connectToHost();
-
     QTimer connectionTimeout;
     connectionTimeout.setInterval(3000);
     connectionTimeout.setSingleShot(true);
     QEventLoop eventLoop;
+
     connect(client,&QMQTT::Client::connected,&eventLoop,&QEventLoop::quit);
     connect(client,&QMQTT::Client::error,&eventLoop,&QEventLoop::quit);
 
     connect(&connectionTimeout,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
     connectionTimeout.start();
     eventLoop.exec();
+
     // connection state may still be INIT but DISCONNECTED when there was an error
-    if(client->connectionState() != QMQTT::ConnectionState::STATE_DISCONNECTED)
+    return client->connectionState() != QMQTT::ConnectionState::STATE_DISCONNECTED;
+}
+
+bool ControllerConnectionManagerImpl::waitForInitialDataReceived()
+{
+    QTimer connectionTimeout;
+    connectionTimeout.setInterval(3000);
+    connectionTimeout.setSingleShot(true);
+
+    bool initialDataReceived = false;
+
+    QEventLoop eventLoop;
+
+    connect(client,&QMQTT::Client::received,&eventLoop,[&eventLoop,&initialDataReceived]
     {
-        registerSubscriptions();
-        testConnection();
-        currentClientId = clientId;
-        qDebug("establishConnection successfull");
-        return true;
-    }
-    else
+        initialDataReceived = true;
+        eventLoop.quit();
+    });
+    connect(client,&QMQTT::Client::error,&eventLoop,&QEventLoop::quit);
+
+    connect(&connectionTimeout,&QTimer::timeout,&eventLoop,&QEventLoop::quit);
+    connectionTimeout.start();
+    eventLoop.exec();
+    return initialDataReceived;
+}
+
+bool ControllerConnectionManagerImpl::establishConnectionBlocking(const QString& brokerAddress, const QString& clientId)
+{
+    delete client;
+    client = createMqttClient(brokerAddress);
+
+    client->setClientId(clientId);
+    client->connectToHost();
+
+    bool successfull = waitForMqttConnected();
+
+    if(!successfull)
     {
         qDebug("establishConnection failed: Connection timeout");
         return false;
     }
 
+    registerSubscriptions();
+    testConnection(); // this will cause the receiving end to respond with the initial data
+
+    bool initialDataReceived = waitForInitialDataReceived();
+    if(!initialDataReceived)
+    {
+        qDebug("failed to receive initial Data");
+        return false;
+    }
+
+    qDebug("initialDataReceived");
+    currentClientId = clientId;
+    return true;
+
 }
+
 
 bool ControllerConnectionManagerImpl::closeConnection()
 {
     if(client->connectionState() != QMQTT::ConnectionState::STATE_DISCONNECTED)
     {
         client->disconnectFromHost();
+        client->deleteLater();
     }
     return true;
 }
 
-void ControllerConnectionManagerImpl::publishSimpleStringMessage(QString path, QString simpleMessage)
+void ControllerConnectionManagerImpl::publishSimpleStringMessage(const QString& path, const QString& simpleMessage)
 {
    QMQTT::Message message;
    message.setTopic(path);
@@ -67,7 +106,7 @@ void ControllerConnectionManagerImpl::publishSimpleStringMessage(QString path, Q
     client->publish(message);
 }
 
-void ControllerConnectionManagerImpl::publishJSONMessage(QByteArray jsonObjectString, QString objectPath)
+void ControllerConnectionManagerImpl::publishJSONMessage(const QByteArray& jsonObjectString, const QString& objectPath)
 {
     QMQTT::Message message;
     message.setTopic(objectPath);
@@ -124,18 +163,18 @@ void ControllerConnectionManagerImpl::storeIncomingMessageLocally(QMQTT::Message
 {
     if (ControllerConnectionConstants::BIRTHDAYPLANSUBSCRIPTIONPATH == msg.topic())
                {
-                   dataContainer->birthdayPlan(QJsonDocument::fromJson( msg.payload()).array());
-                   dataContainer->birthdayTableReceived(true);
+                   mDataContainer->birthdayPlan(QJsonDocument::fromJson( msg.payload()).array());
+                   mDataContainer->birthdayTableReceived(true);
                }
 
     else if (ControllerConnectionConstants::TRASHPLANSUBSCRIPTIONPATH== msg.topic())
                 {
-                    dataContainer->trashPlan(convertMessageToArray(msg.payload()));
-                    dataContainer->trashTableReceived(true);
+                    mDataContainer->trashPlan(convertMessageToArray(msg.payload()));
+                    mDataContainer->trashTableReceived(true);
                 }
             else if (ControllerConnectionConstants::PERSONLISTSUBSCRIPTIONPATH== msg.topic())
             {
-                dataContainer->personList(convertMessageToArray(msg.payload()));
+                mDataContainer->personList(convertMessageToArray(msg.payload()));
             }
             else if (messageContainsIncomingImage(msg.topic()))
             {
@@ -146,162 +185,162 @@ void ControllerConnectionManagerImpl::storeIncomingMessageLocally(QMQTT::Message
             {
 
                 QJsonObject baseOptions = QJsonDocument::fromJson(msg.payload()).object();
-                dataContainer->baseOptions(baseOptions);
+                mDataContainer->baseOptions(baseOptions);
             }
             else if (ControllerConnectionConstants::DISPLAYOPTIONSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonObject displayOptions = QJsonDocument::fromJson(msg.payload()).object();
-                dataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
+                mDataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
             }else if (ControllerConnectionConstants::FOOTBALLLEAGUESUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();;
-                dataContainer->footballLeagues(receivedList);
+                mDataContainer->footballLeagues(receivedList);
             }
             else if (ControllerConnectionConstants::FIRSTLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->firstLeagueFootballTeams(receivedList);
+                mDataContainer->firstLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SECONDLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->secondLeagueFootballTeams(receivedList);
+                mDataContainer->secondLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SUPERLIGFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->superLigFootballTeams(receivedList);
+                mDataContainer->superLigFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::LEAGUEONEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->leagueOneLeagueFootballTeams(receivedList);
+                mDataContainer->leagueOneLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::PREMIERELEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->premiereLeagueFootballTeams(receivedList);
+                mDataContainer->premiereLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SERIEALEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->serialeLeagueFootballTeams(receivedList);
+                mDataContainer->serialeLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::LEAGUEBBVALEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->leagueBBVALeagueFootballTeams(receivedList);
+                mDataContainer->leagueBBVALeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::EREDIVISIEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->eredivisieFootballTeams(receivedList);
+                mDataContainer->eredivisieFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::PROLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->proLeagueFootballTeams(receivedList);
+                mDataContainer->proLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::PRIMEIRALIGAFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->primeiraLigaFootballTeams(receivedList);
+                mDataContainer->primeiraLigaFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SUPERLIGAFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->superligaFootballTeams(receivedList);
+                mDataContainer->superligaFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::ALLSVENSKANFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->allsvenskanFootballTeams(receivedList);
+                mDataContainer->allsvenskanFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SUPERLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->superLeagueFootballTeams(receivedList);
+                mDataContainer->superLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::APFGFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->apfgFootballTeams(receivedList);
+                mDataContainer->apfgFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::FIRSTSTLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->firstLeagueFootballTeams(receivedList);
+                mDataContainer->firstLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::SYNOTLEAGUEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->synotLeagueFootballTeams(receivedList);
+                mDataContainer->synotLeagueFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::OTPBANKLIGAFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->otpBankLigaFootballTeams(receivedList);
+                mDataContainer->otpBankLigaFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::EKSTRAKLASEFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->ekstraklaseFootballTeams(receivedList);
+                mDataContainer->ekstraklaseFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::LIGAFIRSTCHAMPIOSCHIPFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->ligaFirstChampioshipFootballTeams(receivedList);
+                mDataContainer->ligaFirstChampioshipFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::PRIMERADIVFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->primeraDivisionFootballTeams(receivedList);
+                mDataContainer->primeraDivisionFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::CSLPLAYOFFFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->cslPlayOffFootballTeams(receivedList);
+                mDataContainer->cslPlayOffFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::MLSFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->cslPlayOffFootballTeams(receivedList);
+                mDataContainer->cslPlayOffFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::NASLFALLFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->naslFallFootballTeams(receivedList);
+                mDataContainer->naslFallFootballTeams(receivedList);
             }
             else if (ControllerConnectionConstants::USLPROFOOTBALLTEAMSUBSCRIPTIONPATH== msg.topic())
             {
 
                 QJsonArray receivedList = QJsonDocument::fromJson(msg.payload()).array();
-                dataContainer->uslProFootballTeams(receivedList);
+                mDataContainer->uslProFootballTeams(receivedList);
             }
 
 }
@@ -312,30 +351,30 @@ void ControllerConnectionManagerImpl::storeSendingMessageLocally(QString subscri
                 if (ControllerConnectionConstants::BIRTHDAYPLANPATH== subscriptionPath)
                 {
                     QJsonArray birthdayList=QJsonDocument::fromJson(jsonString).array();
-                    dataContainer->birthdayPlan(birthdayList);
-                    dataContainer->birthdayTableReceived(true);
+                    mDataContainer->birthdayPlan(birthdayList);
+                    mDataContainer->birthdayTableReceived(true);
                 }
                 else if (ControllerConnectionConstants::TRASHPLANPATH== subscriptionPath)
                 {
                     QJsonArray trashList=QJsonDocument::fromJson(jsonString).array();
-                    dataContainer->trashPlan(trashList);
-                    dataContainer->trashTableReceived(true);
+                    mDataContainer->trashPlan(trashList);
+                    mDataContainer->trashTableReceived(true);
                 }
                 else if (ControllerConnectionConstants::PERSONACCOUNTPATH== subscriptionPath)
                 {
                     QJsonArray personList=QJsonDocument::fromJson(jsonString).array();
-                    QJsonArray oldPersonList = dataContainer->personList();
+                    QJsonArray oldPersonList = mDataContainer->personList();
                     if (oldPersonList.size() > 0)
                     {
                         QJsonObject master = oldPersonList[0].toObject();
                         personList.insert(0,master);
                     }
-                    dataContainer->personList(personList);
+                    mDataContainer->personList(personList);
                 }
                 else if (ControllerConnectionConstants::MASTERACCOUNTPATH== subscriptionPath)
                 {
                     QJsonObject masterAccount = QJsonDocument::fromJson(jsonString).object();
-                    QJsonArray personList=dataContainer->personList();
+                    QJsonArray personList=mDataContainer->personList();
                     if (personList.size() > 0)
                     {
                         personList[0]= masterAccount;
@@ -343,7 +382,7 @@ void ControllerConnectionManagerImpl::storeSendingMessageLocally(QString subscri
                     {
                         personList.insert(0,masterAccount);
                     }
-                    dataContainer->personList(personList);
+                    mDataContainer->personList(personList);
                 }
                 else if (messageContainsSendingImage(subscriptionPath))
                 {
@@ -352,15 +391,31 @@ void ControllerConnectionManagerImpl::storeSendingMessageLocally(QString subscri
                 else if (ControllerConnectionConstants::BASEOPTIONSPATH== subscriptionPath)
                 {
                     QJsonObject baseOptions = QJsonDocument::fromJson(jsonString).object();
-                    dataContainer->baseOptions(baseOptions);
+                    mDataContainer->baseOptions(baseOptions);
                 }
                 else if (ControllerConnectionConstants::DEVICEOPTIONSPATH== subscriptionPath)
                 {
                     QJsonObject displayOptions = QJsonDocument::fromJson(jsonString).object();
-                    dataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
+                    mDataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
                 }
 
 
+}
+
+QMQTT::Client *ControllerConnectionManagerImpl::createMqttClient(QString brokerAddress)
+{
+    auto mqttClient = new QMQTT::Client(brokerAddress,brokerPort,false, true,this);
+
+    connect(mqttClient,&QMQTT::Client::error,this,&ControllerConnectionManagerImpl::onClientError);
+
+    connect(mqttClient,&QMQTT::Client::received,this,&ControllerConnectionManagerImpl::listenToPublishes);
+
+    return mqttClient;
+}
+
+ControllerDataContainer *ControllerConnectionManagerImpl::dataContainer() const
+{
+    return mDataContainer;
 }
 
  bool ControllerConnectionManagerImpl::messageContainsSendingImage(QString topic)
@@ -421,7 +476,7 @@ bool ControllerConnectionManagerImpl::messageContainsIncomingImage(QString topic
 
 void ControllerConnectionManagerImpl::storeImage(QByteArray jsonString, QString topic)
         {
-            QJsonArray imageList = dataContainer->images();
+            QJsonArray imageList = mDataContainer->images();
 
             if (ControllerConnectionConstants::CALENDARIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_CALENDAR_PATH== topic)
             {
@@ -454,7 +509,7 @@ void ControllerConnectionManagerImpl::storeImage(QByteArray jsonString, QString 
                 imageList.append(imageFile);
             }
 
-            this->dataContainer->images(imageList);
+            this->mDataContainer->images(imageList);
 
 }
 

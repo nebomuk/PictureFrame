@@ -10,7 +10,7 @@ DeviceAccessorImpl::DeviceAccessorImpl(ControllerConnectionManagerImpl *controll
     controllerConnectionManager = controllerConnectionManager;
 
     this->mClientID = QUuid::createUuid().toString().mid(1, 36).toUpper();
-    this->mIsConnectedToBroker = controllerConnectionManager->establishConnection(mClientID);
+   // this->mIsConnectedToBroker = controllerConnectionManager->establishConnection(mClientID);
 }
 
 
