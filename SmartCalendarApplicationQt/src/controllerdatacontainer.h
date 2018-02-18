@@ -7,6 +7,8 @@
 #include <QJsonArray>
 #include "propertyhelper.h"
 
+
+
 class ControllerDataContainer : public QObject
 {
     Q_OBJECT
@@ -56,5 +58,6 @@ private:
     AUTO_PROPERTY(bool,birthdayTableReceived)
     AUTO_PROPERTY(bool,trashTableReceived)
 };
+
 
 #endif // CONTROLLERDATACONTAINER_H

@@ -151,15 +151,24 @@ ControllerDataContainer *DeviceAccessorImpl::controllerDataContainer() const
     return mControllerConnectionManager->dataContainer();
 }
 
+QObject *DeviceAccessorImpl::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(scriptEngine);
+
+    QObject * object = new DeviceAccessorImpl();
+    return object;
+}
+
 bool DeviceAccessorImpl::establishConnectionBlocking(const QString &brokerAddress)
 {
 
-    this->mIsConnectedToBroker = mControllerConnectionManager->establishConnectionBlocking(brokerAddress,mClientID);
+    return this->mIsConnectedToBroker = mControllerConnectionManager->establishConnectionBlocking(brokerAddress,mClientID);
 }
 
 bool DeviceAccessorImpl::closeConnection()
 {
-    mControllerConnectionManager->closeConnection();
+    return mControllerConnectionManager->closeConnection();
 }
 
 void DeviceAccessorImpl::logJson(QVariant json,QString name)

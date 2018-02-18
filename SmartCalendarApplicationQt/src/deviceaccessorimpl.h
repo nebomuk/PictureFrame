@@ -13,7 +13,7 @@ class DeviceAccessorImpl : public QObject
 
     //Q_PROPERTY(ControllerConnectionManagerImpl controllerConnectionManager READ controllerConnectionManager)
 
-    Q_PROPERTY(ControllerDataContainer ControllerDataContainer READ controllerDataContainer)
+    Q_PROPERTY(ControllerDataContainer controllerDataContainer READ controllerDataContainer)
 
     Q_PROPERTY(bool isConnectedToBroker READ isConnectedToBroker)
 
@@ -22,12 +22,16 @@ public:
 
     ControllerDataContainer *controllerDataContainer() const;
 
+    static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
+
+    bool isConnectedToBroker();
+
+
 public slots:
 
     bool establishConnectionBlocking(const QString &brokerAddress);
     bool closeConnection();
 
-    bool isConnectedToBroker();
     void sendCalendarImage(QJsonObject calendarImage);
 
     void sendWeatherImage(QJsonObject weatherImage);

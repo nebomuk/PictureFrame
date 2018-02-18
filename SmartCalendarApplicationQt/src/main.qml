@@ -111,6 +111,16 @@ ApplicationWindow {
                   {
                       msgDialogWifi.open()
                   }
+
+                  var res = DeviceAccessor.establishConnectionBlocking("192.168.2.142");
+
+                  var personList = DeviceAccessor.controllerDataContainer.baseOptions;
+                  var str = JSON.stringify(personList, null, 2);
+
+
+                  console.log("connection result " + str);
+
+
               }
           }
       }

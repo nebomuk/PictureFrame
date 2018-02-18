@@ -1,5 +1,6 @@
 #include "controllerconnectionmanagerimpl.h"
 #include "controllerdatacontainer.h"
+#include "deviceaccessorimpl.h"
 #include "devicemanagermodel.h"
 #include "platformhelper.h"
 #include "smartcalendaraccessimpl.h"
@@ -15,6 +16,7 @@
 
 #include <QQmlApplicationEngine>
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -25,7 +27,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 #endif
 
-   // qmlRegisterSingletonType<ControllerConnectionManagerImpl>("de.vitecvisual.core",1,0,"ControllerConnectionManager",&ControllerConnectionManagerImpl::singletontype_provider);
+    qRegisterMetaType<ControllerDataContainer*>("ControllerDataContainer");
+    qmlRegisterType<ControllerDataContainer>();
+    qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&DeviceAccessorImpl::singletontype_provider);
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &SmartCalendarAccessImpl::singletontype_provider);
     qmlRegisterSingletonType<PlatformHelper>("de.vitecvisual.native",1,0,"PlatformHelper",&PlatformHelper::singletontype_provider);
 
