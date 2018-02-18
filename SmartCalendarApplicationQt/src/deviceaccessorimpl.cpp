@@ -1,16 +1,16 @@
 #include "deviceaccessorimpl.h"
 
 #include "controllerconnectionconstants.h"
+#include "controllerconnectionmanagerimpl.h"
 
 #include <QJsonDocument>
 
 
-DeviceAccessorImpl::DeviceAccessorImpl(ControllerConnectionManagerImpl *controllerConnectionManager, QObject *parent) : QObject(parent), mIsConnectedToBroker(false)
+DeviceAccessorImpl::DeviceAccessorImpl(QObject *parent) : QObject(parent), mIsConnectedToBroker(false)
 {
-    controllerConnectionManager = controllerConnectionManager;
+    mControllerConnectionManager = new ControllerConnectionManagerImpl(this);
 
     this->mClientID = QUuid::createUuid().toString().mid(1, 36).toUpper();
-   // this->mIsConnectedToBroker = controllerConnectionManager->establishConnection(mClientID);
 }
 
 
@@ -146,9 +146,20 @@ QJsonArray DeviceAccessorImpl::addClientID(QJsonArray jsonArray)
     return newArray;
 }
 
-ControllerConnectionManagerImpl *DeviceAccessorImpl::controllerConnectionManager() const
+ControllerDataContainer *DeviceAccessorImpl::controllerDataContainer() const
 {
-    return mControllerConnectionManager;
+    return mControllerConnectionManager->dataContainer();
+}
+
+bool DeviceAccessorImpl::establishConnectionBlocking(const QString &brokerAddress)
+{
+
+    this->mIsConnectedToBroker = mControllerConnectionManager->establishConnectionBlocking(brokerAddress,mClientID);
+}
+
+bool DeviceAccessorImpl::closeConnection()
+{
+    mControllerConnectionManager->closeConnection();
 }
 
 void DeviceAccessorImpl::logJson(QVariant json,QString name)

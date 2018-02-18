@@ -15,6 +15,9 @@ void ControllerConnectionManagerImplTest::initTestCase()
 
 void ControllerConnectionManagerImplTest::establishConnectionBlockingTest()
 {
+    QSKIP("This test can only be run if establishConnectionTest() does not run, because one of the tests will fail when there are two connections in rapid successsion");
+
+
 
     auto uuid = QUuid::createUuid().toString().mid(1, 36).toUpper();
     QVERIFY2(mControllerConnectionManagerImpl->establishConnectionBlocking(QHostAddress(QHostAddress::LocalHost).toString(),uuid),"establishConnection() failed");
@@ -34,7 +37,6 @@ void ControllerConnectionManagerImplTest::establishConnectionBlockingTest()
 
 void ControllerConnectionManagerImplTest::establishConnectionTest()
 {
-    QSKIP("This test can only be run if establishConnectionTest() does not run, because one of the tests will fail when there are two connections in rapid successsion");
 
 
     auto uuid = QUuid::createUuid().toString().mid(1, 36).toUpper();

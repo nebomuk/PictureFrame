@@ -2,6 +2,7 @@
 #define DEVICEACCESSORIMPL_H
 
 #include "controllerconnectionmanagerimpl.h"
+#include "controllerdatacontainer.h"
 
 #include <QObject>
 #include <QUuid>
@@ -10,17 +11,21 @@ class DeviceAccessorImpl : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(ControllerConnectionManagerImpl controllerConnectionManager READ controllerConnectionManager)
+    //Q_PROPERTY(ControllerConnectionManagerImpl controllerConnectionManager READ controllerConnectionManager)
+
+    Q_PROPERTY(ControllerDataContainer ControllerDataContainer READ controllerDataContainer)
 
     Q_PROPERTY(bool isConnectedToBroker READ isConnectedToBroker)
 
 public:
-    explicit DeviceAccessorImpl(ControllerConnectionManagerImpl  *mControllerConnectionManager, QObject *parent = nullptr);
+    explicit DeviceAccessorImpl(QObject *parent = nullptr);
 
-
-    ControllerConnectionManagerImpl *controllerConnectionManager() const;
+    ControllerDataContainer *controllerDataContainer() const;
 
 public slots:
+
+    bool establishConnectionBlocking(const QString &brokerAddress);
+    bool closeConnection();
 
     bool isConnectedToBroker();
     void sendCalendarImage(QJsonObject calendarImage);

@@ -7,6 +7,10 @@
 #include <qmqtt_client.h>
 #include <qmqtt_message.h>
 
+/**
+ * @brief The BlockingMqttConnection class handles mqtt connections and checks if the initial data has been received
+ */
+
 class BlockingMqttConnection : public QObject
 {
     Q_OBJECT
@@ -20,9 +24,10 @@ public:
     void publish(QMQTT::Message msg);
     bool closeConnection();
 
-
-
+    // simple QtConcurrent::run wrapper around establishConnectionBlocking, may not work, because some mqtt client internal objects are still in the wrong thread
     void establishConnection(QString brokerAddress, QString clientId);
+
+
 signals:
     void establishConnectionResult(bool isEstablished);
     void received(QMQTT::Message msg);

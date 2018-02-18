@@ -13,6 +13,7 @@ BlockingMqttConnection::BlockingMqttConnection(QObject *parent) : QObject(parent
     client = nullptr;
 
     qRegisterMetaType<QMQTT::Message>("QMQTT::Message"); // required for QueuedConnection
+    qRegisterMetaType<QMQTT::ClientError>("QMQTT::ClientError"); // required for QueuedConnection
 
     connect(&establishConnectionFutureWatcher,&QFutureWatcher<bool>::finished,this,[this]
     {
@@ -24,7 +25,7 @@ BlockingMqttConnection::BlockingMqttConnection(QObject *parent) : QObject(parent
 bool BlockingMqttConnection::waitForMqttConnected()
 {
     QTimer connectionTimeout;
-    connectionTimeout.setInterval(3000);
+    connectionTimeout.setInterval(2000);
     connectionTimeout.setSingleShot(true);
     QEventLoop eventLoop;
 
@@ -42,7 +43,7 @@ bool BlockingMqttConnection::waitForMqttConnected()
 bool BlockingMqttConnection::waitForInitialDataReceived()
 {
     QTimer connectionTimeout;
-    connectionTimeout.setInterval(3000);
+    connectionTimeout.setInterval(2000);
     connectionTimeout.setSingleShot(true);
 
     bool initialDataReceived = false;
@@ -161,7 +162,7 @@ QMQTT::Client *BlockingMqttConnection::createMqttClient(QString brokerAddress, i
 
 void BlockingMqttConnection::onClientError(QMQTT::ClientError error)
 {
-    qDebug(qPrintable(QString("FIXME: ClientError enum enum %1 received").arg(error)));
+    qDebug(qPrintable(QString("ClientError enum enum %1 received").arg(error)));
 }
 
 void BlockingMqttConnection::establishConnection(QString brokerAddress,QString clientId)
