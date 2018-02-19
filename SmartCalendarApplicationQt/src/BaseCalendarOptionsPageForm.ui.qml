@@ -16,6 +16,12 @@ Page {
 
     property alias buttonManageTrash: buttonManageTrash
 
+    property alias buttonConfirm : buttonConfirm
+
+      property alias  checkBoxShowBirthdays : checkBoxShowBirthdays
+    property alias checkBoxShowNationalHolidays : checkBoxShowNationalHolidays
+    property alias checkBoxShowTrashPlan : checkBoxShowTrashPlan
+
 
     CenterColumn {
         id: column
@@ -45,21 +51,24 @@ Page {
             text: qsTr("Manage Trash")
         }
         CheckBox {
+            id : checkBoxShowBirthdays
             checked: false
             text: qsTr("Show birthdays")
         }
         CheckBox {
+            id : checkBoxShowNationalHolidays
             checked: false
-            text: qsTr("Show public holidays")
+            text: qsTr("Show national holidays")
         }
         CheckBox {
+            id : checkBoxShowTrashPlan
             checked: false
             text: qsTr("Show trash plan")
         }
     }
 
     Button {
-        id: button
+        id: buttonConfirm
         text: qsTr("Confirm")
         anchors.right: parent.right
         anchors.rightMargin: 80

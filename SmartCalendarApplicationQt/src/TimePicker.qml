@@ -6,8 +6,16 @@ Rectangle {
 
     property bool is24HourFormat : is24HourFormatLocale()
 
-    property int hour : hoursTumbler.currentIndex * (is24HourFormat  ? 1 : 2)// returns hours always in 24 hour format
-    property int minute : minutesTumbler.currentIndex
+    property int initialHour : 0
+
+    property int initialMinute : 0
+
+    readonly  property int hour : hoursTumbler.currentIndex * (is24HourFormat  ? 1 : 2)// returns hours always in 24 hour format
+    readonly  property int minute : minutesTumbler.currentIndex
+
+    onInitialHourChanged: hoursTumbler.currentIndex = initialHour
+
+    onInitialMinuteChanged: minutesTumbler.currentIndex = initialMinute
 
     function is24HourFormatLocale()
     {

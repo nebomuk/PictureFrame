@@ -124,7 +124,7 @@ ApplicationWindow {
     Timer {
              interval: 500; running: true; repeat: false
              onTriggered: {
-                 var options = DeviceAccessor.controllerDataContainer.personList;
+                 var options = DeviceAccessor.controllerDataContainer.displayOptions;
 
                  var str = JSON.stringify(options);
 

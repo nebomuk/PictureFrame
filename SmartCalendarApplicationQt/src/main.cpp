@@ -5,6 +5,8 @@
 #include "platformhelper.h"
 #include "smartcalendaraccessimpl.h"
 
+#include <QLoggingCategory>
+
 //#define USE_QAPPLICATION
 
 
@@ -26,6 +28,8 @@ int main(int argc, char *argv[])
 #else
     QGuiApplication app(argc, argv);
 #endif
+
+    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
 
     qRegisterMetaType<ControllerDataContainer*>("ControllerDataContainer");
     qmlRegisterUncreatableType<ControllerDataContainer>("de.vitecvisual.core",1,0,"ControllerDataContainer","Property of DeviceAccessor singleton");

@@ -13,7 +13,7 @@ class DeviceAccessorImpl : public QObject
 
     //Q_PROPERTY(ControllerConnectionManagerImpl controllerConnectionManager READ controllerConnectionManager)
 
-    Q_PROPERTY(ControllerDataContainer* controllerDataContainer READ controllerDataContainer)
+    Q_PROPERTY(ControllerDataContainer* controllerDataContainer READ controllerDataContainer CONSTANT /*supress qml warning*/)
 
     Q_PROPERTY(bool isConnectedToBroker READ isConnectedToBroker)
 

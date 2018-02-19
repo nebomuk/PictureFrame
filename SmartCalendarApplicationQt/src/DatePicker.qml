@@ -8,11 +8,11 @@ Rectangle {
     property int maxYear : 2008
     property int minYear : 1908
     property int initialYear : 1980
-    property int year : parseInt(yearTumbler.currentItem.text) // the year 1908 ..2008
-    property int month: monthTumbler.currentIndex // starts with 0 for January .. 11 for December like javascript
-    property int day : daysTumbler.currentIndex + 1 // the day of the month 1..31
+    readonly  property int year : parseInt(yearTumbler.currentItem.text) // the year 1908 ..2008
+    readonly  property int month: monthTumbler.currentIndex // starts with 0 for January .. 11 for December like javascript
+    readonly  property int day : daysTumbler.currentIndex + 1 // the day of the month 1..31
 
-    property date date : new Date(year,month -1 /*zero indexed*/,day)
+    readonly  property date date : new Date(year,month -1 /*zero indexed*/,day)
 
     function formatDaysInMonth(count, modelData)
     {

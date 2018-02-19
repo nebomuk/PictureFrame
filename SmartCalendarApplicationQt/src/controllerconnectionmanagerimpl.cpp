@@ -32,7 +32,7 @@ void ControllerConnectionManagerImpl::establishConnection(QString brokerAddress,
 
 bool ControllerConnectionManagerImpl::closeConnection()
 {
-    blockingMqttConnection->closeConnection();
+    return blockingMqttConnection->closeConnection();
 }
 
 

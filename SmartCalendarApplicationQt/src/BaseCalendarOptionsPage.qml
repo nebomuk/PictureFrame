@@ -1,4 +1,6 @@
 import QtQuick 2.4
+import de.vitecvisual.core 1.0;
+
 
 BaseCalendarOptionsPageForm {
 
@@ -10,4 +12,24 @@ BaseCalendarOptionsPageForm {
 
     buttonManageTrash.onClicked: stackView.push("ManageTrashPlanPage.qml")
 
+    checkBoxShowBirthdays.checked:  DeviceAccessor.controllerDataContainer.baseOptions.showBirthdays
+
+    checkBoxShowTrashPlan.checked:   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
+
+    checkBoxShowNationalHolidays.checked:   DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
+
+    buttonConfirm.onClicked: {
+
+        var baseOptions = DeviceAccessor.controllerDataContainer.baseOptions;
+
+        baseOptions.showBirthdays = checkBoxShowBirthdays.checked
+
+        baseOptions.showTrashPlan = checkBoxShowTrashPlan.checked
+
+        baseOptions.showNationalHolidays = checkBoxShowNationalHolidays.checked
+
+        DeviceAccessor.controllerDataContainer.baseOptions = baseOptions
+
+        DeviceAccessor.sendCalendarBaseOptions(baseOptions);
+    }
 }

@@ -10,12 +10,27 @@ Page {
     title: qsTr("Display Options")
 
     property alias buttonWorkingDayStart  : buttonWorkingDayStart
-
     property alias buttonWorkingDayEnd    : buttonWorkingDayEnd
-
     property alias buttonWeekendStart     : buttonWeekendStart
-
     property alias buttonWeekendEnd       : buttonWeekendEnd
+
+    property alias buttonConfirm : buttonConfirm
+
+
+    property int fixedDisplayBrightness
+    property int displaySensibilityLevel
+
+    property bool automatedDisplayBrightness
+    property bool permanentActiveDisplay
+
+    property string firstIntervallWorkdayPowerSavingModeStartDate;
+    property string firstIntervallWorkdayPowerSavingModeEndDate;
+    property string secondIntervallWorkdayPowerSavingModeStartDate;
+    property string secondIntervallWorkdayPowerSavingModeEndDate;
+    property string firstIntervallWeekendPowerSavingModeStartDate;
+    property string firstIntervallWeekendPowerSavingModeEndDate;
+    property string secondIntervallWeekendPowerSavingModeStartDate;
+    property string secondIntervallWeekendPowerSavingModeEndDate;
 
 
     GridLayout {
@@ -36,21 +51,25 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
+        ButtonGroup { id: displayBrightnessGroup }
+
         RadioButton {
             id: radioButtonScreenBrightnessFixed
             text: qsTr("Fixed")
+            ButtonGroup.group: displayBrightnessGroup
         }
 
         SpinBox {
             enabled: radioButtonScreenBrightnessFixed.checked
-            value: 80
-            id: spinBox
+            value: fixedDisplayBrightness
         }
 
         RadioButton {
             Layout.columnSpan: 2
-            id: radioButtonScreenBrightnessAutomatic
+            checked : automatedDisplayBrightness
+            id: radioButtonAutomatedDisplayBrightness
             text: qsTr("Automatic")
+            ButtonGroup.group: displayBrightnessGroup
         }
 
         Label {
@@ -60,9 +79,14 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
+        ButtonGroup { id: activationGroup }
+
+
         RadioButton {
+
             id: radioButtonSensibility
             text: qsTr("Sensibility")
+            ButtonGroup.group: activationGroup
         }
 
         ComboBox {
@@ -73,8 +97,9 @@ Page {
 
         RadioButton {
             Layout.columnSpan: 2
-            id: radioButtonPermanentlyActivated
             text: qsTr("Permamently Activated")
+            checked:  permanentActiveDisplay
+            ButtonGroup.group: activationGroup
         }
 
         Label {
@@ -113,5 +138,14 @@ Page {
                 id: buttonWeekendEnd
             }
         }
+    }
+
+    Button {
+        id: buttonConfirm
+        text: qsTr("Confirm")
+        anchors.right: parent.right
+        anchors.rightMargin: 80
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 80
     }
 }
