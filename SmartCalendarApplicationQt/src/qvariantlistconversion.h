@@ -19,6 +19,18 @@ public:
 
         return newList;
     }
+
+    template <typename T>
+    static const QList<T> fromVariantList(const QVariantList& variantList )
+    {
+        QList<T> newList;
+        for(QVariant variant : variantList)
+        {
+            newList.append(variant.value<T>());
+        }
+
+        return newList;
+    }
 };
 
 #endif // QVARIANTLISTCONVERSION_H

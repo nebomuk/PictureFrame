@@ -12,11 +12,15 @@ BaseCalendarOptionsPageForm {
 
     buttonManageTrash.onClicked: stackView.push("ManageTrashPlanPage.qml")
 
-    checkBoxShowBirthdays.checked:  DeviceAccessor.controllerDataContainer.baseOptions.showBirthdays
 
-    checkBoxShowTrashPlan.checked:   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
+    Component.onCompleted:
+    {
+        checkBoxShowBirthdays.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showBirthdays
 
-    checkBoxShowNationalHolidays.checked:   DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
+        checkBoxShowTrashPlan.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
+
+        checkBoxShowNationalHolidays.checked =  DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
+    }
 
     buttonConfirm.onClicked: {
 

@@ -8,25 +8,91 @@ BaseDisplayOptionsPageForm {
 
     id: form
 
-    fixedDisplayBrightness : DeviceAccessor.controllerDataContainer.displayOptions.fixedDisplayBrightness;
-    displaySensibilityLevel : DeviceAccessor.controllerDataContainer.displayOptions.displaySensibilityLevel;
-    automatedDisplayBrightness : DeviceAccessor.controllerDataContainer.displayOptions.automatedDisplayBrightness;
-    permanentActiveDisplay : DeviceAccessor.controllerDataContainer.displayOptions.permanentActiveDisplay;
+    Component.onCompleted: {
 
-    firstIntervallWorkdayPowerSavingModeStartDate : DeviceAccessor.controllerDataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
-    firstIntervallWorkdayPowerSavingModeEndDate : DeviceAccessor.controllerDataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
-    secondIntervallWorkdayPowerSavingModeStartDate : DeviceAccessor.controllerDataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeStartDate;
-    secondIntervallWorkdayPowerSavingModeEndDate : DeviceAccessor.controllerDataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeEndDate;
-    firstIntervallWeekendPowerSavingModeStartDate : DeviceAccessor.controllerDataContainer.displayOptions.firstIntervallWeekendPowerSavingModeStartDate;
-    firstIntervallWeekendPowerSavingModeEndDate : DeviceAccessor.controllerDataContainer.displayOptions.firstIntervallWeekendPowerSavingModeEndDate;
-    secondIntervallWeekendPowerSavingModeStartDate : DeviceAccessor.controllerDataContainer.displayOptions.secondIntervallWeekendPowerSavingModeStartDate;
-    secondIntervallWeekendPowerSavingModeEndDate : DeviceAccessor.controllerDataContainer.displayOptions.secondIntervallWeekendPowerSavingModeEndDate;
+        var dataContainer = DeviceAccessor.controllerDataContainer;
+
+        fixedDisplayBrightness = dataContainer.displayOptions.fixedDisplayBrightness;
+        displaySensibilityLevel = dataContainer.displayOptions.displaySensibilityLevel;
+
+        radioButtonautomatedDisplayBrightness.checked = dataContainer.displayOptions.automatedDisplayBrightness;
+        radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay;
+
+        var firstIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
+        var firstIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
+        var secondIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeStartDate;
+        var secondIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeEndDate;
+        var firstIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeStartDate;
+        var firstIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeEndDate;
+        var secondIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeStartDate;
+        var secondIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeEndDate;
 
 
-    buttonWorkingDayStart.text:   new Date(firstIntervallWorkdayPowerSavingModeStartDate).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
-    buttonWorkingDayEnd.text:  new Date(firstIntervallWorkdayPowerSavingModeEndDate).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
-    buttonWeekendStart.text: new Date(firstIntervallWeekendPowerSavingModeStartDate).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
-    buttonWeekendEnd.text:  new Date(firstIntervallWeekendPowerSavingModeEndDate).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
+        buttonWorkingDayStart.text=   toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate);
+        buttonWorkingDayEnd.text=  toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate);
+        buttonWeekendStart.text= toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate);
+        buttonWeekendEnd.text=  toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate);
+
+        buttonWorkingDayStart2.text=   toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate);
+        buttonWorkingDayEnd2.text=  toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate);
+        buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
+        buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
+    }
+
+    // input from json format:
+    // 2000-12-12T12:12
+    function toLocaleTimeString(dateString)
+    {
+        return new Date(dateString).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
+    }
+
+    function fromLocaleTimeString(timeString)
+    {
+        var date =  new Date(Date.fromLocaleTimeString(Qt.locale(),timeString,Locale.ShortFormat));
+        // toIsoString() in qml would create 2018-02-19T12:12:00.000Z but we want the same as the input
+        var res = date.toISOString().slice(0,16);
+        console.log(res);
+        return res;
+    }
+
+    buttonConfirm.onClicked: {
+        var displayOptions = DeviceAccessor.controllerDataContainer.displayOptions;
+
+        displayOptions.fixedDisplayBrightness = fixedDisplayBrightness
+        displayOptions.displaySensibilityLevel = displaySensibilityLevel
+
+        displayOptions.automatedDisplayBrightness = radioButtonautomatedDisplayBrightness.checked
+        displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked
+
+        displayOptions.firstIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart.text)
+        displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd.text)
+        displayOptions.firstIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart.text)
+        displayOptions.firstIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd.text)
+
+        displayOptions.secondIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart2.text)
+        displayOptions.secondIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd2.text)
+        displayOptions.secondIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart2.text)
+        displayOptions.secondIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd2.text)
+
+
+        DeviceAccessor.controllerDataContainer.displayOptions = displayOptions;
+
+        DeviceAccessor.sendSmartCalendarDeviceOptions(displayOptions);
+    }
+
+    buttonWorkingDayStart.onClicked  : showTimeDialog(buttonWorkingDayStart)
+    buttonWorkingDayEnd.onClicked   : showTimeDialog(buttonWorkingDayEnd)
+
+    buttonWeekendStart.onClicked     : showTimeDialog(buttonWeekendStart)
+
+    buttonWeekendEnd.onClicked  : showTimeDialog(buttonWeekendEnd)
+
+    buttonWorkingDayStart2.onClicked  : showTimeDialog(buttonWorkingDayStart2)
+    buttonWorkingDayEnd2.onClicked   : showTimeDialog(buttonWorkingDayEnd2)
+
+    buttonWeekendStart2.onClicked     : showTimeDialog(buttonWeekendStart2)
+
+    buttonWeekendEnd2.onClicked  : showTimeDialog(buttonWeekendEnd2)
 
 
     Component{
@@ -70,37 +136,6 @@ BaseDisplayOptionsPageForm {
                            new Date(2000,0,1,timePicker.hour,timePicker.minute).toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
                         })
         timeDialogObject.visible = true
-    }
-
-
-    Connections {
-
-        target: buttonWorkingDayStart
-
-        onClicked  : showTimeDialog(buttonWorkingDayStart)
-    }
-
-
-    Connections {
-
-        target : buttonWorkingDayEnd
-
-        onClicked   : showTimeDialog(buttonWorkingDayEnd)
-        }
-
-    Connections {
-
-        target : buttonWeekendStart
-
-        onClicked     : showTimeDialog(buttonWeekendStart)
-        }
-
-    Connections {
-
-        target : buttonWeekendEnd
-
-        onClicked  : showTimeDialog(buttonWeekendEnd)
-
-        }
+    }       
 
 }

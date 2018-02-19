@@ -118,7 +118,10 @@ ApplicationWindow {
         msgDialogWifi.open()
     }
 
-    var res = DeviceAccessor.establishConnectionBlocking("192.168.0.222");
+    var controllerList = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
+
+
+    var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
 }
 
     Timer {

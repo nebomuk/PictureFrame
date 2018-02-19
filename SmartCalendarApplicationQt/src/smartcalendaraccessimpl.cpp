@@ -1,3 +1,4 @@
+#include "qvariantlistconversion.h"
 #include "responderclient.h"
 #include "smartcalendaraccessimpl.h"
 
@@ -67,7 +68,7 @@ QObject *SmartCalendarAccessImpl::singletontype_provider(QQmlEngine *engine, QJS
     return object;
 }
 
-QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadcastBlocking(int timeOut)
+QVariantList SmartCalendarAccessImpl::getControllerInNetworkFromBroadcastBlocking(int timeOut)
 {
     QUdpSocket senderSocket;
     senderSocket.writeDatagram(BROADCASTMESSAGE.toLatin1(),QHostAddress::Broadcast,BROADCASTPORT);
@@ -88,7 +89,7 @@ QList<ResponderClient> SmartCalendarAccessImpl::getControllerInNetworkFromBroadc
 
      QList<ResponderClient> resultAddresses = readResponderClientsFromUdpSocket(&receiver);
 
-    return resultAddresses;
+    return QVariantListConversion::toVariantList(resultAddresses);
 }
 
 QList<ResponderClient> SmartCalendarAccessImpl::readResponderClientsFromUdpSocket(QUdpSocket * socket)

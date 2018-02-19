@@ -3,6 +3,7 @@
 #include <QNetworkConfigurationManager>
 #include <QSignalSpy>
 #include <QtDebug>
+#include <src/qvariantlistconversion.h>
 
 void SmartCalendarAccessImplTest::initTestCase()
 {
@@ -33,7 +34,7 @@ void SmartCalendarAccessImplTest::GetControllerInNetworkFromBroadcastBlockingTes
     }
     else
     {
-        qDebug() << "found controllers: " << controllers;
+        qDebug() << "found controllers: " << QVariantListConversion::fromVariantList(controllers);
     }
 }
 

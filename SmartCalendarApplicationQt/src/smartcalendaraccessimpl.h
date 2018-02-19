@@ -22,7 +22,7 @@ public:
 
     Q_INVOKABLE QList<QHostAddress> getAllAvailableDevicesInNetwork();
 
-    Q_INVOKABLE QList<ResponderClient> getControllerInNetworkFromBroadcastBlocking(int timeOut);
+    Q_INVOKABLE QVariantList getControllerInNetworkFromBroadcastBlocking(int timeOut);
 
     Q_INVOKABLE void getControllerInNetworkFromBroadcast();
 

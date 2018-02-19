@@ -14,24 +14,19 @@ Page {
     property alias buttonWeekendStart     : buttonWeekendStart
     property alias buttonWeekendEnd       : buttonWeekendEnd
 
+    property alias buttonWorkingDayStart2  : buttonWorkingDayStart2
+    property alias buttonWorkingDayEnd2    : buttonWorkingDayEnd2
+    property alias buttonWeekendStart2     : buttonWeekendStart2
+    property alias buttonWeekendEnd2       : buttonWeekendEnd2
+
     property alias buttonConfirm : buttonConfirm
 
 
     property int fixedDisplayBrightness
     property int displaySensibilityLevel
 
-    property bool automatedDisplayBrightness
-    property bool permanentActiveDisplay
-
-    property string firstIntervallWorkdayPowerSavingModeStartDate;
-    property string firstIntervallWorkdayPowerSavingModeEndDate;
-    property string secondIntervallWorkdayPowerSavingModeStartDate;
-    property string secondIntervallWorkdayPowerSavingModeEndDate;
-    property string firstIntervallWeekendPowerSavingModeStartDate;
-    property string firstIntervallWeekendPowerSavingModeEndDate;
-    property string secondIntervallWeekendPowerSavingModeStartDate;
-    property string secondIntervallWeekendPowerSavingModeEndDate;
-
+    property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
+    property alias radioButtonpermanentActiveDisplay :  radioButtonpermanentActiveDisplay
 
     GridLayout {
         x: 51
@@ -42,7 +37,7 @@ Page {
         columnSpacing: 10
         rowSpacing: 10
         columns: 2
-        rows: 9
+        rows: 11
 
         Label {
             Layout.columnSpan: 2
@@ -54,20 +49,20 @@ Page {
         ButtonGroup { id: displayBrightnessGroup }
 
         RadioButton {
-            id: radioButtonScreenBrightnessFixed
+            id: radioButtonfixedDisplayBrightness
             text: qsTr("Fixed")
             ButtonGroup.group: displayBrightnessGroup
         }
 
         SpinBox {
-            enabled: radioButtonScreenBrightnessFixed.checked
+            Layout.fillWidth: true
+            enabled: radioButtonfixedDisplayBrightness.checked
             value: fixedDisplayBrightness
         }
 
         RadioButton {
+            id : radioButtonautomatedDisplayBrightness
             Layout.columnSpan: 2
-            checked : automatedDisplayBrightness
-            id: radioButtonAutomatedDisplayBrightness
             text: qsTr("Automatic")
             ButtonGroup.group: displayBrightnessGroup
         }
@@ -84,7 +79,7 @@ Page {
 
         RadioButton {
 
-            id: radioButtonSensibility
+            id: radioButtondisplaySensibilityLevel
             text: qsTr("Sensibility")
             ButtonGroup.group: activationGroup
         }
@@ -92,13 +87,14 @@ Page {
         ComboBox {
             model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
             id: comboBoxSensibility
-            enabled: radioButtonSensibility.checked
+            Layout.fillWidth: true
+            enabled: radioButtondisplaySensibilityLevel.checked
         }
 
         RadioButton {
+            id : radioButtonpermanentActiveDisplay
             Layout.columnSpan: 2
             text: qsTr("Permamently Activated")
-            checked:  permanentActiveDisplay
             ButtonGroup.group: activationGroup
         }
 
@@ -110,11 +106,14 @@ Page {
         }
 
         CheckBox {
-            id: radioButton4
+            Layout.columnSpan: 2
+            id: radioButtonWorkingDay
             text: qsTr("Working Day")
         }
 
         RowLayout {
+            Layout.fillWidth: false
+            enabled: radioButtonWorkingDay.checked
             Button {
                 id: buttonWorkingDayStart
             }
@@ -122,20 +121,37 @@ Page {
             Button {
                 id: buttonWorkingDayEnd
             }
+            Button {
+                id: buttonWorkingDayStart2
+            }
+
+            Button {
+                id: buttonWorkingDayEnd2
+            }
         }
 
         CheckBox {
-            id: radioButton5
+            Layout.columnSpan: 2
+
+            id: radioButtonWeekend
             text: qsTr("Weekend")
         }
 
         RowLayout {
+            enabled: radioButtonWeekend.checked
             Button {
                 id: buttonWeekendStart
             }
 
             Button {
                 id: buttonWeekendEnd
+            }
+            Button {
+                id: buttonWeekendStart2
+            }
+
+            Button {
+                id: buttonWeekendEnd2
             }
         }
     }

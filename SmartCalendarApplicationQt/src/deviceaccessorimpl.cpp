@@ -173,5 +173,16 @@ bool DeviceAccessorImpl::closeConnection()
 
 void DeviceAccessorImpl::logJson(QVariant json,QString name)
 {
-    qDebug(qPrintable(name + ": " + json.toString()));
+    QString jsonString;
+    if(json.canConvert<QJsonObject>())
+    {
+        QJsonDocument doc(json.value<QJsonObject>());
+        jsonString = QString(doc.toJson());
+    }
+    else if(json.canConvert<QJsonArray>())
+    {
+        QJsonDocument doc(json.value<QJsonArray>());
+        jsonString = QString(doc.toJson());
+    }
+    qDebug(qPrintable(name + ": " + jsonString));
 }
