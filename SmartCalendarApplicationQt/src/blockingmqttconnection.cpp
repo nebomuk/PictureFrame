@@ -40,7 +40,7 @@ bool BlockingMqttConnection::waitForMqttConnected()
     return client->connectionState() != QMQTT::ConnectionState::STATE_DISCONNECTED;
 }
 
-bool BlockingMqttConnection::waitForInitialDataReceived()
+bool BlockingMqttConnection::waitForFirstJsonReceived()
 {
     QTimer connectionTimeout;
     connectionTimeout.setInterval(2000);
@@ -81,16 +81,15 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
     }
 
     registerSubscriptions();
-    testConnection(); // this will cause the receiving end to respond with the initial data
-
-    bool initialDataReceived = waitForInitialDataReceived();
+    testConnection(); // this will cause the receiving end to respond with the first json
+    bool initialDataReceived = waitForFirstJsonReceived();
     if(!initialDataReceived)
     {
-        qDebug("failed to receive initial Data");
+        qDebug("failed to receive first JSON");
         return false;
     }
 
-    qDebug("initialDataReceived");
+    qDebug("first json received, other jsons will be received asynchronously");
     currentClientId = clientId;
     return true;
 

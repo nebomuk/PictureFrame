@@ -40,7 +40,7 @@ void MqttMessageParser::storeIncomingMessageLocally(QMQTT::Message msg)
             {
 
                 QJsonObject displayOptions = QJsonDocument::fromJson(msg.payload()).object();
-                mDataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
+                mDataContainer->displayOptions(displayOptions);
             }else if (ControllerConnectionConstants::FOOTBALLLEAGUESUBSCRIPTIONPATH== msg.topic())
             {
 
@@ -244,7 +244,7 @@ void MqttMessageParser::storeSendingMessageLocally(QString subscriptionPath, QBy
     else if (ControllerConnectionConstants::DEVICEOPTIONSPATH== subscriptionPath)
     {
         QJsonObject displayOptions = QJsonDocument::fromJson(jsonString).object();
-        mDataContainer->smartCalendarDeviceOptionsDisplayOptions(displayOptions);
+        mDataContainer->displayOptions(displayOptions);
     }
 
 }

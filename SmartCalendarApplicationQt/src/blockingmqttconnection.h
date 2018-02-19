@@ -8,14 +8,16 @@
 #include <qmqtt_message.h>
 
 /**
- * @brief The BlockingMqttConnection class handles mqtt connections and checks if the initial data has been received
+ * @brief The BlockingMqttConnection class handles mqtt connections and checks if the
+ * first json object of the initial data has been received.
+ * The client will continue to receive more initial data asynchronously
  */
 
 class BlockingMqttConnection : public QObject
 {
     Q_OBJECT
     bool waitForMqttConnected();
-    bool waitForInitialDataReceived();
+    bool waitForFirstJsonReceived();
 public:
     explicit BlockingMqttConnection(QObject *parent = nullptr);
 

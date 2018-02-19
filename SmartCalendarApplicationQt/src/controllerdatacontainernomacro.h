@@ -10,7 +10,7 @@ class ControllerDataContainerNoMacro : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QJsonValue  baseOptions MEMBER baseOptions)
-    Q_PROPERTY(QJsonValue  smartCalendarDeviceOptionsDisplayOptions MEMBER smartCalendarDeviceOptionsDisplayOptions)
+    Q_PROPERTY(QJsonValue  displayOptions MEMBER displayOptions)
 
     Q_PROPERTY(QJsonArray  trashPlan MEMBER trashPlan)
     Q_PROPERTY(QJsonArray  birthdayPlan MEMBER birthdayPlan)
@@ -51,7 +51,7 @@ public:
     ControllerDataContainerNoMacro();
 
     QJsonValue baseOptions;
-    QJsonValue smartCalendarDeviceOptionsDisplayOptions;
+    QJsonValue displayOptions;
 
 
     QJsonArray trashPlan;

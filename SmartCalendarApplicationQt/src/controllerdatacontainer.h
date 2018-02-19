@@ -21,7 +21,7 @@ private:
     // example read: container->baseOptions();
 
     AUTO_PROPERTY(QJsonObject,baseOptions)
-    AUTO_PROPERTY(QJsonObject,smartCalendarDeviceOptionsDisplayOptions)
+    AUTO_PROPERTY(QJsonObject,displayOptions)
 
 
     AUTO_PROPERTY(QJsonArray, trashPlan)

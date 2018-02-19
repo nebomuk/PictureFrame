@@ -106,22 +106,30 @@ ApplicationWindow {
 
               }
 
-              Component.onCompleted: {
-                  if(!SmartCalendarAccess.isConnectedToWifi)
-                  {
-                      msgDialogWifi.open()
-                  }
-
-                  var res = DeviceAccessor.establishConnectionBlocking("192.168.2.142");
-
-                  var personList = DeviceAccessor.controllerDataContainer.baseOptions;
-                  var str = JSON.stringify(personList, null, 2);
-
-
-                  console.log("connection result " + str);
-
-
               }
+
+
           }
-      }
+
+
+    Component.onCompleted: {
+    if(!SmartCalendarAccess.isConnectedToWifi)
+    {
+        msgDialogWifi.open()
+    }
+
+    var res = DeviceAccessor.establishConnectionBlocking("192.168.0.222");
 }
+
+    Timer {
+             interval: 500; running: true; repeat: false
+             onTriggered: {
+                 var options = DeviceAccessor.controllerDataContainer.personList;
+
+                 var str = JSON.stringify(options);
+
+                 console.log("connection result " + str);
+             }
+
+         }
+      }

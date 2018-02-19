@@ -95,6 +95,7 @@ void MqttConnection::onClientError()
 
 void MqttConnection::onReceived()
 {
+    // first Json received
     resultTrue();
 }
 
