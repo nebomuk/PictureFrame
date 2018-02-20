@@ -22,8 +22,8 @@ Page {
     property alias buttonConfirm : buttonConfirm
 
 
-    property int fixedDisplayBrightness
-    property int displaySensibilityLevel
+    property alias spinBoxfixedDisplayBrightness : spinBoxfixedDisplayBrightness
+    property alias comboBoxdisplaySensibilityLevel : comboBoxdisplaySensibilityLevel
 
     property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
     property alias radioButtonpermanentActiveDisplay :  radioButtonpermanentActiveDisplay
@@ -55,9 +55,9 @@ Page {
         }
 
         SpinBox {
+            id : spinBoxfixedDisplayBrightness
             Layout.fillWidth: true
             enabled: radioButtonfixedDisplayBrightness.checked
-            value: fixedDisplayBrightness
         }
 
         RadioButton {
@@ -85,8 +85,8 @@ Page {
         }
 
         ComboBox {
+            id : comboBoxdisplaySensibilityLevel
             model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
-            id: comboBoxSensibility
             Layout.fillWidth: true
             enabled: radioButtondisplaySensibilityLevel.checked
         }

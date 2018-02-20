@@ -9,6 +9,15 @@ Page {
 
     title: qsTr("Weather")
 
+    property alias additionalNumberOfDays : additionalNumberOfDays;
+   // property alias displayTimeInSeconds : displayTimeInSeconds;
+    //property alias timeScale : timeScale;
+    property alias comboBoxUnit : comboBoxUnit;
+    property alias comboBoxDesign : comboBoxDesign;
+    property alias textFieldcityName : textFieldcityName;
+    property alias comboBoxcountry : comboBoxcountry;
+  //  property alias index : index;
+
     GridLayout
     {
         x: 124
@@ -41,6 +50,7 @@ Page {
 
         TextField
         {
+            id : textFieldcityName
             placeholderText: qsTr("City name")
         }
 
@@ -51,7 +61,7 @@ Page {
 
         ComboBox
         {
-
+            id : comboBoxcountry
         }
 
         Label
@@ -67,7 +77,7 @@ Page {
 
         TextField
         {
-
+            id : additionalNumberOfDays
         }
 
         Label
@@ -78,6 +88,7 @@ Page {
         ComboBox
         {
             id : comboBoxUnit
+            model : ["SI","Imperial"]
         }
 
         Label

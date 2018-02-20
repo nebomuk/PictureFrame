@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.4
 import de.vitecvisual.style 1.0
 import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
+import QmlRegistered 1.0;
 
 
 ApplicationWindow {
@@ -127,11 +128,13 @@ ApplicationWindow {
     Timer {
              interval: 500; running: true; repeat: false
              onTriggered: {
-                 var options = DeviceAccessor.controllerDataContainer.displayOptions;
+                 var options = DeviceAccessor.controllerDataContainer.baseOptions;
 
                  var str = JSON.stringify(options);
 
                  console.log("connection result " + str);
+
+
              }
 
          }

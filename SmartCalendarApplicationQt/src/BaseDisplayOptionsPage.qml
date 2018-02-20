@@ -12,8 +12,8 @@ BaseDisplayOptionsPageForm {
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
-        fixedDisplayBrightness = dataContainer.displayOptions.fixedDisplayBrightness;
-        displaySensibilityLevel = dataContainer.displayOptions.displaySensibilityLevel;
+        spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
+        comboBoxdisplaySensibilityLevel.currentIndex = dataContainer.displayOptions.displaySensibilityLevel;
 
         radioButtonautomatedDisplayBrightness.checked = dataContainer.displayOptions.automatedDisplayBrightness;
         radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay;
@@ -58,8 +58,8 @@ BaseDisplayOptionsPageForm {
     buttonConfirm.onClicked: {
         var displayOptions = DeviceAccessor.controllerDataContainer.displayOptions;
 
-        displayOptions.fixedDisplayBrightness = fixedDisplayBrightness
-        displayOptions.displaySensibilityLevel = displaySensibilityLevel
+        displayOptions.fixedDisplayBrightness = spinBoxfixedDisplayBrightness.value
+        displayOptions.displaySensibilityLevel = comboBoxdisplaySensibilityLevel.currentIndex
 
         displayOptions.automatedDisplayBrightness = radioButtonautomatedDisplayBrightness.checked
         displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked

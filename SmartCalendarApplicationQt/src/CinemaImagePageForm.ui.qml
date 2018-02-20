@@ -9,6 +9,12 @@ Page {
 
     title: qsTr("Cinema")
 
+    property alias comboBoxoption : comboBoxoption;
+    property alias comboBoxgenre : comboBoxgenre;
+    property alias comboBoxcountry : comboBoxcountry;
+    property alias comboBoxdesign : comboBoxdesign;
+    //property alias publishTimeStamp : publishStamp;
+
     GridLayout
     {
         x: 124
@@ -20,11 +26,12 @@ Page {
 
         Label
         {
-            text : qsTr("Appearance")
+            text : qsTr("Option")
         }
 
         ComboBox
         {
+            id : comboBoxoption
 
         }
 
@@ -35,7 +42,7 @@ Page {
 
         ComboBox
         {
-            id : comboBoxGenres
+            id : comboBoxgenre
             model : ["Genre1", "Genre2", "Genre3"]
             // TODO must be a checkable combo box
             delegate: CheckBox{
@@ -58,7 +65,7 @@ Page {
 
         ComboBox
         {
-
+            id : comboBoxcountry
         }
 
         Label
@@ -68,7 +75,7 @@ Page {
 
         ComboBox
         {
-
+            id : comboBoxdesign
         }
 
     }

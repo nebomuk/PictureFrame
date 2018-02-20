@@ -9,6 +9,10 @@ Page {
 
     title: qsTr("News")
 
+    property alias comboBoxoption : comboBoxoption;
+    property alias comboBoxsource : comboBoxsource;
+    property alias comboBoxdesign : comboBoxdesign;
+
     GridLayout
     {
         id : gridLayout
@@ -28,16 +32,17 @@ Page {
 
         ComboBox
         {
-
+            id : comboBoxoption
         }
 
         Label
         {
-            text : qsTr("Sources")
+            text : qsTr("Source")
         }
 
         ComboBox
         {
+            id : comboBoxsource
 
         }
 
@@ -48,6 +53,7 @@ Page {
 
         ComboBox
         {
+            id : comboBoxdesign
 
         }
 
