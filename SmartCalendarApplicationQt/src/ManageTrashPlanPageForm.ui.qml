@@ -7,6 +7,16 @@ Page {
     width: 480
     height: 800
 
+    property alias textFieldTrashType: textFieldTrashType
+
+    property alias buttonDate: buttonDate
+
+    property alias listView: listView
+
+    property alias buttonConfirm: buttonConfirm
+
+    property alias buttonAddEntry: buttonAddEntry
+
     title: qsTr("Manage Trash Plan")
 
     GridLayout {
@@ -17,7 +27,7 @@ Page {
         height: 294
         rowSpacing: 10
         columnSpacing: 10
-        rows: 5
+        rows: 4
         columns: 2
 
         Label {
@@ -26,7 +36,7 @@ Page {
         }
 
         TextField {
-            id: textField
+            id: textFieldTrashType
             placeholderText: qsTr("Type")
         }
 
@@ -35,29 +45,72 @@ Page {
             text: qsTr("Date")
         }
 
-        TextField {
-            id: label2
-            placeholderText: qsTr("Enter date")
+        Button {
+            id: buttonDate
         }
         Button {
             Layout.columnSpan: 2
-            id: buttonConfirm
-            text: qsTr("Confirm")
+            id: buttonAddEntry
+            text: qsTr("Add Entry")
+            enabled: textFieldTrashType.text.length > 0
         }
 
-        Label {
-            Layout.columnSpan: 2
-            id: label3
-            text: qsTr("Remove Trash Plan Entry")
-        }
+        FontLoader { id: fontAwesome; source: "qrc:/fa-regular-400.ttf" }
 
-        TextField {
-            placeholderText: qsTr("Trash Type")
-        }
+        ListView
+        {
+            id : listView
+            height: 400
 
-        TextField {
-            placeholderText: qsTr("Date")
+            model : ListModel
+            {
+
+            }
+
+            delegate: RowLayout
+            {
+
+                Label {
+                    Layout.fillWidth: true
+                    text: trashType
+                    Layout.preferredWidth: 70
+                }
+
+                Label {
+                    Layout.fillWidth: true
+                    text: date
+                    Layout.preferredWidth : 80
+
+                }
+
+                Button
+                {
+                    id : removeEntryButton
+                    text : "\uf2ed"
+                    font.family: fontAwesome.name
+
+                    Connections
+                    {
+                        target : removeEntryButton
+                        onClicked : listView.model.remove(index)
+                    }
+                }
+
+                // TODO add iconize garbage icon
+
+            }
+
+
         }
+    }
+
+    Button {
+        id: buttonConfirm
+        text: qsTr("Confirm")
+        anchors.right: parent.right
+        anchors.rightMargin: 80
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 80
     }
 
 }

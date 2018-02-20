@@ -7,8 +7,6 @@ import "DateUtil.js" as DateUtil
 
 ManageBirthdaysPageForm {
 
-
-
     Component.onCompleted: {
 
         buttonBirthdate.text =  new Date(1980,0,1).toLocaleDateString(Qt.locale(),Locale.ShortFormat)
@@ -77,9 +75,6 @@ ManageBirthdaysPageForm {
             contentItem : DatePicker
             {
                 id : datePicker
-//                onYearChanged:  console.log("year: " + year)
-//                onMonthChanged:  console.log("month: " + month)
-//                onDayChanged:  console.log("day: " + day)
 
             }
 
