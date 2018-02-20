@@ -135,6 +135,17 @@ void DeviceAccessorImpl::sendFirstConfigurationOption(QJsonObject firstConfigOpt
     this->mControllerConnectionManager->publishJSONMessage(QJsonDocument(firstConfigOption).toJson(), ControllerConnectionConstants::FIRSTCONFIGURATIONNETWORKPATH);
 }
 
+void DeviceAccessorImpl::queryTrashPlan()
+{
+    this->mControllerConnectionManager->publishSimpleStringMessage(ControllerConnectionConstants::TRASHPLANREQUESTPATH, "Request Trashplan");
+}
+
+void DeviceAccessorImpl::queryBirthdayPlan()
+{
+    this->mControllerConnectionManager->publishSimpleStringMessage( ControllerConnectionConstants::BIRTHDAYPLANREQUESTPATH, "Request Birthdayplan");
+}
+
+
 QJsonArray DeviceAccessorImpl::addClientID(QJsonArray jsonArray)
 {
     QJsonArray newArray;

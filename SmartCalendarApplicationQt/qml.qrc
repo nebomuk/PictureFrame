@@ -44,5 +44,6 @@
         <file>src/PictureTypeSelectionPageForm.ui.qml</file>
         <file>src/DatePicker.qml</file>
         <file>src/TimePicker.qml</file>
+        <file>fa-regular-400.ttf</file>
     </qresource>
 </RCC>

@@ -11,6 +11,8 @@ Page {
 
     property alias buttonBirthdate: buttonBirthdate
 
+    property alias listView: listView
+
     GridLayout {
         id: grid
         x: 60
@@ -88,24 +90,54 @@ Page {
             text: qsTr("Remove Birthday")
         }
 
+        FontLoader { id: fontAwesome; source: "qrc:/fa-regular-400.ttf" }
+
         ListView
         {
+            id : listView
             height: 400
 
-            model : 1
+            model : ListModel
+            {
+
+            }
 
             delegate: RowLayout
             {
-                TextField {
-                    placeholderText: qsTr("First Name")
+
+                Label {
+                    Layout.fillWidth: true
+
+                    text: firstName
+                    Layout.preferredWidth: 70
                 }
 
-                TextField {
-                    placeholderText: qsTr("Last Name")
+                Label {
+                    Layout.fillWidth: true
+
+                    text: lastName
+                    Layout.preferredWidth: 70
+
                 }
 
-                TextField {
-                    placeholderText: qsTr("Birthdate")
+                Label {
+                    Layout.fillWidth: true
+                    text: birthdate
+                    Layout.preferredWidth : 80
+
+                }
+
+                Button
+                {
+                    id : removeEntryButton
+                    text : "\uf2ed"
+                    font.family: fontAwesome.name
+
+                    Connections
+                    {
+                        target : removeEntryButton
+                        onClicked : listView.model.remove(index)
+                    }
                 }
 
                 // TODO add iconize garbage icon

@@ -50,6 +50,11 @@ public slots:
     void sendCallBackAdress(QString callBackAddress);
     void sendCalendarToken(QJsonObject refreshToken);
     void sendFirstConfigurationOption(QJsonObject firstConfigOption);
+
+    void queryTrashPlan();
+
+    void queryBirthdayPlan();
+
 private:
 
     QJsonArray addClientID(QJsonArray jsonArray);
