@@ -9,9 +9,17 @@ Page {
 
     title: qsTr("Manage Birthdays")
 
+    property alias textFieldFirstName: textFieldFirstName
+
+    property alias textFieldLastName: textFieldLastName
+
     property alias buttonBirthdate: buttonBirthdate
 
     property alias listView: listView
+
+    property alias buttonConfirm: buttonConfirm
+
+    property alias buttonAddEntry: buttonAddEntry
 
     GridLayout {
         id: grid
@@ -78,7 +86,7 @@ Page {
 
             Layout.rowSpan: 2
             Layout.columnSpan: 3
-            id: buttonConfirm
+            id: buttonAddEntry
             text: qsTr("Add Entry")
             enabled: textFieldFirstName.text.length > 0
                      && textFieldLastName.text.length > 0
@@ -147,5 +155,14 @@ Page {
 
         }
 
+    }
+
+    Button {
+        id: buttonConfirm
+        text: qsTr("Confirm")
+        anchors.right: parent.right
+        anchors.rightMargin: 80
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 80
     }
 }

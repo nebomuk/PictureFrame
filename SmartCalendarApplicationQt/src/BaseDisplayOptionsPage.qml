@@ -51,7 +51,6 @@ BaseDisplayOptionsPageForm {
         var date =  new Date(Date.fromLocaleTimeString(Qt.locale(),timeString,Locale.ShortFormat));
         // toIsoString() in qml would create 2018-02-19T12:12:00.000Z but we want the same as the input
         var res = date.toISOString().slice(0,16);
-        console.log(res);
         return res;
     }
 

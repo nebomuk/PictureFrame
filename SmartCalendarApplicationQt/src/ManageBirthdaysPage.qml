@@ -6,25 +6,48 @@ import de.vitecvisual.core 1.0;
 
 ManageBirthdaysPageForm {
 
-    buttonBirthdate.text: new Date(1980,0,1).toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+
 
     Component.onCompleted: {
 
-        var persons = DeviceAccessor.queryBirthdayPlan();
+        buttonBirthdate.text =  new Date(1980,0,1).toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
-        dataContainer.birthdayPlanChanged.connect(function()
+        // birthdays already received before
+        if(Object.keys(dataContainer.birthdayPlan).length !== 0)
         {
-            var birthdayPlan = dataContainer.birthdayPlan;
+            addBirthdaysToModel()
+        }
+        else
+        {
+            DeviceAccessor.queryBirthdayPlan();
+            dataContainer.birthdayPlanChanged.connect(addBirthdaysToModel);
+        }
 
-            for (var i = 0; i < birthdayPlan.length; i++){
-                listView.model.append({"firstName" :birthdayPlan[i].firstName,
-                                          "lastName":birthdayPlan[i].name,
-                                          // date without year is nearly impossible to properly localize automatically
-                                          "birthdate":new Date(birthdayPlan[i].date).toLocaleDateString(Qt.locale(),Locale.ShortFormat)})
-            }
-        });
+    }
 
+    buttonAddEntry.onClicked: addEntry(textFieldFirstName.text,textFieldLastName.text,buttonBirthdate.text)
+
+    function addBirthdaysToModel()
+    {
+
+        var dataContainer = DeviceAccessor.controllerDataContainer;
+        //dataContainer.disconnect(addBirthdaysToModel);
+        var birthdayPlan = dataContainer.birthdayPlan;
+
+
+        for (var i = 0; i < birthdayPlan.length; i++){
+            addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,new Date(birthdayPlan[i].date).toLocaleDateString(Qt.locale(),Locale.ShortFormat));
+        }
+    }
+
+    function addEntry(firstName,lastName,birthdate)
+    {
+        listView.model.append({"firstName" :firstName,
+                                  "lastName":lastName,
+                                  // date without year is nearly impossible to properly localize automatically
+                                  "birthdate":birthdate})
     }
 
     Dialog {
