@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.core 1.0;
+import "DateUtil.js" as DateUtil
 
 
 
@@ -29,6 +30,20 @@ ManageBirthdaysPageForm {
 
     buttonAddEntry.onClicked: addEntry(textFieldFirstName.text,textFieldLastName.text,buttonBirthdate.text)
 
+    buttonConfirm.onClicked: {
+            var newBirthdayPlan = [];
+
+            for(var i = 0; i < listView.model.count; i++)
+            {
+                var item = listView.model.get(i);
+                var date =  new Date(Date.fromLocaleDateString(Qt.locale(),item.birthdate,Locale.ShortFormat));
+                newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(date)})
+            }
+            DeviceAccessor.controllerDataContainer.birthdayPlan = newBirthdayPlan;
+            DeviceAccessor.sendBirthdayTable(newBirthdayPlan);
+
+    }
+
     function addBirthdaysToModel()
     {
 
@@ -42,6 +57,7 @@ ManageBirthdaysPageForm {
         }
     }
 
+    // birthdate is the localized birthday string
     function addEntry(firstName,lastName,birthdate)
     {
         listView.model.append({"firstName" :firstName,

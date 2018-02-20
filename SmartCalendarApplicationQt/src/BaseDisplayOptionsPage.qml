@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.3
 import QtQml 2.0
 import de.vitecvisual.core 1.0;
+import "DateUtil.js" as DateUtil;
 
 
 BaseDisplayOptionsPageForm {
@@ -50,7 +51,7 @@ BaseDisplayOptionsPageForm {
     {
         var date =  new Date(Date.fromLocaleTimeString(Qt.locale(),timeString,Locale.ShortFormat));
         // toIsoString() in qml would create 2018-02-19T12:12:00.000Z but we want the same as the input
-        var res = date.toISOString().slice(0,16);
+        var res = DateUtil.toShortISOString(date);
         return res;
     }
 
