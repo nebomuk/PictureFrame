@@ -13,13 +13,13 @@ Page {
 
     GridLayout {
         id: grid
-        x: 59
-        y: 133
+        x: 60
+        y: 67
         width: 391
-        height: 294
+        height: 692
         rowSpacing: 10
         columnSpacing: 10
-        rows: 6
+        rows: 4
         columns: 3
 
         Label {
@@ -77,7 +77,7 @@ Page {
             Layout.rowSpan: 2
             Layout.columnSpan: 3
             id: buttonConfirm
-            text: qsTr("Confirm")
+            text: qsTr("Add Entry")
             enabled: textFieldFirstName.text.length > 0
                      && textFieldLastName.text.length > 0
         }
@@ -88,16 +88,32 @@ Page {
             text: qsTr("Remove Birthday")
         }
 
-        TextField {
-            placeholderText: qsTr("First Name")
+        ListView
+        {
+            height: 400
+
+            model : 1
+
+            delegate: RowLayout
+            {
+                TextField {
+                    placeholderText: qsTr("First Name")
+                }
+
+                TextField {
+                    placeholderText: qsTr("Last Name")
+                }
+
+                TextField {
+                    placeholderText: qsTr("Birthdate")
+                }
+
+                // TODO add iconize garbage icon
+
+            }
+
+
         }
 
-        TextField {
-            placeholderText: qsTr("Last Name")
-        }
-
-        TextField {
-            placeholderText: qsTr("Birthdate")
-        }
     }
 }
