@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent mqtt
+QT += quick core gui network concurrent networkauth mqtt
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -37,7 +37,9 @@ SOURCES += src/main.cpp \
     src/platformhelper.cpp \
     src/mqttconnection.cpp \
     src/mqttmessageparser.cpp \
-    src/blockingmqttconnection.cpp
+    src/blockingmqttconnection.cpp \
+    src/oauth2authorization.cpp
+    src/oauth2authorization.cpp
 
 
 HEADERS += \
@@ -55,7 +57,9 @@ HEADERS += \
     src/platformhelper.h \
     src/mqttconnection.h \
     src/mqttmessageparser.h \
-    src/blockingmqttconnection.h
+    src/blockingmqttconnection.h \
+    src/oauth2authorization.h
+    src/oauth2authorization.h
 
 RESOURCES += qml.qrc
 
