@@ -5,12 +5,12 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-    
+    property alias listModel: listModel
 
     title: qsTr("Define Persons")
 
     ListModel {
-            id: myModel
+            id: listModel
             ListElement {
                 text: "The Phantom Menace"
             }
@@ -57,7 +57,7 @@ Page {
                     Layout.fillHeight: true
                     ListView {
                         id: listView
-                        model: myModel
+                        model: listModel
                         delegate: DraggableItem {
                             id : draggableItem
                             Rectangle {
@@ -86,7 +86,7 @@ Page {
                                 {
                                     target : draggableItem
                                     onMoveItemRequested: {
-                                        myModel.move(from, to, 1);
+                                        listModel.move(from, to, 1);
                                     }
 
                                 }

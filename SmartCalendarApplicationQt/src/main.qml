@@ -26,11 +26,30 @@ ApplicationWindow {
             msgDialogWifi.open()
         }
 
+        // for testing
+
         var controllerList = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
 
 
         var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
     }
+
+    // handle android back button
+    onClosing : {
+        if(Qt.platform.os === "android")
+        {
+            if(stackView.depth <= 1)
+            {
+                close.accepted = true; // quit app
+            }
+            else
+            {
+                close.accepted = false;
+                stackView.pop();
+            }
+        }
+    }
+
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -98,6 +117,11 @@ ApplicationWindow {
         initialItem: MainPage {}
 
        }
+
+    Keys.onBackPressed: {
+        event.accepted = true
+        stackView.pop();
+    }
 
 
     MessageDialog {

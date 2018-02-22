@@ -60,36 +60,12 @@ ManageTrashPlanPageForm {
                                   "date":date})
     }
 
-    Dialog {
-
-            x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
-
-            id: dialogDatePicker
-            standardButtons: Dialog.Cancel | Dialog.Ok
-
-            contentItem : DatePicker
-            {
-                id : datePicker
-            }
-
-        }
-
-    Connections
+    DatePickerDialog
     {
-        target : buttonDate
-        onClicked : dialogDatePicker.open();
-
+        button: buttonDate
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
     }
 
-    Connections
-    {
-        target : dialogDatePicker
-        onAccepted : {
-
-            buttonDate.text = (new Date(datePicker.year,datePicker.month,datePicker.day))
-            .toLocaleDateString(Qt.locale(),Locale.ShortFormat)
-        }
-    }
 
 }

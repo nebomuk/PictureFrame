@@ -64,37 +64,12 @@ ManageBirthdaysPageForm {
                                   "birthdate":birthdate})
     }
 
-    Dialog {
 
-            x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
-
-            id: dialogDatePicker
-            standardButtons: Dialog.Cancel | Dialog.Ok
-
-            contentItem : DatePicker
-            {
-                id : datePicker
-
-            }
-
-        }
-
-    Connections
+    DatePickerDialog
     {
-        target : buttonBirthdate
-        onClicked : dialogDatePicker.open();
-
-    }
-
-    Connections
-    {
-        target : dialogDatePicker
-        onAccepted : {
-
-            buttonBirthdate.text = (new Date(datePicker.year,datePicker.month,datePicker.day))
-            .toLocaleDateString(Qt.locale(),Locale.ShortFormat)
-        }
+        button: buttonBirthdate
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
     }
 
 }
