@@ -11,27 +11,6 @@ Page {
 
     ListModel {
             id: listModel
-            ListElement {
-                text: "The Phantom Menace"
-            }
-            ListElement {
-                text: "Attack of the Clones"
-            }
-            ListElement {
-                text: "Revenge of the Siths"
-            }
-            ListElement {
-                text: "A New Hope"
-            }
-            ListElement {
-                text: "The Empire Strikes Back"
-            }
-            ListElement {
-                text: "Return of the Jedi"
-            }
-            ListElement {
-                text: "The Force Awakens"
-            }
         }
 
         Item {
@@ -41,35 +20,35 @@ Page {
                 anchors.fill: parent
                 spacing: 0
 
-                Rectangle {
-                    color: "lightblue"
-                    height: 50
-                    Layout.fillWidth: true
-
-                    Text {
-                        anchors.centerIn: parent
-                        text: "A fake toolbar"
-                    }
-                }
-
                 ScrollView {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ListView {
                         id: listView
                         model: listModel
+                        spacing: 10
                         delegate: DraggableItem {
                             id : draggableItem
                             Rectangle {
-                                height: textLabel.height * 2
-                                width: listView.width
+                                height: 60
+                                width: listView.width * 0.8
                                 color: "white"
 
-                                Text {
-                                    id: textLabel
-                                    anchors.centerIn: parent
-                                    text: model.text
+                                RowLayout {
+                                    anchors.fill: parent
+                                    spacing: 20
+                                    TextField {
+                                        id: textFieldName
+                                        text: model.name
+                                    }
+                                    TextField {
+                                        Layout.fillWidth: true
+                                        id: textFieldEmail
+                                        text: model.email
+                                    }
                                 }
+
+
 
                                 // Bottom line border
                                 Rectangle {
