@@ -46,5 +46,6 @@
         <file>src/TimePicker.qml</file>
         <file>fa-regular-400.ttf</file>
         <file>src/DateUtil.js</file>
+        <file>src/DraggableItem.qml</file>
     </qresource>
 </RCC>
