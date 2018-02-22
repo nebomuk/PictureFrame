@@ -7,5 +7,14 @@ MasterAccountPageForm {
         GoogleCalendarAuthorization.startAuthorization();
     }
 
+    Component.onCompleted: {
+        var personList = DeviceAccessor.controllerDataContainer.personList;
+        if(personList.length > 0)
+        {
+            textFieldEmail.text =  personList[0].eMailAdress
+            textFieldName.text =  personList[0].name
+        }
+    }
+
 
 }

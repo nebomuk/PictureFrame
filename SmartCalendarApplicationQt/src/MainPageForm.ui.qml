@@ -5,8 +5,7 @@ import Qt.labs.settings 1.0
 import de.vitecvisual.util 1.0
 
 Page {
-    width: 480
-    height: 800
+
 
     id : page
 

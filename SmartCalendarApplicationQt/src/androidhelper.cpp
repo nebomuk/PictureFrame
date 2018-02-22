@@ -1,5 +1,6 @@
 #include "androidhelper.h"
 #include <QAndroidIntent>
+#include <QtAndroid>
 
 AndroidHelper::AndroidHelper(QObject *parent) : QObject(parent)
 {
@@ -8,14 +9,14 @@ AndroidHelper::AndroidHelper(QObject *parent) : QObject(parent)
 
 void AndroidHelper::showWifiSettings()
 {
-    auto serviceIntent = QAndroidIntent(QtAndroid::androidActivity().object(), "android.settings.WIFI_SETTINGS");
-    QtAndroid::startActivity(serviceIntent.handle());
+    QAndroidIntent serviceIntent = QAndroidIntent(QtAndroid::androidActivity().object(), "android.settings.WIFI_SETTINGS");
+    QtAndroid::startActivity(serviceIntent.handle(),42);
 }
 
 
 
 
-void AndroidHelper::showToast(const QString &message, Duration duration = LONG) {
+void AndroidHelper::showToast(const QString &message, Duration duration) {
     // all the magic must happen on Android UI thread
     QtAndroid::runOnAndroidThread([message, duration] {
         QAndroidJniObject javaString = QAndroidJniObject::fromString(message);

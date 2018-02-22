@@ -4,8 +4,8 @@ import QtQuick.Layouts 1.3
 
 Page {
     id: page
-    width: 480
-    height: 800
+
+
 
     property alias textFieldTrashType: textFieldTrashType
 
@@ -55,8 +55,6 @@ Page {
             enabled: textFieldTrashType.text.length > 0
         }
 
-        FontLoader { id: fontAwesome; source: "qrc:/fa-regular-400.ttf" }
-
         ListView
         {
             id : listView
@@ -87,7 +85,7 @@ Page {
                 {
                     id : removeEntryButton
                     text : "\uf2ed"
-                    font.family: fontAwesome.name
+                    font.family: "FontAwesome" // loaded via QFontDatabase in main.cpp
 
                     Connections
                     {

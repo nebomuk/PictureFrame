@@ -3,7 +3,7 @@ import QtQuick.Controls 2.3
 
 
 Page {
-    width: 480
+
     height: 640
 
     title: qsTr("Calendar Options")

@@ -4,12 +4,16 @@ import QtQuick.Layouts 1.3
 
 Page {
     id: page
-    width: 480
-    height: 800
+
+
 
     title: qsTr("Master Account")
 
     property alias buttonConfirm: buttonConfirm
+
+    property alias textFieldName: textFieldName
+
+    property alias textFieldEmail: textFieldEmail
 
     GridLayout {
         id: grid
@@ -17,19 +21,22 @@ Page {
         columns : 2
         rowSpacing: 10
         columnSpacing: 20
-        x: 93
+        x: 33
         y: 185
-        width: 276
+        width: 412
         height: 188
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Label {
             id: label
             text: qsTr("Name")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
         Label {
             id: label1
             text: qsTr("Email-Address")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
         TextField {
@@ -39,6 +46,8 @@ Page {
 
         TextField {
             id: textFieldEmail
+            Layout.fillHeight: false
+            Layout.fillWidth: true
             placeholderText: qsTr( "Enter email" )
 
             validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }

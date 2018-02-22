@@ -5,8 +5,8 @@ import QtQuick.Layouts 1.3
 
 Page {
     id: page
-    width: 480
-    height: 800
+
+    
 
     title: qsTr("Calendar Image")
 

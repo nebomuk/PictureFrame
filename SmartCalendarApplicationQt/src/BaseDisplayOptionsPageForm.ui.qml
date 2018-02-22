@@ -4,8 +4,6 @@ import QtQuick.Layouts 1.3
 
 Page {
     id: page
-    height: 800
-    width: 480
 
     title: qsTr("Display Options")
 

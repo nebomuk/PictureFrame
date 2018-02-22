@@ -17,6 +17,7 @@
 #include <QGuiApplication>
 #endif
 
+#include <QFontDatabase>
 #include <QQmlApplicationEngine>
 
 
@@ -31,6 +32,9 @@ int main(int argc, char *argv[])
 #else
     QGuiApplication app(argc, argv);
 #endif
+
+    // load Font Awesome icon font
+    Q_ASSERT(QFontDatabase::addApplicationFont(":fa-regular-400.ttf") != -1);
 
     // log accidental binding ovewrite
     QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));

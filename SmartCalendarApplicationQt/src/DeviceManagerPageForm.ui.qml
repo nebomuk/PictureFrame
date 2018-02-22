@@ -6,8 +6,8 @@ import de.vitecvisual.model 1.0
 
 Page {
     id: page
-    width: 480
-    height: 800
+
+    
 
     title: qsTr("Device Selection")
 

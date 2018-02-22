@@ -4,8 +4,8 @@ import QtGraphicalEffects 1.0
 
 Page {
     id: page
-    width: 480
-    height: 800
+
+    
 
     title: qsTr("Configure New Device")
 
