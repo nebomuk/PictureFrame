@@ -38,8 +38,7 @@ SOURCES += src/main.cpp \
     src/mqttconnection.cpp \
     src/mqttmessageparser.cpp \
     src/blockingmqttconnection.cpp \
-    src/oauth2authorization.cpp
-    src/oauth2authorization.cpp
+    src/googlecalendarauthorization.cpp
 
 
 HEADERS += \
@@ -58,8 +57,7 @@ HEADERS += \
     src/mqttconnection.h \
     src/mqttmessageparser.h \
     src/blockingmqttconnection.h \
-    src/oauth2authorization.h
-    src/oauth2authorization.h
+    src/googlecalendarauthorization.h
 
 RESOURCES += qml.qrc
 

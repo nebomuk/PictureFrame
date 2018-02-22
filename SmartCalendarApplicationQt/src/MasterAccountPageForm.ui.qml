@@ -1,6 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 
 Page {
     id: page
@@ -9,7 +9,9 @@ Page {
 
     title: qsTr("Master Account")
 
-    Grid {
+    property alias buttonConfirm: buttonConfirm
+
+    GridLayout {
         id: grid
         rows : 2
         columns : 2
@@ -43,14 +45,8 @@ Page {
         }
     }
 
-    Connections
-    {
-        target: confirmButton
-
-    }
-
     Button {
-        id: confirmButton
+        id: buttonConfirm
         x: 313
         y: 442
         text: qsTr("Confirm")
