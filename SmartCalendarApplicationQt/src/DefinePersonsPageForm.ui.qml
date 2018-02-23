@@ -9,6 +9,8 @@ Page {
 
     title: qsTr("Define Persons")
 
+    signal listIndexClicked(int index);
+
     ListModel {
             id: listModel
         }
@@ -37,14 +39,30 @@ Page {
                                 RowLayout {
                                     anchors.fill: parent
                                     spacing: 20
-                                    TextField {
+                                    Label {
                                         id: textFieldName
                                         text: model.name
                                     }
-                                    TextField {
+                                    Label {
                                         Layout.fillWidth: true
                                         id: textFieldEmail
                                         text: model.email
+                                    }
+                                    Button
+                                    {
+                                        id : editButton
+                                        text : qsTr("Edit")
+
+                                    }
+
+                                    RemoveButton
+                                    {
+                                        listModel: listModel
+                                    }
+                                    Connections
+                                    {
+                                        target : editButton
+                                        onClicked : listIndexClicked(index);
                                     }
                                 }
 

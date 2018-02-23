@@ -51,5 +51,8 @@
         <file>Strings.xml</file>
         <file>src/StringXmlResourceModel.qml</file>
         <file>src/StringXmlResourceComboBox.qml</file>
+        <file>src/NameEmailInputDialog.qml</file>
+        <file>src/NameEmailInputDialogForm.ui.qml</file>
+        <file>src/RemoveButton.qml</file>
     </qresource>
 </RCC>

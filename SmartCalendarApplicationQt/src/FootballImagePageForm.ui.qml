@@ -43,8 +43,8 @@ Page {
             text: "Design"
         }
 
-        ComboBox {
-            model: ["Design-1-x"]
+        StringXmlResourceComboBox {
+            attributeName: "footballDesignSpinnerArray"
         }
 
         Label {

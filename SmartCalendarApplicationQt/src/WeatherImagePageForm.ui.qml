@@ -96,9 +96,10 @@ Page {
             text : qsTr("Design")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
             id : comboBoxDesign
+            attributeName: "weatherDesignSpinnerArray"
         }
 
 

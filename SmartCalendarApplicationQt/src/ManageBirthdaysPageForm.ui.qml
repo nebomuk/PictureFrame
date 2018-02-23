@@ -133,20 +133,10 @@ Page {
 
                 }
 
-                Button
+                RemoveButton
                 {
-                    id : removeEntryButton
-                    text : "\uf2ed"
-                    font.family: "FontAwesome" // loaded via QFontDatabase in main.cpp
-
-                    Connections
-                    {
-                        target : removeEntryButton
-                        onClicked : listView.model.remove(index)
-                    }
+                    listModel: listModel
                 }
-
-                // TODO add iconize garbage icon
 
             }
 
