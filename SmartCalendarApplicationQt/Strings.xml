@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- this file has been copied from the SmartCalendar.Android xamarin project and is used with XmlListModel-->
 
 <resources>
   <!-- Generale Strings -->
@@ -198,7 +197,7 @@
     <item>Romania</item>
     <item>Russia</item>
     <item>San Marino</item>
-    <item>Saudi Arabia</item>
+    <item>Saudi Arabia</item>
     <item>Sweden</item>
     <item>Switzerland</item>
     <item>Serbia</item>
@@ -207,7 +206,7 @@
     <item>Slovenia</item>
     <item>Spain</item>
     <item>Sri Lanka</item>
-    <item>South Korea</item>
+    <item>South Korea</item>
     <item>Thailand</item>
     <item>Czech Republic</item>
     <item>Turkey</item>
@@ -305,7 +304,7 @@
   <string name="CalendarDefinePersonsTitleLabel">Set User Accounts</string>
   <string name="CalendarImageLabel">Calendar Image</string>
   <string name="CalendarMonthlyView">Calendar Monthly View</string>
-  <string name="CalendarViewButtonLabel">Calender View</string>
+  <string name="CalendarViewButtonLabel">Slide Show</string>
   <string name="CalendarWeeklyView">Calendar Weekly View</string>
   <string name="CalenderMasterAccountTitleLabel">Calendar Main Account</string>
   <string name="CancelLabel">Cancel</string>
@@ -334,7 +333,7 @@
   <string name="EMailAdressLabel">Email - Adress</string>
   <string name="EndInputLabel">End</string>
   <string name="EnglishLanguageLabel">English</string>
-  <string name="EstablishConnectionTitleLabel">Establish connection to new device</string>
+  <string name="EstablishConnectionTitleLabel">New devices:</string>
   <string name="FavoriteTeamButtonLabel">Favorite Team</string>
   <string name="FirstDisplaySensitivityButtonLabel">Low</string>
   <string name="FirstLeagueLabel">1 League</string>
@@ -416,8 +415,8 @@
   <string name="NoDataReceivedLabel">No data received</string>
   <string name="DisplayTitleLabel">Display</string>
   <string name="UnitLabel">Unit of measurement</string>
-  <string name="MetricLabel">°C and m/s</string>
-  <string name="ImperialLabel">°F and mph</string>
+  <string name="MetricLabel">C and m/s</string>
+  <string name="ImperialLabel">F and mph</string>
   <string name="DeviceIPLabel">IP - Adress of the device:</string>
   <string name="DeviceIPAdress">xxx.xxx.xxx.xxx</string>
   <string name="ActualDayLabel">Actual day</string>
@@ -472,7 +471,7 @@
   <string name="NoTableReceivedMessage">Timed out. Please restart your device and make sure that your device is reachable. Please try again.</string>
   <string name="RequestListTitle">Loading List</string>
   <string name="RequestListMessage">>Please be patient. The list is loaded.</string>
-  <string name="KnownHostsTitleLabel">Known devices:</string>
+  <string name="KnownHostsTitleLabel">Configured devices:</string>
   <string name="NoKnownHostsFoundLabel">No known devices found. Please configurate your devices.</string>
   <string name="InvalidTableTitle">Invalid Input</string>
   <string name="InvalidTableMessage">Invalid input! Please adjust your changes to the given format. </string>

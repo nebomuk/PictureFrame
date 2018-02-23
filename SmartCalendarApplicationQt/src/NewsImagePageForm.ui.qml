@@ -30,9 +30,11 @@ Page {
             text : qsTr("Option")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
             id : comboBoxoption
+            attributeName: "newsViewSpinnerArray"
+
         }
 
         Label
@@ -40,9 +42,10 @@ Page {
             text : qsTr("Source")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
             id : comboBoxsource
+            attributeName : "newsCategorySpinnerArray"
 
         }
 
@@ -51,9 +54,10 @@ Page {
             text : qsTr("Design")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
             id : comboBoxdesign
+            attributeName: "newsDesignSpinnerArray"
 
         }
 

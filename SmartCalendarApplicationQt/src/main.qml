@@ -61,8 +61,6 @@ ApplicationWindow {
             onClicked: {
                 if (stackView.depth > 1) {
                     stackView.pop()
-                } else {
-                    drawer.open()
                 }
             }
         }
@@ -83,38 +81,10 @@ ApplicationWindow {
     }
 
 
-    Drawer {
-        id: drawer
-        width: window.width * 0.66
-        height: window.height
-
-        Column {
-            anchors.fill: parent
-
-            ItemDelegate {
-                text: qsTr("Device Manager")
-                width: parent.width
-                onClicked: {
-                    stackView.push("BaseOptionsPage.ui.qml")
-                    drawer.close()
-                }
-            }
-            ItemDelegate {
-                text: qsTr("Base Options")
-                width: parent.width
-                onClicked: {
-                    stackView.push("DeviceManagerPage.ui.qml")
-                    drawer.close()
-                }
-            }
-        }
-    }
-
-
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: MainPage {}
+        initialItem: "MainPage.qml"
 
        }
 

@@ -5,80 +5,70 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-    
-
     title: qsTr("Cinema")
 
-    property alias comboBoxoption : comboBoxoption;
-    property alias comboBoxgenre : comboBoxgenre;
-    property alias comboBoxcountry : comboBoxcountry;
-    property alias comboBoxdesign : comboBoxdesign;
-    //property alias publishTimeStamp : publishStamp;
+    property alias comboBoxoption: comboBoxoption
+    property alias comboBoxgenre: comboBoxgenre
+    property alias comboBoxcountry: comboBoxcountry
+    property alias comboBoxdesign: comboBoxdesign
 
-    GridLayout
-    {
+    //property alias publishTimeStamp : publishStamp;
+    GridLayout {
         x: 124
         y: 128
-        columns : 2
-        rows : 5
+        columns: 2
+        rows: 5
         rowSpacing: 5
         columnSpacing: 5
 
-        Label
-        {
-            text : qsTr("Option")
+        Label {
+            text: qsTr("Option")
         }
 
-        ComboBox
+            // TODO check if this is the right spinner
+        StringXmlResourceComboBox
         {
             id : comboBoxoption
-
+            attributeName:  "cinemaViewSpinnerArray"
         }
 
-        Label
-        {
-            text : qsTr("Genre")
+        Label {
+            text: qsTr("Genre")
         }
 
-        ComboBox
-        {
-            id : comboBoxgenre
-            model : ["Genre1", "Genre2", "Genre3"]
-            // TODO must be a checkable combo box
-            delegate: CheckBox{
-
+        ComboBox {
+            id: comboBoxgenre
+            model: StringXmlResourceModel {
+                attributeName: "cinemaGenreSpinnerArray"
             }
-
+            // TODO must be a checkable combo box
+//            delegate: CheckBox {
+//            }
+            Component.onCompleted: currentIndex = 0
         }
 
-        Label
-        {
+        Label {
             Layout.columnSpan: 2
-            id : labelCheckedGenres
-
+            id: labelCheckedGenres
         }
 
-        Label
-        {
-            text : qsTr("Country")
+        Label {
+            text: qsTr("Country")
         }
 
-        ComboBox
-        {
-            id : comboBoxcountry
+
+        StringXmlResourceComboBox {
+            id: comboBoxcountry
+                attributeName: "countrySpinnerArray"
         }
 
-        Label
-        {
-            text : qsTr("Design")
+        Label {
+            text: qsTr("Design")
         }
 
-        ComboBox
-        {
-            id : comboBoxdesign
+        StringXmlResourceComboBox {
+            id: comboBoxdesign
+                attributeName: "cinemaDesignSpinnerArray"
         }
-
     }
-
-
 }
