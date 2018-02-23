@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- this file has been copied from the SmartCalendar.Android xamarin project and is used with XmlListModel-->
+
+<resources>
+  <!-- Generale Strings -->
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="ApplicationName">Smart Calendar Thinc</string>
+    <string name="openCamera">Open Camera</string>
+  
+  <!-- Spinner Strings -->
+    <string name="imagePrompt">Select category</string>
+    <string-array name="imageSpinnerArray">
+      <item>No category selected</item>
+      <item>Calendar image</item>
+      <item>Weather image</item>
+      <item>News image</item>
+      <item>Football image</item>
+      <item>Cinema image</item>
+      <item>Own image</item>
+    </string-array>
+  
+  <string name="timeViewPrompt">View</string>
+  <string-array name="timeViewSpinnerArray">
+    <item>Daily view</item> 
+    <item>Weekly view</item>
+    <item>Monthly view</item>
+  </string-array>
+
+  <string name="calendarFormatPrompt">Format</string>
+  <string-array name="calendarFormatViewSpinnerArrayWithThreeOptions">
+    <item>Current timeframe</item>
+    <item>Dynamic timeframe</item>
+    <item>Given timeframe</item>
+  </string-array>
+
+  <string-array name="calendarFormatViewSpinnerArrayWithTwoOptions">
+    <item>Current timeframe</item>
+    <item>Given timeframe</item>
+  </string-array>
+
+  <string name="formatPrompt">Format</string>
+  <string-array name="formatViewSpinnerArray">
+    <item>Option1</item>
+    <item>Option2</item>
+    <item>Option3</item>
+  </string-array>
+
+  <string name="weatherViewPrompt">View</string>
+  <string-array name="weatherViewSpinnerArray">
+    <item>Current day</item>
+    <item>Weather forecast</item>
+  </string-array>
+
+  <string name="cinemaViewPrompt">View</string>
+  <string-array name="cinemaViewSpinnerArray">
+    <item>Latest movies</item>
+    <item>Best rated movies</item>
+  </string-array>
+
+  <string name="cinemaGenrePrompt">Genre</string>
+  <string-array name="cinemaGenreSpinnerArray">
+    <item>All</item>
+    <item>Action</item>
+    <item>Adventure</item>
+    <item>Animation</item>
+    <item>Comedy</item>
+    <item>Crime</item>
+    <item>Documentary</item>
+    <item>Drama</item>
+    <item>Family</item>
+    <item>Fantasy</item>
+    <item>History</item>
+    <item>Horror</item>
+    <item>Music</item>
+    <item>Mystery</item>
+    <item>Romance</item>
+    <item>Science Fiction</item>
+    <item>TV Movie</item>
+    <item>Thriller</item>
+    <item>War</item>
+    <item>Western</item>
+  </string-array>
+
+  <string name="newsViewPrompt">Option</string>
+  <string-array name="newsViewSpinnerArray">
+    <item>Latest news</item>
+    <item>Most popular news</item>
+  </string-array>
+
+  <string name="newsCategoryViewPrompt">Sources</string>
+  <string-array name="newsCategorySpinnerArray">
+    <item>ABC News AU</item>
+    <item>Aftenposten</item>
+    <item>Australian Financial Review</item>
+    <item>Axios</item>
+    <item>BBC News</item>
+    <item>BBC Sports</item>
+    <item>Bild</item>
+    <item>Bloomberg</item>
+    <item>Breitbart News</item>
+    <item>Business Insider</item>
+    <item>CBS News</item>
+    <item>CNBC</item>
+    <item>CNN</item>
+    <item>CNN Spanish</item>
+    <item>Crypto Coins News</item>
+    <item>Daily Mail</item>
+    <item>Der Tagesspiegel</item>
+    <item>Die Zeit</item>
+    <item>ESPN</item>
+    <item>El Mundo</item>
+    <item>Fokus</item>
+    <item>Fox News</item>
+    <item>Google News</item>
+    <item>Google News Australia</item>
+    <item>Google News Canada</item>
+    <item>Gruenderszene</item>
+    <item>Göteborgs-Posten</item>
+    <item>Handelsblatt</item>
+    <item>IGN</item>
+    <item>Il Sole 24 Ore</item>
+    <item>Independent</item>
+    <item>L equipe</item>
+    <item>La Nacion</item>
+    <item>Le Monde</item>
+    <item>Lenta</item>
+    <item>Les Echos</item>
+    <item>Liberation</item>
+    <item>MTV News</item>
+    <item>Marca</item>
+    <item>Medical News Today</item>
+    <item>NBC News</item>
+    <item>NRK</item>
+    <item>New York Magazine</item>
+    <item>News24</item>
+    <item>Politico</item>
+    <item>RTL Nieuws</item>
+    <item>Spiegel Online</item>
+    <item>Svenska Dagbladet</item>
+    <item>TalkSport</item>
+    <item>The Globe And Mail</item>
+    <item>The Irish Times</item>
+    <item>The New York Times</item>
+    <item>The Time</item>
+    <item>The Wall Street Journal</item>
+    <item>Wirtschaftswoche</item>
+  </string-array>
+
+   <string name="footballLeaguePrompt">League</string>
+  <string-array name="footballLeagueSpinnerArray">
+  </string-array>
+
+  <string name="footballLeagueTeamPrompt">Team</string>
+
+  <string name="countryPrompt">Country</string>
+  <string-array name="countrySpinnerArray">
+    <item>Albania</item>
+    <item>Andorra</item>
+    <item>Australia</item>
+    <item>Belgium</item>
+    <item>Bosnia and Herzegovina</item>
+    <item>Brazil</item>
+    <item>Bulgaria</item>
+    <item>China</item>
+    <item>Denmark</item>
+    <item>Germany</item>
+    <item>Estonia</item>
+    <item>Finland</item>
+    <item>France</item>
+    <item>Greece</item>
+    <item>India</item>
+    <item>Ireland</item>
+    <item>Iceland</item>
+    <item>Italy</item>
+    <item>Japan</item>
+    <item>Canada</item>
+    <item>Kazakhstan</item>
+    <item>Kosovo</item>
+    <item>Croatia</item>
+    <item>Latvia</item>
+    <item>Liechtenstein</item>
+    <item>Lithuania</item>
+    <item>Luxembourg</item>
+    <item>Malaysia</item>
+    <item>Malta</item>
+    <item>Macedonia</item>
+    <item>Mexico</item>
+    <item>Moldova</item>
+    <item>Monaco</item>
+    <item>Montenegro</item>
+    <item>Netherlands</item>
+    <item>Norway</item>
+    <item>Austria</item>
+    <item>Pakistan</item>
+    <item>Philippines</item>
+    <item>Poland</item>
+    <item>Portugal</item>
+    <item>Romania</item>
+    <item>Russia</item>
+    <item>San Marino</item>
+    <item>Saudi Arabia</item>
+    <item>Sweden</item>
+    <item>Switzerland</item>
+    <item>Serbia</item>
+    <item>Singapore</item>
+    <item>Slovakia</item>
+    <item>Slovenia</item>
+    <item>Spain</item>
+    <item>Sri Lanka</item>
+    <item>South Korea</item>
+    <item>Thailand</item>
+    <item>Czech Republic</item>
+    <item>Turkey</item>
+    <item>Hungary</item>
+    <item>Vatican City</item>
+    <item>United States of America</item>
+    <item>United Kingdom</item>
+    <item>Vietnam</item>
+    <item>Belarus</item>
+  </string-array>
+
+  <string name="calendarDayDesignPrompt">Design</string>
+  <string-array name="calendarDayDesignSpinnerArray">
+    <item>Classic</item>
+    <item>Nature</item>
+    <item>Western</item>
+    <item>Black Calendar Design</item>
+    <item>Blue Calendar Design</item>
+    <item>Green Calendar Design</item>
+    <item>Red Calendar Design</item>
+    <item>White Calendar Design</item>
+  </string-array>
+
+  <string name="calendarWeekDesignPrompt">Design</string>
+  <string-array name="calendarWeekDesignSpinnerArray">
+    <item>City</item>
+    <item>Classic</item>
+    <item>Flower</item>
+    <item>Black Calendar Design</item>
+    <item>Blue Calendar Design</item>
+    <item>Green Calendar Design</item>
+    <item>Red Calendar Design</item>
+    <item>White Calendar Design</item>
+  </string-array>
+
+  <string name="calendarMonthDesignPrompt">Design</string>
+  <string-array name="calendarMonthDesignSpinnerArray">
+    <item>Classic</item>
+    <item>Flower</item>
+    <item>Winter</item>
+    <item>Black Calendar Design</item>
+    <item>Blue Calendar Design</item>
+    <item>Green Calendar Design</item>
+    <item>Red Calendar Design</item>
+    <item>White Calendar Design</item>
+  </string-array>
+
+  <string name="footballDesignPrompt">Design</string>
+  <string-array name="footballDesignSpinnerArray">
+    <item>Classic</item>
+    <item>Football</item>
+    <item>Stadium</item>
+  </string-array>
+
+  <string name="newsDesignPrompt">Design</string>
+  <string-array name="newsDesignSpinnerArray">
+    <item>Classic</item>
+    <item>Digital Green</item>
+    <item>Orange Art</item>
+    <item>Modern</item>
+    <item>Space</item>
+  </string-array>
+
+  <string name="cinemaDesignPrompt">Design</string>
+  <string-array name="cinemaDesignSpinnerArray">
+    <item>Classic</item>
+    <item>Horror</item>
+    <item>Movie</item>
+    <item>Science Fiction</item>
+    <item>Ticket</item>
+  </string-array>
+
+  <string name="weatherDesignPrompt">Design</string>
+  <string-array name="weatherDesignSpinnerArray">
+    <item>Orange Art</item>
+    <item>Blue Skies</item>
+  </string-array>
+
+  <!-- Localized Strings -->
+  <string name="AllLabel">All</string>
+  <string name="AcceptButtonLabel">Accept</string>
+  <string name="AcceptEntryButtonLabel">Accept entry</string>
+  <string name="ActionGenreLabel">Action</string>
+  <string name="ActivateDisplayTitleLabel">Display activation</string>
+  <string name="AddDeviceButtonLabel">Add device</string>
+  <string name="AddMoreImagesButtonLabel">Add additional images</string>
+  <string name="AddMorePersonsButtonLabel">Add additional accounts</string>
+  <string name="AutomatedBrightnessCheckboxLabel">Automatic</string>
+  <string name="BackButtonLabel">Back</string>
+  <string name="BaseConfigurationsTitleLabel">Basic Configuration</string>
+  <string name="BaseOptionsButtonLabel">Basis settings</string>
+  <string name="BirthdayTitleInputLabel">Birthdays:</string>
+  <string name="CalendarButtonLabelBaseDeviceOptions">Calendar</string>
+  <string name="CalendarDayViewTitleLabel">Calendar Daily View</string>
+  <string name="CalendarDefinePersonsTitleLabel">Set User Accounts</string>
+  <string name="CalendarImageLabel">Calendar Image</string>
+  <string name="CalendarMonthlyView">Calendar Monthly View</string>
+  <string name="CalendarViewButtonLabel">Calender View</string>
+  <string name="CalendarWeeklyView">Calendar Weekly View</string>
+  <string name="CalenderMasterAccountTitleLabel">Calendar Main Account</string>
+  <string name="CancelLabel">Cancel</string>
+  <string name="CancelTitleMessage">Unsaved data will be lost</string>
+  <string name="ChooseImageCategoryTitleLabel">Choose Image Category</string>
+  <string name="CinemaImageLabel">Cinema Image</string>
+  <string name="ComedyGenreLabel">Comedy</string>
+  <string name="ConnectedLabel">Connected device:</string>
+  <string name="ConnectionAvailableMessage">You are currently connected to the following device: </string>
+  <string name="ConnectionAvailableTitleMessage">Available connections</string>
+  <string name="ConnectionStatusLabel">Status of the connection</string>
+  <string name="ConnectToDeviceButtonLabel">Connect to device</string>
+  <string name="DateInputLabel">Date</string>
+  <string name="DaylyTimeLabel">Daily view</string>
+  <string name="DefinePersonsButtonLabel">Set User Accounts</string>
+  <string name="Design1Label">Design1</string>
+  <string name="Design2Label">Design2</string>
+  <string name="Design3Label">Design3</string>
+  <string name="DesignTitleLabel">Design</string>
+  <string name="DeviceBrightnessTitleLabel">Display brightness</string>
+  <string name="DeviceNameLabel">Device name</string>
+  <string name="DeviceSelectionTitleLabel">Device Selection</string>
+  <string name="DisconnectedLabel">No connection</string>
+  <string name="DisplaySensitivityLevelCheckboxLabel">Sensitivity</string>
+  <string name="DramaGenreLabel">Drama</string>
+  <string name="EMailAdressLabel">Email - Adress</string>
+  <string name="EndInputLabel">End</string>
+  <string name="EnglishLanguageLabel">English</string>
+  <string name="EstablishConnectionTitleLabel">Establish connection to new device</string>
+  <string name="FavoriteTeamButtonLabel">Favorite Team</string>
+  <string name="FirstDisplaySensitivityButtonLabel">Low</string>
+  <string name="FirstLeagueLabel">1 League</string>
+  <string name="FirstNameInputLabel">First name</string>
+  <string name="FootballImageLabel">Football Image</string>
+  <string name="ForeignCountriesLabel">Foreign countries</string>
+  <string name="FormatTitleLabel">Format</string>
+  <string name="GermanLanguageLabel">German</string>
+  <string name="HorrorGenreLabel">Horror</string>
+  <string name="ImageButtonLabel">Image</string>
+  <string name="ImageSelectionTitleLabel">Image selection</string>
+  <string name="InvalidInputMessage">Please check your input</string>
+  <string name="InvalidInputTitleMessage">Invalid input</string>
+  <string name="LanguageLabel">Language</string>
+  <string name="LeagueLabel">League</string>
+  <string name="LeastFiveButtonLabel">Least 5</string>
+  <string name="MaintainBirthdaysButtonLabel">Maintain birthdays</string>
+  <string name="MaintainTrashPlanButtonLabel">Maintain trashplan</string>
+  <string name="MasterAccountButtonLabel">Main Account</string>
+  <string name="MonthlyTimeLabel">Monthly View</string>
+  <string name="MovieGenreLabel">Genre</string>
+  <string name="NameInputLabel">Name</string>
+  <string name="NameLabel">Name</string>
+  <string name="NewsImageLabel">News Image</string>
+  <string name="NoImageSelectedLabel">No image selected</string>
+  <string name="NumberAdditionalDaysLabel">Number of additional days</string>
+  <string name="ObservationPeriodInputLabel">Observation period</string>
+  <string name="OClockTimeUnitLabel">oclock</string>
+  <string name="OkLabel">Ok</string>
+  <string name="Option1Label">Option1</string>
+  <string name="Option2Label">Option2</string>
+  <string name="Option3Label">Option3</string>
+  <string name="OwnImageLabel">Own Image</string>
+  <string name="PercentBrightnessFixedCheckboxLabel">Fixed</string>
+  <string name="PermanentDisplayCheckboxLabel">Permanent activation</string>
+  <string name="PoliticsLabel">Politics</string>
+  <string name="RemoveBirthdayTitleLabel">Remove entry</string>
+  <string name="RemoveEntryButtonLabel">Remove entry</string>
+  <string name="SaveChangesMessage">Selected settings will be saved.</string>
+  <string name="SaveChangesTitleMessage">Saving settings</string>
+  <string name="SecondDisplaySensitivityButtonLabel">Normal</string>
+  <string name="SecondLeagueLabel">2 League</string>
+  <string name="SelectEntryButtonLabel">Select entry</string>
+  <string name="SelectImageThroughGaleryButtonLabel">Photo library</string>
+  <string name="ShowBirthdaysCheckboxLabel">Show birthdays</string>
+  <string name="ShowNationalHolydaysCheckboxLabel">Show national holidays</string>
+  <string name="ShowTrashPlanCheckboxLabel">Show trashplan</string>
+  <string name="SmartCalendarButtonLabelBaseDeviceOptions">Smart Calendar</string>
+  <string name="SocietyLabel">Society</string>
+  <string name="SourceLabel">Source</string>
+  <string name="StartDateInputLabel">Starting date</string>
+  <string name="StartInputLabel">Start</string>
+  <string name="TableViewTitleLabel">Table view</string>
+  <string name="TakePhotoButtonLabel">Take photo</string>
+  <string name="TeamLabel">Team</string>
+  <string name="TeamSelectionInputLabel">Choose your favorite team</string>
+  <string name="ThirdDisplaySensitivityButtonLabel">High</string>
+  <string name="ThrillerGenreLabel">Thriller</string>
+  <string name="TimeIntervalLabel">Time frame</string>
+  <string name="TopFiveButtonLabel">Top 5</string>
+  <string name="TrashTypeInputLabel">Trash type</string>
+  <string name="ViewFormatLabel">View format</string>
+  <string name="ViewTitleLabel">View</string>
+  <string name="WeatherImageLabel">Weather Image</string>
+  <string name="WeekButtonLabel">Week</string>
+  <string name="WeeklyTimeLabel">Weekly view</string>
+  <string name="WorkweekButtonLabel">Work week</string>
+  <string name="OpenCamera">Open Camera</string>
+  <string name="NoDeviceSelectedTitle">No device selected</string>
+  <string name="CinemaTitle">Cinema</string>
+  <string name="StandardConnectionStatusLabel">Connection status: Not connected</string>
+  <string name="FootballTitle">Football</string>
+  <string name="NewsTitle">News</string>
+  <string name="WeatherTitle">Weather</string>
+  <string name="DeviceName">Device name</string>
+  <string name="NoDeviceSelectedMessage">You did not select any device. Please select a device first</string>
+  <string name="WeekendLabel">Weekend</string>
+  <string name="WorkdayLabel">Workday</string>
+  <string name="NoDataReceivedLabel">No data received</string>
+  <string name="DisplayTitleLabel">Display</string>
+  <string name="UnitLabel">Unit of measurement</string>
+  <string name="MetricLabel">°C and m/s</string>
+  <string name="ImperialLabel">°F and mph</string>
+  <string name="DeviceIPLabel">IP - Adress of the device:</string>
+  <string name="DeviceIPAdress">xxx.xxx.xxx.xxx</string>
+  <string name="ActualDayLabel">Actual day</string>
+  <string name="AdditionaleDayLabel">Additional days</string>
+  <string name="ActualTimeframeLabel">Current timeframe</string>
+  <string name="GivenTimeframeLabel">Dynamic timeframe</string>
+  <string name="SolidTimeframeLabel">Given timeframe</string>
+  <string name="NewestMoviesLabel">Newest movies in cinema</string>
+  <string name="BestMoviesLabel">Best movies in cinema</string>
+  <string name="LatesNewsLabel">Latest news</string>
+  <string name="MostPopularNewsLabel">Most popular news</string>
+
+  <!-- Intern message strings localized -->
+  <string name="HighEnergieUsageWarningTitle">High Energy Consumption</string>
+  <string name="HighEnergieUsageWarningMessage">The selected settings can cause high energy consumption! The settings will now be saved.</string>
+  <string name="AcceptTitle">Save</string>
+  <string name="AcceptMessage">The selected will now be saved on your device</string>
+  <string name="WrongInputTitle">Invalid Input</string>
+  <string name="WrongInputMessageOptionBetweenOneAndHundred">Invalid input! The selected setting can only have values between 0 and 100</string>
+  <string name="WrongInputMessage">Invalid input! Please make sure that all necessary fields are filled and that your input matches the given format.</string>
+  <string name="InvalidImageAssociationMessage">Invalid input! Please make sure that all image types are filled and that the given display time is between 10 and 120 seconds.</string>
+  <string name="CancelTitle">Unsaved Data Will Be Lost</string>
+  <string name="CancelMessage">Unsaved data will be lost.</string>
+  <string name="ConnectingToDeviceTitle">Establishing Connection</string>
+  <string name="ConnectingToDeviceMessage">Connecting to selected device</string>
+  <string name="NoDevicesFoundTitle">No Network Connection Available</string>
+  <string name="NoDevicesFoundMessage">No devices have been found in the current network. Please check your connectivity status and make sure that your device is connected to your network.</string>
+  <string name="ConnectionEstablishedTitle">Connection Established</string>
+  <string name="ConnectionEstablishedMessage">Connection to selected device has been established</string>
+  <string name="NoConnectionPossibleTitle">Connection Not Possible</string>
+  <string name="NoConnectionPossibleMessage">Connection to the selected device is currently not possible. Please make sure that you and the target device are connected to the network.</string>
+  <string name="NoCameraFoundTitle">No Camera Found</string>
+  <string name="NoCameraFoundMessage">No camera found on your device</string>
+  <string name="NoImageSelectedTitle">No Image Selected</string>
+  <string name="NoImageSelectedMessage">You did not select an image</string>
+  <string name="NoTableTitle">No Table Loaded</string>
+  <string name="NoTableMessage">Please load the table first before adding new entries</string>
+  <string name="TimeInSecondsLabel">Seconds</string>
+  <string name="PowerSavingModeTitleLabel">Power saving mode</string>
+  <string name="FromTextLabel">From</string>
+  <string name="ToTextLabel">To</string>
+  <string name="CountrySelectionTitle">Country selection</string>
+  <string name="CityNameLabel">City name</string>
+  <string name="ZipCodeLabel">Zip Code</string>
+  <string name="NoMasterAccountTitle">No Main Account Found</string>
+  <string name="NoMasterAccountMessage">Please establish first a connection between your Gmail - Account and the Smart Calendar. You will only be able to create a calendar images after establishing successfully the connection.</string>
+  <string name="WrongEnergyOptionsInputTitle">Invalid Energy Settings</string>
+  <string name="WrongEnergyOptionsInputMessage">Invalid input! Please make sure that the settings are completely and correctly filled. Also check start- and end times ( no overlaps, at least 1 hour gap between start- and end time and 6 hours gap between two time intervals ) as well as given formats.</string>
+  <string name="RequestTableTitle">Loading Data</string>
+  <string name="RequestTableMessage">Please be patient. The data is loaded.</string>
+  <string name="NoTableReceivedTitle">No data Received</string>
+  <string name="NoTableReceivedMessage">Timed out. Please restart your device and make sure that your device is reachable. Please try again.</string>
+  <string name="RequestListTitle">Loading List</string>
+  <string name="RequestListMessage">>Please be patient. The list is loaded.</string>
+  <string name="KnownHostsTitleLabel">Known devices:</string>
+  <string name="NoKnownHostsFoundLabel">No known devices found. Please configurate your devices.</string>
+  <string name="InvalidTableTitle">Invalid Input</string>
+  <string name="InvalidTableMessage">Invalid input! Please adjust your changes to the given format. </string>
+  <string name="WrongIPFormatTitle">Invalid IP - Adress</string>
+  <string name="WrongIPFormatMessage">Given IP - Adress is invalid.</string>
+  <string name="NoResponseMessageTitle">No Response</string>
+  <string name="NoResponseMessage">No response received from selected device. Please make sure that the selected device is connected to your network. Please try again.</string>
+  <string name="DeleteHostTitleMessage">Remove Selected Device</string>
+  <string name="DeleteHostMessage">Are you sure you want to remove this device from your saved and known devices? This will not disconnect you from the device if you are currently connected to it.</string>
+  <string name="NetworkComponentInitiliazationTitleMessage">Initializing Network Connection</string>
+  <string name="NetworkComponentInitiliazationMessage">Network is beeing initialized, please be patient.</string>
+  <string name="InvalidDeviceNameMessageTitle">Invalid Device Name</string>
+  <string name="InvalidDeviceNameMessage">You must input a valid device name.</string>
+  <string name="InvalidRangeMessageTitle">Invalid Range</string>
+  <string name="InvalidRangeMessage">Start value has to be lower than end value.</string>
+  <string name="NoWLanConnectionMessageTitle">No Connection To WLAN</string>
+  <string name="NoWLanConnectionMessage">Your device is not connected to your WLAN network. Please establish a connection to your WLAN network and restart this application.</string>
+  <string name="SelectionInsufficientTitleMessage">Selected Settings Uncompleted</string>
+  <string name="SelectionInsufficientMessage">The selected settings are uncompletely. You need to choose at least one of each of the display and activation settings.</string>
+  <string name="OverlappingDateRangesMessageTitle">Power Saving Mode Times Are Overlapping</string>
+  <string name="OverlappingDateRangesMessage">Please make sure that the given power saving mode times are not overlapping.</string>
+  <string name="ReceivedTableIsEmptyTitleMessage">No Data Receivded</string>
+  <string name="ReceivedTableIsEmptyMessage">The received data record is empty. Please add now new entries if required.</string>
+  <string name="MasterAccountVerificationFailedTitleMessage">Main Account Verification Failed</string>
+  <string name="MasterAccountVerificationFailedMessage">Main account verification failed. Please try again in a few minutes.</string>
+  <string name="MasterAccountVerificationSuccessfulTitleMessage">Main Account Verification Successful</string>
+  <string name="MasterAccountVerificationSuccessfulMessage">Main account verification was successful.</string>
+  <string name="StartingMasterAccountVerificationTitleMessage">Starting Main Account Verification</string>
+  <string name="StartingMasterAccountVerificationMessage">Starting Main Account verification. A new window in your browser will now be opened. Please log in with your Gmail - Account and accept the data exchange between your account and your Smart Calendar. </string>
+  <string name="NoMoreThanFiveImagesTitleMessage">Image Maximum reached</string>
+  <string name="NoMoreThanFiveImagesMessage">You can only display five images.</string>
+  <string name="NoPersonsSelectedTitleMessage">No User Accounts Selected</string>
+  <string name="NoPersonsSelectedMessage">No user accounts have been selected. Are you sure that no more user should be displayed on your device?</string>
+  <string name="InvalidImagesReceivedTitleMessage">Invalid Images Received</string>
+  <string name="InvalidImagesReceivedMessage">Received images are invalid. Please restart your device and start this application again. If this error persists, please create a new diashow. We ask for your understanding.</string>
+  <string name="OptionThreeOnWeeklyTimeViewAlreadySelectedTitleMessage">Weekly View Already selected</string>
+  <string name="OptionThreeOnWeeklyTimeViewAlreadySelectedMessage">You can only select one calendar image option in a given weekly time frame. Please adjust your images.</string>
+  <string name="NoMoreThanFivePersonsTitleMessage">User Accounts Maximum Reached</string>
+  <string name="NoMoreThanFivePersonsMessage">You can only have four user accounts.</string>
+  <string name="NoUnitSelectedMessageTitle">No Unit Of Measurement Selected</string>
+  <string name="NoUnitSelectedMessage">Please select a Unit of measurement.</string>
+  <string name="FirstConfigurationTitleLabel">Network Configuration</string>
+  <string name="SSIDLabel">SSID </string>
+  <string name="PasswordLabel">Password </string>
+  <string name="HostNameLabel">Device Name </string>
+  <string name="SaveButtonLabel">Save</string>
+  <string name="SetUpNewDeviceTitle">Set up a new device</string>
+  <string name="NewDeviceButtonLabel">Set up new device</string>
+  <string name="DeviceSelectionInfoTitleMessage">Device Selection Information</string>
+  <string name="DeviceSelectionInfoMessage">Please be sure that you are directly connected to your Smart Calendar via WLAN.</string>
+  <string name="NoDirectConnectionPossibleMessageTitle">No Direct Connection Possible</string>
+  <string name="NoDirectConnectionPossibleMessage">No direct connection possible. Please make sure that you are directly connected to your controller and try again.</string>
+  <string name="NoDevicesFoundInNetworkLabel">No devices found in your connected network.</string>
+  <string name="NoLeagueDataReceivedTitle">Invalid Football Data Received</string>
+  <string name="NoLeagueDataReceivedMessage">Received football data is invalid. Please restart your device first and then your application. If this error persists, please be patient and try again later.</string>
+</resources>
