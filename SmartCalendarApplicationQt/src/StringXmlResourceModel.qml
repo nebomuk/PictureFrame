@@ -13,4 +13,5 @@ XmlListModel {
 
                 XmlRole { name: "text"; query: "string()" }
 
+
             }
