@@ -40,8 +40,6 @@
         <file>src/WeatherImagePage.qml</file>
         <file>src/CenterColumn.qml</file>
         <file>src/NotifyingSettings.qml</file>
-        <file>src/PictureTypeSelectionPage.qml</file>
-        <file>src/PictureTypeSelectionPageForm.ui.qml</file>
         <file>src/TimePicker.qml</file>
         <file>fa-regular-400.ttf</file>
         <file>src/DateUtil.js</file>
