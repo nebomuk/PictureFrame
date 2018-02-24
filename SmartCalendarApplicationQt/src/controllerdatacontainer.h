@@ -27,7 +27,14 @@ private:
     AUTO_PROPERTY(QJsonArray, trashPlan)
     AUTO_PROPERTY(QJsonArray, birthdayPlan)
     AUTO_PROPERTY(QJsonArray, personList)
-    AUTO_PROPERTY(QJsonArray, images)
+
+    AUTO_PROPERTY(QJsonArray, calendarImages)
+    AUTO_PROPERTY(QJsonArray, newsImages)
+    AUTO_PROPERTY(QJsonArray, footballImages)
+    AUTO_PROPERTY(QJsonArray, cinemaImages)
+    AUTO_PROPERTY(QJsonArray, weatherImages)
+    AUTO_PROPERTY(QJsonArray, imageFileImages)
+
     AUTO_PROPERTY(QJsonArray, footballLeagues)
     AUTO_PROPERTY(QJsonArray, firstLeagueFootballTeams)
     AUTO_PROPERTY(QJsonArray, secondLeagueFootballTeams)

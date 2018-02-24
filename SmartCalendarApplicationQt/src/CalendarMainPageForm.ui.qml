@@ -8,91 +8,111 @@ import de.vitecvisual.util 1.0
 Page {
     id: page
 
-    
+    property alias listModel: listModel
 
     title: qsTr("Calendar Main")
 
-    property string selectedDevice: NotifyingSettings.selectedDevice
-    property int listViewRowCount : 1
+    signal listIndexClicked(int index);
 
-    ColumnLayout
-    {
-        x: 50
-        y: 67
-        width: 367
-        height: 314
-
-        spacing: 10
-        Label
-        {
-            id: label
-            font.pointSize: 20
-            text: selectedDevice
+    ListModel {
+            id: listModel
         }
 
-        ListView
-        {
-            id : listView
-            // TODO change model to support removal of individual rows
-            model : ListModel
-            {
-                id : listModel
-                ListElement
-                {
-                    buttonText : "Image"
+        Item {
+            id: mainContent
+            anchors.fill: parent
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 0
 
+                ScrollView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    ListView {
+                        id: listView
+                        model: listModel
+                        spacing: 10
+                        delegate: DraggableItem {
+                            id : draggableItem
+                            Rectangle {
+                                height: 60
+                                width: listView.width * 0.8
+                                color: "white"
+
+                                RowLayout {
+                                    anchors.fill: parent
+                                    spacing: 20
+                                    Label {
+                                        text: model.pictureType
+                                    }
+                                    Label {
+                                        Layout.fillWidth: true
+                                        text: model.duration
+                                    }
+                                    Button
+                                    {
+                                        id : editButton
+                                        text : qsTr("Edit")
+
+                                    }
+
+                                    RemoveButton
+                                    {
+                                        listModel: listModel
+                                    }
+                                    Connections
+                                    {
+                                        target : editButton
+                                        onClicked : listIndexClicked(index);
+                                    }
+                                }
+
+
+
+                                // Bottom line border
+                                Rectangle {
+                                    anchors {
+                                        left: parent.left
+                                        right: parent.right
+                                        bottom: parent.bottom
+                                    }
+                                    height: 1
+                                    color: "lightgrey"
+                                }
+
+                                Connections
+                                {
+                                    target : draggableItem
+                                    onMoveItemRequested: {
+                                        listModel.move(from, to, 1);
+                                    }
+
+                                }
+                            }
+
+
+                            draggedItemParent: mainContent
+                        }
+                    }
                 }
             }
-
-            height:  300
-            delegate: RowLayout
-                        {
-                        spacing : 10
-
-                        Button
-                        {
-                            id : button
-                            text: buttonText
-                        }
-
-                        Connections
-                        {
-                            target : button
-                            onClicked : {
-                                stackView.push("PictureTypeSelectionPage.qml")
-                            }
-                        }
-
-                        Label
-                        {
-                            text : qsTr("No Image Selected")
-                        }
-
-                        Column
-                        {
-                            Label
-                            {
-                                text : qsTr("Duration in s")
-                            }
-
-                            TextField
-                            {
-                                placeholderText: qsTr("s")
-                            }
-                        }
-
-                    }
-
     }
+
         Button
         {
             id : buttonAddMorePictures
+            y: 360
             text : qsTr("Add more pictures")
+            anchors.left: parent.left
+            anchors.leftMargin: 52
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 72
 
          }
 
         Connections
         {
+            property int listViewRowCount : 0
             target: buttonAddMorePictures
             onClicked : {
 
@@ -113,4 +133,3 @@ Page {
 
 
     }
-}
