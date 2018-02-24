@@ -8,7 +8,6 @@ DefinePersonsPageForm {
 
     onListIndexClicked: {
 
-        console.log("index: " + index);
         var item = listModel.get(index);
         dialog.textFieldEmail.text = item.email
         dialog.textFieldName.text =  item.name

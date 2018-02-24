@@ -54,5 +54,7 @@
         <file>src/NameEmailInputDialog.qml</file>
         <file>src/NameEmailInputDialogForm.ui.qml</file>
         <file>src/RemoveButton.qml</file>
+        <file>src/PictureTypeSelectionDialog.qml</file>
+        <file>src/PictureTypeSelectionDialogForm.ui.qml</file>
     </qresource>
 </RCC>

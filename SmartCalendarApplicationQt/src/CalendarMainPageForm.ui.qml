@@ -47,7 +47,7 @@ Page {
                                     }
                                     Label {
                                         Layout.fillWidth: true
-                                        text: model.duration
+                                        text: model.displayTimeInSeconds
                                     }
                                     Button
                                     {
