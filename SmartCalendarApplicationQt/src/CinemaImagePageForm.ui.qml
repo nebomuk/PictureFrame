@@ -2,12 +2,10 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
-Page {
+ConfirmationPage {
     id: page
 
     title: qsTr("Cinema")
-
-    property alias butonConfirm: buttonConfirm
 
     property alias comboBoxoption: comboBoxoption
     property alias comboBoxgenre: comboBoxgenre
@@ -72,9 +70,5 @@ Page {
             id: comboBoxdesign
                 attributeName: "cinemaDesignSpinnerArray"
         }
-    }
-
-    ConfirmButton {
-        id: buttonConfirm
     }
 }

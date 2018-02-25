@@ -2,10 +2,8 @@ import QtQuick 2.0
 
 NewsImagePageForm {
 
-    // when the page is completed, all contents entered by the user are send via signal and can then be converted to
-    // the corresponding json object
+    // sends json to CalendarMainPage
     signal finished(var formData);
-
 
     buttonConfirm.onClicked:  {
 

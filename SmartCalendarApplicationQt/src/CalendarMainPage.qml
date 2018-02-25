@@ -80,7 +80,7 @@ CalendarMainPageForm
 
     onListIndexClicked: {
         var item = listModel.get(index);
-        //dialog.tumbler.text = item.email
+        dialog.setCurrentText(item.pictureType)
         dialog.open();
         dialog.indexOfItemCurrentlyEdited = index;
 

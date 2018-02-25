@@ -2,21 +2,21 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
-Page {
+ConfirmationPage
+{
     id: page
 
     
 
     title: qsTr("Weather")
 
-    property alias additionalNumberOfDays : additionalNumberOfDays;
+    property alias spinBoxadditionalNumberOfDays : spinBoxadditionalNumberOfDays;
    // property alias displayTimeInSeconds : displayTimeInSeconds;
     //property alias timeScale : timeScale;
     property alias comboBoxUnit : comboBoxUnit;
     property alias comboBoxDesign : comboBoxDesign;
     property alias textFieldcityName : textFieldcityName;
     property alias comboBoxcountry : comboBoxcountry;
-  //  property alias index : index;
 
     GridLayout
     {
@@ -59,9 +59,10 @@ Page {
             text : qsTr("Country")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
             id : comboBoxcountry
+            attributeName: "countrySpinnerArray"
         }
 
         Label
@@ -72,12 +73,14 @@ Page {
 
         Label
         {
-            text : qsTr("Further Days")
+            text : qsTr("Additional Number of Days")
         }
 
-        TextField
+        SpinBox
         {
-            id : additionalNumberOfDays
+            from : 1
+            to : 7
+            id : spinBoxadditionalNumberOfDays
         }
 
         Label
@@ -101,11 +104,6 @@ Page {
             id : comboBoxDesign
             attributeName: "weatherDesignSpinnerArray"
         }
-
-        ConfirmButton {
-            id: buttonConfirm
-        }
-
 
     }
 }
