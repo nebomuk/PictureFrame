@@ -14,7 +14,6 @@ ConfirmationPage {
     GridLayout
     {
         id : gridLayout
-        y: 110
         width: 222
         height: 205
         anchors.horizontalCenter: parent.horizontalCenter

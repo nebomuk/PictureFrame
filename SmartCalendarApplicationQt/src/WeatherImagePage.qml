@@ -10,11 +10,11 @@ WeatherImagePageForm {
     buttonConfirm.onClicked:  {
 
         var formData = {};
-        formData.timeScale = ""; // FIXME missing specification of time scale;
+        formData.timeScale = comboBoxOption.currentText; // uses option according to xamarin app
         formData.additionalNumberOfDays = spinBoxadditionalNumberOfDays.value;
         formData.cityName = textFieldcityName.text;
         formData.country = comboBoxcountry.currentText;
-        formData.unit = comboBoxUnit.currentText; // FIXME text does not match specification
+        formData.unit = comboBoxUnit.model.get(comboBoxUnit.currentIndex).unit;
         finished(formData)
     }
 

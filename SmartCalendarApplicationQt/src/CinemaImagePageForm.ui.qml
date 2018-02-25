@@ -14,8 +14,9 @@ ConfirmationPage {
 
     //property alias publishTimeStamp : publishStamp;
     GridLayout {
-        x: 124
-        y: 128
+        width: 287
+        height: 284
+        anchors.horizontalCenter: parent.horizontalCenter
         columns: 2
         rows: 5
         rowSpacing: 5
@@ -25,7 +26,6 @@ ConfirmationPage {
             text: qsTr("Option")
         }
 
-            // TODO check if this is the right spinner
         StringXmlResourceComboBox
         {
             id : comboBoxoption

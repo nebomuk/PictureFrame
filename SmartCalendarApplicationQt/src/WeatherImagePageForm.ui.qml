@@ -17,11 +17,13 @@ ConfirmationPage
     property alias comboBoxDesign : comboBoxDesign;
     property alias textFieldcityName : textFieldcityName;
     property alias comboBoxcountry : comboBoxcountry;
+    property alias comboBoxOption: comboBoxOption
 
     GridLayout
     {
-        x: 124
-        y: 128
+        width: 455
+        height: 379
+        anchors.horizontalCenter: parent.horizontalCenter
         columns : 2
         rows : 8
         rowSpacing: 5
@@ -29,12 +31,13 @@ ConfirmationPage
 
         Label
         {
-            text : qsTr("Appearance")
+            text : qsTr("Option")
         }
 
-        ComboBox
+        StringXmlResourceComboBox
         {
-            id : comboBoxAppearance
+            attributeName: "formatViewSpinnerArray"
+            id : comboBoxOption
         }
 
         Label
@@ -91,7 +94,20 @@ ConfirmationPage
         ComboBox
         {
             id : comboBoxUnit
-            model : ["SI","Imperial"]
+            model : ListModel
+                    {
+                        ListElement
+                        {
+                            name : qsTr("Metric")
+                            unit : "Metric"
+                        }
+                        ListElement
+                        {
+                            name : qsTr("Imperial")
+                            unit : "Imperial"
+                        }
+                    }
+            textRole : "name"
         }
 
         Label
