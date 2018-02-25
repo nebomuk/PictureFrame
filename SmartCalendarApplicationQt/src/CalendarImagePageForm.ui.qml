@@ -6,9 +6,13 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
+    property alias butonConfirm: buttonConfirm
     
 
     title: qsTr("Calendar Image")
 
+    ConfirmButton {
+        id: buttonConfirm
+    }
 }
 

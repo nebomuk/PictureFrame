@@ -7,6 +7,8 @@ Page {
 
     title: qsTr("Cinema")
 
+    property alias butonConfirm: buttonConfirm
+
     property alias comboBoxoption: comboBoxoption
     property alias comboBoxgenre: comboBoxgenre
     property alias comboBoxcountry: comboBoxcountry
@@ -70,5 +72,9 @@ Page {
             id: comboBoxdesign
                 attributeName: "cinemaDesignSpinnerArray"
         }
+    }
+
+    ConfirmButton {
+        id: buttonConfirm
     }
 }

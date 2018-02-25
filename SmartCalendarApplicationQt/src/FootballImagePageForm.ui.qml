@@ -6,6 +6,7 @@ Page {
     id: page
 
     
+    property alias butonConfirm: buttonConfirm
 
     title: qsTr("Football Image")
 
@@ -66,5 +67,9 @@ Page {
 
         ComboBox {
         }
+    }
+
+    ConfirmButton {
+        id: buttonConfirm
     }
 }

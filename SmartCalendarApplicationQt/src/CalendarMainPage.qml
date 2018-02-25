@@ -104,8 +104,8 @@ CalendarMainPageForm
             }
             listModel.set(indexOfItemCurrentlyEdited,{"pictureType":tumbler.currentItem.text})
 
-            indexOfItemCurrentlyEdited = -1;
             openPage(tumbler.currentItem.text)
+            indexOfItemCurrentlyEdited = -1;
 
         }
     }
@@ -134,13 +134,19 @@ CalendarMainPageForm
                 break;
             default:
                 console.error("No corresponding Page qml file found for picture Type " + pictureType)
-                break;
+                return;
         }
 
-            if(pageToOpen.length > 0)
-            {
-                stackView.push(pageToOpen);
-            }
+        var pushedPage =  stackView.push(pageToOpen);
+        pushedPage.finished.connect(onPageFinished)
+    }
+
+    function onPageFinished(formData)
+    {
+        var currentPage = stackView.pop();
+        currentPage.finished.disconnect(onPageFinished);
+
+
     }
 
 }

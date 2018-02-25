@@ -102,6 +102,9 @@ Page {
             attributeName: "weatherDesignSpinnerArray"
         }
 
+        ConfirmButton {
+            id: buttonConfirm
+        }
 
 
     }

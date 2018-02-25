@@ -10,4 +10,7 @@ Page {
     title: qsTr("Dynamic Picture")
 
 
+    ConfirmButton {
+        id: buttonConfirm
+    }
 }
