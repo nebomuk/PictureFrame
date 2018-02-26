@@ -18,6 +18,7 @@ ConfirmationPage
     property alias buttonStartTime: buttonStartTime
     property alias buttonEndTime: buttonEndTime
     property alias buttonStartDate: buttonStartDate
+    property alias buttonMonth: buttonMonth
 
 
     property bool isDayViewOption3 : comboBoxTimeView.currentIndex === 0 && comboBoxoption.currentIndex === 2;
@@ -116,9 +117,9 @@ ConfirmationPage
 
         Label
         {
-            visible: isWeekViewOption3
+            visible: isWeekViewOption3 || isMonthViewOption2
             text : qsTr("Time Interval")
-            Layout.columnSpan: 3
+            Layout.columnSpan: isWeekViewOption3 ? 3 : 1 // displayed as heading for week, but on the right for month
         }
 
         Label
@@ -149,6 +150,12 @@ ConfirmationPage
             to : 6
         }
 
+        Button
+        {
+            visible: isMonthViewOption2
+            id : buttonMonth
+            Layout.columnSpan : 2
+        }
 
 
         Label {
