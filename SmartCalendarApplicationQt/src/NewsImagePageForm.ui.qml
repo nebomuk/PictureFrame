@@ -14,11 +14,11 @@ ConfirmationPage {
     GridLayout
     {
         id : gridLayout
-        width: 222
-        height: 205
-        anchors.horizontalCenter: parent.horizontalCenter
-        columnSpacing: 10
-        rowSpacing: 10
+        anchors.left : parent.left
+        anchors.right: parent.right
+        anchors.top : parent.top
+        columnSpacing: 5
+        rowSpacing: 5
         rows : 3
         columns :2
 
@@ -37,6 +37,7 @@ ConfirmationPage {
         Label
         {
             text : qsTr("Source")
+
         }
 
         StringXmlResourceComboBox

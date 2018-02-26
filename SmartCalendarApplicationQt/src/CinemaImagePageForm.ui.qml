@@ -14,9 +14,9 @@ ConfirmationPage {
 
     //property alias publishTimeStamp : publishStamp;
     GridLayout {
-        width: 287
-        height: 284
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left : parent.left
+        anchors.right: parent.right
+        anchors.top : parent.top
         columns: 2
         rows: 5
         rowSpacing: 5

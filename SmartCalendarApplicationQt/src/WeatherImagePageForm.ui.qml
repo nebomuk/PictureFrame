@@ -21,9 +21,9 @@ ConfirmationPage
 
     GridLayout
     {
-        width: 455
-        height: 379
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left : parent.left
+        anchors.right: parent.right
+        anchors.top : parent.top
         columns : 2
         rows : 8
         rowSpacing: 5
@@ -77,6 +77,9 @@ ConfirmationPage
         Label
         {
             text : qsTr("Additional Number of Days")
+            Layout.preferredWidth: 120
+            Layout.maximumWidth: 120
+            wrapMode: Text.WordWrap
         }
 
         SpinBox
