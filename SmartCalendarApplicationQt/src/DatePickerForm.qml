@@ -14,6 +14,21 @@ Rectangle {
 
     readonly  property date date : new Date(year,month -1 /*zero indexed*/,day)
 
+    onInitialYearChanged: {
+                updateYearModel();
+        if(maxYear < initialYear)
+        {
+            maxYear = initialYear;
+        }
+        if(minYear > initialYear)
+        {
+            minYear = initialYear
+        }
+    }
+    onMaxYearChanged: updateYearModel();
+    onMinYearChanged: updateYearModel();
+
+
     function formatDaysInMonth(count, modelData)
     {
         return modelData + 1
@@ -94,27 +109,32 @@ Rectangle {
 
             Tumbler {
                 id: yearTumbler
-                model: ListModel {
-
-                    Component.onCompleted: {
-
-                        for (var i = initialYear; i <= maxYear; ++i) {
-
-                            append({value: i.toString()});
-
-                        }
-
-                        for (var j = minYear; j < initialYear; ++j) {
-
-                            append({value: j.toString()});
-
-                        }
-
-                    }
-                }
+                model: yearModel
                 delegate: yearDelegate
             }
 
+            ListModel
+            {
+                id : yearModel
+
+                // initial model data
+                Component.onCompleted: {
+                    updateYearModel();
+                }
+            }
+
+        }
+        function updateYearModel()
+        {
+            yearModel.clear();
+
+            for (var i = initialYear; i <= maxYear; ++i) {
+                yearModel.append({value: i.toString()});
+            }
+
+            for (var j = minYear; j < initialYear; ++j) {
+                yearModel.append({value: j.toString()});
+            }
         }
 
 }

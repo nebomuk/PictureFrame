@@ -15,10 +15,10 @@ ConfirmationPage
 
     property alias spinBoxAdditionalNumberOfDays: spinBoxAdditionalNumberOfDays
 
-    property alias buttonStartTime: buttonStartTime
-    property alias buttonEndTime: buttonEndTime
+    property alias spinBoxStartTime: spinBoxStartTime
+    property alias spinBoxEndTime: spinBoxEndTime
     property alias buttonStartDate: buttonStartDate
-    property alias buttonMonth: buttonMonth
+    property alias comboBoxMonth: comboBoxMonth
 
 
     property bool isDayViewOption3 : comboBoxTimeView.currentIndex === 0 && comboBoxoption.currentIndex === 2;
@@ -71,10 +71,14 @@ ConfirmationPage
             visible: isDayViewOption3
         }
 
-        Button
+        SpinBox
         {
-            id : buttonStartTime
             visible: isDayViewOption3
+            id : spinBoxStartTime
+            up.indicator.enabled: spinBoxEndTime.value > value
+            from : 0
+            to : 24
+            value : 8
         }
 
         Label
@@ -89,10 +93,14 @@ ConfirmationPage
             visible: isDayViewOption3
         }
 
-        Button
+        SpinBox
         {
-            id : buttonEndTime
             visible: isDayViewOption3
+            id : spinBoxEndTime
+            down.indicator.enabled: spinBoxStartTime.value < value
+            from : 0
+            to : 24
+            value : 12
         }
 
         Label
@@ -150,11 +158,13 @@ ConfirmationPage
             to : 6
         }
 
-        Button
+        ComboBox
         {
             visible: isMonthViewOption2
-            id : buttonMonth
+            id : comboBoxMonth
             Layout.columnSpan : 2
+            model : ListModel {}
+            textRole : "name"
         }
 
 

@@ -6,6 +6,9 @@ import QtQuick.Controls 2.3
 Dialog {
 
     property Button button
+    property int initialYear : 1980
+    property int minYear : 1908
+    property int maxYear : 2008
 
         id: dialogDatePicker
         standardButtons: Dialog.Cancel | Dialog.Ok
@@ -13,6 +16,9 @@ Dialog {
         contentItem : DatePickerForm
         {
             id : datePicker
+            initialYear : dialogDatePicker.initialYear
+            minYear : dialogDatePicker.minYear
+            maxYear : dialogDatePicker.maxYear
         }
 
         Connections
