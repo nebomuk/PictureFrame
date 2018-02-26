@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent networkauth mqtt
+QT += quick core gui network concurrent networkauth mqtt #xmlpatterns xml // required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -96,7 +96,6 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    src/NameEmailInputDialog1.ui.qml
+DISTFILES +=
 
 
