@@ -23,7 +23,8 @@ DeviceManagerPageForm {
     }
 
     onSavedDevicesClicked: {
-        NotifyingSettings.selectedDevice = savedDevicesListView.model.get(index).hostName
+        var hostName = savedDevicesListView.model.get(index).hostName
+        NotifyingSettings.selectedDevice =hostName
         stackView.pop();
     }
 

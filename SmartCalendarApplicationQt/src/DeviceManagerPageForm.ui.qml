@@ -22,8 +22,9 @@ Page {
     ColumnLayout
     {
         id: column
-        y: 99
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top :parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
         spacing: 10
 
     Label {
@@ -34,6 +35,7 @@ Page {
     ListView {
         id: savedDevicesListView
         height: 200
+
         delegate:
             Frame
             {
@@ -55,6 +57,7 @@ Page {
                 }
                 Text
                 {
+
                     text : "\uf0c2"
                     font.family: "FontAwesome"
                     font.pointSize: 14
