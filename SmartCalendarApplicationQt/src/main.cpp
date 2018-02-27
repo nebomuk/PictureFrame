@@ -8,6 +8,10 @@
 
 #include <QLoggingCategory>
 
+#ifdef Q_OS_ANDROID
+#include "androidhelper.h"
+#endif
+
 //#define USE_QAPPLICATION
 
 
@@ -34,7 +38,7 @@ int main(int argc, char *argv[])
 #endif
 
     // load Font Awesome icon font
-    Q_ASSERT(QFontDatabase::addApplicationFont(":fa-regular-400.ttf") != -1);
+    Q_ASSERT(QFontDatabase::addApplicationFont(":fa-solid-900.ttf") != -1);
 
     // log accidental binding ovewrite
     QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
@@ -45,8 +49,11 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<GoogleCalendarAuthorization>("de.vitecvisual.core",1,0,"GoogleCalendarAuthorization",&GoogleCalendarAuthorization::singletontype_provider);
     qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&DeviceAccessorImpl::singletontype_provider);
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &SmartCalendarAccessImpl::singletontype_provider);
-    qmlRegisterSingletonType<PlatformHelper>("de.vitecvisual.native",1,0,"PlatformHelper",&PlatformHelper::singletontype_provider);
 
+    qmlRegisterModule("de.vitecvisual.native",1,0);
+#ifdef Q_OS_ANDROID
+    qmlRegisterSingletonType<AndroidHelper>("de.vitecvisual.native",1,0,"AndroidHelper",&AndroidHelper::singletontype_provider);
+#endif
     // instantiable C++ type
     qmlRegisterType<DeviceManagerModel>("de.vitecvisual.model",1,0,"DeviceManagerModel");
 

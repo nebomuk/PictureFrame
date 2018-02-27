@@ -3,6 +3,8 @@ import QtQuick 2.4
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.3
 
+import de.vitecvisual.native 1.0;
+
 DynamicPicturePageForm {
     // TODO may use 1.0 FileDialog for ios but custom solution for android
     // https://stackoverflow.com/questions/33443114/photo-gallery-in-ios-and-android
@@ -17,14 +19,39 @@ DynamicPicturePageForm {
 
     property url currentPictureFilePath
 
+    onCurrentPictureFilePathChanged: {
+        image.source = currentPictureFilePath;
+    }
 
     buttonConfirm.onClicked: {
 
     }
 
+    Component.onCompleted:
+    {
+//        if(Qt.platform.os === "android")
+//        {
+//            AndroidHelper.imagePathRetrieved.connect(function()
+//            {
+//                console.log("Android image path" + imagePath);
+//                currentPictureFilePath = imagePath;
+//            });
+//        }
+    }
+
+
+
 
     buttonChoosePicture.onClicked: {
-        fileDialog.open();
+
+//        if(Qt.platform.os === "android")
+//        {
+//            AndroidHelper.openImagePicker();
+//        }
+//        else
+
+            fileDialog.open();
+
     }
 
     FileDialog // 1.3 file dialog for ios

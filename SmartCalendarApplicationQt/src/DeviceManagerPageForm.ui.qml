@@ -14,16 +14,10 @@ Page {
     signal availableDevicesClicked(int index)
     signal savedDevicesClicked(int index)
 
-    property alias deviceManagerModel: deviceManagerModel
+    property alias savedDevicesListView: savedDevicesListView
 
-    DeviceManagerModel
-    {
-        id : deviceManagerModel
+    property alias availableDevicesListView: availableDevicesListView
 
-//        onAvailableDevicesChanged: console.log("availableDevicesChanged " + availableDevices[0].hostName)
-//        onAvailableDeviceCountChanged:  console.log("onAvailableDeviceCountChanged " + availableDeviceCount)
-
-    }
 
     ColumnLayout
     {
@@ -43,6 +37,8 @@ Page {
         delegate:
             Frame
             {
+                RowLayout
+                {
                 Label
                 {
                     MouseArea
@@ -55,11 +51,34 @@ Page {
                        target: savedDevicesMouseArea
                        onClicked: savedDevicesClicked(index)
                      }
-                    text : deviceManagerModel.savedDevices[modelData].hostName
+                    text : hostName
+                }
+                Text
+                {
+                    text : "\uf0c2"
+                    font.family: "FontAwesome"
+                    font.pointSize: 14
+                }
+
+                Text
+                {
+                    text : "\uf1eb"
+                    font.family: "FontAwesome"
+                    font.pointSize: 14
+                }
+
+                RemoveButton
+                {
+                    listModel: modelSavedDevices
+                    font.pointSize: 14
+                }
                 }
             }
 
-        model: deviceManagerModel.savedDeviceCount
+        model: ListModel
+        {
+            id : modelSavedDevices
+        }
     }
 
 
@@ -86,10 +105,13 @@ Page {
                    target: availableDevicesMouseArea
                    onClicked: availableDevicesClicked(index)
                  }
-                text: deviceManagerModel.availableDevices[modelData].hostName
+                text: hostName
             }
         }
-        model: deviceManagerModel.availableDeviceCount
+        model: ListModel
+        {
+
+        }
     }
 
 

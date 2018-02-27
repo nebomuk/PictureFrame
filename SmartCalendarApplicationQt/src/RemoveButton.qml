@@ -13,6 +13,6 @@ Button
     Connections
     {
         target : removeEntryButton
-        onClicked : listView.model.remove(index)
+        onClicked : listModel.remove(index)
     }
 }

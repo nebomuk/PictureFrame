@@ -36,18 +36,26 @@ Page {
                             id : draggableItem
                             Rectangle {
                                 height: 60
-                                width: listView.width * 0.8
+                                width: listView.width
                                 color: "white"
 
                                 RowLayout {
                                     anchors.fill: parent
-                                    spacing: 20
+                                    spacing: 5
                                     Label {
                                         text: model.pictureType
-                                    }
-                                    Label {
                                         Layout.fillWidth: true
-                                        text: model.displayTimeInSeconds
+
+                                    }
+                                    SpinBox {
+                                        id : spinBox
+                                        value : model.displayTimeInSeconds
+
+                                        // bind two way
+                                        Connections {
+                                            target: spinBox
+                                            onValueChanged : model.displayTimeInSeconds = spinBox.value
+                                        }
                                     }
                                     Button
                                     {
@@ -58,7 +66,7 @@ Page {
 
                                     RemoveButton
                                     {
-                                        listModel: listModel
+                                        listModel: listView.model
                                     }
                                     Connections
                                     {

@@ -8,6 +8,8 @@ Page {
 
     property alias buttonConfirm: buttonConfirm
 
+    property int index // helper value used by CalendarMainPage
+
     default property alias innerObject : innercolumn.data
 
     padding: 20

@@ -19,8 +19,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 android {
-    HEADERS += src/androidhelper.h
-    SOURCES += src/androidhelper.cpp
+    HEADERS += src/androidhelper.h src/androidimagepicker.h
+    SOURCES += src/androidhelper.cpp src/androidimagepicker.cpp
     QT += androidextras
 }
 
@@ -41,6 +41,7 @@ SOURCES += src/main.cpp \
     src/googlecalendarauthorization.cpp
 
 
+
 HEADERS += \
     src/smartcalendaraccessimpl.h \
     src/smartcalendaraccessimpl.h \
@@ -58,6 +59,7 @@ HEADERS += \
     src/mqttmessageparser.h \
     src/blockingmqttconnection.h \
     src/googlecalendarauthorization.h
+
 
 RESOURCES += qml.qrc
 

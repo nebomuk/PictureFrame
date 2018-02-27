@@ -19,7 +19,6 @@ ConfirmationPage {
         anchors.left : parent.left
         anchors.right: parent.right
         anchors.top : parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
         rows: 5
         columns: 2
         rowSpacing: 5

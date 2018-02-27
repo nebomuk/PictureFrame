@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.LocalStorage 2.0
 import de.vitecvisual.util 1.0
 
 
@@ -7,14 +8,66 @@ DeviceManagerPageForm {
 
     id : page
 
+    Component.onCompleted:
+    {
+        availableDevicesListView.model.append({"hostName":"SchmartCalendar"})
+        savedDevicesListView.model.append({"hostName":"SavedSchmartCalendar"})
+    }
+
     onAvailableDevicesClicked:
     {
-        stackView.push("FirstConfigurationPage.qml")
+        var page = stackView.push("FirstConfigurationPage.qml",{"index":index})
+
+        page.finished.connect(onFirstConfigurationPageFinished)
+
     }
 
     onSavedDevicesClicked: {
-        NotifyingSettings.selectedDevice = deviceManagerModel.savedDevices[index].hostName
+        NotifyingSettings.selectedDevice = savedDevicesListView.model.get(index).hostName
         stackView.pop();
+    }
+
+    function onFirstConfigurationPageFinished()
+    {
+        var page = stackView.pop();
+        page.finished.disconnect(onFirstConfigurationPageFinished);
+        var index = page.index;
+        var deviceName = page.textFieldDeviceName.text
+
+        var ssid = page.textFieldSsid.text
+
+        var password = page.textFieldPassword.text
+
+
+    }
+
+    function fillModel(model) {
+             __db().transaction(
+                 function(tx) {
+                     __ensureTables(tx);
+
+                     var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices");
+                     model.clear();
+
+                     if (rs.rows.length > 0) {
+                         for (var i=0; i<rs.rows.length; ++i)
+                         {
+                             model.append(rs.rows.item(i))
+                         }
+
+                     }
+                 }
+             )
+         }
+
+
+    function __db()
+    {
+        return openDatabaseSync("SmartCalendarDevicesModel", "1.0", "Saved Smart Calendar Devices in Network", 1000000);
+    }
+    function __ensureTables(tx)
+    {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS SmartCalendarDevices(productName TEXT, productId TEXT, productPassword TEXT)', []);
     }
 
 

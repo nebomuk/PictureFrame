@@ -37,37 +37,50 @@ CalendarMainPageForm
         var footballImages = DeviceAccessor.controllerDataContainer.footballImages
         footballImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.footballImage,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.footballImage,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                                 "formData":{"":0,"":0}})
+             // {"":0,"":0} causes qml to store an QVariantList placeholder, which we can later overwrite
         })
 
         var newsImages = DeviceAccessor.controllerDataContainer.newsImages
         newsImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.newsImage,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.newsImage,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                             "formData":{"":0,"":0}})
         })
 
         var imageFileImages = DeviceAccessor.controllerDataContainer.imageFileImages
         imageFileImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.imageFile,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.imageFile,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                             "formData":{"":0,"":0}})
         })
 
         var calendarImages = DeviceAccessor.controllerDataContainer.calendarImages
         calendarImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.calendarImage,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.calendarImage,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                             "formData":{"":0,"":0}})
         })
 
         var weatherImages = DeviceAccessor.controllerDataContainer.weatherImages
         weatherImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.weatherImage,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.weatherImage,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                             "formData":{"":0,"":0}})
         })
 
         var cinemaImages = DeviceAccessor.controllerDataContainer.cinemaImages
         cinemaImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.cinemaImage,"displayTimeInSeconds":img.displayTimeInSeconds})
+            listModel.append({"pictureType":pictureTypeModel.cinemaImage,
+                                 "displayTimeInSeconds":img.displayTimeInSeconds,
+                             "formData":{"":0,"":0}})
         })
 
         if(listModel.count === 0)
@@ -104,13 +117,13 @@ CalendarMainPageForm
             }
             listModel.set(indexOfItemCurrentlyEdited,{"pictureType":tumbler.currentItem.text})
 
-            openPage(tumbler.currentItem.text)
+            openPage(tumbler.currentItem.text,indexOfItemCurrentlyEdited)
             indexOfItemCurrentlyEdited = -1;
 
         }
     }
 
-    function openPage(pictureType)
+    function openPage(pictureType, index)
     {
         var pageToOpen = "";
         switch(pictureType) {
@@ -137,7 +150,7 @@ CalendarMainPageForm
                 return;
         }
 
-        var pushedPage =  stackView.push(pageToOpen);
+        var pushedPage =  stackView.push(pageToOpen,{"index":index});
         pushedPage.finished.connect(onPageFinished)
     }
 
@@ -145,7 +158,16 @@ CalendarMainPageForm
     {
         var currentPage = stackView.pop();
         currentPage.finished.disconnect(onPageFinished);
+        listModel.setProperty(currentPage.index,"formData",formData);
 
+        // list model item is now of the following structure
+        // {
+        //      displayTimeInSeconds : 20
+        //      formData : {
+        //                  someProperty : 1
+        //                  }
+        //      pictureType : calendarImage
+        // }
 
     }
 
