@@ -24,7 +24,7 @@ DeviceManagerPageForm {
 
     onSavedDevicesClicked: {
         var hostName = savedDevicesListView.model.get(index).hostName
-        NotifyingSettings.selectedDevice =hostName
+        NotifyingSettings.selectedDevice =hostName // fixme this line crashes
         stackView.pop();
     }
 

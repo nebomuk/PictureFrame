@@ -36,14 +36,14 @@ DynamicPicturePageForm {
 
     Component.onCompleted:
     {
-//        if(Qt.platform.os === "android")
-//        {
-//            AndroidHelper.imagePathRetrieved.connect(function()
-//            {
-//                console.log("Android image path" + imagePath);
-//                currentPictureFilePath = imagePath;
-//            });
-//        }
+        if(Qt.platform.os === "android")
+        {
+            AndroidHelper.imagePathRetrieved.connect(function(imagePath)
+            {
+                console.log("Android image path" + imagePath);
+                currentPictureFilePath = imagePath;
+            });
+        }
     }
 
 
@@ -51,12 +51,11 @@ DynamicPicturePageForm {
 
     buttonChoosePicture.onClicked: {
 
-//        if(Qt.platform.os === "android")
-//        {
-//            AndroidHelper.openImagePicker();
-//        }
-//        else
-
+        if(Qt.platform.os === "android")
+        {
+            AndroidHelper.openImagePicker();
+        }
+        else
             fileDialog.open();
 
     }

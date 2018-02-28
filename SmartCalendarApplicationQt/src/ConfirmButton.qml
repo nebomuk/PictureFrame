@@ -6,7 +6,5 @@ Button {
     id: buttonConfirm
     text: qsTr("Confirm")
     anchors.right: parent.right
-    anchors.rightMargin: 40
     anchors.bottom: parent.bottom
-    anchors.bottomMargin: 40
 }

@@ -32,6 +32,7 @@ ConfirmationPage {
             anchors.top : buttonChoosePicture.bottom
             anchors.bottom: buttonConfirm.top
             width : parent.width // only thing which works
+            height: parent.width
             id: image
             asynchronous : true
             fillMode :  Image.PreserveAspectFit

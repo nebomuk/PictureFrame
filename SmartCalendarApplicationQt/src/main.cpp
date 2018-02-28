@@ -24,6 +24,16 @@
 #include <QFontDatabase>
 #include <QQmlApplicationEngine>
 
+#include <QAndroidJniObject>
+int fibonacci(int n)
+{
+    return QAndroidJniObject::callStaticMethod<jint>
+                        ("de/vitecvisual/java/MyJavaClass" // class name
+                        , "fibonacci" // method name
+                        , "(I)I" // signature
+                        , n);
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +46,9 @@ int main(int argc, char *argv[])
 #else
     QGuiApplication app(argc, argv);
 #endif
+
+    int res = fibonacci(23);
+
 
     // load Font Awesome icon font
     Q_ASSERT(QFontDatabase::addApplicationFont(":fa-solid-900.ttf") != -1);

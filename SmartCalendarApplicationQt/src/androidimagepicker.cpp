@@ -5,6 +5,9 @@ AndroidImagePicker::AndroidImagePicker(QObject *parent) : QObject(parent)
 
 }
 
+
+// based on
+// https://forum.qt.io/topic/66324/qt-android-image-picker-issue-with-android-5-5-1/3
 void AndroidImagePicker::openImagePicker()
 {
     QAndroidJniObject Intent__ACTION_PICK = QAndroidJniObject::getStaticObjectField("android/content/Intent", "ACTION_PICK", "Ljava/lang/String;");
@@ -60,7 +63,7 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
 
         cursor.callMethod<void>("close");
 
-        emit imagePathRetrieved(imagePath);
+        emit imagePathRetrieved(QUrl(uri.toString()).toString());
     }
     else
         qWarning() << "AndroidImagePicker wrong path";
