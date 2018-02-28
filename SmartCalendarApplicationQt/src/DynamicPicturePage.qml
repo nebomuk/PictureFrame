@@ -25,6 +25,13 @@ DynamicPicturePageForm {
 
     buttonConfirm.onClicked: {
 
+        var formData = {};
+        // combo box option shows a different user string from what should be sent via json
+
+        // TODO convert to byte array
+        formData.imageByteArray = currentPictureFilePath
+        finished(formData)
+
     }
 
     Component.onCompleted:

@@ -24,6 +24,7 @@ void AndroidImagePicker::openImagePicker()
     QtAndroid::startActivity(intent, 101, this);
 }
 
+// TODO Permission ?
 void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data)
 {
     jint RESULT_OK = QAndroidJniObject::getStaticField<jint>("android/app/Activity", "RESULT_OK");
@@ -57,7 +58,7 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
         QString imagePath = "file://" +  path.toString();
         qDebug() << "AndroidImagePicker path" << imagePath;
 
-        cursor.callMethod<jboolean>("close");
+        cursor.callMethod<void>("close");
 
         emit imagePathRetrieved(imagePath);
     }
