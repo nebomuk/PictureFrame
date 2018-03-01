@@ -45,35 +45,10 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
                                                                               , uri.object<jobject>());
         qDebug() << "path.isValid()=" << path1.isValid();
 
-//        QAndroidJniObject dadosAndroid = QAndroidJniObject::getStaticObjectField("android/provider/MediaStore$MediaColumns", "DATA", "Ljava/lang/String;");
-//        QAndroidJniEnvironment env;
-//        jobjectArray projecao = (jobjectArray)env->NewObjectArray(1, env->FindClass("java/lang/String"), NULL);
-//        jobject projacaoDadosAndroid = env->NewStringUTF(dadosAndroid.toString().toStdString().c_str());
-//        env->SetObjectArrayElement(projecao, 0, projacaoDadosAndroid);
-
-//        QAndroidJniObject contentResolver = QtAndroid::androidActivity().callObjectMethod("getContentResolver", "()Landroid/content/ContentResolver;");
-//        QAndroidJniObject nullObj;
-
-//        QAndroidJniObject cursor = contentResolver.callObjectMethod("query", "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;", uri.object<jobject>(), projecao, nullObj.object<jstring>(), nullObj.object<jobjectArray>(), nullObj.object<jstring>());
-//        qDebug() << "AndroidImagePicker cursor.isValid()=" << cursor.isValid();
-
-//        jint columnIndex = cursor.callMethod<jint>("getColumnIndexOrThrow","(Ljava/lang/String;)I", dadosAndroid.object<jstring>());
-//        qDebug() << "AndroidImagePicker column_index=" << columnIndex;
-
-//        cursor.callMethod<jboolean>("moveToFirst");
-
-//        QAndroidJniObject path = cursor.callObjectMethod("getString", "(I)Ljava/lang/String;", columnIndex);
-//        qDebug() << "AndroidImagePicker path.isValid()=" << path.isValid();
-
 
         QString imagePath = "file://" +  path1.toString();
         qDebug() << "AndroidImagePicker path" << imagePath;
 
-
-//        cursor.callMethod<void>("close");
-
         emit imagePathRetrieved(imagePath);
     }
-    else
-        qWarning() << "AndroidImagePicker wrong path";
 }

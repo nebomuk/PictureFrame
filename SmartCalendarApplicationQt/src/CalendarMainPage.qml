@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import de.vitecvisual.core 1.0
+import "DateUtil.js" as DateUtil
 
 CalendarMainPageForm
 {
@@ -34,53 +35,55 @@ CalendarMainPageForm
 
     function populate()
     {
+        // FIXME insert in right order by preordering or ordering in-place
+
         var footballImages = DeviceAccessor.controllerDataContainer.footballImages
         footballImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.footballImage,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.footballImage,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                                 "formData":{"":0,"":0}})
+                                 "formData":img})
              // {"":0,"":0} causes qml to store an QVariantList placeholder, which we can later overwrite
         })
 
         var newsImages = DeviceAccessor.controllerDataContainer.newsImages
         newsImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.newsImage,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.newsImage,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                             "formData":{"":0,"":0}})
+                             "formData":img})
         })
 
         var imageFileImages = DeviceAccessor.controllerDataContainer.imageFileImages
         imageFileImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.imageFile,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.imageFile,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                             "formData":{"":0,"":0}})
+                             "formData":img})
         })
 
         var calendarImages = DeviceAccessor.controllerDataContainer.calendarImages
         calendarImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.calendarImage,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.calendarImage,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                             "formData":{"":0,"":0}})
+                             "formData":img})
         })
 
         var weatherImages = DeviceAccessor.controllerDataContainer.weatherImages
         weatherImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.weatherImage,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.weatherImage,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                             "formData":{"":0,"":0}})
+                             "formData":img})
         })
 
         var cinemaImages = DeviceAccessor.controllerDataContainer.cinemaImages
         cinemaImages.forEach(function(img)
         {
-            listModel.append({"pictureType":pictureTypeModel.cinemaImage,
+            insertSortedIntoListModel({"pictureType":pictureTypeModel.cinemaImage,
                                  "displayTimeInSeconds":img.displayTimeInSeconds,
-                             "formData":{"":0,"":0}})
+                             "formData":img})
         })
 
         if(listModel.count === 0)
@@ -89,6 +92,23 @@ CalendarMainPageForm
 
         listModel.append({"pictureType":qsTr("Nothing Selected"),"displayTimeInSeconds":0})
         }
+    }
+
+    // uses insertion sort algo and the index from the formData to insert it into the list
+    // so that the list items' order corresponds to the formData.index indices
+    function insertSortedIntoListModel(json)
+    {
+
+        var inputIndex = json.formData.index;
+        for(var i = 0; i< listModel.count; ++i)
+        {
+            if(listModel.get(i).formData.index >= inputIndex)
+            {
+                listModel.insert(i,json);
+                return;
+            }
+        }
+        listModel.append(json);
     }
 
     onListIndexClicked: {
@@ -170,5 +190,56 @@ CalendarMainPageForm
         // }
 
     }
+
+    buttonConfirm.onClicked: {
+
+        for(var i = 0; i < listModel.count; ++i)
+        {
+            var formData = listModel.get(i).formData;
+            var jsonObject = {};
+
+            // write form data (image type specific properties) into jsonObject
+            for (var prop in formData) {
+                if (formData.hasOwnProperty(prop))
+                {
+                    jsonObject[prop] = formData[prop]
+                }
+            }
+            jsonObject.displayTimeInSeconds = listModel.get(i).displayTimeInSeconds;
+            jsonObject.totalImageCount = listModel.count;
+            jsonObject.index = i;
+            jsonObject.publishTimeStamp = DateUtil.toShortISOString(new Date());
+            jsonObject.clientID = "test_client42"
+
+            switch(listModel.get(i).pictureType)
+            {
+                case pictureTypeModel.calendarImage:
+                    DeviceAccessor.sendCalendarImage(jsonObject);
+                    break;
+                case pictureTypeModel.weatherImage :
+                    DeviceAccessor.sendWeatherImage(jsonObject);
+                    break;
+                case pictureTypeModel.newsImage    :
+                    DeviceAccessor.sendNewsImage(jsonObject);
+                    break;
+                case pictureTypeModel.footballImage:
+                    DeviceAccessor.sendFootballImage(jsonObject);
+                    break;
+                case pictureTypeModel.cinemaImage  :
+                    DeviceAccessor.sendCinemaImage(jsonObject);
+                    break;
+                case pictureTypeModel.imageFile    :
+                    DeviceAccessor.sendImageFile(jsonObject);
+                    break;
+            }
+        }
+        listModel.clear();
+        stackView.pop();
+        // FIXME, transaction when storing images? should not overwrite old ControllerDataContainer immediately but only part of it
+        // 2 possibilities: use SQLite in memory :memory: database or overwrite old instance of ControllerDataContainer with new one
+        // when the transaction finished (simpler)
+    }
+
+
 
 }

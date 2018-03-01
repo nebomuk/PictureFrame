@@ -9,6 +9,7 @@ Page {
     id: page
 
     property alias listModel: listModel
+    property alias buttonConfirm: buttonConfirm
 
     title: qsTr("Calendar Main")
 
@@ -127,7 +128,9 @@ Page {
                 if(listViewRowCount <4)
                 {
                     listViewRowCount++;
-                    listModel.append({"buttonText": "Item" + listViewRowCount})
+                    listModel.append({"pictureType":pictureTypeModel.footballImage,
+                                         "displayTimeInSeconds":20,
+                                         "formData":{"":0,"":0}})
                 }
                 else
                 {
@@ -137,6 +140,12 @@ Page {
 
             }
 
+        }
+
+
+        ConfirmButton
+        {
+            id : buttonConfirm
         }
 
 
