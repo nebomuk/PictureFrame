@@ -1,4 +1,5 @@
 #include "androidimagepicker.h"
+#include <QAndroidJniObject>
 
 AndroidImagePicker::AndroidImagePicker(QObject *parent) : QObject(parent)
 {
@@ -38,10 +39,11 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
 
         qDebug("AndroidImagePicker uri = %s", qPrintable(uri.toString()));
 
-        QAndroidJniObject path = QAndroidJniObject::callStaticMethod<jstring>("de/vitecvisual/java/QExtendedSharePathResolver"
+        QAndroidJniObject path1 = QAndroidJniObject::callStaticObjectMethod("de/vitecvisual/java/QExtendedSharePathResolver"
                                                                               , "getRealPathFromUri" // Uri upper or lower case?
-                                                                              , "Landroid/net/Uri;[Landroid/content/Context;"
-                                                                              , n);
+                                                                              , "(Landroid/net/Uri;)Ljava/lang/String;"
+                                                                              , uri.object<jobject>());
+        qDebug() << "path.isValid()=" << path1.isValid();
 
 //        QAndroidJniObject dadosAndroid = QAndroidJniObject::getStaticObjectField("android/provider/MediaStore$MediaColumns", "DATA", "Ljava/lang/String;");
 //        QAndroidJniEnvironment env;
@@ -63,12 +65,14 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
 //        QAndroidJniObject path = cursor.callObjectMethod("getString", "(I)Ljava/lang/String;", columnIndex);
 //        qDebug() << "AndroidImagePicker path.isValid()=" << path.isValid();
 
-//        QString imagePath = "file://" +  path.toString();
-//        qDebug() << "AndroidImagePicker path" << imagePath;
+
+        QString imagePath = "file://" +  path1.toString();
+        qDebug() << "AndroidImagePicker path" << imagePath;
+
 
 //        cursor.callMethod<void>("close");
 
-//        emit imagePathRetrieved(QUrl(uri.toString()).toString());
+        emit imagePathRetrieved(imagePath);
     }
     else
         qWarning() << "AndroidImagePicker wrong path";

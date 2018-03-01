@@ -40,7 +40,7 @@ DynamicPicturePageForm {
         {
             AndroidHelper.imagePathRetrieved.connect(function(imagePath)
             {
-                console.log("Android image path" + imagePath);
+                console.log("Android image url" + imagePath);
                 currentPictureFilePath = imagePath;
             });
         }

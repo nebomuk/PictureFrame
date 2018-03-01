@@ -19,8 +19,9 @@ import java.io.FileOutputStream;
 // based on SharePathResolver from the Qt Sharing on ios and android blog posts, but creates a temporary if there is really no file
 
 public class QExtendedSharePathResolver {
-    public static String getRealPathFromUri(final Context context, final Uri uri) {
+    public static String getRealPathFromUri(Uri uri) {
 
+	    Context context = org.qtproject.qt5.android.QtNative.activity();
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
