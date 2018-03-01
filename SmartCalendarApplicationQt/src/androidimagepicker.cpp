@@ -38,32 +38,37 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
 
         qDebug("AndroidImagePicker uri = %s", qPrintable(uri.toString()));
 
-        QAndroidJniObject dadosAndroid = QAndroidJniObject::getStaticObjectField("android/provider/MediaStore$MediaColumns", "DATA", "Ljava/lang/String;");
-        QAndroidJniEnvironment env;
-        jobjectArray projecao = (jobjectArray)env->NewObjectArray(1, env->FindClass("java/lang/String"), NULL);
-        jobject projacaoDadosAndroid = env->NewStringUTF(dadosAndroid.toString().toStdString().c_str());
-        env->SetObjectArrayElement(projecao, 0, projacaoDadosAndroid);
+        QAndroidJniObject path = QAndroidJniObject::callStaticMethod<jstring>("de/vitecvisual/java/QExtendedSharePathResolver"
+                                                                              , "getRealPathFromUri" // Uri upper or lower case?
+                                                                              , "Landroid/net/Uri;[Landroid/content/Context;"
+                                                                              , n);
 
-        QAndroidJniObject contentResolver = QtAndroid::androidActivity().callObjectMethod("getContentResolver", "()Landroid/content/ContentResolver;");
-        QAndroidJniObject nullObj;
+//        QAndroidJniObject dadosAndroid = QAndroidJniObject::getStaticObjectField("android/provider/MediaStore$MediaColumns", "DATA", "Ljava/lang/String;");
+//        QAndroidJniEnvironment env;
+//        jobjectArray projecao = (jobjectArray)env->NewObjectArray(1, env->FindClass("java/lang/String"), NULL);
+//        jobject projacaoDadosAndroid = env->NewStringUTF(dadosAndroid.toString().toStdString().c_str());
+//        env->SetObjectArrayElement(projecao, 0, projacaoDadosAndroid);
 
-        QAndroidJniObject cursor = contentResolver.callObjectMethod("query", "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;", uri.object<jobject>(), projecao, nullObj.object<jstring>(), nullObj.object<jobjectArray>(), nullObj.object<jstring>());
-        qDebug() << "AndroidImagePicker cursor.isValid()=" << cursor.isValid();
+//        QAndroidJniObject contentResolver = QtAndroid::androidActivity().callObjectMethod("getContentResolver", "()Landroid/content/ContentResolver;");
+//        QAndroidJniObject nullObj;
 
-        jint columnIndex = cursor.callMethod<jint>("getColumnIndexOrThrow","(Ljava/lang/String;)I", dadosAndroid.object<jstring>());
-        qDebug() << "AndroidImagePicker column_index=" << columnIndex;
+//        QAndroidJniObject cursor = contentResolver.callObjectMethod("query", "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;", uri.object<jobject>(), projecao, nullObj.object<jstring>(), nullObj.object<jobjectArray>(), nullObj.object<jstring>());
+//        qDebug() << "AndroidImagePicker cursor.isValid()=" << cursor.isValid();
 
-        cursor.callMethod<jboolean>("moveToFirst");
+//        jint columnIndex = cursor.callMethod<jint>("getColumnIndexOrThrow","(Ljava/lang/String;)I", dadosAndroid.object<jstring>());
+//        qDebug() << "AndroidImagePicker column_index=" << columnIndex;
 
-        QAndroidJniObject path = cursor.callObjectMethod("getString", "(I)Ljava/lang/String;", columnIndex);
-        qDebug() << "AndroidImagePicker path.isValid()=" << path.isValid();
+//        cursor.callMethod<jboolean>("moveToFirst");
 
-        QString imagePath = "file://" +  path.toString();
-        qDebug() << "AndroidImagePicker path" << imagePath;
+//        QAndroidJniObject path = cursor.callObjectMethod("getString", "(I)Ljava/lang/String;", columnIndex);
+//        qDebug() << "AndroidImagePicker path.isValid()=" << path.isValid();
 
-        cursor.callMethod<void>("close");
+//        QString imagePath = "file://" +  path.toString();
+//        qDebug() << "AndroidImagePicker path" << imagePath;
 
-        emit imagePathRetrieved(QUrl(uri.toString()).toString());
+//        cursor.callMethod<void>("close");
+
+//        emit imagePathRetrieved(QUrl(uri.toString()).toString());
     }
     else
         qWarning() << "AndroidImagePicker wrong path";
