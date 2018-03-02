@@ -7,6 +7,20 @@ WeatherImagePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
+    property var formData
+
+
+
+    Component.onCompleted:
+    {
+        comboBoxOption.initialText = formData.timeScale;
+        comboBoxcountry.initialText = formData.country;
+        comboBoxUnit.initialText = formData.unit;
+        spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;
+        textFieldcityName.text = formData.cityName;
+    }
+
+
     buttonConfirm.onClicked:  {
 
         var formData = {};

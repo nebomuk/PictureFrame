@@ -36,7 +36,7 @@ ConfirmationPage {
             text: qsTr("Genre")
         }
 
-        ComboBox {
+        ExtendedComboBox {
             id: comboBoxgenre
             model: StringXmlResourceModel {
                 attributeName: "cinemaGenreSpinnerArray"

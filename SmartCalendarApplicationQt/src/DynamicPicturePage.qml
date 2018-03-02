@@ -15,6 +15,8 @@ DynamicPicturePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
+    property var formData
+
     property url currentPictureFilePath
 
     onCurrentPictureFilePathChanged: {

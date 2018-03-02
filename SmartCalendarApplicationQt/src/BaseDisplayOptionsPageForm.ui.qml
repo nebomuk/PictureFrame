@@ -82,7 +82,7 @@ Page {
             ButtonGroup.group: activationGroup
         }
 
-        ComboBox {
+        ExtendedComboBox {
             id : comboBoxdisplaySensibilityLevel
             model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
             Layout.fillWidth: true

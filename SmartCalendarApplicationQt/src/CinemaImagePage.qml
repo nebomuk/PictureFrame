@@ -5,10 +5,18 @@ CinemaImagePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
-    StringXmlResourceModel
+    // for the control's initial values
+    property var formData
+
+    Component.onCompleted:
     {
-        id : optionModel // Option1,..2..3
-        attributeName: "formatViewSpinnerArray"
+        if(Object.keys(formData).length > 0)
+        {
+         comboBoxgenre.initialText = formData.genre
+         comboBoxdesign.initialText = formData.design
+         comboBoxcountry.initialText = formData.country
+        }
+
     }
 
     buttonConfirm.onClicked:  {
@@ -21,6 +29,12 @@ CinemaImagePageForm {
         formData.country = comboBoxcountry.currentText;
 
         finished(formData)
+    }
+
+    StringXmlResourceModel
+    {
+        id : optionModel // Option1,..2..3
+        attributeName: "formatViewSpinnerArray"
     }
 
 }

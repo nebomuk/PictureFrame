@@ -115,7 +115,7 @@ ConfirmationPage
             visible: isWeekViewOption1
         }
 
-        ComboBox
+        ExtendedComboBox
         {
             visible: isWeekViewOption1
             id : comboBoxWeekType
@@ -158,7 +158,7 @@ ConfirmationPage
             to : 6
         }
 
-        ComboBox
+        ExtendedComboBox
         {
             visible: isMonthViewOption2
             id : comboBoxMonth

@@ -5,10 +5,20 @@ NewsImagePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
+    property var formData
+
+
     StringXmlResourceModel
     {
         id : optionModel // Option1,..2..3
         attributeName: "formatViewSpinnerArray"
+    }
+
+    Component.onCompleted:
+    {
+        comboBoxdesign.initialText = formData.design
+        comboBoxsource.initialText = formData.source
+        //comboBoxoption.currentIndex = optionModel.formData.option
     }
 
     buttonConfirm.onClicked:  {

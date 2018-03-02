@@ -8,7 +8,8 @@ Page {
 
     property alias buttonConfirm: buttonConfirm
 
-    property int index // helper value used by CalendarMainPage
+    // to get the model index in CalendarMainPage when the page is popped
+    property int index
 
     default property alias innerObject : innercolumn.data
 

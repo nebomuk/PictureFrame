@@ -56,5 +56,7 @@
         <file>src/ConfirmButton.qml</file>
         <file>src/ConfirmationPage.qml</file>
         <file>fa-solid-900.ttf</file>
+        <file>src/ExtendedComboBox.qml</file>
+        <file>src/ComboBoxUtil.js</file>
     </qresource>
 </RCC>

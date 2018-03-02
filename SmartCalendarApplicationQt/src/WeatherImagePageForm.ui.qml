@@ -94,7 +94,7 @@ ConfirmationPage
             text : qsTr("Unit")
         }
 
-        ComboBox
+        ExtendedComboBox
         {
             id : comboBoxUnit
             model : ListModel
@@ -107,7 +107,7 @@ ConfirmationPage
                         ListElement
                         {
                             name : qsTr("Imperial")
-                            unit : "Imperial"
+                            unit : "imperial"
                         }
                     }
             textRole : "name"

@@ -6,6 +6,20 @@ CalendarImagePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
+    // for the control's initial values
+    property var formData
+
+    Component.onCompleted:
+    {
+        populateComboBoxMonth(); // must come first
+
+
+        //spinBoxAdditionalNumberOfDays.value = formData.additionalNumberOfDays
+        // FIXME implementation stub
+        // should set the other stuff from formData
+
+
+    }
 
     buttonConfirm.onClicked: {
         var formData = {};
@@ -28,16 +42,8 @@ CalendarImagePageForm {
 
     }
 
-    Component.onCompleted:
-    {
-        populateComboBoxMonth();
-
-    }
-
-
     comboBoxTimeView.onCurrentIndexChanged: {
         updateComboBoxDesign();
-
     }
 
     StringXmlResourceModel

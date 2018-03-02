@@ -6,17 +6,23 @@ FootballImagePageForm {
     // sends json to CalendarMainPage
     signal finished(var formData);
 
+    property var formData
+
     Component.onCompleted:
     {
         var dataContainer = DeviceAccessor.controllerDataContainer;
         comboBoxLeague.model = dataContainer.footballLeagues
+
+        comboBoxDesign.initialText = formData.design
+        comboBoxTableFormat.initialText = formData.tableFormat
+        comboBoxTeam.initialText = formData.team
+        comboBoxLeague.initialText = formData.league
     }
 
     buttonConfirm.onClicked:  {
 
         var formData = {};
 
-        // FIXME is translated text required here?
         formData.tableFormat = comboBoxTableFormat.model.get(comboBoxTableFormat.currentIndex()).key;
         formData.design = comboBoxDesign.currentText;
         formData.league = comboBoxLeague.currentText;

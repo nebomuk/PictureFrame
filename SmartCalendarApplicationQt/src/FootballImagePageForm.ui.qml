@@ -28,7 +28,7 @@ ConfirmationPage {
         Label {
             text: qsTr("Table Format")
         }
-        ComboBox
+        ExtendedComboBox
         {
 
             id : comboBoxTableFormat
@@ -42,7 +42,7 @@ ConfirmationPage {
                 ListElement
                 {
                     text : qsTr("Top 5")
-                    key : "Top 5"
+                    key : "Top 5" // fixme emulator sends "top5"
                 }
                 ListElement
                 {
@@ -73,7 +73,7 @@ ConfirmationPage {
             text: qsTr("Leage")
         }
 
-        ComboBox {
+        ExtendedComboBox {
             id : comboBoxLeague
         }
 
@@ -81,7 +81,7 @@ ConfirmationPage {
             text: qsTr("Team")
         }
 
-        ComboBox {
+        ExtendedComboBox {
             id : comboBoxTeam
         }
     }

@@ -35,7 +35,6 @@ CalendarMainPageForm
 
     function populate()
     {
-        // FIXME insert in right order by preordering or ordering in-place
 
         var footballImages = DeviceAccessor.controllerDataContainer.footballImages
         footballImages.forEach(function(img)
@@ -135,15 +134,31 @@ CalendarMainPageForm
             {
                 return;
             }
+            // in the tumbler, a different picture type may has been selected from the one on the button that opens the tumbler
+            var pictureTypeHasChanged = listModel.get(indexOfItemCurrentlyEdited).pictureType !== tumbler.currentItem.text
+
             listModel.set(indexOfItemCurrentlyEdited,{"pictureType":tumbler.currentItem.text})
 
-            openPage(tumbler.currentItem.text,indexOfItemCurrentlyEdited)
+            // picture type has changed, no initial properties for the ImagePage
+            if(pictureTypeHasChanged)
+            {
+                openPage(tumbler.currentItem.text,
+                         indexOfItemCurrentlyEdited,
+                         {"":0}) // empty QVariantMap
+            }
+            else // picture type has not changed, push initial properties (formData) to the ImagePage
+            {
+                openPage(tumbler.currentItem.text,
+                         indexOfItemCurrentlyEdited,
+                         listModel.get(indexOfItemCurrentlyEdited).formData)
+            }
+
             indexOfItemCurrentlyEdited = -1;
 
         }
     }
 
-    function openPage(pictureType, index)
+    function openPage(pictureType, index, formData)
     {
         var pageToOpen = "";
         switch(pictureType) {
@@ -170,7 +185,7 @@ CalendarMainPageForm
                 return;
         }
 
-        var pushedPage =  stackView.push(pageToOpen,{"index":index});
+        var pushedPage =  stackView.push(pageToOpen,{"index":index, "formData":formData});
         pushedPage.finished.connect(onPageFinished)
     }
 
@@ -178,13 +193,16 @@ CalendarMainPageForm
     {
         var currentPage = stackView.pop();
         currentPage.finished.disconnect(onPageFinished);
-        listModel.setProperty(currentPage.index,"formData",formData);
+        var item = listModel.get(currentPage.index)
+        item.formData = formData;
+        listModel.set(currentPage.index,item); // setProperty would not work here because it takes a variant
 
         // list model item is now of the following structure
         // {
         //      displayTimeInSeconds : 20
         //      formData : {
-        //                  someProperty : 1
+        //                  design : "someDesign"
+        //                      ...
         //                  }
         //      pictureType : calendarImage
         // }
