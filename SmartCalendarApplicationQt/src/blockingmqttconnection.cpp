@@ -15,11 +15,6 @@ BlockingMqttConnection::BlockingMqttConnection(QObject *parent) : QObject(parent
     qRegisterMetaType<QMQTT::Message>("QMQTT::Message"); // required for QueuedConnection
     qRegisterMetaType<QMQTT::ClientError>("QMQTT::ClientError"); // required for QueuedConnection
 
-    connect(&establishConnectionFutureWatcher,&QFutureWatcher<bool>::finished,this,[this]
-    {
-        emit establishConnectionResult(establishConnectionFuture.resultAt(0));
-    });
-
 }
 
 bool BlockingMqttConnection::waitForMqttConnected()
@@ -66,6 +61,7 @@ bool BlockingMqttConnection::waitForFirstJsonReceived()
 bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAddress, const QString& clientId)
 {
     delete client;
+    client = nullptr;
     client = createMqttClient(brokerAddress,1337);
 
 
@@ -97,6 +93,18 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
 
 void BlockingMqttConnection::publish(QMQTT::Message msg)
 {
+    if(client == nullptr)
+    {
+        qDebug("BlockingMqttConnection::publish failed: Mqtt client is NULL");
+        return;
+    }
+
+    if(client->connectionState() !=  QMQTT::ConnectionState::STATE_CONNECTED)
+    {
+        qDebug("BlockingMqttConnection::publish failed: Mqtt client is not connected");
+        return;
+    }
+
     client->publish(msg);
 }
 
@@ -162,17 +170,5 @@ QMQTT::Client *BlockingMqttConnection::createMqttClient(QString brokerAddress, i
 void BlockingMqttConnection::onClientError(QMQTT::ClientError error)
 {
     qDebug(qPrintable(QString("ClientError enum enum %1 received").arg(error)));
-}
-
-void BlockingMqttConnection::establishConnection(QString brokerAddress,QString clientId)
-{
-    establishConnectionFuture = QtConcurrent::run([=]{
-                  bool result =  establishConnectionBlocking(brokerAddress,clientId);
-
-                  client->moveToThread(QCoreApplication::instance()->thread());
-                  return result;
-    });
-    establishConnectionFutureWatcher.setFuture(establishConnectionFuture);
-
 }
 

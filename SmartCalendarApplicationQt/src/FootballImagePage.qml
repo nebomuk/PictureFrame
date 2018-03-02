@@ -23,7 +23,7 @@ FootballImagePageForm {
 
         var formData = {};
 
-        formData.tableFormat = comboBoxTableFormat.model.get(comboBoxTableFormat.currentIndex()).key;
+        formData.tableFormat = comboBoxTableFormat.model.get(comboBoxTableFormat.currentIndex).key;
         formData.design = comboBoxDesign.currentText;
         formData.league = comboBoxLeague.currentText;
         formData.team = comboBoxTeam.currentText;

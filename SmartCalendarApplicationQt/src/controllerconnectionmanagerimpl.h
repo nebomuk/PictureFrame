@@ -21,8 +21,6 @@ public:
 
     bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
 
-     void establishConnection(QString brokerAddress, QString clientId);
-
      bool closeConnection();
 
      void publishSimpleStringMessage(const QString& path, const QString& simpleMessage);
@@ -30,10 +28,6 @@ public:
      void publishJSONMessage(const QByteArray &jsonObjectString, const QString &objectPath);
 
      ControllerDataContainer *dataContainer() const;
-
-signals:
-
-     void establishConnectionResult(bool isEstablished);
 
 public slots:
 

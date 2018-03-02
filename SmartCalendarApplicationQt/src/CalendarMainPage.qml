@@ -193,7 +193,7 @@ CalendarMainPageForm
     {
         var currentPage = stackView.pop();
         currentPage.finished.disconnect(onPageFinished);
-        var item = listModel.get(currentPage.index)
+        var item = listModel.get(currentPage.index) // index is inherited from page's base
         item.formData = formData;
         listModel.set(currentPage.index,item); // setProperty would not work here because it takes a variant
 

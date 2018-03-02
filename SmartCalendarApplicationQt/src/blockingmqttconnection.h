@@ -26,12 +26,7 @@ public:
     void publish(QMQTT::Message msg);
     bool closeConnection();
 
-    // simple QtConcurrent::run wrapper around establishConnectionBlocking, may not work, because some mqtt client internal objects are still in the wrong thread
-    void establishConnection(QString brokerAddress, QString clientId);
-
-
 signals:
-    void establishConnectionResult(bool isEstablished);
     void received(QMQTT::Message msg);
 
 
@@ -45,8 +40,6 @@ private:
     void testConnection();
     void registerSubscriptions();
     QMQTT::Client *createMqttClient(QString brokerAddress, int brokerPort);
-    QFuture<bool> establishConnectionFuture;
-    QFutureWatcher<bool> establishConnectionFutureWatcher;
 };
 
 #endif // BLOCKINGMQTTCONNECTION_H

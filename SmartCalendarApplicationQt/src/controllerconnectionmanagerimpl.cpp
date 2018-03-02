@@ -24,12 +24,6 @@ bool ControllerConnectionManagerImpl::establishConnectionBlocking(const QString 
     return blockingMqttConnection->establishConnectionBlocking(brokerAddress,clientId);
 }
 
-void ControllerConnectionManagerImpl::establishConnection(QString brokerAddress, QString clientId)
-{
-    blockingMqttConnection->establishConnection(brokerAddress,clientId);
-    connect(blockingMqttConnection,SIGNAL(establishConnectionResult(bool)),this,SIGNAL(establishConnectionResult(bool)));
-}
-
 bool ControllerConnectionManagerImpl::closeConnection()
 {
     return blockingMqttConnection->closeConnection();

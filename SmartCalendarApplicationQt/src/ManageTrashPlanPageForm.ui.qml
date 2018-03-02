@@ -21,10 +21,9 @@ Page {
 
     GridLayout {
         id: grid
-        x: 59
-        y: 133
-        width: 391
-        height: 294
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
         rowSpacing: 10
         columnSpacing: 10
         rows: 4
@@ -83,7 +82,8 @@ Page {
 
                 RemoveButton
                 {
-                    listModel: listModel
+                    listModel: listView.model
+
                 }
 
             }

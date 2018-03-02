@@ -28,10 +28,9 @@ Page {
 
     GridLayout {
         x: 51
-        width: 402
-        height: 507
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 33
         columnSpacing: 10
         rowSpacing: 10
         columns: 2

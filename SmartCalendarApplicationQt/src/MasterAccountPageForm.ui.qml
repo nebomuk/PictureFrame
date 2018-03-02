@@ -21,11 +21,9 @@ Page {
         columns : 2
         rowSpacing: 10
         columnSpacing: 20
-        x: 33
-        y: 185
-        width: 412
-        height: 188
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
 
         Label {
             id: label

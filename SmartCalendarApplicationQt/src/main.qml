@@ -29,9 +29,30 @@ ApplicationWindow {
         // for testing
 
         var controllerList = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
+        if(controllerList.length > 0)
+        {
+            var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
+            msgDialogConnectionFailed.open();
+        }
+        else
+        {
+            msgDialogUdpFailed.open();
+        }
 
+    }
 
-        var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
+    MessageDialog {
+          id : msgDialogUdpFailed
+          title:  qsTr("demo functionality for Debug")
+          text: qsTr("UDP Broadcast did not find smartcalendar.
+                    App will continue to display empty data but might randomly crash")
+    }
+
+    MessageDialog {
+          id : msgDialogConnectionFailed
+          title:  qsTr("demo functionality for Debug")
+          text: qsTr("could not establish MQTT Connection.
+App will continue to display empty data but might randomly crash")
     }
 
     // handle android back button

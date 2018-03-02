@@ -22,11 +22,9 @@ Page {
     property alias buttonAddEntry: buttonAddEntry
 
     GridLayout {
-        id: grid
-        x: 60
-        y: 67
-        width: 391
-        height: 692
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
         rowSpacing: 10
         columnSpacing: 10
         rows: 4
@@ -135,7 +133,7 @@ Page {
 
                 RemoveButton
                 {
-                    listModel: listModel
+                    listModel: listView.model
                 }
 
             }
