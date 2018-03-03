@@ -32,7 +32,11 @@ ApplicationWindow {
         if(controllerList.length > 0)
         {
             var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
-            msgDialogConnectionFailed.open();
+            if(!res)
+            {
+                msgDialogConnectionFailed.open();
+            }
+
         }
         else
         {
