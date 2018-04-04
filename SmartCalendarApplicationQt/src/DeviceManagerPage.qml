@@ -3,30 +3,35 @@ import QtQuick.LocalStorage 2.0
 import de.vitecvisual.util 1.0
 
 
-
+// Workflow is a bit different than from the description in Modell zur Erstkonfiguration.ppt
+// devices that have been removed (via X or Trash icon) reappear in the available devices list
+// instead of being moved to the banned list
 DeviceManagerPageForm {
 
     id : page
 
     Component.onCompleted:
     {
-        availableDevicesListView.model.append({"hostName":"SchmartCalendar"})
+        availableDevicesListView.model.append({"productId":"some id device"})
+
+        createDummyDbEntries();
 
 
-        savedDevicesListView.model.append({"hostName":"SavedSchmartCalendar"})
+        fillModel(savedDevicesListView.model)
     }
 
     onAvailableDevicesClicked:
     {
-        var page = stackView.push("FirstConfigurationPage.qml",{"index":index})
+        var item = availableDevicesListView.model.get(index);
+        var page = stackView.push("FirstConfigurationPage.qml",{"productId" : item.productId});
 
         page.finished.connect(onFirstConfigurationPageFinished)
 
     }
 
     onSavedDevicesClicked: {
-        var hostName = savedDevicesListView.model.get(index).hostName
-       // NotifyingSettings.selectedDevice =hostName // fixme this line crashes
+        var productName = savedDevicesListView.model.get(index).productName
+       // NotifyingSettings.selectedDevice =productName // fixme this line crashes
         stackView.pop();
     }
 
@@ -34,17 +39,54 @@ DeviceManagerPageForm {
     {
         var page = stackView.pop();
         page.finished.disconnect(onFirstConfigurationPageFinished);
-        var index = page.index;
         var deviceName = page.textFieldDeviceName.text
 
         var ssid = page.textFieldSsid.text
 
         var password = page.textFieldPassword.text
 
+        insertDbEntry(deviceName,page.productId, password);
+
+        availableDevicesListView.model.clear();
+        var unconfigured = getUnconfiguredAvailableDevices();
+        for(var i = 0; i< unconfigured.length; ++i)
+        {
+            availableDevicesListView.model.append(unconfigured[i]);
+        }
 
     }
 
-    function createDummyDatabaseEntries()
+    function getUnconfiguredAvailableDevices()
+    {
+        // TODO replace this line by SmartCalendarAccess
+        var availableDevices =   {"productId":"some id device"};
+
+        __db().transaction(
+            function(tx) {
+                __ensureTables(tx);
+
+                return tx.executeSql("SELECT * FROM SmartCalendarDevices WHERE productId NOT IN (?)",availableDevices.productId);
+
+            }
+            );
+
+
+
+    }
+
+    function insertDbEntry(productName, productId, productPassword)
+    {
+        __db().transaction(
+            function(tx) {
+                __ensureTables(tx);
+
+                tx.executeSql("INSERT INTO SmartCalendarDevices VALUES(?,?,?)",[productName,productId,productPassword]);
+
+            }
+            );
+    }
+
+    function createDummyDbEntries()
     {
         __db().transaction(
             function(tx) {
@@ -82,7 +124,7 @@ DeviceManagerPageForm {
 
     function __db()
     {
-        return openDatabaseSync("SmartCalendarDevicesModel", "1.0", "Saved Smart Calendar Devices in Network", 1000000);
+        return LocalStorage.openDatabaseSync("SmartCalendarDevicesModel", "1.0", "Saved Smart Calendar Devices in Network", 1000000);
     }
     function __ensureTables(tx)
     {

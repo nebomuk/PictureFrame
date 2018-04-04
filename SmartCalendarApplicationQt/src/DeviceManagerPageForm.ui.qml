@@ -53,7 +53,7 @@ Page {
                        target: savedDevicesMouseArea
                        onClicked: savedDevicesClicked(index)
                      }
-                    text : hostName
+                    text : productName
                 }
                 Text
                 {
@@ -108,7 +108,7 @@ Page {
                    target: availableDevicesMouseArea
                    onClicked: availableDevicesClicked(index)
                  }
-                text: hostName
+                text: productId
             }
         }
         model: ListModel

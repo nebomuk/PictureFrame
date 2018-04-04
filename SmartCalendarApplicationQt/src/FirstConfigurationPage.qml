@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
 FirstConfigurationPageForm {
-    property int index // helper property when page is popped
+
+    property string productId
 
     signal finished(); // confirm pressed
 
