@@ -11,6 +11,8 @@ DeviceManagerPageForm {
     Component.onCompleted:
     {
         availableDevicesListView.model.append({"hostName":"SchmartCalendar"})
+
+
         savedDevicesListView.model.append({"hostName":"SavedSchmartCalendar"})
     }
 
@@ -39,6 +41,22 @@ DeviceManagerPageForm {
 
         var password = page.textFieldPassword.text
 
+
+    }
+
+    function createDummyDatabaseEntries()
+    {
+        __db().transaction(
+            function(tx) {
+                __ensureTables(tx);
+
+                 var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices");
+                if(rs.rows.length === 0)
+                {
+                    tx.executeSql("INSERT INTO SmartCalendarDevices VALUES(?,?,?)",["SavedSchmartCalendar","myId","pwisasdf"]);
+                }
+            }
+            );
 
     }
 
