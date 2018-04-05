@@ -14,6 +14,8 @@ Page {
     signal availableDevicesClicked(int index)
     signal savedDevicesClicked(int index)
 
+    signal savedDeviceRemoved(int index)
+
     property alias savedDevicesListView: savedDevicesListView
 
     property alias availableDevicesListView: availableDevicesListView
@@ -72,8 +74,15 @@ Page {
 
                 RemoveButton
                 {
+                    id : removeButton
                     listModel: modelSavedDevices
                     font.pointSize: 14
+
+                    Connections
+                    {
+                        target : removeButton
+                        onClicked : savedDeviceRemoved(index)
+                    }
                 }
                 }
             }

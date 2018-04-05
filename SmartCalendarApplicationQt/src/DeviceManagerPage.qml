@@ -11,14 +11,17 @@ DeviceManagerPageForm {
     id : page
 
     Component.onCompleted:
-    {
-       // availableDevicesListView.model.append({"productId":"id2"})
+    {       
+        addNonSavedDevices(availableDevicesListView.model);
 
-       // createDummyDbEntries();
+      //  createDummySavedDevices();
 
 
         fillModel(savedDevicesListView.model)
     }
+
+    // TODO remove from
+    onSavedDeviceRemoved: console.log("removed index " + index);
 
     onAvailableDevicesClicked:
     {
@@ -49,26 +52,39 @@ DeviceManagerPageForm {
 
         availableDevicesListView.model.clear();
 
-        addUnconfiguredAvailableDevicesToModel(availableDevicesListView.model);
+        addNonSavedDevices(availableDevicesListView.model);
 
 
     }
 
-
-    function addUnconfiguredAvailableDevicesToModel(model)
+    function addNonSavedDevices(model)
     {
-        // TODO replace this line by SmartCalendarAccess
-        var availableDevices =   {"productId":"some id device"};
+        // TODO get scanned devices instead of this dummy list
+        var allDevices =   [
+        {"productId":"id0"},
+        {"productId":"id1"},
+        {"productId":"id2"},
+
+         ];
 
         __db().transaction(
             function(tx) {
                 __ensureTables(tx);
 
-                var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices WHERE productId NOT IN ('some id device')");
+                var rs = tx.executeSql("SELECT productId FROM SavedDevices");
+                var existingProductIds = [];
                 for (var i=0; i<rs.rows.length; ++i)
                 {
-                    model.append({"productId":rs.rows.item(i).productId});
+                    existingProductIds.push(rs.rows.item(i).productId);
                 }
+
+                allDevices.forEach(function(device)
+                {
+                    if(existingProductIds.indexOf(device.productId) === -1) // not included
+                    {
+                        model.append({"productId":device.productId});
+                    }
+                });
 
             }
             );
@@ -83,26 +99,10 @@ DeviceManagerPageForm {
             function(tx) {
                 __ensureTables(tx);
 
-                tx.executeSql("INSERT INTO SmartCalendarDevices VALUES(?,?,?)",[productName,productId,productPassword]);
+                tx.executeSql("INSERT INTO SavedDevices VALUES(?,?,?)",[productName,productId,productPassword]);
 
             }
             );
-    }
-
-    function createDummyDbEntries()
-    {
-        __db().transaction(
-            function(tx) {
-                __ensureTables(tx);
-
-                 var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices");
-                if(rs.rows.length === 0)
-                {
-                    tx.executeSql("INSERT INTO SmartCalendarDevices VALUES(?,?,?)",["SavedSchmartCalendar","myId","pwisasdf"]);
-                }
-            }
-            );
-
     }
 
     function fillModel(model) {
@@ -110,7 +110,7 @@ DeviceManagerPageForm {
                  function(tx) {
                      __ensureTables(tx);
 
-                     var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices");
+                     var rs = tx.executeSql("SELECT * FROM SavedDevices");
                      model.clear();
 
                      if (rs.rows.length > 0) {
@@ -131,7 +131,24 @@ DeviceManagerPageForm {
     }
     function __ensureTables(tx)
     {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS SmartCalendarDevices(productName TEXT, productId TEXT, productPassword TEXT)', []);
+        //tx.executeSql("DROP TABLE SmartCalendarDevices");
+        tx.executeSql('CREATE TABLE IF NOT EXISTS SavedDevices(productName TEXT, productId TEXT, productPassword TEXT)', []);
+    }
+
+    function createDummySavedDevices()
+    {
+        __db().transaction(
+            function(tx) {
+                __ensureTables(tx);
+
+                 var rs = tx.executeSql("SELECT * FROM SavedDevices");
+                if(rs.rows.length === 0)
+                {
+                    tx.executeSql("INSERT INTO SavedDevices VALUES(?,?,?)",["SavedSchmartCalendar","myId","pwisasdf"]);
+                }
+            }
+            );
+
     }
 
 
