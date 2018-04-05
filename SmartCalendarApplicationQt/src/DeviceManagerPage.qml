@@ -12,9 +12,9 @@ DeviceManagerPageForm {
 
     Component.onCompleted:
     {
-        availableDevicesListView.model.append({"productId":"some id device"})
+       // availableDevicesListView.model.append({"productId":"id2"})
 
-        createDummyDbEntries();
+       // createDummyDbEntries();
 
 
         fillModel(savedDevicesListView.model)
@@ -48,15 +48,14 @@ DeviceManagerPageForm {
         insertDbEntry(deviceName,page.productId, password);
 
         availableDevicesListView.model.clear();
-        var unconfigured = getUnconfiguredAvailableDevices();
-        for(var i = 0; i< unconfigured.length; ++i)
-        {
-            availableDevicesListView.model.append(unconfigured[i]);
-        }
+
+        addUnconfiguredAvailableDevicesToModel(availableDevicesListView.model);
+
 
     }
 
-    function getUnconfiguredAvailableDevices()
+
+    function addUnconfiguredAvailableDevicesToModel(model)
     {
         // TODO replace this line by SmartCalendarAccess
         var availableDevices =   {"productId":"some id device"};
@@ -65,7 +64,11 @@ DeviceManagerPageForm {
             function(tx) {
                 __ensureTables(tx);
 
-                return tx.executeSql("SELECT * FROM SmartCalendarDevices WHERE productId NOT IN (?)",availableDevices.productId);
+                var rs = tx.executeSql("SELECT * FROM SmartCalendarDevices WHERE productId NOT IN ('some id device')");
+                for (var i=0; i<rs.rows.length; ++i)
+                {
+                    model.append({"productId":rs.rows.item(i).productId});
+                }
 
             }
             );
