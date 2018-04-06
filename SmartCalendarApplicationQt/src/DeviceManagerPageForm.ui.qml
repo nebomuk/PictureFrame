@@ -21,45 +21,61 @@ Page {
     property alias availableDevicesListView: availableDevicesListView
 
 
-    ColumnLayout
+    GridLayout
     {
         id: column
         anchors.top :parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: 10
+        rows : 5
+        columns : 1
 
     Label {
         id: label1
         text: qsTr("Configured Devices")
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
 
     ListView {
         id: savedDevicesListView
         height: 200
+        anchors.left: parent.left
+        anchors.right: parent.right
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+        spacing: 0
 
         delegate:
-            Frame
-            {
+            Rectangle {
+                height: 50
+                color: "white"
+                width: savedDevicesListView.width
+
+                MouseArea
+                {
+                    id : savedDevicesMouseArea
+                    anchors.fill: parent
+
+                }
+                Connections {
+                   target: savedDevicesMouseArea
+                   onClicked: savedDevicesClicked(index)
+                 }
+
                 RowLayout
                 {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+
                 Label
                 {
-                    MouseArea
-                    {
-                        id : savedDevicesMouseArea
-                        anchors.fill: parent
-
-                    }
-                    Connections {
-                       target: savedDevicesMouseArea
-                       onClicked: savedDevicesClicked(index)
-                     }
+                    Layout.leftMargin: 20
+                    Layout.fillWidth: true
                     text : productName
                 }
                 Text
                 {
-
+                    Layout.alignment: Qt.AlignRight
                     text : "\uf0c2"
                     font.family: "FontAwesome"
                     font.pointSize: 14
@@ -67,36 +83,55 @@ Page {
 
                 Text
                 {
+                    Layout.alignment: Qt.AlignRight
+
                     text : "\uf1eb"
                     font.family: "FontAwesome"
                     font.pointSize: 14
                 }
 
-                RemoveButton
+                Button
                 {
+                    Layout.alignment: Qt.AlignRight
+
                     id : removeButton
-                    listModel: modelSavedDevices
+                    text : "\uf2ed"
+                    font.family: "FontAwesome" // loaded via QFontDatabase in main.cpp
                     font.pointSize: 14
 
                     Connections
                     {
                         target : removeButton
-                        onClicked : savedDeviceRemoved(index)
+                        onClicked : {
+                                  savedDeviceRemoved(index); // removal of list and db entry done in slot
+                        }
                     }
                 }
+                }
+
+                // Bottom line border
+                Rectangle {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    height: 1
+                    color: "lightgrey"
                 }
             }
 
         model: ListModel
         {
-            id : modelSavedDevices
         }
     }
+
 
 
     Label {
         id: label
         text: qsTr("Configure New Device")
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
 
 
@@ -104,20 +139,44 @@ Page {
     ListView {
         id: availableDevicesListView
         height: 200
-        delegate: Frame {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        spacing: 0
+
+
+        delegate: Rectangle {
+            height: 50
+            color: "white"
+            width: availableDevicesListView.width
+
+            MouseArea
+            {
+                id : availableDevicesMouseArea
+                anchors.fill: parent
+            }
+            Connections {
+               target: availableDevicesMouseArea
+               onClicked: availableDevicesClicked(index)
+             }
 
             Label {
 
-                MouseArea
-                {
-                    id : availableDevicesMouseArea
-                    anchors.fill: parent
+                anchors.leftMargin: 20
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Product ID: ") + productId
+            }
+
+            // Bottom line border
+            Rectangle {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
                 }
-                Connections {
-                   target: availableDevicesMouseArea
-                   onClicked: availableDevicesClicked(index)
-                 }
-                text: productId
+                height: 1
+                color: "lightgrey"
             }
         }
         model: ListModel

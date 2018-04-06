@@ -12,16 +12,14 @@ DeviceManagerPageForm {
 
     Component.onCompleted:
     {       
-        addNonSavedDevices(availableDevicesListView.model);
-
-      //  createDummySavedDevices();
-
-
-        fillModel(savedDevicesListView.model)
+        updateListViews();
     }
 
     // TODO remove from
-    onSavedDeviceRemoved: console.log("removed index " + index);
+    onSavedDeviceRemoved: {
+        deleteDbEntry(savedDevicesListView.model.get(index).productId)
+    }
+
 
     onAvailableDevicesClicked:
     {
@@ -50,11 +48,19 @@ DeviceManagerPageForm {
 
         insertDbEntry(deviceName,page.productId, password);
 
+
+
+    }
+
+    function updateListViews()
+    {
         availableDevicesListView.model.clear();
 
         addNonSavedDevices(availableDevicesListView.model);
 
+        savedDevicesListView.model.clear();
 
+        addSavedDevices(savedDevicesListView.model)
     }
 
     function addNonSavedDevices(model)
@@ -100,12 +106,25 @@ DeviceManagerPageForm {
                 __ensureTables(tx);
 
                 tx.executeSql("INSERT INTO SavedDevices VALUES(?,?,?)",[productName,productId,productPassword]);
+                updateListViews();
+            }
+            );
+    }
+
+    function deleteDbEntry(productId)
+    {
+        __db().transaction(
+            function(tx) {
+                __ensureTables(tx);
+
+                tx.executeSql("DELETE FROM SavedDevices WHERE productId=?",productId);
+                updateListViews();
 
             }
             );
     }
 
-    function fillModel(model) {
+    function addSavedDevices(model) {
              __db().transaction(
                  function(tx) {
                      __ensureTables(tx);

@@ -1,5 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 Page {
@@ -19,17 +20,18 @@ Page {
 
     property alias buttonConfirm: confirmButton
 
-    Grid {
+    GridLayout {
         id: grid
-        x: 11
-        y: 71
-        width: 400
-        height: 178
-        spacing: 10
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        rowSpacing: 10
+        columnSpacing: 10
         rows: 3
         columns: 2
 
         Label {
+
             id: label
             text: qsTr("Device Name")
         }

@@ -32,7 +32,7 @@ Page {
                     ListView {
                         id: listView
                         model: listModel
-                        spacing: 10
+                        spacing: 0
                         delegate: DraggableItem {
                             id : draggableItem
                             Rectangle {
