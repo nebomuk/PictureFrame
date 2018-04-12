@@ -26,6 +26,10 @@ Page {
     property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
     property alias radioButtonpermanentActiveDisplay :  radioButtonpermanentActiveDisplay
 
+    property alias checkBoxButtonWorkingDay: checkBoxButtonWorkingDay
+    property alias checkBoxButtonWeekend :  checkBoxButtonWeekend
+
+
     GridLayout {
         x: 51
         anchors.left: parent.left
@@ -104,13 +108,13 @@ Page {
 
         CheckBox {
             Layout.columnSpan: 2
-            id: radioButtonWorkingDay
+            id: checkBoxButtonWorkingDay
             text: qsTr("Working Day")
         }
 
         RowLayout {
             Layout.fillWidth: false
-            enabled: radioButtonWorkingDay.checked
+            enabled: checkBoxButtonWorkingDay.checked
             Button {
                 id: buttonWorkingDayStart
             }
@@ -130,12 +134,12 @@ Page {
         CheckBox {
             Layout.columnSpan: 2
 
-            id: radioButtonWeekend
+            id: checkBoxButtonWeekend
             text: qsTr("Weekend")
         }
 
         RowLayout {
-            enabled: radioButtonWeekend.checked
+            enabled: checkBoxButtonWeekend.checked
             Button {
                 id: buttonWeekendStart
             }

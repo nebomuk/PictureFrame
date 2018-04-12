@@ -29,15 +29,16 @@ BaseDisplayOptionsPageForm {
         var secondIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeEndDate;
 
 
-        buttonWorkingDayStart.text=   toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate);
-        buttonWorkingDayEnd.text=  toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate);
-        buttonWeekendStart.text= toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate);
-        buttonWeekendEnd.text=  toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate);
 
-        buttonWorkingDayStart2.text=   toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate);
-        buttonWorkingDayEnd2.text=  toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate);
-        buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
-        buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
+            buttonWorkingDayStart.text=   toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate);
+            buttonWorkingDayEnd.text=  toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate);
+            buttonWorkingDayStart2.text=   toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate);
+            buttonWorkingDayEnd2.text=  toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate);
+
+            buttonWeekendStart.text= toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate);
+            buttonWeekendEnd.text=  toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate);
+            buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
+            buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
     }
 
     // input from json format:
@@ -64,16 +65,21 @@ BaseDisplayOptionsPageForm {
         displayOptions.automatedDisplayBrightness = radioButtonautomatedDisplayBrightness.checked
         displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked
 
-        displayOptions.firstIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart.text)
-        displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd.text)
-        displayOptions.firstIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart.text)
-        displayOptions.firstIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd.text)
+            if(checkBoxButtonWorkingDay.checked)
+            {
+                displayOptions.firstIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart.text)
+                displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd.text)
+                displayOptions.firstIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart.text)
+                displayOptions.firstIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd.text)
 
-        displayOptions.secondIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart2.text)
-        displayOptions.secondIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd2.text)
-        displayOptions.secondIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart2.text)
-        displayOptions.secondIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd2.text)
-
+            }
+            if(checkBoxButtonWeekend.checked)
+            {
+                displayOptions.secondIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart2.text)
+                displayOptions.secondIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd2.text)
+                displayOptions.secondIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart2.text)
+                displayOptions.secondIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd2.text)
+            }
 
         DeviceAccessor.controllerDataContainer.displayOptions = displayOptions;
 

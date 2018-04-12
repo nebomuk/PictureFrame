@@ -99,9 +99,12 @@ void BlockingMqttConnection::publish(QMQTT::Message msg)
         return;
     }
 
-    if(client->connectionState() !=  QMQTT::ConnectionState::STATE_CONNECTED)
+    // FIXME connection state stuck in "INIT" instead of CONNECTED
+    if(client->connectionState() ==  QMQTT::ConnectionState::STATE_DISCONNECTED)
     {
-        qDebug("BlockingMqttConnection::publish failed: Mqtt client is not connected");
+
+        auto state = client->connectionState();
+         qDebug("BlockingMqttConnection::publish failed: Mqtt client is not connected");
         return;
     }
 
