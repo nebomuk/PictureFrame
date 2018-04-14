@@ -21,6 +21,8 @@ private:
     void storeImage(QByteArray jsonString, QString topic);
     QJsonArray convertMessageToArray(QByteArray msg);
 
+    static void appendToArrayUniqueIndex(QJsonArray  * array,QJsonObject object);
+
     ControllerDataContainer * mDataContainer;
 };
 

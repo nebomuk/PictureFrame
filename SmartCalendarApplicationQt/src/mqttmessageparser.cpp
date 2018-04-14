@@ -310,37 +310,57 @@ void MqttMessageParser::storeImage(QByteArray jsonString, QString topic)
            if (ControllerConnectionConstants::CALENDARIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_CALENDAR_PATH== topic)
            {
                QJsonObject calendarImage = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->calendarImages(); arr.append(calendarImage); mDataContainer->calendarImages(arr);
+               QJsonArray arr = mDataContainer->calendarImages(); appendToArrayUniqueIndex(&arr,calendarImage); mDataContainer->calendarImages(arr);
 
            }
            else if (ControllerConnectionConstants::CINEMAIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_CINEMA_PATH== topic)
            {
                QJsonObject cinemaImage = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->cinemaImages(); arr.append(cinemaImage); mDataContainer->cinemaImages(arr);
+               QJsonArray arr = mDataContainer->cinemaImages(); appendToArrayUniqueIndex(&arr,cinemaImage); mDataContainer->cinemaImages(arr);
            }
            else if (ControllerConnectionConstants::FOOTBALLIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_FOOTBALL_PATH== topic)
            {
                QJsonObject footballImage = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->footballImages(); arr.append(footballImage); mDataContainer->footballImages(arr);
+               QJsonArray arr = mDataContainer->footballImages(); appendToArrayUniqueIndex(&arr,footballImage); mDataContainer->footballImages(arr);
            }
            else if (ControllerConnectionConstants::NEWSIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_NEWSIMAGE_PATH== topic)
            {
                QJsonObject newsImage = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->newsImages(); arr.append(newsImage); mDataContainer->newsImages(arr);
+               QJsonArray arr = mDataContainer->newsImages(); appendToArrayUniqueIndex(&arr,newsImage); mDataContainer->newsImages(arr);
            }
            else if (ControllerConnectionConstants::WEATHERIMAGESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_WEATHER_PATH== topic)
            {
                QJsonObject weatherImage = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->weatherImages(); arr.append(weatherImage); mDataContainer->weatherImages(arr);
+               QJsonArray arr = mDataContainer->weatherImages(); appendToArrayUniqueIndex(&arr,weatherImage); mDataContainer->weatherImages(arr);
            }
            else if (ControllerConnectionConstants::IMAGEFILESUBSCRIPTIONPATH== topic|| ControllerConnectionConstants::IMAGEMESSAGE_IMAGEFILE_PATH== topic)
            {
                QJsonObject imageFile = QJsonDocument::fromJson(jsonString).object();
-               QJsonArray arr = mDataContainer->imageFileImages(); arr.append(imageFile); mDataContainer->imageFileImages(arr);
+               QJsonArray arr = mDataContainer->imageFileImages(); appendToArrayUniqueIndex(&arr,imageFile); mDataContainer->imageFileImages(arr);
            }
 }
 
+
+
 QJsonArray MqttMessageParser::convertMessageToArray(QByteArray msg)
 {
-   return QJsonDocument::fromJson(msg).array();
+    return QJsonDocument::fromJson(msg).array();
+}
+
+void MqttMessageParser::appendToArrayUniqueIndex(QJsonArray * array, QJsonObject object)
+{
+    for(auto it =  array->begin(); it != array->end();)
+    {
+        auto jsonObject = (*it).toObject();
+
+        if(jsonObject["index"] == object["index"])
+        {
+            it = array->erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    array->append(object);
 }

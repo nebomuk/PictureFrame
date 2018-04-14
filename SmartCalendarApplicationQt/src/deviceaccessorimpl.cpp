@@ -135,6 +135,11 @@ void DeviceAccessorImpl::sendFirstConfigurationOption(QJsonObject firstConfigOpt
     this->mControllerConnectionManager->publishJSONMessage(QJsonDocument(firstConfigOption).toJson(), ControllerConnectionConstants::FIRSTCONFIGURATIONNETWORKPATH);
 }
 
+void DeviceAccessorImpl::clearLocalImageCache()
+{
+    this->mControllerConnectionManager->clearLocalImageCache();
+}
+
 void DeviceAccessorImpl::queryTrashPlan()
 {
     this->mControllerConnectionManager->publishSimpleStringMessage(ControllerConnectionConstants::TRASHPLANREQUESTPATH, "Request Trashplan");

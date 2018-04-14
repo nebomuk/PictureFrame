@@ -29,6 +29,8 @@ public:
 
      ControllerDataContainer *dataContainer() const;
 
+     void clearLocalImageCache();
+
 public slots:
 
 private slots:

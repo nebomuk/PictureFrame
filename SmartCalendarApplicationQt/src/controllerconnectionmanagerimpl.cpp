@@ -75,6 +75,17 @@ ControllerDataContainer *ControllerConnectionManagerImpl::dataContainer() const
     return mDataContainer;
 }
 
+void ControllerConnectionManagerImpl::clearLocalImageCache()
+{
+    mDataContainer->footballImages(QJsonArray());
+    mDataContainer->newsImages(QJsonArray());
+    mDataContainer->weatherImages(QJsonArray());
+    mDataContainer->imageFileImages(QJsonArray());
+    mDataContainer->cinemaImages(QJsonArray());
+    mDataContainer->calendarImages(QJsonArray());
+
+}
+
 
 
 

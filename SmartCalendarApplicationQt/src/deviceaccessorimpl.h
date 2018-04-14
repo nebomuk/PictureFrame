@@ -51,6 +51,8 @@ public slots:
     void sendCalendarToken(QJsonObject refreshToken);
     void sendFirstConfigurationOption(QJsonObject firstConfigOption);
 
+    void clearLocalImageCache();
+
     void queryTrashPlan();
 
     void queryBirthdayPlan();

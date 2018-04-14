@@ -211,6 +211,7 @@ CalendarMainPageForm
 
     buttonConfirm.onClicked: {
 
+        DeviceAccessor.clearLocalImageCache();
         for(var i = 0; i < listModel.count; ++i)
         {
             var formData = listModel.get(i).formData;
