@@ -1,7 +1,6 @@
 #include "controllerconnectionmanagerimpl.h"
 #include "controllerdatacontainer.h"
 #include "deviceaccessorimpl.h"
-#include "devicemanagermodel.h"
 #include "googlecalendarauthorization.h"
 #include "platformhelper.h"
 #include "smartcalendaraccessimpl.h"
@@ -69,8 +68,6 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     qmlRegisterSingletonType<AndroidHelper>("de.vitecvisual.native",1,0,"AndroidHelper",&AndroidHelper::singletontype_provider);
 #endif
-    // instantiable C++ type
-    qmlRegisterType<DeviceManagerModel>("de.vitecvisual.model",1,0,"DeviceManagerModel");
 
     // QML singletons
     qmlRegisterSingletonType( QUrl("qrc:/src/Style.qml"), "de.vitecvisual.style", 1, 0, "Style" );

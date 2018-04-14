@@ -29,10 +29,8 @@ SOURCES += src/main.cpp \
     src/responderclient.cpp \
     src/controllerconnectionmanagerimpl.cpp \
     src/propertyhelper.cpp \
-    src/controllerdatacontainernomacro.cpp \
     src/controllerdatacontainer.cpp \
     src/deviceaccessorimpl.cpp \
-    src/devicemanagermodel.cpp \
     src/qvariantlistconversion.cpp \
     src/platformhelper.cpp \
     src/mqttconnection.cpp \
@@ -49,10 +47,8 @@ HEADERS += \
     src/responderclient.h \
     src/controllerconnectionmanagerimpl.h \
     src/propertyhelper.h \
-    src/controllerdatacontainernomacro.h \
     src/controllerdatacontainer.h \
     src/deviceaccessorimpl.h \
-    src/devicemanagermodel.h \
     src/qvariantlistconversion.h \
     src/platformhelper.h \
     src/mqttconnection.h \
