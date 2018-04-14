@@ -178,7 +178,6 @@ QObject *DeviceAccessorImpl::singletontype_provider(QQmlEngine *engine, QJSEngin
 
 bool DeviceAccessorImpl::establishConnectionBlocking(const QString &brokerAddress)
 {
-
     return this->mIsConnectedToBroker = mControllerConnectionManager->establishConnectionBlocking(brokerAddress,mClientID);
 }
 

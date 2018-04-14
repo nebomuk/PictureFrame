@@ -62,26 +62,39 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
 {
     delete client;
     client = nullptr;
+    qDebug("creating mqtt client");
+
+
     client = createMqttClient(brokerAddress,1337);
 
 
     client->setClientId(clientId);
     client->connectToHost();
 
+    qDebug("mqtt client connect...");
+
     bool successfull = waitForMqttConnected();
 
     if(!successfull)
     {
-        qDebug("establishConnection failed: Connection timeout");
+        qDebug("mqtt connection failed: Connection timeout");
         return false;
     }
+    qDebug("mqtt connection established");
 
     registerSubscriptions();
     testConnection(); // this will cause the receiving end to respond with the first json
+
     bool initialDataReceived = waitForFirstJsonReceived();
     if(!initialDataReceived)
     {
-        qDebug("failed to receive first JSON");
+        qDebug("failed to receive first JSON, retrying");
+    }
+    testConnection(); // this will cause the receiving end to respond with the first json
+    bool initialDataReceivedRetry = waitForFirstJsonReceived();
+    if(!initialDataReceivedRetry)
+    {
+        qDebug("failed to receive first JSON retry failed");
         return false;
     }
 

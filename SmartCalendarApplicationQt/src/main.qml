@@ -40,6 +40,7 @@ ApplicationWindow {
         }
         else
         {
+            console.debug("Failed to get controller in network");
             msgDialogUdpFailed.open();
         }
 
@@ -147,20 +148,4 @@ App will continue to display empty data but might randomly crash")
 
 
           }
-
-
-
-    Timer {
-             interval: 500; running: true; repeat: false
-             onTriggered: {
-                 var options = DeviceAccessor.controllerDataContainer.baseOptions;
-
-                 var str = JSON.stringify(options);
-
-                 console.log("connection result " + str);
-
-
-             }
-
-         }
       }
