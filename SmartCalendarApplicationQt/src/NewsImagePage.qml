@@ -16,9 +16,12 @@ NewsImagePageForm {
 
     Component.onCompleted:
     {
-        comboBoxdesign.initialText = formData.design
-        comboBoxsource.initialText = formData.source
-        //comboBoxoption.currentIndex = optionModel.formData.option
+        if(Object.keys(formData).length > 1)
+        {
+            comboBoxdesign.initialText = formData.design
+            comboBoxsource.initialText = formData.source
+            //comboBoxoption.currentIndex = optionModel.formData.option
+        }
     }
 
     buttonConfirm.onClicked:  {

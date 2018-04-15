@@ -10,7 +10,8 @@ CinemaImagePageForm {
 
     Component.onCompleted:
     {
-        if(Object.keys(formData).length > 0)
+        var keys = Object.keys(formData);
+        if(keys.length > 1) // not only contains default key
         {
          comboBoxgenre.initialText = formData.genre
          comboBoxdesign.initialText = formData.design

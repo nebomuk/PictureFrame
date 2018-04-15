@@ -13,11 +13,14 @@ WeatherImagePageForm {
 
     Component.onCompleted:
     {
-        comboBoxOption.initialText = formData.timeScale;
-        comboBoxcountry.initialText = formData.country;
-        comboBoxUnit.initialText = formData.unit;
-        spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;
-        textFieldcityName.text = formData.cityName;
+        if(Object.keys(formData).length > 1)
+        {
+            comboBoxOption.initialText = formData.timeScale;
+            comboBoxcountry.initialText = formData.country;
+            comboBoxUnit.initialText = formData.unit;
+            spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;
+            textFieldcityName.text = formData.cityName;
+        }
     }
 
 

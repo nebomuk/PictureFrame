@@ -13,10 +13,14 @@ FootballImagePageForm {
         var dataContainer = DeviceAccessor.controllerDataContainer;
         comboBoxLeague.model = dataContainer.footballLeagues
 
-        comboBoxDesign.initialText = formData.design
-        comboBoxTableFormat.initialText = formData.tableFormat
-        comboBoxTeam.initialText = formData.team
-        comboBoxLeague.initialText = formData.league
+        var keys = Object.keys(formData);
+        if(Object.keys(formData).length > 1)
+        {
+            comboBoxDesign.initialText = formData.design
+            comboBoxTableFormat.initialText = formData.tableFormat
+            comboBoxTeam.initialText = formData.team
+            comboBoxLeague.initialText = formData.league
+        }
     }
 
     buttonConfirm.onClicked:  {
