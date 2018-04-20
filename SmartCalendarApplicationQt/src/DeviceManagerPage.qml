@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
 import de.vitecvisual.util 1.0
+import Qt.labs.platform 1.0
+import de.vitecvisual.core 1.0;
 
 
 // Workflow is a bit different than from the description in Modell zur Erstkonfiguration.ppt
@@ -10,9 +12,58 @@ DeviceManagerPageForm {
 
     id : page
 
+    Timer {
+             interval: 2000; running: true; repeat: false
+             onTriggered: {
+
+                 busyIndicator.visible = false;
+                 gridLayout.visible = true;
+             }
+         }
+
+
+MessageDialog {
+      id : msgDialogUdpFailed
+      title:  qsTr("demo functionality for Debug")
+      text: qsTr("UDP Broadcast did not find smartcalendar.
+                App will continue to display empty data but might randomly crash")
+}
+
+MessageDialog {
+      id : msgDialogConnectionFailed
+      title:  qsTr("demo functionality for Debug")
+      text: qsTr("could not establish MQTT Connection.
+App will continue to display empty data but might randomly crash")
+}
+
     Component.onCompleted:
     {       
-        updateListViews();
+
+        var controllerList = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
+        if(controllerList.length > 0)
+        {
+            var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
+            if(!res)
+            {
+                msgDialogConnectionFailed.open();
+            }
+
+        }
+        else
+        {
+            console.debug("Failed to get controller in network");
+            msgDialogUdpFailed.open();
+        }
+
+                var devicesFromUdpBroadcast =   [
+                {"productId":"id0"},
+                {"productId":"id1"},
+                {"productId":"id2"},
+
+                 ];
+
+
+        updateListViews(devicesFromUdpBroadcast);
     }
 
     // TODO remove from
@@ -52,26 +103,19 @@ DeviceManagerPageForm {
 
     }
 
-    function updateListViews()
+    function updateListViews(devicesFromUdpBroadcast)
     {
         availableDevicesListView.model.clear();
 
-        addNonSavedDevices(availableDevicesListView.model);
+        addNonSavedDevices(devicesFromUdpBroadcast,availableDevicesListView.model);
 
         savedDevicesListView.model.clear();
 
         addSavedDevices(savedDevicesListView.model)
     }
 
-    function addNonSavedDevices(model)
+    function addNonSavedDevices(devicesFromUdpBroadcast, model)
     {
-        // TODO get scanned devices instead of this dummy list
-        var allDevices =   [
-        {"productId":"id0"},
-        {"productId":"id1"},
-        {"productId":"id2"},
-
-         ];
 
         __db().transaction(
             function(tx) {
@@ -84,7 +128,7 @@ DeviceManagerPageForm {
                     existingProductIds.push(rs.rows.item(i).productId);
                 }
 
-                allDevices.forEach(function(device)
+                devicesFromUdpBroadcast.forEach(function(device)
                 {
                     if(existingProductIds.indexOf(device.productId) === -1) // not included
                     {

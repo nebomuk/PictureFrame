@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import "OptionComboBoxUtil.js" as OptionComboBoxUtil;
+
 
 CinemaImagePageForm {
 
@@ -24,7 +26,7 @@ CinemaImagePageForm {
 
         var formData = {};
         // combo box option shows a different user string from what should be sent via json
-        formData.option =  optionModel.get(comboBoxoption.currentIndex).text;
+        formData.option =  OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex);
         formData.genre = comboBoxgenre.currentText;
         formData.design = comboBoxdesign.currentText;
         formData.country = comboBoxcountry.currentText;

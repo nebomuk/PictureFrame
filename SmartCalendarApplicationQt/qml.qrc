@@ -58,5 +58,6 @@
         <file>fa-solid-900.ttf</file>
         <file>src/ExtendedComboBox.qml</file>
         <file>src/ComboBoxUtil.js</file>
+        <file>src/OptionComboBoxUtil.js</file>
     </qresource>
 </RCC>

@@ -19,10 +19,22 @@ Page {
 
     property alias availableDevicesListView: availableDevicesListView
 
+    property alias busyIndicator: busyIndicator
+
+    property alias gridLayout: gridLayout
+
+    BusyIndicator
+    {
+        id : busyIndicator
+        visible: true
+        anchors.centerIn: parent
+
+    }
 
     GridLayout
     {
-        id: column
+        visible: false;
+        id: gridLayout
         anchors.top :parent.top
         anchors.left: parent.left
         anchors.right: parent.right

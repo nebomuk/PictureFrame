@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "OptionComboBoxUtil.js" as OptionComboBoxUtil
 
 NewsImagePageForm {
 
@@ -27,7 +28,7 @@ NewsImagePageForm {
     buttonConfirm.onClicked:  {
 
         var formData = {};
-        formData.option = optionModel.get(comboBoxoption.currentIndex).text
+        formData.option = OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex)
         formData.source = comboBoxsource.currentText
         formData.design = comboBoxdesign.currentText
         finished(formData)

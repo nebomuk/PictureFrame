@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import "DateUtil.js" as DateUtil
+import "OptionComboBoxUtil.js" as OptionComboBoxUtil;
+
 
 CalendarImagePageForm {
 
@@ -24,7 +26,7 @@ CalendarImagePageForm {
     buttonConfirm.onClicked: {
         var formData = {};
         // combo box option shows a different user string from what should be sent via json
-        formData.format =  comboBoxoption.currentText
+        formData.format =  OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex);
 
         formData.timeScale = comboBoxTimeView.currentText;
 
