@@ -74,6 +74,12 @@ MessageDialog {
                        msgDialogOldVersion.open();
 
                }
+
+            var res = DeviceAccessor.establishConnectionBlocking(devicesFromUdpBroadcast[0].hostIpAdress);
+            if(!res)
+            {
+                msgDialogConnectionFailed.open();
+            }
         }
         else // length == 0
         {
@@ -104,6 +110,8 @@ MessageDialog {
        // NotifyingSettings.selectedDevice =productName // fixme this line crashes
 
         // FIXME should get current ip from productId
+
+        // FIXME remove connect block in findAndConnect()
         var res = DeviceAccessor.establishConnectionBlocking(devicesFromUdpBroadcast[0].hostIpAdress);
         if(!res)
         {
