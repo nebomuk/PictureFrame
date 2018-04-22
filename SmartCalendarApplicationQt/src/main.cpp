@@ -11,7 +11,7 @@
 #include "androidhelper.h"
 #endif
 
-//#define USE_QAPPLICATION
+#define USE_QAPPLICATION
 
 
 #if (defined(Q_OS_WIN) || defined(Q_OS_LINUX) || defined(Q_OS_OSX)) && defined(USE_QAPPLICATION)

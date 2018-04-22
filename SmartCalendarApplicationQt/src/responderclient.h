@@ -16,12 +16,18 @@ class ResponderClient
 
     Q_PROPERTY(QString hostIpAdress READ hostIpAdress)
 
+    Q_PROPERTY(QString productId READ productId)
+
+    Q_PROPERTY(QString authToken READ authToken)
+
 public:
 
     // only used for meta object system
     ResponderClient();
 
    ResponderClient(QString hostName, QString hostIpAdress);
+
+   ResponderClient(QString hostName, QString hostIpAdress, QString productId, QString authToken);
 
    QString hostName() const;
 
@@ -35,13 +41,22 @@ public:
        {
            mHostName.swap(other.mHostName);
            mHostIpAdress.swap(other.mHostIpAdress);
+           mProductId.swap(other.mProductId);
+           mAuthToken.swap(other.mAuthToken);
            return *this;
        }
 
- private:
+   QString productId() const;
 
-    QString mHostName;
+   QString authToken() const;
+
+private:
+
+   QString mHostName;
    QString mHostIpAdress;
+
+   QString mProductId;
+   QString mAuthToken;
 };
 
 Q_DECLARE_METATYPE(ResponderClient)

@@ -100,10 +100,33 @@ QList<ResponderClient> SmartCalendarAccessImpl::readResponderClientsFromUdpSocke
     {
         datagram.resize(int(socket->pendingDatagramSize()));
          socket->readDatagram(datagram.data(), datagram.size());
-         auto splitted = datagram.split(';');
-         auto hostName = splitted[0];
-         QByteArray ipAddress = splitted[1];
-         resultAddresses << ResponderClient(QString(hostName),QString(ipAddress));
+         QList<QByteArray> splitted = datagram.split(';');
+
+          QString hostName;
+         QByteArray ipAddress;
+         QString productId;
+         QString authToken;
+
+         if(splitted.size() == 2)
+         {
+             hostName = splitted[0];
+             ipAddress = splitted[1];
+             resultAddresses << ResponderClient(QString(hostName),QString(ipAddress));
+
+         }
+         else if(splitted.size() >=4)
+         {
+             hostName = splitted[0];
+             ipAddress = splitted[1];
+             productId = splitted[2];
+             authToken = splitted[3];
+             resultAddresses << ResponderClient(QString(hostName),QString(ipAddress),QString(productId),QString(authToken));
+         }
+         else
+         {
+             qDebug("SmartCalendarAccess: failed to  parse udp broadcast response from SmartCalendar");
+         }
+
 
     }
     return resultAddresses;

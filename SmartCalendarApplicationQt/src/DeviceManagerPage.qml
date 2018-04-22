@@ -13,7 +13,8 @@ DeviceManagerPageForm {
     id : page
 
     Timer {
-             interval: 2000; running: true; repeat: false
+        id : timer
+             interval: 2000; running: false; repeat: false
              onTriggered: {
 
                  busyIndicator.visible = false;
@@ -21,47 +22,64 @@ DeviceManagerPageForm {
              }
          }
 
-
 MessageDialog {
       id : msgDialogUdpFailed
-      title:  qsTr("demo functionality for Debug")
-      text: qsTr("UDP Broadcast did not find smartcalendar.
-                App will continue to display empty data but might randomly crash")
+      title:  qsTr("No SmartCalendar found")
+      text: qsTr("Make sure your SmartCalendar is turned on and in the same network. Click OK to continue.")
+      buttons: MessageDialog.Ok | MessageDialog.Cancel
+
+      onOkClicked: findAndConnect();
+      onCancelClicked: stackView.pop();
 }
 
 MessageDialog {
       id : msgDialogConnectionFailed
-      title:  qsTr("demo functionality for Debug")
-      text: qsTr("could not establish MQTT Connection.
-App will continue to display empty data but might randomly crash")
+      title:  qsTr("Connection failed")
+      text: qsTr("Please restart the SmartCalendar and press OK")
+      buttons: MessageDialog.Ok | MessageDialog.Cancel
+      onOkClicked: findAndConnect();
+      onCancelClicked: stackView.pop();
+
+}
+
+MessageDialog {
+      id : msgDialogOldVersion
+      title:  qsTr("Version too old")
+      text: qsTr("SmartCalendar response did not contain Product Id. Please update your Smart Calendar software")
+      buttons: MessageDialog.Ok | MessageDialog.Cancel
+      onOkClicked: findAndConnect();
+      onCancelClicked: stackView.pop();
+
 }
 
     Component.onCompleted:
     {       
+        findAndConnect()
+    }
 
-        var controllerList = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
-        if(controllerList.length > 0)
+    function findAndConnect()
+    {
+        busyIndicator.visible = true;
+        gridLayout.visible = false;
+        timer.restart();
+
+
+        var devicesFromUdpBroadcast = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
+        // token required here
+        if(devicesFromUdpBroadcast.length > 0)
         {
-            var res = DeviceAccessor.establishConnectionBlocking(controllerList[0].hostIpAdress);
-            if(!res)
-            {
-                msgDialogConnectionFailed.open();
-            }
+            // productId is required
+            if(devicesFromUdpBroadcast[0].productId === "")
+               {
+                       msgDialogOldVersion.open();
 
+               }
         }
-        else
+        else // length == 0
         {
-            console.debug("Failed to get controller in network");
+            console.debug("SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking failed");
             msgDialogUdpFailed.open();
         }
-
-                var devicesFromUdpBroadcast =   [
-                {"productId":"id0"},
-                {"productId":"id1"},
-                {"productId":"id2"},
-
-                 ];
-
 
         updateListViews(devicesFromUdpBroadcast);
     }
@@ -84,7 +102,13 @@ App will continue to display empty data but might randomly crash")
     onSavedDevicesClicked: {
         var productName = savedDevicesListView.model.get(index).productName
        // NotifyingSettings.selectedDevice =productName // fixme this line crashes
-        stackView.pop();
+
+        // FIXME should get current ip from productId
+        var res = DeviceAccessor.establishConnectionBlocking(devicesFromUdpBroadcast[0].hostIpAdress);
+        if(!res)
+        {
+            msgDialogConnectionFailed.open();
+        }
     }
 
     function onFirstConfigurationPageFinished()
@@ -98,9 +122,6 @@ App will continue to display empty data but might randomly crash")
         var password = page.textFieldPassword.text
 
         insertDbEntry(deviceName,page.productId, password);
-
-
-
     }
 
     function updateListViews(devicesFromUdpBroadcast)
@@ -138,9 +159,6 @@ App will continue to display empty data but might randomly crash")
 
             }
             );
-
-
-
     }
 
     function insertDbEntry(productName, productId, productPassword)
