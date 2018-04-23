@@ -86,6 +86,7 @@ Page {
                 }
                 Text
                 {
+
                     Layout.alignment: Qt.AlignRight
                     text : "\uf0c2"
                     font.family: "FontAwesome"
@@ -94,8 +95,8 @@ Page {
 
                 Text
                 {
+                    visible: ip != ""
                     Layout.alignment: Qt.AlignRight
-
                     text : "\uf1eb"
                     font.family: "FontAwesome"
                     font.pointSize: 14

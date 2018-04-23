@@ -52,6 +52,13 @@ MessageDialog {
 
 }
 
+MessageDialog {
+      id : msgDialogDeviceNotReachable
+      title:  qsTr("Not Reachable")
+      text: qsTr("We cannot find this SmartCalendar in the local network or in the cloud")
+      buttons: MessageDialog.Ok
+}
+
     Component.onCompleted:
     {       
         findAndConnect()
@@ -74,12 +81,6 @@ MessageDialog {
                        msgDialogOldVersion.open();
 
                }
-
-            var res = DeviceAccessor.establishConnectionBlocking(devicesFromUdpBroadcast[0].hostIpAdress);
-            if(!res)
-            {
-                msgDialogConnectionFailed.open();
-            }
         }
         else // length == 0
         {
@@ -106,17 +107,29 @@ MessageDialog {
     }
 
     onSavedDevicesClicked: {
-        var productName = savedDevicesListView.model.get(index).productName
-       // NotifyingSettings.selectedDevice =productName // fixme this line crashes
+        var ip = savedDevicesListView.model.get(index).ip
 
-        // FIXME should get current ip from productId
-
-        // FIXME remove connect block in findAndConnect()
-        var res = DeviceAccessor.establishConnectionBlocking(devicesFromUdpBroadcast[0].hostIpAdress);
-        if(!res)
+        if(ip === "" || ip === undefined)
         {
-            msgDialogConnectionFailed.open();
+            msgDialogDeviceNotReachable.open();
         }
+        else
+        {
+
+             var res = DeviceAccessor.establishConnectionBlocking(ip);
+             if(!res)
+             {
+                 msgDialogConnectionFailed.open();
+             }
+             else
+             {
+                 NotifyingSettings.selectedDevice = ""
+                 stackView.pop();
+                 // TODO connection succesfull message/toast
+             }
+        }
+
+
     }
 
     function onFirstConfigurationPageFinished()
@@ -140,7 +153,7 @@ MessageDialog {
 
         savedDevicesListView.model.clear();
 
-        addSavedDevices(savedDevicesListView.model)
+        addSavedDevices(savedDevicesListView.model, devicesFromUdpBroadcast)
     }
 
     function addNonSavedDevices(devicesFromUdpBroadcast, model)
@@ -194,7 +207,7 @@ MessageDialog {
             );
     }
 
-    function addSavedDevices(model) {
+    function addSavedDevices(model,devicesFromUdpBroadcast) {
              __db().transaction(
                  function(tx) {
                      __ensureTables(tx);
@@ -205,7 +218,14 @@ MessageDialog {
                      if (rs.rows.length > 0) {
                          for (var i=0; i<rs.rows.length; ++i)
                          {
-                             model.append(rs.rows.item(i))
+                             var rowItem = rs.rows.item(i);
+                             var found = devicesFromUdpBroadcast.find(function(device) {
+                               return device.productId === rowItem.productId;
+                             });
+
+                             // this will set wifi icon visibility
+                             rowItem.ip = found !== undefined ? found.hostIpAdress : ""; // note the spelling error
+                             model.append(rowItem)
                          }
 
                      }

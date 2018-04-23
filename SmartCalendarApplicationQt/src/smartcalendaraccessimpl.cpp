@@ -118,8 +118,8 @@ QList<ResponderClient> SmartCalendarAccessImpl::readResponderClientsFromUdpSocke
          {
              hostName = splitted[0];
              ipAddress = splitted[1];
-             productId = splitted[2];
-             authToken = splitted[3];
+             authToken = splitted[2];
+             productId = splitted[3];
              resultAddresses << ResponderClient(QString(hostName),QString(ipAddress),QString(productId),QString(authToken));
          }
          else
