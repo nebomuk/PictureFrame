@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
+import QtQuick.Controls 2.3 // required for stackView attached properties
 import de.vitecvisual.util 1.0
 import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
@@ -123,7 +124,10 @@ MessageDialog {
              }
              else
              {
-                 NotifyingSettings.selectedDevice = ""
+
+                 var mainPage = stackView.get(StackView.index -1);
+                 mainPage.selectedDevice = ip;
+
                  stackView.pop();
                  // TODO connection succesfull message/toast
              }
