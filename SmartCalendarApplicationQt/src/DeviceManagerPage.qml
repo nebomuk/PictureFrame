@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.LocalStorage 2.0
+import QtQuick.Controls 2.3 // required for stackView attached properties
 import de.vitecvisual.util 1.0
 import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
@@ -64,6 +65,8 @@ MessageDialog {
         findAndConnect()
     }
 
+    property var devicesFromUdpBroadcast
+
     function findAndConnect()
     {
         busyIndicator.visible = true;
@@ -71,7 +74,7 @@ MessageDialog {
         timer.restart();
 
 
-        var devicesFromUdpBroadcast = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
+        devicesFromUdpBroadcast = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
         // token required here
         if(devicesFromUdpBroadcast.length > 0)
         {
@@ -88,7 +91,7 @@ MessageDialog {
             msgDialogUdpFailed.open();
         }
 
-        updateListViews(devicesFromUdpBroadcast);
+        updateListViews();
     }
 
     // TODO remove from
@@ -115,7 +118,6 @@ MessageDialog {
         }
         else
         {
-
              var res = DeviceAccessor.establishConnectionBlocking(ip);
              if(!res)
              {
@@ -123,13 +125,12 @@ MessageDialog {
              }
              else
              {
-                 NotifyingSettings.selectedDevice = ""
+                 var mainPage = stackView.get(StackView.index -1);
+                 mainPage.selectedDevice = ip;
+
                  stackView.pop();
-                 // TODO connection succesfull message/toast
              }
         }
-
-
     }
 
     function onFirstConfigurationPageFinished()
@@ -145,25 +146,23 @@ MessageDialog {
         insertDbEntry(deviceName,page.productId, password);
     }
 
-    function updateListViews(devicesFromUdpBroadcast)
+    function updateListViews()
     {
-        availableDevicesListView.model.clear();
+        fillAvailableDevicesModel();
 
-        addNonSavedDevices(devicesFromUdpBroadcast,availableDevicesListView.model);
-
-        savedDevicesListView.model.clear();
-
-        addSavedDevices(savedDevicesListView.model, devicesFromUdpBroadcast)
+        fillSavedDevicesModel()
     }
 
-    function addNonSavedDevices(devicesFromUdpBroadcast, model)
+    function fillAvailableDevicesModel()
     {
-
         __db().transaction(
             function(tx) {
                 __ensureTables(tx);
 
+                availableDevicesListView.model.clear();
+
                 var rs = tx.executeSql("SELECT productId FROM SavedDevices");
+
                 var existingProductIds = [];
                 for (var i=0; i<rs.rows.length; ++i)
                 {
@@ -174,13 +173,41 @@ MessageDialog {
                 {
                     if(existingProductIds.indexOf(device.productId) === -1) // not included
                     {
-                        model.append({"productId":device.productId});
+                        availableDevicesListView.model.append({"productId":device.productId});
                     }
                 });
 
             }
             );
     }
+
+
+
+    function fillSavedDevicesModel() {
+             __db().transaction(
+                 function(tx) {
+                     __ensureTables(tx);
+
+                     var rs = tx.executeSql("SELECT * FROM SavedDevices");
+                     savedDevicesListView.model.clear();
+
+                     if (rs.rows.length > 0) {
+                         for (var i=0; i<rs.rows.length; ++i)
+                         {
+                             var rowItem = rs.rows.item(i);
+                             var found = devicesFromUdpBroadcast.find(function(device) {
+                               return device.productId === rowItem.productId;
+                             });
+
+                             // this will set wifi icon visibility
+                             rowItem.ip = found !== undefined ? found.hostIpAdress : ""; // note the spelling error
+                             savedDevicesListView.model.append(rowItem)
+                         }
+
+                     }
+                 }
+             )
+         }
 
     function insertDbEntry(productName, productId, productPassword)
     {
@@ -207,32 +234,6 @@ MessageDialog {
             );
     }
 
-    function addSavedDevices(model,devicesFromUdpBroadcast) {
-             __db().transaction(
-                 function(tx) {
-                     __ensureTables(tx);
-
-                     var rs = tx.executeSql("SELECT * FROM SavedDevices");
-                     model.clear();
-
-                     if (rs.rows.length > 0) {
-                         for (var i=0; i<rs.rows.length; ++i)
-                         {
-                             var rowItem = rs.rows.item(i);
-                             var found = devicesFromUdpBroadcast.find(function(device) {
-                               return device.productId === rowItem.productId;
-                             });
-
-                             // this will set wifi icon visibility
-                             rowItem.ip = found !== undefined ? found.hostIpAdress : ""; // note the spelling error
-                             model.append(rowItem)
-                         }
-
-                     }
-                 }
-             )
-         }
-
 
     function __db()
     {
@@ -243,23 +244,5 @@ MessageDialog {
         //tx.executeSql("DROP TABLE SmartCalendarDevices");
         tx.executeSql('CREATE TABLE IF NOT EXISTS SavedDevices(productName TEXT, productId TEXT, productPassword TEXT)', []);
     }
-
-    function createDummySavedDevices()
-    {
-        __db().transaction(
-            function(tx) {
-                __ensureTables(tx);
-
-                 var rs = tx.executeSql("SELECT * FROM SavedDevices");
-                if(rs.rows.length === 0)
-                {
-                    tx.executeSql("INSERT INTO SavedDevices VALUES(?,?,?)",["SavedSchmartCalendar","myId","pwisasdf"]);
-                }
-            }
-            );
-
-    }
-
-
 }
 

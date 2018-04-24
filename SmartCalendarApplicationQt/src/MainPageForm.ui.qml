@@ -17,7 +17,7 @@ Page {
 
     property alias buttonBaseConfiguration : baseConfigurationButton
 
-    property string selectedDevice : NotifyingSettings.selectedDevice
+    property string selectedDevice // written to in DeviceManagerPage
 
     CenterColumn {
         id: column
@@ -37,16 +37,19 @@ Page {
         }
 
         CenterButton {
+
             id: deviceSelectionButton
             text: qsTr("Device Selection")
         }
 
         CenterButton {
+            enabled: label.text.length > 0
             id: calendarViewButton
             text: qsTr("Calendar View")
         }
 
         CenterButton {
+            enabled: label.text.length > 0
             id: baseConfigurationButton
             text: qsTr("Base Configuration")
        }
