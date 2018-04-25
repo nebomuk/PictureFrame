@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
     // QML singletons
     qmlRegisterSingletonType( QUrl("qrc:/src/Style.qml"), "de.vitecvisual.style", 1, 0, "Style" );
     qmlRegisterSingletonType(QUrl("qrc:/src/NotifyingSettings.qml"),"de.vitecvisual.util",1,0,"NotifyingSettings");
-        qmlRegisterSingletonType(QUrl("qrc:/src/FontAwesome.qml"),"de.vitecvisual.util",1,0,"FontAwesome");
 
     // Q_GADGET type return type
     qRegisterMetaType<ResponderClient>();

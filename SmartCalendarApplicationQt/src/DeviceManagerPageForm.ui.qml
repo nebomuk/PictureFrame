@@ -86,32 +86,24 @@ Page {
                     Layout.fillWidth: true
                     text : productName
                 }
-                Text
-                {
-
+                Image {
                     Layout.alignment: Qt.AlignRight
-                    text : FontAwesome.cloud
-                    font.family: FontAwesome.fontFamily
-                    font.pointSize: 14
+                    asynchronous : true
+                    source : "qrc:/icon/cloud.svg"
                 }
 
-                Text
-                {
+                Image {
                     visible: ip != ""
                     Layout.alignment: Qt.AlignRight
-                    text : FontAwesome.wifi
-                    font.family: FontAwesome.fontFamily
-                    font.pointSize: 14
+                    asynchronous : true
+                    source : "qrc:/icon/signal.svg"
                 }
 
                 Button
                 {
                     Layout.alignment: Qt.AlignRight
-
                     id : removeButton
-                    text : FontAwesome.trash
-                    font.family: FontAwesome.fontFamily
-                    font.pointSize: 14
+                    icon.source : "qrc:/icon/trash.svg"
 
                     Connections
                     {

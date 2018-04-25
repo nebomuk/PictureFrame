@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/cloud.svg</file>
+        <file>icon/signal.svg</file>
+        <file>icon/trash.svg</file>
+    </qresource>
+</RCC>

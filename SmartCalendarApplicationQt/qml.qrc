@@ -55,11 +55,9 @@
         <file>src/PictureTypeSelectionDialogForm.ui.qml</file>
         <file>src/ConfirmButton.qml</file>
         <file>src/ConfirmationPage.qml</file>
-        <file>fa-solid-900.ttf</file>
         <file>src/ExtendedComboBox.qml</file>
         <file>src/ComboBoxUtil.js</file>
         <file>src/OptionComboBoxUtil.js</file>
         <file>src/Object.qml</file>
-        <file>src/FontAwesome.qml</file>
     </qresource>
 </RCC>

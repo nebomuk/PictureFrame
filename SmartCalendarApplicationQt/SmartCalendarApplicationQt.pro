@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent networkauth mqtt #xmlpatterns xml // required for xmlListModel?
+QT += quick core gui network concurrent svg networkauth mqtt #xmlpatterns xml // required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -57,7 +57,8 @@ HEADERS += \
     src/googlecalendarauthorization.h
 
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    icon.qrc
 
 # in QtCreator/Projects clone Debug configuration, name it Test and add the following qmake arguments: "CONFIG+=test" including the ""
 test {

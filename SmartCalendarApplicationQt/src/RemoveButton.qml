@@ -8,8 +8,8 @@ Button
     property ListModel listModel
 
     id : removeEntryButton
-    text : FontAwesome.trash
-    font.family: FontAwesome.fontFamily
+    icon.source : "qrc:/icon/trash.svg"
+
 
     Connections
     {
