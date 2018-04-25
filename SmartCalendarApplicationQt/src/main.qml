@@ -49,7 +49,8 @@ ApplicationWindow {
 
         ToolButton {
             id: toolButton
-            text: stackView.depth > 1 ? "\u25C0" : "\u2630"
+            icon.source :  "qrc:/icon/arrow-left.svg"
+            display: stackView.depth > 1 ? AbstractButton.IconOnly : AbstractButton.TextOnly
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 if (stackView.depth > 1) {
