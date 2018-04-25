@@ -59,5 +59,7 @@
         <file>src/ExtendedComboBox.qml</file>
         <file>src/ComboBoxUtil.js</file>
         <file>src/OptionComboBoxUtil.js</file>
+        <file>src/Object.qml</file>
+        <file>src/FontAwesome.qml</file>
     </qresource>
 </RCC>

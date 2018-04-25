@@ -2,6 +2,8 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
+import de.vitecvisual.util 1.0;
+
 
 Page {
     id: page
@@ -88,8 +90,8 @@ Page {
                 {
 
                     Layout.alignment: Qt.AlignRight
-                    text : "\uf0c2"
-                    font.family: "FontAwesome"
+                    text : FontAwesome.cloud
+                    font.family: FontAwesome.fontFamily
                     font.pointSize: 14
                 }
 
@@ -97,8 +99,8 @@ Page {
                 {
                     visible: ip != ""
                     Layout.alignment: Qt.AlignRight
-                    text : "\uf1eb"
-                    font.family: "FontAwesome"
+                    text : FontAwesome.wifi
+                    font.family: FontAwesome.fontFamily
                     font.pointSize: 14
                 }
 
@@ -107,8 +109,8 @@ Page {
                     Layout.alignment: Qt.AlignRight
 
                     id : removeButton
-                    text : "\uf2ed"
-                    font.family: "FontAwesome" // loaded via QFontDatabase in main.cpp
+                    text : FontAwesome.trash
+                    font.family: FontAwesome.fontFamily
                     font.pointSize: 14
 
                     Connections
