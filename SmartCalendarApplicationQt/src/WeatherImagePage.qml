@@ -34,6 +34,7 @@ WeatherImagePageForm {
         formData.cityName = textFieldcityName.text;
         formData.country = comboBoxcountry.currentText;
         formData.unit = comboBoxUnit.model.get(comboBoxUnit.currentIndex).unit;
+        formData.design = comboBoxDesign.currentText
         finished(formData)
     }
 

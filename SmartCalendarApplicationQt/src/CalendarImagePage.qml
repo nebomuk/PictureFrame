@@ -40,6 +40,8 @@ CalendarImagePageForm {
 
         formData.additionalNumberOfDays = spinBoxAdditionalNumberOfDays.value;
 
+        formData.design = comboBoxDesign.currentText
+
         finished(formData)
 
     }
