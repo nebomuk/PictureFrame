@@ -39,7 +39,6 @@ SOURCES += src/main.cpp \
     src/googlecalendarauthorization.cpp
 
 
-
 HEADERS += \
     src/smartcalendaraccessimpl.h \
     src/smartcalendaraccessimpl.h \
@@ -109,7 +108,64 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    src/DateUtil.js \
+    src/ComboBoxUtil.js \
+    src/OptionComboBoxUtil.js \
+    src/BaseOptionsPageForm.ui.qml \
+    src/NameEmailInputDialogForm.ui.qml \
+    src/DynamicPicturePageForm.ui.qml \
+    src/PictureTypeSelectionDialogForm.ui.qml \
+    src/NewsImagePageForm.ui.qml \
+    src/MainPageForm.ui.qml \
+    src/FirstConfigurationPageForm.ui.qml \
+    src/MasterAccountPageForm.ui.qml \
+    src/CinemaImagePageForm.ui.qml \
+    src/FootballImagePageForm.ui.qml \
+    src/BaseCalendarOptionsPageForm.ui.qml \
+    src/ManageTrashPlanPageForm.ui.qml \
+    src/WeatherImagePageForm.ui.qml \
+    src/ManageBirthdaysPageForm.ui.qml \
+    src/DefinePersonsPageForm.ui.qml \
+    src/CalendarImagePageForm.ui.qml \
+    src/BaseDisplayOptionsPageForm.ui.qml \
+    src/DeviceManagerPageForm.ui.qml \
+    src/CalendarMainPageForm.ui.qml \
+    src/BaseOptionsPage.qml \
+    src/CenterColumn.qml \
+    src/CenterButton.qml \
+    src/NameEmailInputDialog.qml \
+    src/Object.qml \
+    src/FirstConfigurationPage.qml \
+    src/Style.qml \
+    src/ConfirmButton.qml \
+    src/NotifyingSettings.qml \
+    src/ExtendedComboBox.qml \
+    src/MainPage.qml \
+    src/RemoveButton.qml \
+    src/PictureTypeSelectionDialog.qml \
+    src/MasterAccountPage.qml \
+    src/StringXmlResourceModel.qml \
+    src/ConfirmationPage.qml \
+    src/NewsImagePage.qml \
+    src/DatePickerDialog.qml \
+    src/DefinePersonsPage.qml \
+    src/CinemaImagePage.qml \
+    src/WeatherImagePage.qml \
+    src/BaseCalendarOptionsPage.qml \
+    src/StringXmlResourceComboBox.qml \
+    src/TimePicker.qml \
+    src/ManageTrashPlanPage.qml \
+    src/ManageBirthdaysPage.qml \
+    src/main.qml \
+    src/DynamicPicturePage.qml \
+    src/CalendarImagePage.qml \
+    src/DatePickerForm.qml \
+    src/FootballImagePage.qml \
+    src/DraggableItem.qml \
+    src/BaseDisplayOptionsPage.qml \
+    src/DeviceManagerPage.qml \
+    src/CalendarMainPage.qml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

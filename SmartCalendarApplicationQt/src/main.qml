@@ -11,7 +11,7 @@ ApplicationWindow {
     id: window
     visible: true
 
-    title: qsTr("SmartCalendar")
+    title: qsTr("Smart Calendar Thync")
 
     Component.onCompleted:
     {

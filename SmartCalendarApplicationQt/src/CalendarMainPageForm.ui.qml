@@ -112,8 +112,7 @@ Page {
             id : buttonAddMorePictures
             y: 360
             text : qsTr("Add more pictures")
-            anchors.left: parent.left
-            anchors.leftMargin: 52
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 72
 

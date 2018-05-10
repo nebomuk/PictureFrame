@@ -76,6 +76,7 @@ ConfirmationPage
             visible: isDayViewOption3
             id : spinBoxStartTime
             up.indicator.enabled: spinBoxEndTime.value > value
+            down.indicator.enabled: spinBoxEndTime.value -value < 12
             from : 0
             to : 24
             value : 8
@@ -98,6 +99,7 @@ ConfirmationPage
             visible: isDayViewOption3
             id : spinBoxEndTime
             down.indicator.enabled: spinBoxStartTime.value < value
+            up.indicator.enabled: value -spinBoxStartTime.value <12
             from : 0
             to : 24
             value : 12

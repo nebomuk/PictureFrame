@@ -52,8 +52,8 @@ Page {
     ListView {
         id: savedDevicesListView
         height: 200
-        anchors.left: parent.left
-        anchors.right: parent.right
+        width : parent.width
+
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
         spacing: 0
@@ -145,8 +145,7 @@ Page {
     ListView {
         id: availableDevicesListView
         height: 200
-        anchors.left: parent.left
-        anchors.right: parent.right
+        width: parent.width
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         spacing: 0
 

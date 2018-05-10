@@ -47,8 +47,9 @@ Page {
             Layout.fillHeight: false
             Layout.fillWidth: true
             placeholderText: qsTr( "Enter email" )
+            inputMethodHints : Qt.ImhEmailCharactersOnly
 
-            validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
+            //validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
         }
     }
 

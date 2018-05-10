@@ -99,12 +99,15 @@ Rectangle {
                 id: monthTumbler
                 model: 12
                 delegate: monthDelegate
+                wrap: false
             }
 
             Tumbler {
                 id: daysTumbler
                 model: daysInMonth(monthTumbler.currentIndex+1,(new Date()).getFullYear()) // days are zero indexed here
                 delegate: daysInMonthDelegateComponent
+                wrap: false
+
             }
 
             Tumbler {
