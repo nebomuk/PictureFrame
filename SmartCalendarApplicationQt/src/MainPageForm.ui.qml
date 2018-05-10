@@ -9,7 +9,7 @@ Page {
 
     id : page
 
-    title: qsTr("Smart Calendar")
+    title: qsTr("Smart Calendar Thync")
 
     property alias buttonDeviceSelection : deviceSelectionButton
 

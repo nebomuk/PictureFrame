@@ -59,6 +59,10 @@ Page {
             id : spinBoxfixedDisplayBrightness
             Layout.fillWidth: true
             enabled: radioButtonfixedDisplayBrightness.checked
+            from: 10
+            value: 10
+            to: 100
+            stepSize: 10
         }
 
         RadioButton {

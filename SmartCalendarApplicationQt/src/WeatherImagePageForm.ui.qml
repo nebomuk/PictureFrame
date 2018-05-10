@@ -8,7 +8,7 @@ ConfirmationPage
 
     
 
-    title: qsTr("Weather")
+    title: qsTr("Weather Image")
 
     property alias spinBoxadditionalNumberOfDays : spinBoxadditionalNumberOfDays;
    // property alias displayTimeInSeconds : displayTimeInSeconds;
@@ -76,6 +76,7 @@ ConfirmationPage
 
         Label
         {
+            visible: comboBoxOption.currentIndex == 1
             text : qsTr("Additional Number of Days")
             Layout.preferredWidth: 120
             Layout.maximumWidth: 120
@@ -84,8 +85,9 @@ ConfirmationPage
 
         SpinBox
         {
+            visible: comboBoxOption.currentIndex == 1
             from : 1
-            to : 7
+            to : 5
             id : spinBoxadditionalNumberOfDays
         }
 

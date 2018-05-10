@@ -30,7 +30,7 @@ WeatherImagePageForm {
 
         var formData = {};
         formData.timeScale = OptionComboBoxUtil.mapToOption(comboBoxOption.currentIndex); // uses option according to xamarin app
-        formData.additionalNumberOfDays = spinBoxadditionalNumberOfDays.value;
+        formData.additionalNumberOfDays = comboBoxOption.currentIndex  > 0 ? spinBoxadditionalNumberOfDays.value : 0; // no addtional nmb of days for option1
         formData.cityName = textFieldcityName.text;
         formData.country = comboBoxcountry.currentText;
         formData.unit = comboBoxUnit.model.get(comboBoxUnit.currentIndex).unit;

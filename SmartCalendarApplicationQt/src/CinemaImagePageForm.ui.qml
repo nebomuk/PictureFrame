@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 ConfirmationPage {
     id: page
 
-    title: qsTr("Cinema")
+    title: qsTr("Cinema Image")
 
     property alias comboBoxoption: comboBoxoption
     property alias comboBoxgenre: comboBoxgenre

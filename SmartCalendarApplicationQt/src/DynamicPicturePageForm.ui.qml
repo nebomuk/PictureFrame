@@ -12,7 +12,7 @@ ConfirmationPage {
     {
         anchors.top : parent.top
         id : buttonChoosePicture
-        text : qsTr("Choose Picture");
+        text : qsTr("Dynamic Picture");
     }
 
 //    GridLayout

@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 ConfirmationPage {
     id: page
 
-    title: qsTr("News")
+    title: qsTr("News Image")
 
     property alias comboBoxoption : comboBoxoption;
     property alias comboBoxsource : comboBoxsource;
