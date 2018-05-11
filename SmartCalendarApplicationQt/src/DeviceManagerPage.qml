@@ -126,7 +126,7 @@ MessageDialog {
              else
              {
                  var mainPage = stackView.get(StackView.index -1);
-                 mainPage.selectedDevice = ip;
+                 mainPage.selectedDevice = savedDevicesListView.model.get(index).productName;
 
                  stackView.pop();
              }
@@ -137,13 +137,13 @@ MessageDialog {
     {
         var page = stackView.pop();
         page.finished.disconnect(onFirstConfigurationPageFinished);
-        var deviceName = page.textFieldDeviceName.text
+        var productName = page.textFieldProductName.text
 
         var ssid = page.textFieldSsid.text
 
-        var password = page.textFieldPassword.text
+        var productPassword = page.textFieldProductPassword.text
 
-        insertDbEntry(deviceName,page.productId, password);
+        insertDbEntry(productName,page.productId, productPassword);
     }
 
     function updateListViews()

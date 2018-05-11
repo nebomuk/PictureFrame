@@ -12,11 +12,13 @@ Page {
 
 
 
-    property alias textFieldDeviceName: textFieldDeviceName
+    property alias textFieldProductName: textFieldProductName
 
     property alias textFieldSsid: textFieldSsid
 
-    property alias textFieldPassword : textFieldPassword
+    property alias textFieldPassword : textFieldWifiPassword
+
+    property alias textFieldProductPassword: textFieldProductPassword
 
     property alias buttonConfirm: confirmButton
 
@@ -31,17 +33,23 @@ Page {
         columns: 2
 
         Label {
-
-            id: label
             text: qsTr("Device Name")
         }
 
         TextField {
-            id: textFieldDeviceName
+            id: textFieldProductName
+        }
+
+        Label
+        {
+            text : qsTr("Product Password")
+        }
+
+        TextField {
+            id : textFieldProductPassword
         }
 
         Label {
-            id: label1
             text: qsTr("SSID (Network Name)")
         }
 
@@ -50,12 +58,11 @@ Page {
         }
 
         Label {
-            id: label2
-            text: qsTr("Password")
+            text: qsTr("Wifi Password")
         }
 
         TextField {
-            id: textFieldPassword
+            id: textFieldWifiPassword
             echoMode: TextInput.Password
 
         }
@@ -66,6 +73,6 @@ Page {
         x: 35
         y: 268
         text: qsTr("Confirm")
-        enabled: textFieldPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldDeviceName.text.length > 0
+        enabled: textFieldWifiPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldProductName.text.length > 0
     }
 }

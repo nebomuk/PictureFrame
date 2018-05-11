@@ -10,56 +10,49 @@ ConfirmationPage {
     property alias comboBoxTeam: comboBoxTeam
     property alias comboBoxDesign: comboBoxDesign
 
-
     title: qsTr("Football Image")
 
-
-
     GridLayout {
-        anchors.left : parent.left
+        anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top : parent.top
+        anchors.top: parent.top
         rows: 5
         columns: 2
         rowSpacing: 5
         columnSpacing: 5
 
-
         Label {
             text: qsTr("Table Format")
         }
-        ExtendedComboBox
-        {
+        ExtendedComboBox {
 
-            id : comboBoxTableFormat
-            model : ListModel
-            {
-                ListElement
-                {
+            id: comboBoxTableFormat
+            Layout.preferredWidth: 200
+            Layout.fillWidth: false
+            model: ListModel {
+                ListElement {
                     text: qsTr("Favorite Team")
-                    key : "Favorite Team"
+                    key: "Favorite Team"
                 }
-                ListElement
-                {
-                    text : qsTr("Top 5")
-                    key : "Top 5" // fixme emulator sends "top5"
+                ListElement {
+                    text: qsTr("Top 5")
+                    key: "Top 5" // fixme emulator sends "top5"
                 }
-                ListElement
-                {
-                    text : qsTr("Least 5");
-                    key : "Least 5"
+                ListElement {
+                    text: qsTr("Least 5")
+                    key: "Least 5"
                 }
             }
-            textRole : "text"
+            textRole: "text"
         }
-
 
         Label {
             text: qsTr("Design")
         }
 
         StringXmlResourceComboBox {
-            id : comboBoxDesign
+            id: comboBoxDesign
+            Layout.preferredWidth: 200
             attributeName: "footballDesignSpinnerArray"
         }
 
@@ -74,7 +67,8 @@ ConfirmationPage {
         }
 
         ExtendedComboBox {
-            id : comboBoxLeague
+            id: comboBoxLeague
+            Layout.preferredWidth: 200
         }
 
         Label {
@@ -82,8 +76,8 @@ ConfirmationPage {
         }
 
         ExtendedComboBox {
-            id : comboBoxTeam
+            id: comboBoxTeam
+            Layout.preferredWidth: 200
         }
     }
-
 }
