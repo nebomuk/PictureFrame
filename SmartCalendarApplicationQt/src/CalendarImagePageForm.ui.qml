@@ -30,6 +30,8 @@ ConfirmationPage
     property bool isMonthViewOption1 : comboBoxTimeView.currentIndex === 2 && comboBoxoption.currentIndex === 0;
     property bool isMonthViewOption2 : comboBoxTimeView.currentIndex === 2 && comboBoxoption.currentIndex === 1;
 
+    property bool isDayOrWeek : comboBoxTimeView.currentIndex === 0 || comboBoxTimeView.currentIndex === 1
+
 
     GridLayout {
         anchors.left : parent.left
@@ -61,7 +63,7 @@ ConfirmationPage
         {
             id : comboBoxoption
             Layout.columnSpan: 2
-            attributeName:  "formatViewSpinnerArray"
+            attributeName:  isDayOrWeek ? "calendarFormatViewSpinnerArrayWithThreeOptions" : "calendarFormatViewSpinnerArrayWithTwoOptions"
         }
 
         Label
