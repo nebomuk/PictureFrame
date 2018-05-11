@@ -17,7 +17,7 @@ WeatherImagePageForm {
     {
         if(Object.keys(formData).length > 1)
         {
-            comboBoxOption.initialText = formData.timeScale;
+            //comboBoxOption.initialText = formData.timeScale; // FIXME initial item is translation mapped option
             comboBoxcountry.initialText = formData.country;
             comboBoxUnit.initialText = formData.unit;
             spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;

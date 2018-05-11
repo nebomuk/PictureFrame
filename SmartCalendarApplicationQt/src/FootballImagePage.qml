@@ -11,7 +11,9 @@ FootballImagePageForm {
     Component.onCompleted:
     {
         var dataContainer = DeviceAccessor.controllerDataContainer;
-        comboBoxLeague.model = dataContainer.footballLeagues
+        comboBoxLeague.model = dataContainer.footballLeagues.concat().sort(function(a,b){
+            return a.localeCompare(b);
+        });
 
         var keys = Object.keys(formData);
         if(Object.keys(formData).length > 1)
@@ -43,7 +45,9 @@ FootballImagePageForm {
 
     function setTeamComboBoxModel(teams)
     {
-        comboBoxTeam.model = teams;
+        comboBoxTeam.model = teams.concat().sort(function(a,b){
+            return a.localeCompare(b);
+        });;
     }
 
     function onFootballLeagueSelected(selectedfootballLeague)
