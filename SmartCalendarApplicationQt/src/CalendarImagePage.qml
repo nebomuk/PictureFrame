@@ -28,7 +28,7 @@ CalendarImagePageForm {
         // combo box option shows a different user string from what should be sent via json
         formData.format =  OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex);
 
-        formData.timeScale = comboBoxTimeView.currentText;
+        formData.timeScale = getTimeScaleKeyForIndex(comboBoxTimeView.currentIndex);
 
         var year = new Date().getFullYear();
 
@@ -116,6 +116,23 @@ CalendarImagePageForm {
         }
     }
 
+    function getTimeScaleKeyForIndex(index)
+    {
+        // these json values are locale independent
+        if(index === 0)
+        {
+            return "Tagesansicht";
+        }
+        else if(index === 1)
+        {
+            return "Wochenansicht";
+        }
+        else if(index === 2)
+        {
+            return "Monatsansicht";
+
+        }
+    }
 
 
 }
