@@ -44,8 +44,11 @@ Dialog {
                 {
                     button.text = DateUtil.toStringWithoutYear(date)
                 }
+                else
+                {
+                    button.text = date.toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+                }
 
-                button.text = date.toLocaleDateString(Qt.locale(),Locale.ShortFormat)
             }
         }
 

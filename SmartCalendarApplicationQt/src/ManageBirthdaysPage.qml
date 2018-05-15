@@ -53,6 +53,8 @@ ManageBirthdaysPageForm {
         for (var i = 0; i < birthdayPlan.length; i++){
             addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,DateUtil.toStringWithoutYear(new Date(birthdayPlan[i].date)));
         }
+
+        sortModel()
     }
 
     // birthdate is the localized birthday string
@@ -62,7 +64,41 @@ ManageBirthdaysPageForm {
                                   "lastName":lastName,
                                   // date without year is nearly impossible to properly localize automatically
                                   "birthdate":birthdate})
+
+        sortModel()
+
+
     }
+
+    function sortModel()
+    {
+        var listModel = listView.model;
+        var n;
+        var i;
+        for (n=0; n < listModel.count; n++)
+            for (i=n+1; i < listModel.count; i++)
+            {
+                if (compareLastAndFirstNames(listModel.get(n).lastName,listModel.get(i).lastName,
+                                             listModel.get(n).firstName,listModel.get(i).firstName))
+                {
+                    listModel.move(i, n, 1);
+                    n=0;
+                }
+            }
+    }
+
+    function compareLastAndFirstNames(lastName1,lastName2,firstName1,firstName2)
+    {
+        if(lastName1 === lastName2)
+        {
+            return firstName1 > firstName2;
+        }
+        else
+        {
+            return lastName1 > lastName2;
+        }
+    }
+
 
 
     DatePickerDialog
