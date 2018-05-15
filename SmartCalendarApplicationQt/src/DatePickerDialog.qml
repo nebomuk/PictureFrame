@@ -14,6 +14,12 @@ Dialog {
     property bool yearVisible : true
     property bool dayVisible : true
 
+    readonly  property int year : datePicker.year
+    readonly  property int month: datePicker.month
+    readonly  property int day : datePicker.day
+
+    readonly property date date : datePicker.date
+
         id: dialogDatePicker
         standardButtons: Dialog.Cancel | Dialog.Ok
 

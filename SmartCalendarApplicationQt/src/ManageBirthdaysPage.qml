@@ -27,7 +27,7 @@ ManageBirthdaysPageForm {
 
     }
 
-    buttonAddEntry.onClicked: addEntry(textFieldFirstName.text,textFieldLastName.text,buttonBirthdate.text)
+    buttonAddEntry.onClicked: addEntry(textFieldFirstName.text,textFieldLastName.text,datePickerDialog.date)
 
     buttonConfirm.onClicked: {
             var newBirthdayPlan = [];
@@ -35,8 +35,7 @@ ManageBirthdaysPageForm {
             for(var i = 0; i < listView.model.count; i++)
             {
                 var item = listView.model.get(i);
-                var date =  new Date(Date.fromLocaleDateString(Qt.locale(),item.birthdate,Locale.ShortFormat));
-                newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(date)})
+                newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(item.birthdate)})
             }
             DeviceAccessor.controllerDataContainer.birthdayPlan = newBirthdayPlan;
             DeviceAccessor.sendBirthdayTable(newBirthdayPlan);
@@ -52,17 +51,18 @@ ManageBirthdaysPageForm {
 
 
         for (var i = 0; i < birthdayPlan.length; i++){
-            addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,DateUtil.toStringWithoutYear(new Date(birthdayPlan[i].date)));
+            addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,new Date(birthdayPlan[i].date));
         }
     }
 
     // birthdate is the localized birthday string
-    function addEntry(firstName,lastName,birthdate)
+    function addEntry(firstName,lastName,dateObject)
     {
         listView.model.append({"firstName" :firstName,
                                   "lastName":lastName,
                                   // date without year is nearly impossible to properly localize automatically
-                                  "birthdate":birthdate})
+                                  "birthdate":DateUtil.toStringWithoutYear(dateObject),
+                                  "dateObject": dateObject})
 
         ListModelUtil.sortModel(listView.model,compareLastAndFirstNames)
     }
@@ -91,6 +91,7 @@ ManageBirthdaysPageForm {
 
     DatePickerDialog
     {
+        id : datePickerDialog
         yearVisible: false
         button: buttonBirthdate
         x: (parent.width - width) / 2

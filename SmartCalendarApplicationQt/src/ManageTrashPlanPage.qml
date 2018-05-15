@@ -25,7 +25,7 @@ ManageTrashPlanPageForm {
 
     }
 
-    buttonAddEntry.onClicked: addEntry(textFieldTrashType.text,buttonDate.text)
+    buttonAddEntry.onClicked: addEntry(textFieldTrashType.text,datePickerDialog.date)
 
     buttonConfirm.onClicked: {
             var newTrashPlan = [];
@@ -33,8 +33,7 @@ ManageTrashPlanPageForm {
             for(var i = 0; i < listView.model.count; i++)
             {
                 var item = listView.model.get(i);
-                var date =  new Date(Date.fromLocaleDateString(Qt.locale(),item.date,Locale.ShortFormat));
-                newTrashPlan.push({"clientID":"", "trashType":item.trashType,"date":DateUtil.toShortISOString(date)})
+                newTrashPlan.push({"clientID":"", "trashType":item.trashType,"date":DateUtil.toShortISOString(item.dateObject)})
             }
             DeviceAccessor.controllerDataContainer.trashPlan = newTrashPlan;
             DeviceAccessor.sendTrashTable(newTrashPlan);
@@ -50,7 +49,7 @@ ManageTrashPlanPageForm {
 
 
         for (var i = 0; i < trashPlan.length; i++){
-            addEntry(trashPlan[i].trashType,DateUtil.toStringWithoutYear(new Date(trashPlan[i].date)));
+            addEntry(trashPlan[i].trashType,new Date(trashPlan[i].date));
         }
     }
 
@@ -58,7 +57,8 @@ ManageTrashPlanPageForm {
     function addEntry(trashType,date)
     {
         listView.model.append({"trashType" :trashType,
-                                  "date":date})
+                                  "date":DateUtil.toStringWithoutYear(date),
+                                  "dateObject":date}) // add dateObject separately because formatting function call not possible in quick ui form
 
         ListModelUtil.sortModel(listView.model,compareDate);
 
@@ -66,11 +66,12 @@ ManageTrashPlanPageForm {
 
     function compareDate(listItem1, listItem2)
     {
-        return listItem1.date > listItem2.date
+        return listItem1.dateObject > listItem2.dateObject
     }
 
     DatePickerDialog
     {
+        id : datePickerDialog
         yearVisible: false
         button: buttonDate
         x: (parent.width - width) / 2
