@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.core 1.0;
 import "DateUtil.js" as DateUtil
+import "ListModelUtil.js" as ListModelUtil
 
 ManageTrashPlanPageForm {
 
@@ -58,6 +59,14 @@ ManageTrashPlanPageForm {
     {
         listView.model.append({"trashType" :trashType,
                                   "date":date})
+
+        ListModelUtil.sortModel(listView.model,compareDate);
+
+    }
+
+    function compareDate(listItem1, listItem2)
+    {
+        return listItem1.date > listItem2.date
     }
 
     DatePickerDialog

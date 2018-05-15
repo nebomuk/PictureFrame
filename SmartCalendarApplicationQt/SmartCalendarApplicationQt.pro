@@ -165,7 +165,8 @@ DISTFILES += \
     src/DraggableItem.qml \
     src/BaseDisplayOptionsPage.qml \
     src/DeviceManagerPage.qml \
-    src/CalendarMainPage.qml
+    src/CalendarMainPage.qml \
+    src/ListModelUtil.js
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

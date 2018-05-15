@@ -50,7 +50,8 @@ Rectangle {
     function formatMonth(count, modelData)
     {
         var data = count === 12 ? modelData + 1 : modelData;
-        return new Date((new Date()).getFullYear(),data,0).toLocaleDateString(Qt.locale(), "MMMM")
+        var monthName = new Date((new Date()).getFullYear(),data,0).toLocaleDateString(Qt.locale(), "MMMM")
+        return monthName === "Jänner" ? "Januar" : monthName; // January should be Januar in all german locales
     }
 
     FontMetrics {

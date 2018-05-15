@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.core 1.0;
 import "DateUtil.js" as DateUtil
+import "ListModelUtil.js" as ListModelUtil
 
 
 
@@ -53,8 +54,6 @@ ManageBirthdaysPageForm {
         for (var i = 0; i < birthdayPlan.length; i++){
             addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,DateUtil.toStringWithoutYear(new Date(birthdayPlan[i].date)));
         }
-
-        sortModel()
     }
 
     // birthdate is the localized birthday string
@@ -65,30 +64,19 @@ ManageBirthdaysPageForm {
                                   // date without year is nearly impossible to properly localize automatically
                                   "birthdate":birthdate})
 
-        sortModel()
-
-
+        ListModelUtil.sortModel(listView.model,compareLastAndFirstNames)
     }
 
-    function sortModel()
-    {
-        var listModel = listView.model;
-        var n;
-        var i;
-        for (n=0; n < listModel.count; n++)
-            for (i=n+1; i < listModel.count; i++)
-            {
-                if (compareLastAndFirstNames(listModel.get(n).lastName,listModel.get(i).lastName,
-                                             listModel.get(n).firstName,listModel.get(i).firstName))
-                {
-                    listModel.move(i, n, 1);
-                    n=0;
-                }
-            }
-    }
 
-    function compareLastAndFirstNames(lastName1,lastName2,firstName1,firstName2)
+
+    function compareLastAndFirstNames(listItem1, listItem2)
     {
+
+        var lastName1 = listItem1.lastName;
+        var lastName2 = listItem2.lastName;
+        var firstName1 = listItem1.firstName;
+        var firstName2 = listItem2.firstName;
+
         if(lastName1 === lastName2)
         {
             return firstName1 > firstName2;
