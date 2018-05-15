@@ -14,6 +14,9 @@ Rectangle {
 
     readonly  property date date : new Date(year,month -1 /*zero indexed*/,day)
 
+    property bool yearVisible
+    property bool dayVisible
+
     onInitialYearChanged: {
                 updateYearModel();
         if(maxYear < initialYear)
@@ -103,6 +106,7 @@ Rectangle {
             }
 
             Tumbler {
+                visible: dayVisible
                 id: daysTumbler
                 model: daysInMonth(monthTumbler.currentIndex+1,(new Date()).getFullYear()) // days are zero indexed here
                 delegate: daysInMonthDelegateComponent
@@ -111,6 +115,7 @@ Rectangle {
             }
 
             Tumbler {
+                visible : yearVisible
                 id: yearTumbler
                 model: yearModel
                 delegate: yearDelegate

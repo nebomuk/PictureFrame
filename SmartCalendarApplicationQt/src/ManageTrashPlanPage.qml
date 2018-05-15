@@ -7,7 +7,7 @@ ManageTrashPlanPageForm {
 
     Component.onCompleted: {
 
-        buttonDate.text =  new Date(1980,0,1).toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+        buttonDate.text =  DateUtil.toStringWithoutYear(new Date(1980,0,1))
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
@@ -22,6 +22,14 @@ ManageTrashPlanPageForm {
             dataContainer.trashPlanChanged.connect(addTrashEntriesToModel);
         }
 
+    }
+
+    function dateToStringWithoutYear(date)
+    {
+        var numeric = { day: 'numeric', month: 'numeric', year : null };
+
+        var str =  date.toLocaleDateString(Qt.locale().name, numeric);
+        return str;
     }
 
     buttonAddEntry.onClicked: addEntry(textFieldTrashType.text,buttonDate.text)
@@ -62,6 +70,7 @@ ManageTrashPlanPageForm {
 
     DatePickerDialog
     {
+        yearVisible: false
         button: buttonDate
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2

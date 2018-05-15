@@ -10,6 +10,9 @@ Dialog {
     property int minYear : 1908
     property int maxYear : 2008
 
+    property bool yearVisible : true
+    property bool dayVisible : true
+
         id: dialogDatePicker
         standardButtons: Dialog.Cancel | Dialog.Ok
 
@@ -19,6 +22,8 @@ Dialog {
             initialYear : dialogDatePicker.initialYear
             minYear : dialogDatePicker.minYear
             maxYear : dialogDatePicker.maxYear
+            yearVisible : dialogDatePicker.yearVisible
+            dayVisible : dialogDatePicker.dayVisible
         }
 
         Connections

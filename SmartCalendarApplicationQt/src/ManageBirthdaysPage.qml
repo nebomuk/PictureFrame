@@ -67,6 +67,7 @@ ManageBirthdaysPageForm {
 
     DatePickerDialog
     {
+        yearVisible: false
         button: buttonBirthdate
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
