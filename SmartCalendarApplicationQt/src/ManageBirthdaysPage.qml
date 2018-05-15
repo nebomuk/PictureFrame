@@ -9,7 +9,7 @@ ManageBirthdaysPageForm {
 
     Component.onCompleted: {
 
-        buttonBirthdate.text =  new Date(1980,0,1).toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+        buttonBirthdate.text =  DateUtil.toStringWithoutYear(new Date(1980,0,1))
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
@@ -51,7 +51,7 @@ ManageBirthdaysPageForm {
 
 
         for (var i = 0; i < birthdayPlan.length; i++){
-            addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,new Date(birthdayPlan[i].date).toLocaleDateString(Qt.locale(),Locale.ShortFormat));
+            addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,DateUtil.toStringWithoutYear(new Date(birthdayPlan[i].date)));
         }
     }
 

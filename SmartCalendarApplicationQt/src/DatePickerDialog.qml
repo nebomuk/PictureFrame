@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.3
+import "DateUtil.js" as DateUtil
 
 
 // a date picker dialog that writes the date on a button and can be opened using a button
@@ -38,8 +39,13 @@ Dialog {
             target : dialogDatePicker
             onAccepted : {
 
-                button.text = (new Date(datePicker.year,datePicker.month,datePicker.day))
-                .toLocaleDateString(Qt.locale(),Locale.ShortFormat)
+                var date = new Date(datePicker.year,datePicker.month,datePicker.day);
+                if(!yearVisible)
+                {
+                    button.text = DateUtil.toStringWithoutYear(date)
+                }
+
+                button.text = date.toLocaleDateString(Qt.locale(),Locale.ShortFormat)
             }
         }
 

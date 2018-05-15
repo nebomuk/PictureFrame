@@ -24,14 +24,6 @@ ManageTrashPlanPageForm {
 
     }
 
-    function dateToStringWithoutYear(date)
-    {
-        var numeric = { day: 'numeric', month: 'numeric', year : null };
-
-        var str =  date.toLocaleDateString(Qt.locale().name, numeric);
-        return str;
-    }
-
     buttonAddEntry.onClicked: addEntry(textFieldTrashType.text,buttonDate.text)
 
     buttonConfirm.onClicked: {
@@ -57,7 +49,7 @@ ManageTrashPlanPageForm {
 
 
         for (var i = 0; i < trashPlan.length; i++){
-            addEntry(trashPlan[i].trashType,new Date(trashPlan[i].date).toLocaleDateString(Qt.locale(),Locale.ShortFormat));
+            addEntry(trashPlan[i].trashType,DateUtil.toStringWithoutYear(new Date(trashPlan[i].date)));
         }
     }
 
