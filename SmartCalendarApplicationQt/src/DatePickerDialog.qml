@@ -7,6 +7,7 @@ import "DateUtil.js" as DateUtil
 Dialog {
 
     property Button button
+
     property int initialYear : 1980
     property int minYear : 1908
     property int maxYear : 2008
@@ -18,7 +19,8 @@ Dialog {
     readonly  property int month: datePicker.month
     readonly  property int day : datePicker.day
 
-    readonly property date date : datePicker.date
+    // must be var, not date for binding to work
+    readonly property var date : datePicker.date
 
         id: dialogDatePicker
         standardButtons: Dialog.Cancel | Dialog.Ok

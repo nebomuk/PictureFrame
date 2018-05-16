@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
@@ -10,7 +11,7 @@ ManageBirthdaysPageForm {
 
     Component.onCompleted: {
 
-        buttonBirthdate.text =  DateUtil.toStringWithoutYear(new Date(1980,0,1))
+        buttonBirthdate.text = qsTr("Birthdate");
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
@@ -25,9 +26,48 @@ ManageBirthdaysPageForm {
             dataContainer.birthdayPlanChanged.connect(addBirthdaysToModel);
         }
 
+        buttonAddEntry.enabled = Qt.binding(function() {
+          return buttonBirthdate.text !== qsTr("Birthdate") && textFieldLastName.text.length > 0 && textFieldFirstName.text.length > 0;
+        }
+        );
+
     }
 
-    buttonAddEntry.onClicked: addEntry(textFieldFirstName.text,textFieldLastName.text,datePickerDialog.date)
+    MessageDialog {
+         id : dialogPersonExists
+         buttons: MessageDialog.Ok
+         title : qsTr("Error")
+         text: qsTr("A person with the same name and birthdate already exists")
+     }
+
+    buttonAddEntry.onClicked: {
+
+        if(!listModelContains(textFieldFirstName.text,textFieldLastName.text,datePickerDialog.date))
+        {
+            addEntry(textFieldFirstName.text,textFieldLastName.text,datePickerDialog.date)
+            buttonBirthdate.text = qsTr("Birthdate");
+        }
+        else
+        {
+            dialogPersonExists.open();
+        }
+    }
+
+    function listModelContains(firstName,lastName,date)
+    {
+        for(var i = 0; i < listView.model.count; ++i)
+        {
+            var item = listView.model.get(i);
+            if (item.firstName === firstName
+                    && item.lastName === lastName
+                    && item.dateObject.getDay() === date.getDay()
+                    && item.dateObject.getMonth() === date.getMonth())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     buttonConfirm.onClicked: {
             var newBirthdayPlan = [];

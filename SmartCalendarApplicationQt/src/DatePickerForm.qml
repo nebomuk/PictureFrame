@@ -12,10 +12,18 @@ Rectangle {
     readonly  property int month: monthTumbler.currentIndex // starts with 0 for January .. 11 for December like javascript
     readonly  property int day : daysTumbler.currentIndex + 1 // the day of the month 1..31
 
-    readonly  property date date : new Date(year,month  /*zero indexed*/,day)
+    // must be var, not date for binding to work
+    /*treated as readonly*/ property var date
 
     property bool yearVisible
     property bool dayVisible
+
+    Component.onCompleted:
+    {
+        date = Qt.binding(function() {
+            return new Date(year,month  /*zero indexed*/,day);
+        })
+    }
 
     onInitialYearChanged: {
                 updateYearModel();

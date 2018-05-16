@@ -86,8 +86,6 @@ Page {
             Layout.columnSpan: 3
             id: buttonAddEntry
             text: qsTr("Add Entry")
-            enabled: textFieldFirstName.text.length > 0
-                     && textFieldLastName.text.length > 0
         }
 
         Label {
