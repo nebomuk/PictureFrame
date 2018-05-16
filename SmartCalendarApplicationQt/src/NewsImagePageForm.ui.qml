@@ -30,6 +30,7 @@ ConfirmationPage {
         StringXmlResourceComboBox
         {
             id : comboBoxoption
+            Layout.preferredWidth: 200
             attributeName: "newsViewSpinnerArray"
 
         }
@@ -43,6 +44,7 @@ ConfirmationPage {
         StringXmlResourceComboBox
         {
             id : comboBoxsource
+            Layout.preferredWidth: 200
             attributeName : "newsCategorySpinnerArray"
 
         }
@@ -55,6 +57,7 @@ ConfirmationPage {
         StringXmlResourceComboBox
         {
             id : comboBoxdesign
+            Layout.preferredWidth: 200
             attributeName: "newsDesignSpinnerArray"
 
         }

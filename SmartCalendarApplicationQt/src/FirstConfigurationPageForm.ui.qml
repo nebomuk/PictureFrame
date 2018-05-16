@@ -64,6 +64,7 @@ Page {
         TextField {
             id: textFieldWifiPassword
             echoMode: TextInput.Password
+            passwordCharacter: "*" // default character too large on some devices
 
         }
     }
