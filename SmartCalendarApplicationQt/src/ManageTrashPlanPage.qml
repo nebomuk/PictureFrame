@@ -47,6 +47,7 @@ ManageTrashPlanPageForm {
         //dataContainer.disconnect(addTrashEntriesToModel);
         var trashPlan = dataContainer.trashPlan;
 
+        listView.model.clear();
 
         for (var i = 0; i < trashPlan.length; i++){
             addEntry(trashPlan[i].trashType,new Date(trashPlan[i].date));

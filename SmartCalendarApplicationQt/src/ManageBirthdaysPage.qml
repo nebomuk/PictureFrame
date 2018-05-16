@@ -32,6 +32,8 @@ ManageBirthdaysPageForm {
     buttonConfirm.onClicked: {
             var newBirthdayPlan = [];
 
+
+
             for(var i = 0; i < listView.model.count; i++)
             {
                 var item = listView.model.get(i);
@@ -48,7 +50,7 @@ ManageBirthdaysPageForm {
         var dataContainer = DeviceAccessor.controllerDataContainer;
         //dataContainer.disconnect(addBirthdaysToModel);
         var birthdayPlan = dataContainer.birthdayPlan;
-
+        listView.model.clear();
 
         for (var i = 0; i < birthdayPlan.length; i++){
             addEntry(birthdayPlan[i].firstName,birthdayPlan[i].name,new Date(birthdayPlan[i].date));
