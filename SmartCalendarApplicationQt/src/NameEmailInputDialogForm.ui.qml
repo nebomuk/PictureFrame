@@ -13,6 +13,8 @@ Dialog {
 
     contentWidth: view.width
 
+
+
     GridLayout
     {
         id : view
@@ -44,6 +46,7 @@ Dialog {
         {
             id : textFieldEmail
             Layout.fillWidth: true
+            inputMethodHints: Qt.ImhEmailCharactersOnly
 
         }
 

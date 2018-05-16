@@ -1,15 +1,25 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.3
+
 
 Page {
     id: page
 
+    padding: 20
+
     property alias listModel: listModel
+
+    property alias addButton: addButton
 
     title: qsTr("Define Persons")
 
+
+
     signal listIndexClicked(int index);
+
+
 
     ListModel {
             id: listModel
@@ -57,7 +67,7 @@ Page {
 
                                     RemoveButton
                                     {
-                                        listModel: listModel
+                                        listModel: listView.model
                                     }
                                     Connections
                                     {
@@ -96,6 +106,21 @@ Page {
                 }
             }
     }
+
+        // must be on top of other items
+        RoundButton {
+            id : addButton
+
+            icon
+            {
+                source : "qrc:/icon/add.svg"
+                color : "white"
+            }
+
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            Material.background: Material.Pink
+        }
 
 
 }

@@ -12,26 +12,44 @@ DefinePersonsPageForm {
         dialog.textFieldEmail.text = item.email
         dialog.textFieldName.text =  item.name
         dialog.open();
-        dialog.indexOfItemCurrentlyEdited = index;
+        dialog.editedItemIndex = index;
 
     }
+
+    addButton.onClicked: {
+        dialog.editedItemIndex = dialog.indexAddItem
+        dialog.open()
+    }
+
+
 
 
     NameEmailInputDialog
     {
         id : dialog
 
-        property int indexOfItemCurrentlyEdited : -1
+        readonly property int indexUndefined  : -1
+        readonly property int indexAddItem : -2
+
+
+        property int editedItemIndex
+
+        Component.onCompleted: editedItemIndex = indexUndefined;
 
 
         onAccepted: {
-            if(indexOfItemCurrentlyEdited === -1)
-            {
-                return;
-            }
-            listModel.set(indexOfItemCurrentlyEdited,{"name":textFieldName.text, "email":textFieldEmail.text})
 
-            indexOfItemCurrentlyEdited = -1;
+            if(editedItemIndex > 0)
+            {
+                listModel.set(editedItemIndex,{"name":textFieldName.text, "email":textFieldEmail.text})
+            }
+            else if (editedItemIndex === indexAddItem)
+            {
+                listModel.append({"name":textFieldName.text, "email":textFieldEmail.text});
+            }
+
+            editedItemIndex = indexUndefined;
+
         }
 
         x: (parent.width - width) / 2

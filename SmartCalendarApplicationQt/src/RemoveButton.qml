@@ -8,6 +8,7 @@ Button
     property ListModel listModel
 
     id : removeEntryButton
+    // @disable-check M17
     icon.source : "qrc:/icon/trash.svg"
 
 

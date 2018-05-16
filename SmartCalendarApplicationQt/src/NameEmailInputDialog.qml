@@ -6,4 +6,14 @@ import QtQuick.Controls 2.3
 NameEmailInputDialogForm {
 
     id : dialog
+
+    Component.onCompleted:
+    {
+        var button = standardButton(Dialog.Ok);
+        button.enabled = Qt.binding(function() {
+        return textFieldName.text.length > 0 && textFieldEmail.length > 0;
+        });
+
+
+    }
 }

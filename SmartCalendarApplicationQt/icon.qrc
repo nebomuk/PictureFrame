@@ -5,5 +5,6 @@
         <file>icon/trash.svg</file>
         <file>icon/arrow-left.svg</file>
         <file>icon/refresh.svg</file>
+        <file>icon/add.svg</file>
     </qresource>
 </RCC>
