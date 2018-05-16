@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import de.vitecvisual.core 1.0;
+import Qt.labs.platform 1.0
 
 
 DefinePersonsPageForm {
@@ -22,6 +23,12 @@ DefinePersonsPageForm {
     }
 
 
+    MessageDialog {
+         id : dialogEmailExists
+         buttons: MessageDialog.Ok
+         title : qsTr("Error")
+         text: qsTr("The Email Address of the person you entered already exists")
+     }
 
 
     NameEmailInputDialog
@@ -39,13 +46,20 @@ DefinePersonsPageForm {
 
         onAccepted: {
 
-            if(editedItemIndex > 0)
+            if(listModelContains(textFieldEmail.text))
             {
-                listModel.set(editedItemIndex,{"name":textFieldName.text, "email":textFieldEmail.text})
+                dialogEmailExists.open();
             }
-            else if (editedItemIndex === indexAddItem)
+            else
             {
-                listModel.append({"name":textFieldName.text, "email":textFieldEmail.text});
+                if(editedItemIndex > 0)
+                {
+                    listModel.set(editedItemIndex,{"name":textFieldName.text, "email":textFieldEmail.text})
+                }
+                else if (editedItemIndex === indexAddItem)
+                {
+                    listModel.append({"name":textFieldName.text, "email":textFieldEmail.text});
+                }
             }
 
             editedItemIndex = indexUndefined;
@@ -54,6 +68,18 @@ DefinePersonsPageForm {
 
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
+    }
+
+    function listModelContains(emailAddress)
+    {
+      for(var i = 0; i < listModel.count; ++i)
+      {
+          if (listModel.get(i).email === emailAddress)
+          {
+              return true;
+          }
+      }
+      return false;
     }
 
 

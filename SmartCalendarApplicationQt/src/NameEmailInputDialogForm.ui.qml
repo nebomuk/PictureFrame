@@ -48,6 +48,8 @@ Dialog {
             Layout.fillWidth: true
             inputMethodHints: Qt.ImhEmailCharactersOnly
 
+            validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
+
         }
 
     }
