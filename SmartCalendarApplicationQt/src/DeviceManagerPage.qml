@@ -65,6 +65,8 @@ MessageDialog {
         findAndConnect()
     }
 
+    refreshButton.onClicked: findAndConnect();
+
     property var devicesFromUdpBroadcast
 
     function findAndConnect()
@@ -144,6 +146,7 @@ MessageDialog {
         var productPassword = page.textFieldProductPassword.text
 
         insertDbEntry(productName,page.productId, productPassword);
+        stackView.pop();
     }
 
     function updateListViews()
