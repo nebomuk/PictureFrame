@@ -35,7 +35,7 @@ ManageBirthdaysPageForm {
             for(var i = 0; i < listView.model.count; i++)
             {
                 var item = listView.model.get(i);
-                newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(item.birthdate)})
+                newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(item.dateObject)})
             }
             DeviceAccessor.controllerDataContainer.birthdayPlan = newBirthdayPlan;
             DeviceAccessor.sendBirthdayTable(newBirthdayPlan);
