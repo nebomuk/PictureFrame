@@ -13,10 +13,12 @@ BaseDisplayOptionsPageForm {
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
-        spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
 
-        radioButtonautomatedDisplayBrightness.checked = dataContainer.displayOptions.automatedDisplayBrightness;
-        radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay;
+        radioButtonautomatedDisplayBrightness.checked = dataContainer.displayOptions.automatedDisplayBrightness === 1;
+        radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay === 1;
+
+
+        spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
 
         var firstIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
         var firstIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
