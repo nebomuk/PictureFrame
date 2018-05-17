@@ -45,7 +45,6 @@
         <file>src/DraggableItem.qml</file>
         <file>src/DatePickerForm.qml</file>
         <file>src/DatePickerDialog.qml</file>
-        <file>Strings.xml</file>
         <file>src/StringXmlResourceModel.qml</file>
         <file>src/StringXmlResourceComboBox.qml</file>
         <file>src/NameEmailInputDialog.qml</file>

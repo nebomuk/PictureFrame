@@ -67,6 +67,7 @@ Page {
             id: savedDevicesListView
             height: 200
             width: parent.width
+            interactive: false
 
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 

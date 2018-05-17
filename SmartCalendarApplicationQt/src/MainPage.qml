@@ -16,10 +16,5 @@ MainPageForm {
         stackView.push("CalendarMainPage.qml")
     }
 
-
-
-
-
-
 }
 

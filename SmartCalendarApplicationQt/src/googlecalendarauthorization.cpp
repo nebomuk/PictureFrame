@@ -13,9 +13,9 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
         &QDesktopServices::openUrl);
 
     authorizationFlow->setAuthorizationUrl(QUrl("https://accounts.google.com/o/oauth2/auth"));
-    authorizationFlow->setClientIdentifier("542791953489-edliucps63oe1s1l8gjm71m530etj2u2.apps.googleusercontent.com");
+    authorizationFlow->setClientIdentifier("519174763143-12v9kv06h4rm6aehp67cfv3gg9gerji8.apps.googleusercontent.com");
     authorizationFlow->setAccessTokenUrl(QUrl("https://accounts.googlew.com/o/oauth2/token"));
-    authorizationFlow->setClientIdentifierSharedKey("ab86T7E5asOARnhPVD5Bpwhu");
+    authorizationFlow->setClientIdentifierSharedKey("iVLAK5S6c5huXjgRCwdJ8OXl");
 
     QOAuthHttpServerReplyHandler * replyHandler = new QOAuthHttpServerReplyHandler(49517, this);
     replyHandler->setCallbackPath("Callback/");

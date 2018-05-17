@@ -18,7 +18,8 @@ BaseDisplayOptionsPageForm {
         radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay === 1;
 
 
-        spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
+        // FIXME on java app, fixedDisplayBrightness is always undefined
+        //spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
 
         var firstIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
         var firstIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
