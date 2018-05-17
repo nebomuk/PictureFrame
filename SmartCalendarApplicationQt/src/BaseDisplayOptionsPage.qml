@@ -14,7 +14,6 @@ BaseDisplayOptionsPageForm {
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
         spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
-        comboBoxdisplaySensibilityLevel.currentIndex = dataContainer.displayOptions.displaySensibilityLevel;
 
         radioButtonautomatedDisplayBrightness.checked = dataContainer.displayOptions.automatedDisplayBrightness;
         radioButtonpermanentActiveDisplay.checked = dataContainer.displayOptions.permanentActiveDisplay;
@@ -62,11 +61,11 @@ BaseDisplayOptionsPageForm {
 
         var displayOptions = DeviceAccessor.controllerDataContainer.displayOptions;
 
-        displayOptions.fixedDisplayBrightness = spinBoxfixedDisplayBrightness.value
-        displayOptions.displaySensibilityLevel = comboBoxdisplaySensibilityLevel.currentIndex
+        displayOptions.fixedDisplayBrightness = !radioButtonautomatedDisplayBrightness.checked ? spinBoxfixedDisplayBrightness.value : 0;
+        displayOptions.automatedDisplayBrightness = radioButtonautomatedDisplayBrightness.checked ? 1 : 0;
 
-        displayOptions.automatedDisplayBrightness = radioButtonautomatedDisplayBrightness.checked
-        displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked
+        displayOptions.displaySensibilityLevel = !radioButtonpermanentActiveDisplay.checked  ? 1 : 0; // ui renamed to "auto"
+        displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked ? 1 : 0;
 
             if(checkBoxButtonWorkingDay.checked)
             {

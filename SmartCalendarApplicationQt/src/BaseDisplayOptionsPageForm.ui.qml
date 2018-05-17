@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
+    padding: 20
+
     title: qsTr("Display Options")
 
     property alias buttonWorkingDayStart  : buttonWorkingDayStart
@@ -21,7 +23,6 @@ Page {
 
 
     property alias spinBoxfixedDisplayBrightness : spinBoxfixedDisplayBrightness
-    property alias comboBoxdisplaySensibilityLevel : comboBoxdisplaySensibilityLevel
 
     property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
     property alias radioButtonpermanentActiveDisplay :  radioButtonpermanentActiveDisplay
@@ -59,7 +60,6 @@ Page {
 
         SpinBox {
             id : spinBoxfixedDisplayBrightness
-            Layout.fillWidth: true
             enabled: radioButtonfixedDisplayBrightness.checked
             from: 10
             value: 10
@@ -89,15 +89,8 @@ Page {
 
             id: radioButtondisplaySensibilityLevel
             text: qsTr("Auto")
+            Layout.columnSpan: 2
             ButtonGroup.group: activationGroup
-        }
-
-        // TODO remove
-        ExtendedComboBox {
-            id : comboBoxdisplaySensibilityLevel
-            model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
-            Layout.fillWidth: true
-            enabled: radioButtondisplaySensibilityLevel.checked
         }
 
         RadioButton {
