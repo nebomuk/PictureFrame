@@ -72,8 +72,6 @@ ManageBirthdaysPageForm {
     buttonConfirm.onClicked: {
             var newBirthdayPlan = [];
 
-
-
             for(var i = 0; i < listView.model.count; i++)
             {
                 var item = listView.model.get(i);

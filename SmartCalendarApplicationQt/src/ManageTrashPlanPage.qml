@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.core 1.0;
+import Qt.labs.platform 1.0
+
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
 
@@ -8,7 +10,7 @@ ManageTrashPlanPageForm {
 
     Component.onCompleted: {
 
-        buttonDate.text =  DateUtil.toStringWithoutYear(new Date(1980,0,1))
+        buttonDate.text =  qsTr("Date")
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
 
@@ -23,9 +25,49 @@ ManageTrashPlanPageForm {
             dataContainer.trashPlanChanged.connect(addTrashEntriesToModel);
         }
 
+        buttonAddEntry.enabled = Qt.binding(function() {
+          return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
+        }
+        );
+
     }
 
-    buttonAddEntry.onClicked: addEntry(textFieldTrashType.text,datePickerDialog.date)
+    MessageDialog {
+         id : dialogExists
+         buttons: MessageDialog.Ok
+         title : qsTr("Error")
+         text: qsTr("A trash plan entry with the same name and date already exists")
+     }
+
+
+
+    buttonAddEntry.onClicked: {
+
+        if(!listModelContains(textFieldTrashType.text,datePickerDialog.date))
+        {
+            addEntry(textFieldTrashType.text,datePickerDialog.date)
+            buttonDate.text = qsTr("Date");
+        }
+        else
+        {
+            dialogExists.open();
+        }
+    }
+
+    function listModelContains(trashType,date)
+    {
+        for(var i = 0; i < listView.model.count; ++i)
+        {
+            var item = listView.model.get(i);
+            if (item.trashType === trashType
+                    && item.dateObject.getDay() === date.getDay()
+                    && item.dateObject.getMonth() === date.getMonth())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     buttonConfirm.onClicked: {
             var newTrashPlan = [];

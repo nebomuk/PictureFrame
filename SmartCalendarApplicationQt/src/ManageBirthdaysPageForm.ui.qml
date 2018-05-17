@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
+    padding: 20
 
 
     title: qsTr("Manage Birthdays")

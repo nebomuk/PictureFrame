@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-
+    padding: 20
 
     property alias textFieldTrashType: textFieldTrashType
 
@@ -52,7 +52,6 @@ Page {
             Layout.columnSpan: 2
             id: buttonAddEntry
             text: qsTr("Add Entry")
-            enabled: textFieldTrashType.text.length > 0
         }
 
         ListView
