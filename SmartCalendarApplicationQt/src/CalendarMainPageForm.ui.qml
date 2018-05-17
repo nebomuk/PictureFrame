@@ -51,6 +51,8 @@ Page {
                                     SpinBox {
                                         id : spinBox
                                         value : model.displayTimeInSeconds
+                                        from : 5
+                                        to : 100
 
                                         // bind two way
                                         Connections {

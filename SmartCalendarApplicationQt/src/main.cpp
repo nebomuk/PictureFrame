@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QCoreApplication::setApplicationName("Smart Calendar Application");
+    QCoreApplication::setApplicationName("Smart Calendar Thync");
 
     // QApplication is required for the QWidget based Qml.labs message dialog on desktops,
     // but QApplication will use desktop style instead of material style

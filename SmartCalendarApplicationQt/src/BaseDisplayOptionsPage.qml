@@ -57,6 +57,9 @@ BaseDisplayOptionsPageForm {
     }
 
     buttonConfirm.onClicked: {
+
+        // checked radio button is 1, the other one is 0
+
         var displayOptions = DeviceAccessor.controllerDataContainer.displayOptions;
 
         displayOptions.fixedDisplayBrightness = spinBoxfixedDisplayBrightness.value

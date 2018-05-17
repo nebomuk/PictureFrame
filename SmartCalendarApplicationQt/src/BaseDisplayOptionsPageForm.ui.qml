@@ -47,6 +47,8 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
+        // when auto, send 1 for auto, 0 for fixed,
+        // when fixed, send 0 for auto, value for fixed
         ButtonGroup { id: displayBrightnessGroup }
 
         RadioButton {
@@ -68,7 +70,7 @@ Page {
         RadioButton {
             id : radioButtonautomatedDisplayBrightness
             Layout.columnSpan: 2
-            text: qsTr("Automatic")
+            text: qsTr("Auto")
             ButtonGroup.group: displayBrightnessGroup
         }
 
@@ -79,16 +81,18 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
+        // checked radio button is 1, the other one is 0
         ButtonGroup { id: activationGroup }
 
 
         RadioButton {
 
             id: radioButtondisplaySensibilityLevel
-            text: qsTr("Sensibility")
+            text: qsTr("Auto")
             ButtonGroup.group: activationGroup
         }
 
+        // TODO remove
         ExtendedComboBox {
             id : comboBoxdisplaySensibilityLevel
             model: [qsTr("Low"), qsTr("Average"), qsTr("High")]
@@ -118,7 +122,7 @@ Page {
 
         RowLayout {
             Layout.fillWidth: false
-            enabled: checkBoxButtonWorkingDay.checked
+            visible: checkBoxButtonWorkingDay.checked
             Button {
                 id: buttonWorkingDayStart
             }
@@ -143,7 +147,7 @@ Page {
         }
 
         RowLayout {
-            enabled: checkBoxButtonWeekend.checked
+            visible: checkBoxButtonWeekend.checked
             Button {
                 id: buttonWeekendStart
             }
