@@ -49,7 +49,10 @@ ApplicationWindow {
 
         ToolButton {
             id: toolButton
-            icon.source :  "qrc:/icon/arrow-left.svg"
+            icon
+            {
+                source :  "qrc:/icon/arrow-left.svg"
+            }
             display: stackView.depth > 1 ? AbstractButton.IconOnly : AbstractButton.TextOnly
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
@@ -65,6 +68,16 @@ ApplicationWindow {
             anchors.centerIn: parent
             font.pointSize: 20
                }
+
+        ToolButton {
+            id : doneButton
+            visible: stackView.depth > 1
+            anchors.right : parent.right
+            icon
+            {
+                source : "qrc:/icon/done.svg"
+            }
+        }
         }
 
     footer: Label {

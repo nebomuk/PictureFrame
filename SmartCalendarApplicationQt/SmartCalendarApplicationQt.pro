@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent svg networkauth mqtt #xmlpatterns xml // required for xmlListModel?
+QT += quick core gui network concurrent svg networkauth mqtt  xmlpatterns xml #required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs

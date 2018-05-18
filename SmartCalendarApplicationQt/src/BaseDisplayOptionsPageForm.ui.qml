@@ -107,7 +107,7 @@ Page {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
-        CheckBox {
+        Switch {
             Layout.columnSpan: 2
             id: checkBoxButtonWorkingDay
             text: qsTr("Working Day")
@@ -132,7 +132,7 @@ Page {
             }
         }
 
-        CheckBox {
+        Switch {
             Layout.columnSpan: 2
 
             id: checkBoxButtonWeekend

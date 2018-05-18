@@ -50,17 +50,17 @@ Page {
             id: buttonManageTrash
             text: qsTr("Manage Trash")
         }
-        CheckBox {
+        Switch {
             id : checkBoxShowBirthdays
             checked: false
             text: qsTr("Show birthdays")
         }
-        CheckBox {
+        Switch {
             id : checkBoxShowNationalHolidays
             checked: false
             text: qsTr("Show national holidays")
         }
-        CheckBox {
+        Switch {
             id : checkBoxShowTrashPlan
             checked: false
             text: qsTr("Show trash plan")
