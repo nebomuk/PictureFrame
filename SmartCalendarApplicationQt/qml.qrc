@@ -58,5 +58,6 @@
         <file>src/OptionComboBoxUtil.js</file>
         <file>src/Object.qml</file>
         <file>src/ListModelUtil.js</file>
+        <file>src/SignalUtil.js</file>
     </qresource>
 </RCC>

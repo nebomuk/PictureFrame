@@ -4,7 +4,7 @@ import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
-
+import "SignalUtil.js" as SignalUtil
 
 
 ManageBirthdaysPageForm {
@@ -23,7 +23,7 @@ ManageBirthdaysPageForm {
         else
         {
             DeviceAccessor.queryBirthdayPlan();
-            dataContainer.birthdayPlanChanged.connect(addBirthdaysToModel);
+            SignalUtil.connectOnce(dataContainer.birthdayPlanChanged,addBirthdaysToModel);
         }
 
         buttonAddEntry.enabled = Qt.binding(function() {
@@ -78,7 +78,7 @@ ManageBirthdaysPageForm {
             }
             DeviceAccessor.controllerDataContainer.birthdayPlan = newBirthdayPlan;
             DeviceAccessor.sendBirthdayTable(newBirthdayPlan);
-
+            stackView.pop();
     }
 
     function addBirthdaysToModel()

@@ -5,6 +5,8 @@ import Qt.labs.platform 1.0
 
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
+import "SignalUtil.js" as SignalUtil
+
 
 ManageTrashPlanPageForm {
 
@@ -22,15 +24,13 @@ ManageTrashPlanPageForm {
         else
         {
             DeviceAccessor.queryTrashPlan();
-            dataContainer.trashPlanChanged.connect(addTrashEntriesToModel);
+            SignalUtil.connectOnce(dataContainer.trashPlanChanged,addTrashEntriesToModel);
         }
 
         buttonAddEntry.enabled = Qt.binding(function() {
           return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
         }
         );
-
-        //buttonDone.clicked.connect(onDoneClicked);
     }
 
     MessageDialog {
@@ -80,7 +80,7 @@ ManageTrashPlanPageForm {
             }
             DeviceAccessor.controllerDataContainer.trashPlan = newTrashPlan;
             DeviceAccessor.sendTrashTable(newTrashPlan);
-
+            stackView.pop();
     }
 
     function addTrashEntriesToModel()

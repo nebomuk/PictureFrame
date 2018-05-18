@@ -14,8 +14,6 @@ Page {
 
     property alias listView: listView
 
-    property alias buttonConfirm: buttonConfirm
-
     property alias buttonAddEntry: buttonAddEntry
 
     title: qsTr("Manage Trash Plan")
@@ -92,13 +90,5 @@ Page {
         }
     }
 
-    Button {
-        id: buttonConfirm
-        text: qsTr("Confirm")
-        anchors.right: parent.right
-        anchors.rightMargin: 80
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 80
-    }
 
 }

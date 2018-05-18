@@ -18,8 +18,6 @@ Page {
 
     property alias listView: listView
 
-    property alias buttonConfirm: buttonConfirm
-
     property alias buttonAddEntry: buttonAddEntry
 
     GridLayout {
@@ -140,14 +138,5 @@ Page {
 
         }
 
-    }
-
-    Button {
-        id: buttonConfirm
-        text: qsTr("Confirm")
-        anchors.right: parent.right
-        anchors.rightMargin: 80
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 80
     }
 }
