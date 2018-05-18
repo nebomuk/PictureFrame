@@ -19,9 +19,6 @@ Page {
     property alias buttonWeekendStart2     : buttonWeekendStart2
     property alias buttonWeekendEnd2       : buttonWeekendEnd2
 
-    property alias buttonConfirm : buttonConfirm
-
-
     property alias spinBoxfixedDisplayBrightness : spinBoxfixedDisplayBrightness
 
     property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
@@ -156,14 +153,5 @@ Page {
                 id: buttonWeekendEnd2
             }
         }
-    }
-
-    Button {
-        id: buttonConfirm
-        text: qsTr("Confirm")
-        anchors.right: parent.right
-        anchors.rightMargin: 80
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 80
     }
 }

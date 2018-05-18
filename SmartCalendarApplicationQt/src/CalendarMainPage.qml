@@ -209,11 +209,6 @@ CalendarMainPageForm
 
     }
 
-    Component.onCompleted:
-    {
-        buttonDone.clicked.connect(onDoneClicked);
-    }
-
      function onDoneClicked() {
 
         DeviceAccessor.clearLocalImageCache();
@@ -258,7 +253,7 @@ CalendarMainPageForm
             }
         }
         listModel.clear();
-        stackView.pop();
+
         // FIXME, transaction when storing images? should not overwrite old ControllerDataContainer immediately but only part of it
         // 2 possibilities: use SQLite in memory :memory: database or overwrite old instance of ControllerDataContainer with new one
         // when the transaction finished (simpler)

@@ -20,10 +20,8 @@ CinemaImagePageForm {
          comboBoxcountry.initialText = formData.country
         }
 
-        buttonDone.clicked.connect(onDoneClicked);
-
-
     }
+
 
     function onDoneClicked()  {
 

@@ -14,11 +14,6 @@ FirstConfigurationPageForm {
 
     }
 
-    Component.onCompleted:
-    {
-        buttonDone.clicked.connect(onDoneClicked);
-    }
-
     MessageDialog {
           id : msgDialogDeviceRestart
           title:  qsTr("Device Restart")

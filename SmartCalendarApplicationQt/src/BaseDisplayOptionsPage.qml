@@ -42,7 +42,7 @@ BaseDisplayOptionsPageForm {
             buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
             buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
 
-        buttonDone.clicked.connect(onDoneClicked);
+        //buttonDone.clicked.connect(onDoneClicked);
     }
 
     // input from json format:

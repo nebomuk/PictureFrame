@@ -23,9 +23,6 @@ FootballImagePageForm {
             comboBoxTeam.initialText = formData.team
             comboBoxLeague.initialText = formData.league
         }
-
-        buttonDone.clicked.connect(onDoneClicked);
-
     }
 
     function onDoneClicked()  {
@@ -48,6 +45,12 @@ FootballImagePageForm {
 
     function setTeamComboBoxModel(teams)
     {
+        if(teams === undefined)
+        {
+            console.warn("cannot set team as combo box model. teams was not received via mqtt.")
+            return;
+        }
+
         comboBoxTeam.model = teams.concat().sort(function(a,b){
             return a.localeCompare(b);
         });;

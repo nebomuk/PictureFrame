@@ -23,8 +23,6 @@ NewsImagePageForm {
             comboBoxsource.initialText = formData.source
             //comboBoxoption.currentIndex = optionModel.formData.option
         }
-        buttonDone.clicked.connect(onDoneClicked);
-
     }
 
     function onDoneClicked()  {

@@ -69,18 +69,24 @@ ApplicationWindow {
             text: stackView.currentItem.title
             anchors.centerIn: parent
             font.pointSize: 20
-               }
+        }
 
         ToolButton {
             id : buttonDone
-            visible: stackView.depth > 1
+            visible: stackView.depth > 1 && typeof stackView.currentItem.onDoneClicked === "function"
             anchors.right : parent.right
             icon
             {
                 source : "qrc:/icon/done.svg"
             }
+
+            onClicked: {
+                if (typeof stackView.currentItem.onDoneClicked === "function") {
+                    stackView.currentItem.onDoneClicked();
+                }
+            }
         }
-        }
+    }
 
     footer: Label {
             text : "Copyright © 2018 ViTec - Visual Solutions"

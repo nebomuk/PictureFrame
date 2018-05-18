@@ -20,8 +20,6 @@ CalendarImagePageForm {
         // FIXME implementation stub
         // should set the other stuff from formData
 
-        buttonDone.clicked.connect(onDoneClicked);
-
     }
 
     function onDoneClicked() {

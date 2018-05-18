@@ -4,6 +4,9 @@ import QtQuick.Controls 2.3
 Page {
     
 
+    property alias baseCalendarOptionsPage: baseCalendarOptionsPage
+    property alias baseDisplayOptionsPage: baseDisplayOptionsPage
+
 
     title: qsTr("Base Options")
 
@@ -15,11 +18,12 @@ Page {
 
         BaseCalendarOptionsPage
         {
+            id : baseCalendarOptionsPage
 
         }
         BaseDisplayOptionsPage
         {
-
+            id : baseDisplayOptionsPage
         }
     }
 

@@ -16,8 +16,6 @@ Page {
 
     property alias buttonManageTrash: buttonManageTrash
 
-    property alias buttonConfirm : buttonConfirm
-
       property alias  checkBoxShowBirthdays : checkBoxShowBirthdays
     property alias checkBoxShowNationalHolidays : checkBoxShowNationalHolidays
     property alias checkBoxShowTrashPlan : checkBoxShowTrashPlan
@@ -66,14 +64,4 @@ Page {
             text: qsTr("Show trash plan")
         }
     }
-
-    Button {
-        id: buttonConfirm
-        text: qsTr("Confirm")
-        anchors.right: parent.right
-        anchors.rightMargin: 80
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 80
-    }
-
 }

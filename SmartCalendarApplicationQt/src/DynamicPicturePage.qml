@@ -64,8 +64,6 @@ DynamicPicturePageForm {
                 currentPictureFilePath = imagePath;
             });
         }
-
-        buttonDone.clicked.connect(onDoneClicked);
     }
 
 

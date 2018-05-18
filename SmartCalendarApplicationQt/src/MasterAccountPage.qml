@@ -14,9 +14,6 @@ MasterAccountPageForm {
             textFieldEmail.text =  personList[0].eMailAdress
             textFieldName.text =  personList[0].name
         }
-        buttonDone.clicked.connect(onDoneClicked);
-
     }
-
 
 }

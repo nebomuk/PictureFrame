@@ -21,7 +21,6 @@ BaseCalendarOptionsPageForm {
 
         checkBoxShowNationalHolidays.checked =  DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
 
-        buttonDone.clicked.connect(onDoneClicked);
     }
 
     function onDoneClicked() {

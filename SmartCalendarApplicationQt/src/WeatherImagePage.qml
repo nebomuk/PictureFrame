@@ -23,9 +23,6 @@ WeatherImagePageForm {
             spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;
             textFieldcityName.text = formData.cityName;
         }
-
-            buttonDone.clicked.connect(onDoneClicked);
-
     }
 
 

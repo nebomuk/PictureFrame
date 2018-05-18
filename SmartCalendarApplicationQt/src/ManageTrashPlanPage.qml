@@ -29,9 +29,8 @@ ManageTrashPlanPageForm {
           return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
         }
         );
-        buttonDone.clicked.connect(onDoneClicked);
 
-
+        //buttonDone.clicked.connect(onDoneClicked);
     }
 
     MessageDialog {

@@ -30,9 +30,6 @@ ManageBirthdaysPageForm {
           return buttonBirthdate.text !== qsTr("Birthdate") && textFieldLastName.text.length > 0 && textFieldFirstName.text.length > 0;
         }
         );
-        buttonDone.clicked.connect(onDoneClicked);
-
-
     }
 
     MessageDialog {
