@@ -41,6 +41,8 @@ BaseDisplayOptionsPageForm {
             buttonWeekendEnd.text=  toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate);
             buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
             buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
+
+        buttonDone.clicked.connect(onDoneClicked);
     }
 
     // input from json format:
@@ -58,7 +60,7 @@ BaseDisplayOptionsPageForm {
         return res;
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
 
         // checked radio button is 1, the other one is 0
 

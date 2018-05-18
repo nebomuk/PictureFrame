@@ -23,10 +23,13 @@ WeatherImagePageForm {
             spinBoxadditionalNumberOfDays.value = formData.additionalNumberOfDays;
             textFieldcityName.text = formData.cityName;
         }
+
+            buttonDone.clicked.connect(onDoneClicked);
+
     }
 
 
-    buttonConfirm.onClicked:  {
+    function onDoneClicked()  {
 
         var formData = {};
         formData.timeScale = OptionComboBoxUtil.mapToOption(comboBoxOption.currentIndex); // uses option according to xamarin app

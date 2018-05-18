@@ -8,7 +8,16 @@ FirstConfigurationPageForm {
 
     signal finished(); // confirm pressed
 
-    buttonConfirm.onClicked: msgDialogDeviceRestart.open();
+    function onDoneClicked()
+    {
+        msgDialogDeviceRestart.open();
+
+    }
+
+    Component.onCompleted:
+    {
+        buttonDone.clicked.connect(onDoneClicked);
+    }
 
     MessageDialog {
           id : msgDialogDeviceRestart

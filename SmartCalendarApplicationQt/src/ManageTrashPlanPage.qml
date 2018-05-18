@@ -29,6 +29,8 @@ ManageTrashPlanPageForm {
           return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
         }
         );
+        buttonDone.clicked.connect(onDoneClicked);
+
 
     }
 
@@ -69,7 +71,7 @@ ManageTrashPlanPageForm {
         return false;
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
             var newTrashPlan = [];
 
             for(var i = 0; i < listView.model.count; i++)

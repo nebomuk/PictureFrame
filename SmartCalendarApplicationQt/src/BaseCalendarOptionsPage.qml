@@ -20,9 +20,11 @@ BaseCalendarOptionsPageForm {
         checkBoxShowTrashPlan.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
 
         checkBoxShowNationalHolidays.checked =  DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
+
+        buttonDone.clicked.connect(onDoneClicked);
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
 
         var baseOptions = DeviceAccessor.controllerDataContainer.baseOptions;
 

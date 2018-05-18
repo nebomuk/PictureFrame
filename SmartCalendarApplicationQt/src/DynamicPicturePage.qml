@@ -23,7 +23,7 @@ DynamicPicturePageForm {
         image.source = currentPictureFilePath;
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
 
         var formData = {};
         // combo box option shows a different user string from what should be sent via json
@@ -64,6 +64,8 @@ DynamicPicturePageForm {
                 currentPictureFilePath = imagePath;
             });
         }
+
+        buttonDone.clicked.connect(onDoneClicked);
     }
 
 

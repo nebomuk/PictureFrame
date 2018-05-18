@@ -13,6 +13,8 @@ ApplicationWindow {
 
     title: qsTr("Smart Calendar Thync")
 
+    property alias buttonDone: buttonDone
+
     Component.onCompleted:
     {
         if(Qt.platform.os !== "android" && Qt.platform.os !== "ios" && Qt.platform.os !== "tvos")
@@ -70,7 +72,7 @@ ApplicationWindow {
                }
 
         ToolButton {
-            id : doneButton
+            id : buttonDone
             visible: stackView.depth > 1
             anchors.right : parent.right
             icon

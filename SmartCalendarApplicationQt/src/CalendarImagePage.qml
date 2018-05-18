@@ -20,10 +20,11 @@ CalendarImagePageForm {
         // FIXME implementation stub
         // should set the other stuff from formData
 
+        buttonDone.clicked.connect(onDoneClicked);
 
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
         var formData = {};
         // combo box option shows a different user string from what should be sent via json
         formData.format =  OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex);

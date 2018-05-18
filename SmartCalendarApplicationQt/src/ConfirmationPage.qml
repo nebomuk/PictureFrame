@@ -6,8 +6,6 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-    property alias buttonConfirm: buttonConfirm
-
     // to get the model index in CalendarMainPage when the page is popped
     property int index
 
@@ -23,10 +21,4 @@ Page {
         anchors.right: parent.right
         anchors.bottom: buttonConfirm.top
     }
-
-
-    ConfirmButton {
-        id: buttonConfirm
-    }
-
 }

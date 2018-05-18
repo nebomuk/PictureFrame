@@ -3,7 +3,7 @@ import de.vitecvisual.core 1.0;
 
 MasterAccountPageForm {
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
         GoogleCalendarAuthorization.startAuthorization();
     }
 
@@ -14,6 +14,8 @@ MasterAccountPageForm {
             textFieldEmail.text =  personList[0].eMailAdress
             textFieldName.text =  personList[0].name
         }
+        buttonDone.clicked.connect(onDoneClicked);
+
     }
 
 

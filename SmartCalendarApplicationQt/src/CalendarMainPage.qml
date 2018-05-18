@@ -209,7 +209,12 @@ CalendarMainPageForm
 
     }
 
-    buttonConfirm.onClicked: {
+    Component.onCompleted:
+    {
+        buttonDone.clicked.connect(onDoneClicked);
+    }
+
+     function onDoneClicked() {
 
         DeviceAccessor.clearLocalImageCache();
         for(var i = 0; i < listModel.count; ++i)

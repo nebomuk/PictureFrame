@@ -30,6 +30,8 @@ ManageBirthdaysPageForm {
           return buttonBirthdate.text !== qsTr("Birthdate") && textFieldLastName.text.length > 0 && textFieldFirstName.text.length > 0;
         }
         );
+        buttonDone.clicked.connect(onDoneClicked);
+
 
     }
 
@@ -69,7 +71,7 @@ ManageBirthdaysPageForm {
         return false;
     }
 
-    buttonConfirm.onClicked: {
+    function onDoneClicked() {
             var newBirthdayPlan = [];
 
             for(var i = 0; i < listView.model.count; i++)

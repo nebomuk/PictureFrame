@@ -23,9 +23,12 @@ FootballImagePageForm {
             comboBoxTeam.initialText = formData.team
             comboBoxLeague.initialText = formData.league
         }
+
+        buttonDone.clicked.connect(onDoneClicked);
+
     }
 
-    buttonConfirm.onClicked:  {
+    function onDoneClicked()  {
 
         var formData = {};
 

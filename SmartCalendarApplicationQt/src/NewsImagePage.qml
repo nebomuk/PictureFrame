@@ -23,9 +23,11 @@ NewsImagePageForm {
             comboBoxsource.initialText = formData.source
             //comboBoxoption.currentIndex = optionModel.formData.option
         }
+        buttonDone.clicked.connect(onDoneClicked);
+
     }
 
-    buttonConfirm.onClicked:  {
+    function onDoneClicked()  {
 
         var formData = {};
         formData.option = OptionComboBoxUtil.mapToOption(comboBoxoption.currentIndex)

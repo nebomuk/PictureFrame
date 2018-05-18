@@ -20,9 +20,12 @@ CinemaImagePageForm {
          comboBoxcountry.initialText = formData.country
         }
 
+        buttonDone.clicked.connect(onDoneClicked);
+
+
     }
 
-    buttonConfirm.onClicked:  {
+    function onDoneClicked()  {
 
         var formData = {};
         // combo box option shows a different user string from what should be sent via json
