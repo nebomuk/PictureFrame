@@ -87,12 +87,6 @@ Page {
             text: qsTr("Add Entry")
         }
 
-        Label {
-            Layout.columnSpan: 3
-            id: label3
-            text: qsTr("Remove Birthday")
-        }
-
         ListView
         {
             id : listView

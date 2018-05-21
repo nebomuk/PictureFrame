@@ -112,49 +112,34 @@ CalendarMainPageForm
 
     onListIndexClicked: {
         var item = listModel.get(index);
-        dialog.setCurrentText(item.pictureType)
-        dialog.open();
-        dialog.indexOfItemCurrentlyEdited = index;
+
+        openPage(item.pictureType,
+                 index,
+                 item.formData)
 
     }
+
+    buttonAddMorePictures.onClicked:
+    {
+
+        dialog.open();
+
+    }
+
 
 
     PictureTypeSelectionDialog
     {
         id : dialog
 
-        property int indexOfItemCurrentlyEdited : -1
-
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
 
 
         onAccepted: {
-            if(indexOfItemCurrentlyEdited === -1)
-            {
-                return;
-            }
-            // in the tumbler, a different picture type may has been selected from the one on the button that opens the tumbler
-            var pictureTypeHasChanged = listModel.get(indexOfItemCurrentlyEdited).pictureType !== tumbler.currentItem.text
-
-            listModel.set(indexOfItemCurrentlyEdited,{"pictureType":tumbler.currentItem.text})
-
-            // picture type has changed, no initial properties for the ImagePage
-            if(pictureTypeHasChanged)
-            {
-                openPage(tumbler.currentItem.text,
-                         indexOfItemCurrentlyEdited,
-                         {"":0}) // empty QVariantMap
-            }
-            else // picture type has not changed, push initial properties (formData) to the ImagePage
-            {
-                openPage(tumbler.currentItem.text,
-                         indexOfItemCurrentlyEdited,
-                         listModel.get(indexOfItemCurrentlyEdited).formData)
-            }
-
-            indexOfItemCurrentlyEdited = -1;
-
+            openPage(tumbler.currentItem.text,
+                     -1,
+                     {"":0})
         }
     }
 
@@ -185,17 +170,34 @@ CalendarMainPageForm
                 return;
         }
 
-        var pushedPage =  stackView.push(pageToOpen,{"index":index, "formData":formData});
-        pushedPage.finished.connect(onPageFinished)
+        var pushedPage =  stackView.push(pageToOpen,{"formData":formData});
+        pushedPage.finished.connect(onPageFinished);
+        // properties seems to be invisible in debugger
+        Object.defineProperty(pushedPage,'index',{value:index});
+        Object.defineProperty(pushedPage,'pictureType',{value:pictureType});
     }
 
     function onPageFinished(formData)
     {
         var currentPage = stackView.pop();
         currentPage.finished.disconnect(onPageFinished);
-        var item = listModel.get(currentPage.index) // index is inherited from page's base
-        item.formData = formData;
-        listModel.set(currentPage.index,item); // setProperty would not work here because it takes a variant
+
+        // newly created page
+        if(currentPage.index === -1)
+        {
+            listModel.append({"pictureType":currentPage.pictureType,
+                                 "displayTimeInSeconds":20,
+                                 "formData":{"":0,"":0}})
+            var item = listModel.get(listModel.count -1);
+            item.formData = formData;
+            listModel.set(listModel.count -1,item); // setProperty would not work here because it takes a variant
+        }
+        else
+        {
+            var item = listModel.get(currentPage.index)
+            item.formData = formData;
+            listModel.set(currentPage.index,item); // setProperty would not work here because it takes a variant
+        }
 
         // list model item is now of the following structure
         // {
@@ -253,11 +255,14 @@ CalendarMainPageForm
             }
         }
         listModel.clear();
+        stackView.pop();
 
         // FIXME, transaction when storing images? should not overwrite old ControllerDataContainer immediately but only part of it
         // 2 possibilities: use SQLite in memory :memory: database or overwrite old instance of ControllerDataContainer with new one
         // when the transaction finished (simpler)
     }
+
+
 
 
 

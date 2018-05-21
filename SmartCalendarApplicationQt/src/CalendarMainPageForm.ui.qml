@@ -2,18 +2,25 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import de.vitecvisual.util 1.0
+import QtQuick.Controls.Material 2.3
+
 
 
 
 Page {
     id: page
 
+    padding: 20
+
     property alias listModel: listModel
-    property alias buttonConfirm: buttonConfirm
+
+    property alias buttonAddMorePictures: buttonAddMorePictures
 
     title: qsTr("Calendar Main")
 
     signal listIndexClicked(int index);
+
+
 
     ListModel {
             id: listModel
@@ -109,45 +116,20 @@ Page {
             }
     }
 
-        Button
-        {
+        RoundButton {
             id : buttonAddMorePictures
-            y: 360
-            text : qsTr("Add more pictures")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 72
 
-         }
+            //text : qsTr("Add more pictures")
 
-        Connections
-        {
-            property int listViewRowCount : 0
-            target: buttonAddMorePictures
-            onClicked : {
-
-                if(listViewRowCount <4)
-                {
-                    listViewRowCount++;
-                    listModel.append({"pictureType":pictureTypeModel.footballImage,
-                                         "displayTimeInSeconds":20,
-                                         "formData":{"":0,"":0}})
-                }
-                else
-                {
-                    listViewRowCount++;
-                    buttonAddMorePictures.visible = false
-                }
-
+            icon
+            {
+                source : "qrc:/icon/add.svg"
+                color : "white"
             }
 
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            Material.background: Material.Pink
         }
-
-
-        ConfirmButton
-        {
-            id : buttonConfirm
-        }
-
 
     }

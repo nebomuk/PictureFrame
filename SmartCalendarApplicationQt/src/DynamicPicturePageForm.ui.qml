@@ -30,7 +30,7 @@ Page {
 
         Image {
             anchors.top : buttonChoosePicture.bottom
-            anchors.bottom: buttonConfirm.top
+            anchors.bottom: parent.bottom
             width : parent.width // only thing which works
             height: parent.width
             id: image

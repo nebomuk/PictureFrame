@@ -38,7 +38,7 @@ bool BlockingMqttConnection::waitForMqttConnected()
 bool BlockingMqttConnection::waitForFirstJsonReceived()
 {
     QTimer connectionTimeout;
-    connectionTimeout.setInterval(2000);
+    connectionTimeout.setInterval(5000);
     connectionTimeout.setSingleShot(true);
 
     bool initialDataReceived = false;
@@ -86,13 +86,13 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
     testConnection(); // this will cause the receiving end to respond with the first json
 
     bool initialDataReceived = waitForFirstJsonReceived();
+//    if(!initialDataReceived)
+//    {
+//        qDebug("failed to receive first JSON, retrying");
+//    }
+//    testConnection(); // this will cause the receiving end to respond with the first json
+//    initialDataReceived = waitForFirstJsonReceived();
     if(!initialDataReceived)
-    {
-        qDebug("failed to receive first JSON, retrying");
-    }
-    testConnection(); // this will cause the receiving end to respond with the first json
-    bool initialDataReceivedRetry = waitForFirstJsonReceived();
-    if(!initialDataReceivedRetry)
     {
         qDebug("failed to receive first JSON retry failed");
         return false;

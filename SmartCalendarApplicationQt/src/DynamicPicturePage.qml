@@ -56,6 +56,7 @@ DynamicPicturePageForm {
 
     Component.onCompleted:
     {
+        // FIXME disconnect missing
         if(Qt.platform.os === "android")
         {
             AndroidHelper.imagePathRetrieved.connect(function(imagePath)
