@@ -9,24 +9,23 @@ Page {
 
     title: qsTr("Display Options")
 
-    property alias buttonWorkingDayStart  : buttonWorkingDayStart
-    property alias buttonWorkingDayEnd    : buttonWorkingDayEnd
-    property alias buttonWeekendStart     : buttonWeekendStart
-    property alias buttonWeekendEnd       : buttonWeekendEnd
 
-    property alias buttonWorkingDayStart2  : buttonWorkingDayStart2
-    property alias buttonWorkingDayEnd2    : buttonWorkingDayEnd2
-    property alias buttonWeekendStart2     : buttonWeekendStart2
-    property alias buttonWeekendEnd2       : buttonWeekendEnd2
+    //    property alias buttonWorkingDayStart  : buttonWorkingDayStart
+    //    property alias buttonWorkingDayEnd    : buttonWorkingDayEnd
+    //    property alias buttonWeekendStart     : buttonWeekendStart
+    //    property alias buttonWeekendEnd       : buttonWeekendEnd
 
-    property alias spinBoxfixedDisplayBrightness : spinBoxfixedDisplayBrightness
+    //    property alias buttonWorkingDayStart2  : buttonWorkingDayStart2
+    //    property alias buttonWorkingDayEnd2    : buttonWorkingDayEnd2
+    //    property alias buttonWeekendStart2     : buttonWeekendStart2
+    //    property alias buttonWeekendEnd2       : buttonWeekendEnd2
+    property alias spinBoxfixedDisplayBrightness: spinBoxfixedDisplayBrightness
 
-    property alias radioButtonautomatedDisplayBrightness : radioButtonautomatedDisplayBrightness
-    property alias radioButtonpermanentActiveDisplay :  radioButtonpermanentActiveDisplay
+    property alias radioButtonautomatedDisplayBrightness: radioButtonautomatedDisplayBrightness
+    property alias radioButtonpermanentActiveDisplay: radioButtonpermanentActiveDisplay
 
     property alias checkBoxButtonWorkingDay: checkBoxButtonWorkingDay
-    property alias checkBoxButtonWeekend :  checkBoxButtonWeekend
-
+    property alias checkBoxButtonWeekend: checkBoxButtonWeekend
 
     GridLayout {
         x: 51
@@ -36,7 +35,7 @@ Page {
         columnSpacing: 10
         rowSpacing: 10
         columns: 2
-        rows: 11
+        rows: 13
 
         Label {
             Layout.columnSpan: 2
@@ -47,7 +46,9 @@ Page {
 
         // when auto, send 1 for auto, 0 for fixed,
         // when fixed, send 0 for auto, value for fixed
-        ButtonGroup { id: displayBrightnessGroup }
+        ButtonGroup {
+            id: displayBrightnessGroup
+        }
 
         RadioButton {
             id: radioButtonfixedDisplayBrightness
@@ -56,7 +57,7 @@ Page {
         }
 
         SpinBox {
-            id : spinBoxfixedDisplayBrightness
+            id: spinBoxfixedDisplayBrightness
             enabled: radioButtonfixedDisplayBrightness.checked
             from: 10
             value: 10
@@ -65,7 +66,7 @@ Page {
         }
 
         RadioButton {
-            id : radioButtonautomatedDisplayBrightness
+            id: radioButtonautomatedDisplayBrightness
             Layout.columnSpan: 2
             text: qsTr("Auto")
             ButtonGroup.group: displayBrightnessGroup
@@ -79,8 +80,9 @@ Page {
         }
 
         // checked radio button is 1, the other one is 0
-        ButtonGroup { id: activationGroup }
-
+        ButtonGroup {
+            id: activationGroup
+        }
 
         RadioButton {
 
@@ -91,7 +93,7 @@ Page {
         }
 
         RadioButton {
-            id : radioButtonpermanentActiveDisplay
+            id: radioButtonpermanentActiveDisplay
             Layout.columnSpan: 2
             text: qsTr("Permamently Activated")
             ButtonGroup.group: activationGroup
@@ -110,22 +112,108 @@ Page {
             text: qsTr("Working Day")
         }
 
-        RowLayout {
-            Layout.fillWidth: false
-            visible: checkBoxButtonWorkingDay.checked
-            Button {
-                id: buttonWorkingDayStart
+        GridLayout {
+            columns: 2
+            rows: 2
+            //visible: checkBoxButtonWorkingDay.checked
+            RangeSlider {
+                id: sliderWorkingDayFirst
+                snapMode: RangeSlider.SnapAlways
+                stepSize: 1
+                from : 0
+                to : 21
+                second
+                {
+                    value : 12
+
+                    onValueChanged : {
+                        if(second.value === first.value)
+                        {
+                            setValues(first.value,first.value +1)
+                        }
+
+                        if(second.value - first.value > 10)
+                        {
+                            first.value = second.value -10;
+                        }
+
+                        if(sliderWorkingDaySecond.first.value < second.value+2)
+                        {
+                            sliderWorkingDaySecond.first.increase();
+                            sliderWorkingDaySecond.second.increase();
+                        }
+                    }
+                }
+
+                first
+                {
+                    onValueChanged : {
+                        if(second.value === first.value)
+                        {
+                            first.decrease();
+                        }
+
+                        if(second.value - first.value > 10)
+                        {
+                            second.value = first.value + 10;
+                        }
+                    }
+                }
             }
 
-            Button {
-                id: buttonWorkingDayEnd
+            RangeSlider {
+                    snapMode: RangeSlider.SnapAlways
+                    stepSize: 1
+                id: sliderWorkingDaySecond
+                from : 3
+                to : 24
+
+                second
+                {
+                    value : 24
+                    onValueChanged : {
+                        if(second.value === first.value)
+                        {
+                            setValues(first.value,first.value +1)
+                        }
+
+                        if(second.value - first.value > 10)
+                        {
+                            first.value = second.value -10;
+                        }
+                    }
+                }
+
+                first
+                {
+                    value : 12
+                    onValueChanged : {
+                        if(second.value === first.value)
+                        {
+                            first.decrease();
+                        }
+
+                        if(second.value - first.value > 10)
+                        {
+                            second.value = first.value + 10;
+                        }
+
+                        if(sliderWorkingDayFirst.second.value > first.value -2)
+                        {
+                            sliderWorkingDayFirst.second.decrease();
+                            sliderWorkingDayFirst.first.decrease();
+                        }
+                    }
+                }
             }
-            Button {
-                id: buttonWorkingDayStart2
+            Label {
+                text: Math.round(sliderWorkingDayFirst.first.value) + " - " + Math.round(sliderWorkingDayFirst.second.value)
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
 
-            Button {
-                id: buttonWorkingDayEnd2
+            Label {
+                text: Math.round(sliderWorkingDaySecond.first.value) + " - " + Math.round(sliderWorkingDaySecond.second.value)
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
         }
 
@@ -136,21 +224,31 @@ Page {
             text: qsTr("Weekend")
         }
 
-        RowLayout {
-            visible: checkBoxButtonWeekend.checked
-            Button {
-                id: buttonWeekendStart
+        GridLayout {
+            columns: 2
+            rows: 2
+            //visible: checkBoxButtonWeekend.checked
+            RangeSlider {
+                snapMode: RangeSlider.SnapAlways
+                stepSize: 1
+                id: sliderWeekendFirst
+                from : 0
+                to : 24
             }
-
-            Button {
-                id: buttonWeekendEnd
+            RangeSlider {
+                snapMode: RangeSlider.SnapAlways
+                stepSize: 1
+                id: sliderWeekendSecond
+                from : 0
+                to : 24
             }
-            Button {
-                id: buttonWeekendStart2
+            Label {
+                text: sliderWeekendFirst.first.value + " - " + sliderWeekendFirst.second.value
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
-
-            Button {
-                id: buttonWeekendEnd2
+            Label {
+                text: sliderWeekendSecond.first.value + " - " + sliderWeekendSecond.second.value
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
         }
     }

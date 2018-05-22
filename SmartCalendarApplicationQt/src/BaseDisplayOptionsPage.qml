@@ -93,19 +93,19 @@ BaseDisplayOptionsPageForm {
         DeviceAccessor.sendSmartCalendarDeviceOptions(displayOptions);
     }
 
-    buttonWorkingDayStart.onClicked  : showTimeDialog(buttonWorkingDayStart)
-    buttonWorkingDayEnd.onClicked   : showTimeDialog(buttonWorkingDayEnd)
+//    buttonWorkingDayStart.onClicked  : showTimeDialog(buttonWorkingDayStart)
+//    buttonWorkingDayEnd.onClicked   : showTimeDialog(buttonWorkingDayEnd)
 
-    buttonWeekendStart.onClicked     : showTimeDialog(buttonWeekendStart)
+//    buttonWeekendStart.onClicked     : showTimeDialog(buttonWeekendStart)
 
-    buttonWeekendEnd.onClicked  : showTimeDialog(buttonWeekendEnd)
+//    buttonWeekendEnd.onClicked  : showTimeDialog(buttonWeekendEnd)
 
-    buttonWorkingDayStart2.onClicked  : showTimeDialog(buttonWorkingDayStart2)
-    buttonWorkingDayEnd2.onClicked   : showTimeDialog(buttonWorkingDayEnd2)
+//    buttonWorkingDayStart2.onClicked  : showTimeDialog(buttonWorkingDayStart2)
+//    buttonWorkingDayEnd2.onClicked   : showTimeDialog(buttonWorkingDayEnd2)
 
-    buttonWeekendStart2.onClicked     : showTimeDialog(buttonWeekendStart2)
+//    buttonWeekendStart2.onClicked     : showTimeDialog(buttonWeekendStart2)
 
-    buttonWeekendEnd2.onClicked  : showTimeDialog(buttonWeekendEnd2)
+//    buttonWeekendEnd2.onClicked  : showTimeDialog(buttonWeekendEnd2)
 
 
     Component{
