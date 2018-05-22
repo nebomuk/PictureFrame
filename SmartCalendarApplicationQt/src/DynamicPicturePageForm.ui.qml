@@ -25,7 +25,7 @@ Page {
 //        anchors.top : parent.top
 //        anchors.left: parent.left
 //        anchors.right: parent.right
-//        anchors.bottom: buttonConfirm.top
+
 
 
         Image {

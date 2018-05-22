@@ -5,11 +5,7 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-
-
     title: qsTr("Master Account")
-
-    property alias buttonConfirm: buttonConfirm
 
     property alias textFieldName: textFieldName
 
@@ -52,18 +48,4 @@ Page {
             //validator: RegExpValidator { regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ }
         }
     }
-
-    Button {
-        id: buttonConfirm
-        x: 313
-        y: 442
-        text: qsTr("Confirm")
-        anchors.right: parent.right
-        anchors.rightMargin: 87
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 310
-        enabled: textFieldName.text.length > 0 && textFieldEmail.length > 0
-    }
-
-
 }

@@ -1,10 +1,23 @@
 import QtQuick 2.0
 import de.vitecvisual.core 1.0;
+import "SignalUtil.js" as SignalUtil
 
 MasterAccountPageForm {
 
     function onDoneClicked() {
         GoogleCalendarAuthorization.startAuthorization();
+
+        SignalUtil.connectOnce(GoogleCalendarAuthorization.granted,onGranted());
+    }
+
+    function onGranted()
+    {
+        console.log("granted");
+    }
+
+    function onFailed()
+    {
+        console.log("failed");
     }
 
     Component.onCompleted: {

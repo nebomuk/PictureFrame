@@ -11,6 +11,7 @@ Page {
     title: qsTr("Configure New Device")
 
 
+    property bool onDoneEnabled :  textFieldWifiPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldProductName.text.length > 0
 
     property alias textFieldProductName: textFieldProductName
 
@@ -19,8 +20,6 @@ Page {
     property alias textFieldPassword : textFieldWifiPassword
 
     property alias textFieldProductPassword: textFieldProductPassword
-
-    property alias buttonConfirm: confirmButton
 
     GridLayout {
         id: grid
@@ -67,13 +66,5 @@ Page {
             passwordCharacter: "*" // default character too large on some devices
 
         }
-    }
-
-    Button {
-        id: confirmButton
-        x: 35
-        y: 268
-        text: qsTr("Confirm")
-        enabled: textFieldWifiPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldProductName.text.length > 0
     }
 }

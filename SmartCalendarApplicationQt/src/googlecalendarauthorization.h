@@ -15,6 +15,7 @@ public:
 
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
+    Q_INVOKABLE QOAuth2AuthorizationCodeFlow  * authorizationFlow() const;
 
 public slots:
 
@@ -25,7 +26,7 @@ signals:
     void failed();
 
 private:
-    QOAuth2AuthorizationCodeFlow * authorizationFlow;
+    QOAuth2AuthorizationCodeFlow * mAuthorizationFlow;
 };
 
 #endif // GOOGLECALENDARAUTHORIZATION_H
