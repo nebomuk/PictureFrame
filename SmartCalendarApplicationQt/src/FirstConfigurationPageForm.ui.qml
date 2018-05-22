@@ -10,9 +10,6 @@ Page {
 
     title: qsTr("Configure New Device")
 
-
-    property bool onDoneEnabled :  textFieldWifiPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldProductName.text.length > 0
-
     property alias textFieldProductName: textFieldProductName
 
     property alias textFieldSsid: textFieldSsid

@@ -8,10 +8,11 @@ FirstConfigurationPageForm {
 
     signal finished(); // confirm pressed
 
+    property bool doneVisible:  textFieldPassword.text.length > 0 && textFieldSsid.text.length > 0 && textFieldProductName.text.length > 0
+
     function onDoneClicked()
     {
         msgDialogDeviceRestart.open();
-
     }
 
     MessageDialog {

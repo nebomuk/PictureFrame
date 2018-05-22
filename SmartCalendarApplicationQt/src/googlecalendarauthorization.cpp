@@ -25,9 +25,6 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
     connect(mAuthorizationFlow,&QOAuth2AuthorizationCodeFlow::statusChanged,this,[this](QOAuth2AuthorizationCodeFlow::Status status)
     {
         qDebug() << "authorizationFlow Calendar Authorization Status " + QString::number((int)status) + " received";
-        qDebug() << "access token url" << mAuthorizationFlow->accessTokenUrl();
-        qDebug() << "token " << mAuthorizationFlow->token();
-        qDebug() << "refresh  token " << mAuthorizationFlow->refreshToken();
     });
 
     connect(mAuthorizationFlow,SIGNAL(granted()),this,SIGNAL(granted()));

@@ -71,9 +71,11 @@ ApplicationWindow {
             font.pointSize: 20
         }
 
+        // pages can control the visibility by having a property doneVisible and a method onDoneClicked
         ToolButton {
             id : buttonDone
             visible: stackView.depth > 1 && typeof stackView.currentItem.onDoneClicked === "function"
+            && stackView.currentItem.doneVisible !==false
             anchors.right : parent.right
             icon
             {
