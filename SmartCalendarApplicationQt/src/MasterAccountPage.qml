@@ -13,6 +13,8 @@ MasterAccountPageForm {
     function onGranted()
     {
         console.log("granted");
+        var flow = GoogleCalendarAuthorization.authorizationFlow();
+        console.log("token: " + flow.token);
     }
 
     function onFailed()

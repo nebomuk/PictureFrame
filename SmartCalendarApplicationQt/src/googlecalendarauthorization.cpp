@@ -30,7 +30,7 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
     connect(mAuthorizationFlow,SIGNAL(granted()),this,SIGNAL(granted()));
     connect(mAuthorizationFlow,&QOAuth2AuthorizationCodeFlow::requestFailed,this,&GoogleCalendarAuthorization::failed);
 
-    connect(this,&GoogleCalendarAuthorization::granted,this,[this]{
+    connect(mAuthorizationFlow,&QOAuth2AuthorizationCodeFlow::granted,this,[this]{
        qDebug() << "access token url" << mAuthorizationFlow->accessTokenUrl();
        qDebug() << "token " << mAuthorizationFlow->token();
        qDebug() << "refresh  token " << mAuthorizationFlow->refreshToken();
