@@ -61,8 +61,6 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&DeviceAccessorImpl::singletontype_provider);
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &SmartCalendarAccessImpl::singletontype_provider);
 
-    qmlRegisterType<QOAuth2AuthorizationCodeFlow>(); // for testing
-
     qmlRegisterModule("de.vitecvisual.native",1,0);
 #ifdef Q_OS_ANDROID
     qmlRegisterSingletonType<AndroidHelper>("de.vitecvisual.native",1,0,"AndroidHelper",&AndroidHelper::singletontype_provider);

@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent svg networkauth mqtt  xmlpatterns xml #required for xmlListModel?
+QT += quick core gui network concurrent svg mqtt  xmlpatterns xml #required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -40,6 +40,9 @@ SOURCES += src/main.cpp \
     src/googlecalendarauthorization.cpp
 
 
+
+
+
 HEADERS += \
     src/smartcalendaraccessimpl.h \
     src/smartcalendaraccessimpl.h \
@@ -57,7 +60,42 @@ HEADERS += \
     src/googlecalendarauthorization.h
 
 
-RESOURCES +=  icon.qrc string.qrc qml.qrc
+# O2 OAuth2 authorization library, License: BSD,
+# requires "android.app.background_running"  set to true on android in AndroidManifest.xml
+# https://github.com/pipacs/o2
+HEADERS +=  src/o2/o0abstractstore.h \
+    src/o2/o0baseauth.h \
+    src/o2/o0export.h \
+    src/o2/o0globals.h \
+    src/o2/o0requestparameter.h \
+    src/o2/o0settingsstore.h \
+    src/o2/o0simplecrypt.h \
+    src/o2/o1.h \
+    src/o2/o1requestor.h \
+    src/o2/o1timedreply.h \
+    src/o2/o2.h \
+    src/o2/o2google.h \
+    src/o2/o2reply.h \
+    src/o2/o2replyserver.h \
+    src/o2/o2requestor.h
+SOURCES +=    src/o2/o0baseauth.cpp \
+    src/o2/o0settingsstore.cpp \
+    src/o2/o1.cpp \
+    src/o2/o1requestor.cpp \
+    src/o2/o1timedreply.cpp \
+    src/o2/o2.cpp \
+    src/o2/o2google.cpp \
+    src/o2/o2reply.cpp \
+    src/o2/o2replyserver.cpp \
+    src/o2/o2requestor.cpp \
+    src/o2/o2simplecrypt.cpp
+
+
+
+
+
+RESOURCES +=  icon.qrc string.qrc qml.qrc \
+    credentials.qrc
 
 # in QtCreator/Projects clone Debug configuration, name it Test and add the following qmake arguments: "CONFIG+=test" including the ""
 test {
@@ -98,13 +136,7 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/src/de/vitecvisual/java/QExtendedSharePathResolver.java
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

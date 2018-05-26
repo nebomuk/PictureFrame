@@ -1,7 +1,7 @@
 #ifndef GOOGLECALENDARAUTHORIZATION_H
 #define GOOGLECALENDARAUTHORIZATION_H
 
-#include <QOAuth2AuthorizationCodeFlow>
+#include "src/o2/o2google.h"
 #include <QObject>
 #include <QQmlEngine>
 #include "propertyhelper.h"
@@ -9,13 +9,13 @@
 class GoogleCalendarAuthorization : public QObject
 {
 
+    Q_PROPERTY(O2Google* authorizationFlow MEMBER mAuthorizationFlow)
+
     Q_OBJECT
 public:
     explicit GoogleCalendarAuthorization(QObject *parent = nullptr);
 
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
-
-    Q_INVOKABLE QOAuth2AuthorizationCodeFlow  * authorizationFlow() const;
 
 public slots:
 
@@ -25,8 +25,14 @@ signals:
     void granted();
     void failed();
 
+private slots:
+    void onLinkedChanged();
+    void onLinkingFailed();
+    void onLinkingSucceeded();
+    void onOpenBrowser(QUrl url);
+    void onCloseBrowser();
 private:
-    QOAuth2AuthorizationCodeFlow * mAuthorizationFlow;
+    O2Google * mAuthorizationFlow;
 };
 
 #endif // GOOGLECALENDARAUTHORIZATION_H

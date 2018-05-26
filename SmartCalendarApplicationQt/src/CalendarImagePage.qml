@@ -39,6 +39,8 @@ CalendarImagePageForm {
 
         formData.additionalNumberOfDays = spinBoxAdditionalNumberOfDays.value;
 
+         // TODO add formatData.additionalHours for day view option1
+
         formData.design = comboBoxDesign.currentText
 
         finished(formData)

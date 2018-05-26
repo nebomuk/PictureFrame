@@ -7,13 +7,13 @@ MasterAccountPageForm {
     function onDoneClicked() {
         GoogleCalendarAuthorization.startAuthorization();
 
-        SignalUtil.connectOnce(GoogleCalendarAuthorization.granted,onGranted());
+        SignalUtil.connectOnce(GoogleCalendarAuthorization.granted,onGranted);
     }
 
     function onGranted()
     {
         console.log("granted");
-        var flow = GoogleCalendarAuthorization.authorizationFlow();
+        var flow = GoogleCalendarAuthorization.authorizationFlow;
         console.log("token: " + flow.token);
     }
 
