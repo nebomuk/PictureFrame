@@ -4,6 +4,7 @@ import QtQuick.Dialogs 1.0
 import QtMultimedia 5.8
 
 import QtQuick.Controls 2.4
+import de.vitecvisual.core 1.0;
 
 Page {
     visible: true

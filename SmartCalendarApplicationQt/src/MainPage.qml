@@ -16,5 +16,9 @@ MainPageForm {
         stackView.push("CalendarMainPage.qml")
     }
 
+    buttonImagePicker.onClicked: {
+        stackView.push("DynamicPicturePage.qml");
+    }
+
 }
 

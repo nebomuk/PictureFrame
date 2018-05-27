@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <QAndroidActivityResultReceiver>
+#include "iimagecapture.h"
 
-class AndroidImageCapture : public QObject, QAndroidActivityResultReceiver
+class AndroidImageCapture : public QObject, QAndroidActivityResultReceiver, public IImageCapture
 
 {
 	Q_OBJECT
@@ -12,6 +13,8 @@ class AndroidImageCapture : public QObject, QAndroidActivityResultReceiver
 
 
 public:
+    explicit AndroidImageCapture(QObject * parent);
+
     const QString& imageFilePath() const { return this->mImageFilePath; }
 
 public:

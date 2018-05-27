@@ -4,14 +4,6 @@
 
 AndroidHelper::AndroidHelper(QObject *parent) : QObject(parent)
 {
-    imagePicker = new AndroidImagePicker(this);
-
-    connect(imagePicker,&AndroidImagePicker::imagePathRetrieved,this,&AndroidHelper::imagePathRetrieved);
-}
-
-QObject *AndroidHelper::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    return new AndroidHelper();
 }
 
 void AndroidHelper::showWifiSettings()
@@ -34,9 +26,4 @@ void AndroidHelper::showToast(const QString &message, Duration duration) {
                                                                             jint(duration));
         toast.callMethod<void>("show");
     });
-}
-
-void AndroidHelper::openImagePicker()
-{
-    imagePicker->openImagePicker();
 }

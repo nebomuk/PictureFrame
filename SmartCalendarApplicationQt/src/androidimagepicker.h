@@ -7,7 +7,7 @@
 
 #include <QDebug>
 
-class AndroidImagePicker : public QObject, public QAndroidActivityResultReceiver
+class AndroidImagePicker : public QObject, QAndroidActivityResultReceiver
 {
     Q_OBJECT
 
@@ -18,7 +18,7 @@ public:
     virtual void handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data);
 
 signals:
-    void imagePathRetrieved(QString imagePath);
+    void imageFilePathChanged();
 };
 
 #endif // ANDROIDIMAGEPICKER_H

@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<O2Google>();
 
     qmlRegisterModule("de.vitecvisual.native",1,0);
+
 #ifdef Q_OS_ANDROID
     qmlRegisterSingletonType<AndroidHelper>("de.vitecvisual.native",1,0,"AndroidHelper",&AndroidHelper::singletontype_provider);
 #endif

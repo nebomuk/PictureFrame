@@ -1,6 +1,8 @@
 #ifndef PLATFORMHELPER_H
 #define PLATFORMHELPER_H
 
+#include "iimagecapture.h"
+
 #include <QObject>
 #include <QQmlEngine>
 
@@ -14,13 +16,32 @@
 class PlatformHelper : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QString captureImageFilePath READ captureImageFilePath NOTIFY captureImageFilePathChanged)
+
+    Q_PROPERTY(QString pickerImageFilePath READ pickerImageFilePath NOTIFY pickerImageFilePathChanged)
+
+
+
 public:
     explicit PlatformHelper(QObject *parent = nullptr);
 
+    QString captureImageFilePath() const;
+    QString pickerImageFilePath() const;
+
+public slots:
+    void captureImage();
+    void openImagePicker();
 
 
-// singleton type provider function (callback).
-static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
+
+
+signals:
+    void captureImageFilePathChanged();
+    void pickerImageFilePathChanged();
+
+private:
+    IImageCapture * mImageCapture;
 };
 
 #endif // PLATFORMHELPER_H

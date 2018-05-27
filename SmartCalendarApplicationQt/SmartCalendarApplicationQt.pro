@@ -66,7 +66,9 @@ HEADERS += \
     src/mqttmessageparser.h \
     src/blockingmqttconnection.h \
     src/googlecalendarauthorization.h \
-    src/imagecropper.h
+    src/imagecropper.h \
+    src/iimagecapture.h \
+    src/iimagepicker.h
 
 
 # O2 OAuth2 authorization library, License: BSD,

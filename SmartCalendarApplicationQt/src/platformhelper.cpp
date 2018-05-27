@@ -1,22 +1,42 @@
 #include "platformhelper.h"
 
-PlatformHelper::PlatformHelper(QObject *parent) : QObject(parent)
-{
-
-}
-
-QObject *PlatformHelper::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    QObject *object;
-
-#ifdef Q_O_ANDROID
-    object = new AndroidHelper();
-#else
-    object = new QObject();
+#ifdef Q_OS_ANDROID
+#include "androidimagecapture.h"
+#include "androidimagepicker.h"
+#elif Q_OS_IOS
 #endif
 
-    return object;
+PlatformHelper::PlatformHelper(QObject *parent) : QObject(parent)
+{
+    #ifdef Q_OS_ANDROID
+    mImageCapture = new AndroidImageCapture(this);
+    #elif Q_OS_IOS
+    mImageCapture = nullptr;
+    #else
+    mImageCapture = nullptr;
+    #endif
+
+    connect(mImageCapture,&IImageCapture::imageFilePathChanged,this,&PlatformHelper::captureImageFilePathChanged);
+    connect(mImageCapture,&IImageCapture::imageFilePathChanged,this,&PlatformHelper::captureImageFilePathChanged);
+
 }
+
+QString PlatformHelper::captureImageFilePath() const
+{
+    return mImageCapture->imageFilePath();
+}
+
+QString PlatformHelper::pickerImageFilePath() const
+{
+
+}
+
+void PlatformHelper::captureImage()
+{
+    mImageCapture->captureImage();
+}
+
+void PlatformHelper::openImagePicker()
+{
+}
+
