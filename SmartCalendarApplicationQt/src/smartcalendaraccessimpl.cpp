@@ -59,14 +59,6 @@ bool SmartCalendarAccessImpl::isCurrentlyRoaming()
 
 }
 
-QObject *SmartCalendarAccessImpl::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    QObject *object = new SmartCalendarAccessImpl();
-    return object;
-}
 
 QVariantList SmartCalendarAccessImpl::getControllerInNetworkFromBroadcastBlocking(int timeOut)
 {

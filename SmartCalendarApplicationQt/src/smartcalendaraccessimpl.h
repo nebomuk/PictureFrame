@@ -34,8 +34,6 @@ public:
 
     Q_INVOKABLE bool isCurrentlyRoaming();
 
-    static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
-
 signals:
     void controllerInNetworkReceived(QList<ResponderClient> controllers);
 

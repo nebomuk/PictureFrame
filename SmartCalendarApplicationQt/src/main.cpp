@@ -2,6 +2,7 @@
 #include "controllerdatacontainer.h"
 #include "deviceaccessorimpl.h"
 #include "googlecalendarauthorization.h"
+#include "imagecropper.h"
 #include "platformhelper.h"
 #include "smartcalendaraccessimpl.h"
 
@@ -33,6 +34,13 @@
 //                        , n);
 //}
 
+template<class T>
+QObject *newObject(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(scriptEngine);
+    return new T;
+}
 
 int main(int argc, char *argv[])
 {
@@ -48,18 +56,19 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 #endif
 
-    //int res = fibonacci(23);
-
-
     // log accidental binding ovewrite
     QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
 
     qmlRegisterUncreatableMetaObject(QLocale::staticMetaObject,"QmlRegistered",1,0,"QLocale","Qt Core class registered for qml");
 
     // C++ singletons
-    qmlRegisterSingletonType<GoogleCalendarAuthorization>("de.vitecvisual.core",1,0,"GoogleCalendarAuthorization",&GoogleCalendarAuthorization::singletontype_provider);
-    qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&DeviceAccessorImpl::singletontype_provider);
-    qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &SmartCalendarAccessImpl::singletontype_provider);
+    qmlRegisterSingletonType<GoogleCalendarAuthorization>("de.vitecvisual.core",1,0,"GoogleCalendarAuthorization",&newObject<GoogleCalendarAuthorization>);
+    qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&newObject<DeviceAccessorImpl>);
+    qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &newObject<SmartCalendarAccessImpl>);
+    qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
+
+    // uncreatable return types
+    qmlRegisterType<O2Google>();
 
     qmlRegisterModule("de.vitecvisual.native",1,0);
 #ifdef Q_OS_ANDROID
@@ -84,3 +93,5 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
+

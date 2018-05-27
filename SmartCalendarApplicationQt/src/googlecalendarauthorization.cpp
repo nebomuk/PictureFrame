@@ -102,16 +102,6 @@ qDebug() << __FUNCTION__;
 
 }
 
-QObject *GoogleCalendarAuthorization::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(scriptEngine);
-
-    QObject * object = new GoogleCalendarAuthorization();
-    return object;
-
-}
-
 void GoogleCalendarAuthorization::startAuthorization()
 {
     mAuthorizationFlow->unlink(); // for testing

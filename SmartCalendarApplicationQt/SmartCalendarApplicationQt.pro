@@ -20,9 +20,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 android {
-    HEADERS += src/androidhelper.h src/androidimagepicker.h
-    SOURCES += src/androidhelper.cpp src/androidimagepicker.cpp
     QT += androidextras
+
+    HEADERS += src/androidhelper.h \
+     src/androidimagepicker.h \
+     src/androidimagecapture.h
+
+    SOURCES += src/androidhelper.cpp \
+     src/androidimagepicker.cpp \
+     src/androidimagecapture.cpp
+
 }
 
 SOURCES += src/main.cpp \
@@ -37,7 +44,8 @@ SOURCES += src/main.cpp \
     src/mqttconnection.cpp \
     src/mqttmessageparser.cpp \
     src/blockingmqttconnection.cpp \
-    src/googlecalendarauthorization.cpp
+    src/googlecalendarauthorization.cpp \
+    src/imagecropper.cpp
 
 
 
@@ -57,7 +65,8 @@ HEADERS += \
     src/mqttconnection.h \
     src/mqttmessageparser.h \
     src/blockingmqttconnection.h \
-    src/googlecalendarauthorization.h
+    src/googlecalendarauthorization.h \
+    src/imagecropper.h
 
 
 # O2 OAuth2 authorization library, License: BSD,

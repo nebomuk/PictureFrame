@@ -167,15 +167,6 @@ ControllerDataContainer *DeviceAccessorImpl::controllerDataContainer() const
     return mControllerConnectionManager->dataContainer();
 }
 
-QObject *DeviceAccessorImpl::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(scriptEngine);
-
-    QObject * object = new DeviceAccessorImpl();
-    return object;
-}
-
 bool DeviceAccessorImpl::establishConnectionBlocking(const QString &brokerAddress)
 {
     return this->mIsConnectedToBroker = mControllerConnectionManager->establishConnectionBlocking(brokerAddress,mClientID);

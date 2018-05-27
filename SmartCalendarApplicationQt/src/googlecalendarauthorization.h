@@ -15,8 +15,6 @@ class GoogleCalendarAuthorization : public QObject
 public:
     explicit GoogleCalendarAuthorization(QObject *parent = nullptr);
 
-    static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
-
 public slots:
 
     void startAuthorization();

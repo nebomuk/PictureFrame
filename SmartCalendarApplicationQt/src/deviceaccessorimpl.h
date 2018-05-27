@@ -22,8 +22,6 @@ public:
 
     ControllerDataContainer *controllerDataContainer() const;
 
-    static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
-
     bool isConnectedToBroker();
 
 

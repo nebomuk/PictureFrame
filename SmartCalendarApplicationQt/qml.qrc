@@ -58,5 +58,6 @@
         <file>src/Object.qml</file>
         <file>src/ListModelUtil.js</file>
         <file>src/SignalUtil.js</file>
+        <file>src/ImageCropperItem.qml</file>
     </qresource>
 </RCC>
