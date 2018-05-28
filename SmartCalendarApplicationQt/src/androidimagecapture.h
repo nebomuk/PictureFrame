@@ -5,7 +5,7 @@
 #include <QAndroidActivityResultReceiver>
 #include "iimagecapture.h"
 
-class AndroidImageCapture : public QObject, QAndroidActivityResultReceiver, public IImageCapture
+class AndroidImageCapture : public IImageCapture, public QAndroidActivityResultReceiver
 
 {
 	Q_OBJECT
@@ -17,15 +17,16 @@ public:
 
     const QString& imageFilePath() const { return this->mImageFilePath; }
 
-public:
-    Q_INVOKABLE void captureImage();
+    virtual void  handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject & data);
+
+public slots:
+    void captureImage();
 
 signals:
     void imageFilePathChanged();
 
 private:
     QAndroidJniObject savedImageUri;
-	void handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject & data);
 
     void startCameraActivity();
 

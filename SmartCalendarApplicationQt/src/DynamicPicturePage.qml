@@ -23,6 +23,16 @@ DynamicPicturePageForm {
         image.source = currentPictureFilePath;
     }
 
+    ImagePicker
+    {
+
+    }
+
+    ImageCapture
+    {
+
+    }
+
     function onDoneClicked() {
 
         var formData = {};
@@ -59,6 +69,8 @@ DynamicPicturePageForm {
         // FIXME disconnect missing
         if(Qt.platform.os === "android")
         {
+
+
             AndroidHelper.imagePathRetrieved.connect(function(imagePath)
             {
                 console.log("Android image url" + imagePath);

@@ -40,12 +40,13 @@ SOURCES += src/main.cpp \
     src/controllerdatacontainer.cpp \
     src/deviceaccessorimpl.cpp \
     src/qvariantlistconversion.cpp \
-    src/platformhelper.cpp \
     src/mqttconnection.cpp \
     src/mqttmessageparser.cpp \
     src/blockingmqttconnection.cpp \
     src/googlecalendarauthorization.cpp \
-    src/imagecropper.cpp
+    src/imagecropper.cpp \
+    src/iimagecapture.cpp \
+    src/iimagepicker.cpp
 
 
 
@@ -61,7 +62,6 @@ HEADERS += \
     src/controllerdatacontainer.h \
     src/deviceaccessorimpl.h \
     src/qvariantlistconversion.h \
-    src/platformhelper.h \
     src/mqttconnection.h \
     src/mqttmessageparser.h \
     src/blockingmqttconnection.h \

@@ -3,16 +3,25 @@
 
 #include <QObject>
 
-class IImagePicker
+/**
+ * @brief The IImagePicker class is used as an interface for platform dependent implementations
+ */
+class IImagePicker : public QObject
 {
+    Q_OBJECT
+
+    Q_PROPERTY(QString imageFilePath MEMBER imageFilePath)
+
 public:
-    IImagePicker() = delete;
+    IImagePicker();
 
-signals:
+public slots:
+    virtual void openImagePicker();
 
+private:
+    QString imageFilePath;
 
 };
 
-Q_DECLARE_INTERFACE(IImagePicker,"IImagePicker")
 
 #endif // IIMAGEPICKER_H

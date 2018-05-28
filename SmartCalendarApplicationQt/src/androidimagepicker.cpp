@@ -49,6 +49,7 @@ void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resul
         QString imagePath = "file://" +  path1.toString();
         qDebug() << "AndroidImagePicker path" << imagePath;
 
-        emit imagePathRetrieved(imagePath);
+        mImageFilePath = imagePath;
+        emit imageFilePathChanged(imagePath);
     }
 }

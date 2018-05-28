@@ -4,24 +4,26 @@
 #include <QString>
 #include <QtPlugin>
 
+/**
+ * @brief The IImageCapture is used as an interface for platform dependent implementations
+ */
 
-
-class IImageCapture
+class IImageCapture : public QObject
 {
+    Q_OBJECT
+
+    Q_PROPERTY(QString imageFilePath MEMBER imageFilePath)
 
 public:
 
-    IImageCapture() = delete;
+    IImageCapture();
 
-    virtual void captureImage() = 0;
+public slots:
 
-    virtual const QString& imageFilePath() const = 0;
+    virtual void captureImage();
 
-protected: // <- ignored by moc and only serves as documentation aid
-           // The code will work exactly the same if signals: is absent.
-    virtual void imageFilePathChanged() = 0;
+private:
+    QString imageFilePath;
 };
-
-Q_DECLARE_INTERFACE(IImageCapture,"IImageCapture")
 
 #endif // IIMAGECAPTURE_H

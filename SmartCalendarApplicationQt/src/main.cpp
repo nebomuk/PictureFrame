@@ -2,8 +2,9 @@
 #include "controllerdatacontainer.h"
 #include "deviceaccessorimpl.h"
 #include "googlecalendarauthorization.h"
+#include "iimagecapture.h"
+#include "iimagepicker.h"
 #include "imagecropper.h"
-#include "platformhelper.h"
 #include "smartcalendaraccessimpl.h"
 
 #include <QLoggingCategory>
@@ -67,14 +68,28 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &newObject<SmartCalendarAccessImpl>);
     qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
 
+    // instantiable C++ types
+#ifdef Q_OS_ANDROID
+    qmlRegisterType<AndroidImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+#elif Q_OS_IOS
+    qmlRegisterType<IImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+#else
+    qmlRegisterType<IImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+#endif
+
+
+#ifdef Q_OS_ANDROID
+    qmlRegisterType<AndroidImageCapture>("de.vitecvisual.native",1,0,"ImageCapture",
+#elif Q_OS_IOS
+    qmlRegisterType<IImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
+#else
+    qmlRegisterType<IImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
+#endif
+
     // uncreatable return types
     qmlRegisterType<O2Google>();
 
     qmlRegisterModule("de.vitecvisual.native",1,0);
-
-#ifdef Q_OS_ANDROID
-    qmlRegisterSingletonType<AndroidHelper>("de.vitecvisual.native",1,0,"AndroidHelper",&AndroidHelper::singletontype_provider);
-#endif
 
     // QML singletons
     qmlRegisterSingletonType( QUrl("qrc:/src/Style.qml"), "de.vitecvisual.style", 1, 0, "Style" );
