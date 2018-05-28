@@ -224,32 +224,9 @@ Page {
             text: qsTr("Weekend")
         }
 
-        GridLayout {
+        SpinBoxRange {
             columns: 2
             rows: 2
-            //visible: checkBoxButtonWeekend.checked
-            RangeSlider {
-                snapMode: RangeSlider.SnapAlways
-                stepSize: 1
-                id: sliderWeekendFirst
-                from : 0
-                to : 24
-            }
-            RangeSlider {
-                snapMode: RangeSlider.SnapAlways
-                stepSize: 1
-                id: sliderWeekendSecond
-                from : 0
-                to : 24
-            }
-            Label {
-                text: sliderWeekendFirst.first.value + " - " + sliderWeekendFirst.second.value
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            }
-            Label {
-                text: sliderWeekendSecond.first.value + " - " + sliderWeekendSecond.second.value
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            }
         }
     }
 }
