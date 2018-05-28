@@ -47,25 +47,17 @@ MainPageForm {
 
                 console.log("current text: " + firstIntervalStart.hour);
 
-                var fullDay = timePickerWizard.range(0,24);
-                var partDay = fullDay.filter(function(item) {
-                    if(firstIntervalStart.hour + 10 > 24)
-                    {
-                        return item <= firstIntervalStart.hour + 10 -24 || item >= firstIntervalStart.hour -10;
-                    }
-                    else if(firstIntervalStart.hour - 10 < 0)
-                    {
-                        return item <= firstIntervalStart.hour + 10 ||  item >= firstIntervalStart.hour -10 + 24;
-                    }
-                    else // item +-10 inside 0..24
-                    {
-                        return item  >= firstIntervalStart.hour-10 && item  <= firstIntervalStart.hour+10
-                    }
-                });
+                if(firstIntervalStart.hour + 10 > 24)
+                {
+                    firstIntervalEnd.tumblerModel = timePickerWizard.range(firstIntervalStart.hour,23)
+                    .concat(timePickerWizard.range(0,firstIntervalStart.hour +10 -24));
+                }
+                else
+                {
+                    firstIntervalEnd.tumblerModel = timePickerWizard.range(firstIntervalStart.hour+1,
+                                                                           firstIntervalStart.hour + 10);
+                }
 
-
-
-                firstIntervalEnd.tumblerModel = partDay.sort(timePickerWizard.sortNumber);
                 firstIntervalEnd.open();
             }
         }
@@ -83,15 +75,16 @@ MainPageForm {
                 var fullDay = timePickerWizard.range(0,24);
                 if(!isSplitInterval)
                 {
-                    var upperHalf = timePickerWizard.range(end+2,24);
+                    var upperHalf = timePickerWizard.range(end+2,24-1); // -1 because min interval length 1
                     var lowerHalf = timePickerWizard.range(0, start -3);
-                    var modelData = lowerHalf.concat(upperHalf);
-                    secondIntervalStart.tumblerModel = modelData.sort(timePickerWizard.sortNumber);
+                    var modelData = upperHalf.concat(lowerHalf);
+                    //secondIntervalStart.tumblerModel = modelData.sort(timePickerWizard.sortNumber);
+                    secondIntervalStart.tumblerModel = modelData;
                 }
                 else
                 {
                     secondIntervalStart.tumblerModel = fullDay.filter(function(item){
-                     return item <= start-2 && item >= end+2
+                     return item <= start-2-1 && item >= end+2 // -1 because min interval length 1
                     }
                     );
                 }
@@ -109,6 +102,21 @@ MainPageForm {
 
             onAccepted: {
 
+                //if(secondIntervalStart.hour < firstIntervalStart.hour-2)
+
+                var arr = secondIntervalStart.tumblerModel.slice(1);
+                var last = arr[arr.length -1];
+                if(last === 23)
+                {
+                    arr.push(0);
+                }
+                else
+                {
+                    arr.push(last +1);
+                }
+                secondIntervalEnd.tumblerModel = arr;
+
+                secondIntervalEnd.open();
             }
 
         }
@@ -119,6 +127,7 @@ MainPageForm {
             title : qsTr("Second interval end")
 
             onAccepted: {
+                // final result
 
             }
 
