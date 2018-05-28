@@ -60,5 +60,6 @@
         <file>src/SignalUtil.js</file>
         <file>src/ImageCropperItem.qml</file>
         <file>src/SpinBoxRange.qml</file>
+        <file>src/TimeRangePicker.qml</file>
     </qresource>
 </RCC>
