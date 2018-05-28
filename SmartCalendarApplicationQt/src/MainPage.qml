@@ -102,18 +102,28 @@ MainPageForm {
 
             onAccepted: {
 
-                //if(secondIntervalStart.hour < firstIntervalStart.hour-2)
-
-                var arr = secondIntervalStart.tumblerModel.slice(1);
-                var last = arr[arr.length -1];
-                if(last === 23)
+                // FIXME do not show secondIntervalEnd if only 1h possible
+                var arr = secondIntervalStart.tumblerModel.filter(function(item){
+                    return item > secondIntervalStart.hour;  // FXIME does not work when wrap
+                });
+                if(arr.length === 0)
                 {
-                    arr.push(0);
+                    arr.push(secondIntervalStart.hour +1);
                 }
                 else
                 {
-                    arr.push(last +1);
+                    var last = arr[arr.length -1];
+                    if(last === 23)
+                    {
+                        arr.push(0);
+                    }
+                    else
+                    {
+                        arr.push(last +1);
+                    }
                 }
+
+
                 secondIntervalEnd.tumblerModel = arr;
 
                 secondIntervalEnd.open();
