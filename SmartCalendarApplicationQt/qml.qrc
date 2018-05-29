@@ -61,5 +61,6 @@
         <file>src/ImageCropperItem.qml</file>
         <file>src/SpinBoxRange.qml</file>
         <file>src/TimeRangePicker.qml</file>
+        <file>src/ArrayUtil.js</file>
     </qresource>
 </RCC>
