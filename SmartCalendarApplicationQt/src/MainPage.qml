@@ -103,9 +103,9 @@ MainPageForm {
             onAccepted: {
 
                 // FIXME do not show secondIntervalEnd if only 1h possible
-                var arr = secondIntervalStart.tumblerModel.filter(function(item){
-                    return item > secondIntervalStart.hour;  // FXIME does not work when wrap
-                });
+                var index = secondIntervalStart.tumblerModel.indexOf(secondIntervalStart.hour);
+
+                var arr = secondIntervalStart.tumblerModel;
                 if(arr.length === 0)
                 {
                     arr.push(secondIntervalStart.hour +1);
@@ -122,6 +122,8 @@ MainPageForm {
                         arr.push(last +1);
                     }
                 }
+
+                arr = arr.slice(index+1);
 
 
                 secondIntervalEnd.tumblerModel = arr;
