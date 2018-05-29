@@ -112,100 +112,7 @@ Page {
             text: qsTr("Working Day")
         }
 
-        GridLayout {
-            columns: 2
-            rows: 2
-            //visible: checkBoxButtonWorkingDay.checked
-            RangeSlider {
-                id: sliderWorkingDayFirst
-                snapMode: RangeSlider.SnapAlways
-                stepSize: 1
-                from : 0
-                to : 21
-                second
-                {
-                    value : 12
 
-                    onValueChanged : {
-                        if(second.value === first.value)
-                        {
-                            setValues(first.value,first.value +1)
-                        }
-
-                        if(second.value - first.value > 10)
-                        {
-                            first.value = second.value -10;
-                        }
-
-                        if(sliderWorkingDaySecond.first.value < second.value+2)
-                        {
-                            sliderWorkingDaySecond.first.increase();
-                            sliderWorkingDaySecond.second.increase();
-                        }
-                    }
-                }
-
-                first
-                {
-                    onValueChanged : {
-                        if(second.value === first.value)
-                        {
-                            first.decrease();
-                        }
-
-                        if(second.value - first.value > 10)
-                        {
-                            second.value = first.value + 10;
-                        }
-                    }
-                }
-            }
-
-            RangeSlider {
-                    snapMode: RangeSlider.SnapAlways
-                    stepSize: 1
-                id: sliderWorkingDaySecond
-                from : 3
-                to : 24
-
-                second
-                {
-                    value : 24
-                    onValueChanged : {
-                        if(second.value === first.value)
-                        {
-                            setValues(first.value,first.value +1)
-                        }
-
-                        if(second.value - first.value > 10)
-                        {
-                            first.value = second.value -10;
-                        }
-                    }
-                }
-
-                first
-                {
-                    value : 12
-                    onValueChanged : {
-                        if(second.value === first.value)
-                        {
-                            first.decrease();
-                        }
-
-                        if(second.value - first.value > 10)
-                        {
-                            second.value = first.value + 10;
-                        }
-
-                        if(sliderWorkingDayFirst.second.value > first.value -2)
-                        {
-                            sliderWorkingDayFirst.second.decrease();
-                            sliderWorkingDayFirst.first.decrease();
-                        }
-                    }
-                }
-            }
             Label {
                 text: Math.round(sliderWorkingDayFirst.first.value) + " - " + Math.round(sliderWorkingDayFirst.second.value)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -215,7 +122,7 @@ Page {
                 text: Math.round(sliderWorkingDaySecond.first.value) + " - " + Math.round(sliderWorkingDaySecond.second.value)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
-        }
+
 
         Switch {
             Layout.columnSpan: 2
@@ -224,9 +131,6 @@ Page {
             text: qsTr("Weekend")
         }
 
-        SpinBoxRange {
-            columns: 2
-            rows: 2
-        }
+
     }
 }
