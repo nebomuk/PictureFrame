@@ -21,8 +21,6 @@ Page {
 
     property alias buttonImagePicker: buttonImagePicker
 
-    property alias buttonTimePicker: buttonTimePicker
-
     CenterColumn {
         id: column
 
@@ -62,12 +60,6 @@ Page {
         {
             id : buttonImagePicker
             text : "image picker test"
-        }
-
-        Button
-        {
-            id : buttonTimePicker
-            text : "time picker test"
         }
     }
 }

@@ -21,15 +21,5 @@ MainPageForm {
     buttonImagePicker.onClicked: {
         stackView.push("DynamicPicturePage.qml");
     }
-
-    buttonTimePicker.onClicked: {
-       timePickerWizard.openWizard();
-    }
-
-    TimeRangeWizard {
-        anchors.centerIn: parent
-
-        id: timePickerWizard
-    }
 }
 
