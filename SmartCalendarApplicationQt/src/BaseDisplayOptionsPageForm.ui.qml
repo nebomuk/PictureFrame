@@ -9,16 +9,6 @@ Page {
 
     title: qsTr("Display Options")
 
-
-    //    property alias buttonWorkingDayStart  : buttonWorkingDayStart
-    //    property alias buttonWorkingDayEnd    : buttonWorkingDayEnd
-    //    property alias buttonWeekendStart     : buttonWeekendStart
-    //    property alias buttonWeekendEnd       : buttonWeekendEnd
-
-    //    property alias buttonWorkingDayStart2  : buttonWorkingDayStart2
-    //    property alias buttonWorkingDayEnd2    : buttonWorkingDayEnd2
-    //    property alias buttonWeekendStart2     : buttonWeekendStart2
-    //    property alias buttonWeekendEnd2       : buttonWeekendEnd2
     property alias spinBoxfixedDisplayBrightness: spinBoxfixedDisplayBrightness
 
     property alias radioButtonautomatedDisplayBrightness: radioButtonautomatedDisplayBrightness

@@ -32,16 +32,19 @@ BaseDisplayOptionsPageForm {
 
 
 
-            buttonWorkingDayStart.text=   toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate);
-            buttonWorkingDayEnd.text=  toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate);
-            buttonWorkingDayStart2.text=   toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate);
-            buttonWorkingDayEnd2.text=  toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate);
+        labelWorkingDay.text = createTimeLabelText(toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate),
+            toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate),
+            toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate),
+            toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate));
 
-            buttonWeekendStart.text= toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate);
-            buttonWeekendEnd.text=  toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate);
-            buttonWeekendStart2.text= toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate);
-            buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
+        labelWeekend.text = createTimeLabelText(
+             toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate),
+            toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate),
+            toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate),
+             toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate));
     }
+
+
 
     property bool timeRangeWizardIsEditingWorkingDay : false; // else weekend
 
@@ -50,9 +53,15 @@ BaseDisplayOptionsPageForm {
         timeRangeWizardIsEditingWorkingDay = true;
     }
 
+    function createTimeLabelText(firstStart,firstEnd,secondStart,secondEnd)
+    {
+        return firstStart + " - " + firstEnd + " " + qsTr("and") + " " +  secondStart + " - " + secondEnd;
+    }
+
     timeRangeWizard.onAccepted: {
 
-        var time = firstStart + ":00 - " + firstEnd + ":00 " + qsTr("and") + " " +  secondStart + ":00 - " + secondEnd + ":00";
+        var time = createTimeLabelText(hourToLocaleTimeString(firstStart),hourToLocaleTimeString(firstEnd),
+                                       hourToLocaleTimeString(secondStart),hourToLocaleTimeString(secondEnd));
         if(timeRangeWizardIsEditingWorkingDay)
         {
             labelWorkingDay.text =time
@@ -66,6 +75,11 @@ BaseDisplayOptionsPageForm {
     buttonChangeWeekend.onClicked: {
         timeRangeWizard.open();
         timeRangeWizardIsEditingWorkingDay = false;
+    }
+
+    function hourToLocaleTimeString(hour)
+    {
+        return new Date(1,1,1,firstStart).toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
     }
 
     // input from json format:

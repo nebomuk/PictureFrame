@@ -15,11 +15,15 @@ BaseCalendarOptionsPageForm {
 
     Component.onCompleted:
     {
-        checkBoxShowBirthdays.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showBirthdays
+        // FIXME undefined
+        //checkBoxShowBirthdays.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showBirthdays;
 
-        checkBoxShowTrashPlan.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
+        // FIXME undefined
 
-        checkBoxShowNationalHolidays.checked =  DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
+       // checkBoxShowTrashPlan.checked =   DeviceAccessor.controllerDataContainer.baseOptions.showTrashPlan
+
+         // FIXME undefined
+        //checkBoxShowNationalHolidays.checked =  DeviceAccessor.controllerDataContainer.baseOptions.showNationalHolidays
 
     }
 
