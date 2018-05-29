@@ -43,6 +43,31 @@ BaseDisplayOptionsPageForm {
             buttonWeekendEnd2.text=  toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate);
     }
 
+    property bool timeRangeWizardIsEditingWorkingDay : false; // else weekend
+
+    buttonChangeWorkingDay.onClicked: {
+        timeRangeWizard.open();
+        timeRangeWizardIsEditingWorkingDay = true;
+    }
+
+    timeRangeWizard.onAccepted: {
+
+        var time = firstStart + ":00 - " + firstEnd + ":00 " + qsTr("and") + " " +  secondStart + ":00 - " + secondEnd + ":00";
+        if(timeRangeWizardIsEditingWorkingDay)
+        {
+            labelWorkingDay.text =time
+        }
+        else
+        {
+            labelWeekend.text = time;
+        }
+    }
+
+    buttonChangeWeekend.onClicked: {
+        timeRangeWizard.open();
+        timeRangeWizardIsEditingWorkingDay = false;
+    }
+
     // input from json format:
     // 2000-12-12T12:12
     function toLocaleTimeString(dateString)

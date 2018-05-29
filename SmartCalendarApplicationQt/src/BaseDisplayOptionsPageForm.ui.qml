@@ -27,8 +27,18 @@ Page {
     property alias checkBoxButtonWorkingDay: checkBoxButtonWorkingDay
     property alias checkBoxButtonWeekend: checkBoxButtonWeekend
 
+    property alias timeRangeWizard: timeRangeWizard
+
+    property alias buttonChangeWorkingDay: buttonChangeWorkingDay
+    property alias buttonChangeWeekend: buttonChangeWeekend
+
+    property alias labelWorkingDay: labelWorkingDay
+
+    property alias labelWeekend: labelWeekend
+
+
+
     GridLayout {
-        x: 51
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -112,16 +122,19 @@ Page {
             text: qsTr("Working Day")
         }
 
+        Button
+        {
+            id : buttonChangeWorkingDay
+            visible: checkBoxButtonWorkingDay.checked
+            text : qsTr("Change")
+        }
 
-            Label {
-                text: Math.round(sliderWorkingDayFirst.first.value) + " - " + Math.round(sliderWorkingDayFirst.second.value)
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            }
-
-            Label {
-                text: Math.round(sliderWorkingDaySecond.first.value) + " - " + Math.round(sliderWorkingDaySecond.second.value)
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            }
+        Label
+        {
+            visible: checkBoxButtonWorkingDay.checked
+            id : labelWorkingDay
+            text : ""
+        }
 
 
         Switch {
@@ -131,6 +144,24 @@ Page {
             text: qsTr("Weekend")
         }
 
+        Button
+        {
+            id : buttonChangeWeekend
+            visible: checkBoxButtonWeekend.checked
+            text : qsTr("Change")
+        }
 
+        Label
+        {
+            visible: checkBoxButtonWeekend.checked
+            id : labelWeekend
+            text : ""
+        }
+    }
+
+    TimeRangeWizard
+    {
+        id : timeRangeWizard
+        anchors.centerIn: parent
     }
 }

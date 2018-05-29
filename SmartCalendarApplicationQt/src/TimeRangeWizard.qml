@@ -11,7 +11,7 @@ Item
     width: firstIntervalStart.width
     height: firstIntervalStart.height
     
-    function openWizard()
+    function open()
     {
         firstIntervalStartDialog.tumblerModel = ArrayUtil.range(0,24);
         firstIntervalStartDialog.open();
