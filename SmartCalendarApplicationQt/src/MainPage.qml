@@ -30,6 +30,10 @@ MainPageForm {
     {
         id : timePickerWizard
 
+        anchors.centerIn: parent
+        width: firstIntervalStart.width
+        height: firstIntervalStart.height
+
         function openWizard()
         {
             firstIntervalStartDialog.tumblerModel = ArrayUtil.range(0,24);
@@ -45,9 +49,6 @@ MainPageForm {
             id : firstIntervalStart
             title : qsTr("First interval start")
             onAccepted: {
-
-
-                console.log("current text: " + firstIntervalStart.hour);
 
                 if(firstIntervalStart.hour + 10 > 24)
                 {

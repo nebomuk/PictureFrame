@@ -14,11 +14,9 @@ Dialog {
 
     property string currentText: hoursTumbler.currentItem != null ? hoursTumbler.currentItem.text : ""
 
-    property int hour : currentText.length > 0 ? parseInt(currentText.substring(0,2)) : 0
+    property int hour : currentText.length > 0 ? parseInt(currentText.substring(0,currentText.indexOf(":"))) : 0
 
     contentItem : Rectangle {
-
-
 
         FontMetrics {
             id: fontMetrics
@@ -38,21 +36,20 @@ Dialog {
 
                 function formatText(count, modelData) {
                     var data = count === 12 ? modelData + 1 : modelData;
-                    return data.toString().length < 2 ? "0" + data : data;
+                    return data + ":00";
                 }
             }
         }
 
-        Row {
-            id: row
+        Tumbler {
 
-            Tumbler {
-                id: hoursTumbler
-                model: tumblerModel
-                delegate: delegateComponent
-                wrap: false
-            }
+            anchors.horizontalCenter: parent.horizontalCenter
+            id: hoursTumbler
+            model: tumblerModel
+            delegate: delegateComponent
+            wrap: false
         }
+
 
     }
 }
