@@ -3,19 +3,16 @@ import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 Page {
-    id: page
+    title: qsTr("Dynamic Picture")
 
-    property alias image: image
+    property alias imageCropperItem : imageCropperItem
 
-     title: qsTr("Dynamic Picture")
 
-        Image {
-            anchors.fill: parent
-
-            id: image
-            asynchronous : true
-            fillMode :  Image.PreserveAspectFit
-            clip: true
-        }
+    ImageCropperItem
+    {
+        anchors.fill: parent
+        visible: false
+        id : imageCropperItem
+    }
 
 }

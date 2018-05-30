@@ -6,79 +6,67 @@ import QtMultimedia 5.8
 import QtQuick.Controls 2.4
 import de.vitecvisual.core 1.0;
 
-Page {
-    visible: true
-    height: 480
-    width:  800
-    title: qsTr("Dynamic Picture")
+Item {
 
-    Button
+    property string title: qsTr("Crop Image") // for toolbar
+
+    property string imageFilePath
+
+    property alias image : img
+
+    property string imageBase64String : ""
+
+    property bool cropStarted: false
+
+    function crop()
     {
-        z : 1
-        text : "Choose picture"
-       // onClicked: fileDialog.open();
-       onClicked: AndroidImageCapture.captureImage();
-    }
-
-    Button
-    {
-        anchors.right: parent.right;
-        z : 1
-        text : "crop"
-        onClicked: {
-            ImageCropper.imageFileUrl = currentPictureFilePath
-            var distX = Math.abs(img.paintedX - draggableRect.x);
-            var distY = Math.abs(img.paintedY - draggableRect.y);
-
-            if(sourceAspectRatio < targetAspectRatio)
-            {
-                var posX = scaleToWidth(distX);
-                var posY = scaleToWidth(distY);
-            }
-            else
-            {
-                var posX = scaleToHeight(distX);
-                var posY = scaleToHeight(distY);
-            }
-
-            var cropRect = Qt.rect(posX,posY,1024,600);
-            img.source = "data:image/jpg;base64," + ImageCropper.crop(cropRect);
-            draggableRect.visible = false;
-        }
-
-
-        function scaleToWidth(value)
+        if(cropStarted)
         {
-            return value * 1024.0 /img.paintedWidth;
+            console.debug("crop already started");
+            return;
         }
+        cropStarted = true;
 
-        function scaleToHeight(value)
+
+        ImageCropper.imageFileUrl = imageFilePath
+        var distX = Math.abs(img.paintedX - draggableRect.x);
+        var distY = Math.abs(img.paintedY - draggableRect.y);
+
+        var sourceAspectRatio = img.sourceSize.width / img.sourceSize.height;
+        var targetAspectRatio = 1024.0/600.0
+
+        if(sourceAspectRatio < targetAspectRatio)
         {
-            return value * 600.0 /img.paintedHeight;
+            var posX = scaleToWidth(distX);
+            var posY = scaleToWidth(distY);
+        }
+        else
+        {
+            var posX = scaleToHeight(distX);
+            var posY = scaleToHeight(distY);
         }
 
-        property real sourceAspectRatio : img.sourceSize.width / img.sourceSize.height;
-        property real targetAspectRatio : 1024.0/600.0
+        var cropRect = Qt.rect(posX,posY,1024,600);
+        imageBase64String = "data:image/jpg;base64," + ImageCropper.crop(cropRect);
+        img.source = imageBase64String;
+        draggableRect.visible = false;
+
     }
 
 
 
-
-    property string currentPictureFilePath :  AndroidImageCapture.imageFilePath
-    //property string currentPictureFilePath : "file:///home/taiko/Desktop/fettsack.jpg"
-
-    FileDialog // 1.3 file dialog for ios
+    function scaleToWidth(value)
     {
-        id: fileDialog
-        folder: shortcuts.pictures // will show native dialog
-
-        onAccepted:
-        {
-            console.log("You chose: " + fileDialog.fileUrls)
-            currentPictureFilePath = fileDialog.fileUrls[0];
-
-        }
+        return value * 1024.0 /img.paintedWidth;
     }
+
+    function scaleToHeight(value)
+    {
+        return value * 600.0 /img.paintedHeight;
+    }
+
+
+
 
     Rectangle {
 
@@ -99,14 +87,16 @@ Page {
             property real paintedY: y  + distancePaintedYToY
             fillMode: Image.PreserveAspectFit
             id : img
-            source: currentPictureFilePath
+            source: imageFilePath
             anchors.fill: parent
         }
-        Rectangle {
-            anchors.fill: img
-            color : "transparent"
-            border.color: "blue"
-        }
+
+        // debug border
+//        Rectangle {
+//            anchors.fill: img
+//            color : "transparent"
+//            border.color: "blue"
+//        }
 
         // rect for panorama photos
         Rectangle {

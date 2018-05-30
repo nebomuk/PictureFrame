@@ -22,7 +22,7 @@ MainPageForm {
     buttonImagePicker.onClicked: {
 
         LoggingFilter.setFilterRules("qt.qml.binding.removal.info=false");
-        stackView.push("DynamicPicturePage.qml");
+        stackView.push("DynamicPicturePage.qml",{formData:{}});
     }
 }
 

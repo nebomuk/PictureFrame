@@ -28,6 +28,21 @@ DynamicPicturePageForm {
         LoggingFilter.setFilterRules("qt.qml.binding.removal.info=true");
     }
 
+    function onDoneClicked() // for toolbar done icon
+    {
+        if(!imageCropperItem.cropStarted)
+        {
+            imageCropperItem.crop();
+            // TODO make input for descriptive text visible
+        }
+        else
+        {
+            formData.imageByteArray = imageCropperItem.imageBase64String;
+            finished(formData);
+            stackView.pop();
+        }
+    }
+
 
     ImagePicker
     {
@@ -39,17 +54,17 @@ DynamicPicturePageForm {
         }
 
         onFilePathChanged: {
-            image.source = filePath;
+
+           imageCropperItem.visible = true;
+           imageCropperItem.imageFilePath = filePath;
 
         }
 
-
     }
 
-    function onDoneClicked() {
+    function loadImageIntoArrayBuffer() {
 
-        var formData = {};
-        // combo box option shows a different user string from what should be sent via json
+                // combo box option shows a different user string from what should be sent via json
 
         // convert file to byte array
         var request = new XMLHttpRequest()
@@ -70,13 +85,6 @@ DynamicPicturePageForm {
         request.open('GET', Qt.resolvedUrl(imagePicker.filePath), true) // TODO this has been changed from url to string
         request.send(null)
     }
-
-    function onImageLoadedIntoArrayBuffer(arrayBuffer)
-    {
-        formData.imageByteArray = currentPictureFilePath
-        finished(formData)
-    }
-
 }
 
 
