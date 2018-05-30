@@ -23,11 +23,11 @@ android {
     QT += androidextras
 
     HEADERS += src/androidhelper.h \
-     src/androidimagepicker.h \
+    src/androidimagegallery.h \
      src/androidimagecapture.h
 
     SOURCES += src/androidhelper.cpp \
-     src/androidimagepicker.cpp \
+    src/androidimagegallery.cpp \
      src/androidimagecapture.cpp
 
 }
@@ -46,7 +46,7 @@ SOURCES += src/main.cpp \
     src/googlecalendarauthorization.cpp \
     src/imagecropper.cpp \
     src/iimagecapture.cpp \
-    src/iimagepicker.cpp
+    src/iimagegallery.cpp
 
 
 
@@ -68,7 +68,7 @@ HEADERS += \
     src/googlecalendarauthorization.h \
     src/imagecropper.h \
     src/iimagecapture.h \
-    src/iimagepicker.h
+    src/iimagegallery.h
 
 
 # O2 OAuth2 authorization library, License: BSD,

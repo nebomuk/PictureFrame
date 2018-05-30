@@ -1,22 +1,22 @@
-#ifndef IIMAGEPICKER_H
-#define IIMAGEPICKER_H
+#ifndef IIMAGEGALLERY_H
+#define IIMAGEGALLERY_H
 
 #include <QObject>
 
 /**
  * @brief The IImagePicker class is used as an interface for platform dependent implementations
  */
-class IImagePicker : public QObject
+class IImageGallery : public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(QString imageFilePath MEMBER imageFilePath)
 
 public:
-    IImagePicker();
+    IImageGallery();
 
 public slots:
-    virtual void openImagePicker();
+    virtual void openGallery();
 
 private:
     QString imageFilePath;
@@ -24,4 +24,4 @@ private:
 };
 
 
-#endif // IIMAGEPICKER_H
+#endif // IIMAGEGALLERY_H

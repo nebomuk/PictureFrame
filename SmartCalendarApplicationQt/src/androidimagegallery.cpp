@@ -1,7 +1,7 @@
-#include "androidimagepicker.h"
+#include "androidimagegallery.h"
 #include <QAndroidJniObject>
 
-AndroidImagePicker::AndroidImagePicker(QObject *parent) : QObject(parent)
+AndroidImageGallery::AndroidImageGallery(QObject *parent) : QObject(parent)
 {
 
 }
@@ -9,7 +9,7 @@ AndroidImagePicker::AndroidImagePicker(QObject *parent) : QObject(parent)
 
 // based on
 // https://forum.qt.io/topic/66324/qt-android-image-picker-issue-with-android-5-5-1/3
-void AndroidImagePicker::openImagePicker()
+void AndroidImageGallery::openGallery()
 {
     QAndroidJniObject Intent__ACTION_PICK = QAndroidJniObject::getStaticObjectField("android/content/Intent", "ACTION_PICK", "Ljava/lang/String;");
     qDebug() << "AndroidImagePicker Intent__ACTION_PICK.isValid()=" << Intent__ACTION_PICK.isValid();
@@ -29,7 +29,7 @@ void AndroidImagePicker::openImagePicker()
 }
 
 // TODO Permission ?
-void AndroidImagePicker::handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data)
+void AndroidImageGallery::handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data)
 {
     jint RESULT_OK = QAndroidJniObject::getStaticField<jint>("android/app/Activity", "RESULT_OK");
 

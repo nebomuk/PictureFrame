@@ -5,7 +5,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
-#include "androidimagepicker.h"
+#include "androidimagegallery.h"
 
 class AndroidHelper : public QObject
 {

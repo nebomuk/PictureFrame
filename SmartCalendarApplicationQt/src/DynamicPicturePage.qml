@@ -23,7 +23,7 @@ DynamicPicturePageForm {
         image.source = currentPictureFilePath;
     }
 
-    ImagePicker
+    ImageGallery
     {
 
     }
@@ -86,7 +86,7 @@ DynamicPicturePageForm {
 
         if(Qt.platform.os === "android")
         {
-            AndroidHelper.openImagePicker();
+            ImagePicker.openGallery();
         }
         else
             fileDialog.open();

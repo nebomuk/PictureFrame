@@ -79,7 +79,7 @@ BaseDisplayOptionsPageForm {
 
     function hourToLocaleTimeString(hour)
     {
-        return new Date(1,1,1,firstStart).toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
+        return new Date(1,1,1,hour).toLocaleTimeString(Qt.locale(),Locale.ShortFormat)
     }
 
     // input from json format:

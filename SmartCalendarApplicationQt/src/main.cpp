@@ -3,7 +3,7 @@
 #include "deviceaccessorimpl.h"
 #include "googlecalendarauthorization.h"
 #include "iimagecapture.h"
-#include "iimagepicker.h"
+#include "iimagegallery.h"
 #include "imagecropper.h"
 #include "smartcalendaraccessimpl.h"
 
@@ -70,11 +70,11 @@ int main(int argc, char *argv[])
 
     // instantiable C++ types
 #ifdef Q_OS_ANDROID
-    qmlRegisterType<AndroidImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+    qmlRegisterType<AndroidImageGallery>("de.vitecvisual.native",1,0,"ImageGallery");
 #elif Q_OS_IOS
-    qmlRegisterType<IImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+    qmlRegisterType<IImageGallery>("de.vitecvisual.native",1,0,"ImageGallery");
 #else
-    qmlRegisterType<IImagePicker>("de.vitecvisual.native",1,0,"ImagePicker");
+    qmlRegisterType<IImageGallery>("de.vitecvisual.native",1,0,"ImageGallery");
 #endif
 
 

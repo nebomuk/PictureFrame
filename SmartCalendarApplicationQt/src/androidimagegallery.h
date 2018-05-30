@@ -1,22 +1,22 @@
-#ifndef ANDROIDIMAGEPICKER_H
-#define ANDROIDIMAGEPICKER_H
+#ifndef ANDROIDIMAGEGALLERY_H
+#define ANDROIDIMAGEGALLERY_H
 
 
-#include "iimagepicker.h"
+#include "iimagegallery.h"
 
 #include <QtAndroidExtras>
 #include <QAndroidActivityResultReceiver>
 
 #include <QDebug>
 
-class AndroidImagePicker : public IImagePicker, public QAndroidActivityResultReceiver
+class AndroidImageGallery : public IImageGallery, public QAndroidActivityResultReceiver
 {
     Q_OBJECT
 
     Q_PROPERTY(QString imageFilePath MEMBER mImageFilePath NOTIFY imageFilePathChanged)
 
 public:
-    AndroidImagePicker(QObject *parent = nullptr);
+    AndroidImageGallery(QObject *parent = nullptr);
 
 
 
@@ -24,7 +24,7 @@ public:
 
 public slots:
 
-    void openImagePicker();
+    void openGallery();
 signals:
     void imageFilePathChanged(QString filePath);
 
@@ -32,4 +32,4 @@ private:
     QString mImageFilePath;
 };
 
-#endif // ANDROIDIMAGEPICKER_H
+#endif // ANDROIDIMAGEGALLERY_H
