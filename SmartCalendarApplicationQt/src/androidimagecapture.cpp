@@ -13,7 +13,7 @@
 
 const int REQUEST_CODE = 91;
 
-AndroidImageCapture::AndroidImageCapture(QObject *parent) : QObject(parent)
+AndroidImageCapture::AndroidImageCapture(QObject *parent) : IImageCapture(parent)
 {
 
 }

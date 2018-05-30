@@ -14,7 +14,7 @@ Dialog {
 
     property string currentText: hoursTumbler.currentItem != null ? hoursTumbler.currentItem.text : ""
 
-    property int hour : currentText.length > 0 ? parseInt(currentText.substring(0,currentText.indexOf(":"))) : 0
+    property int hour : currentText.length > 0 ? parseInt(currentText.substring(0,currentText.indexOf(":")),10) : 0
 
     contentItem : Rectangle {
 

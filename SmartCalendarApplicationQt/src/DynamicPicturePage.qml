@@ -1,11 +1,15 @@
 import QtQuick 2.0
 import QtQuick 2.4
-import QtQuick.Controls 1.4
-import QtQuick.Dialogs 1.3
+import QtQuick.Controls 2.4
+
+import de.vitecvisual.core 1.0;
 
 import de.vitecvisual.native 1.0;
 
 DynamicPicturePageForm {
+
+    id : page
+
     // TODO may use 1.0 FileDialog for ios but custom solution for android
     // https://stackoverflow.com/questions/33443114/photo-gallery-in-ios-and-android
     // requires info plist for ios
@@ -17,27 +21,29 @@ DynamicPicturePageForm {
 
     property var formData
 
-    property url currentPictureFilePath
 
-    onCurrentPictureFilePathChanged: {
-        image.source = currentPictureFilePath;
+
+    Component.onDestruction: {
+        // must set qt.qml.binding.removal.info=false on stackView.push
+        LoggingFilter.setFilterRules("qt.qml.binding.removal.info=true");
     }
 
-    ImageGallery
-    {
-
-    }
-
-    ImageCapture
-    {
-
-    }
 
     ImagePicker
     {
         id : imagePicker
-        x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
+
+        Component.onCompleted:
+        {
+            popup(page,(parent.width - width) / 2,(parent.height - height) / 2);
+        }
+
+        onFilePathChanged: {
+            image.source = filePath;
+
+        }
+
+
     }
 
     function onDoneClicked() {
@@ -61,7 +67,7 @@ DynamicPicturePageForm {
                                request = null
                            }
                        };
-        request.open('GET', currentPictureFilePath, true)
+        request.open('GET', Qt.resolvedUrl(imagePicker.filePath), true) // TODO this has been changed from url to string
         request.send(null)
     }
 
@@ -69,49 +75,6 @@ DynamicPicturePageForm {
     {
         formData.imageByteArray = currentPictureFilePath
         finished(formData)
-    }
-
-    Component.onCompleted:
-    {
-        // FIXME disconnect missing
-        if(Qt.platform.os === "android")
-        {
-
-
-            AndroidHelper.imagePathRetrieved.connect(function(imagePath)
-            {
-                console.log("Android image url" + imagePath);
-                currentPictureFilePath = imagePath;
-            });
-        }
-    }
-
-
-
-
-    buttonChoosePicture.onClicked: {
-
-//        if(Qt.platform.os === "android")
-//        {
-//            ImagePicker.openGallery();
-//        }
-//        else
-//            fileDialog.open();
-
-        imagePicker.open();
-
-    }
-
-    FileDialog // 1.3 file dialog for ios
-    {
-        id: fileDialog
-        folder: shortcuts.pictures // will show native dialog
-
-        onAccepted:
-        {
-            console.log("You chose: " + fileDialog.fileUrls)
-            currentPictureFilePath = fileDialog.fileUrls[0];
-        }
     }
 
 }

@@ -12,15 +12,18 @@ class IImageCapture : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString imageFilePath MEMBER imageFilePath)
+    Q_PROPERTY(QString imageFilePath MEMBER imageFilePath  NOTIFY imageFilePathChanged)
 
 public:
 
-    IImageCapture();
+    IImageCapture(QObject* parent = nullptr);
 
 public slots:
 
     virtual void captureImage();
+
+signals:
+    void imageFilePathChanged();
 
 private:
     QString imageFilePath;

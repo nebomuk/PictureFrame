@@ -5,12 +5,15 @@
 #include "iimagecapture.h"
 #include "iimagegallery.h"
 #include "imagecropper.h"
+#include "loggingfilter.h"
 #include "smartcalendaraccessimpl.h"
 
 #include <QLoggingCategory>
 
 #ifdef Q_OS_ANDROID
 #include "androidhelper.h"
+#include "androidimagecapture.h"
+#include "androidimagegallery.h"
 #endif
 
 //#define USE_QAPPLICATION
@@ -60,6 +63,7 @@ int main(int argc, char *argv[])
     // log accidental binding ovewrite
     QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
 
+
     qmlRegisterUncreatableMetaObject(QLocale::staticMetaObject,"QmlRegistered",1,0,"QLocale","Qt Core class registered for qml");
 
     // C++ singletons
@@ -67,6 +71,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&newObject<DeviceAccessorImpl>);
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &newObject<SmartCalendarAccessImpl>);
     qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
+    qmlRegisterSingletonType<LoggingFilter>("de.vitecvisual.core",1,0,"LoggingFilter",&newObject<LoggingFilter>);
 
     // instantiable C++ types
 #ifdef Q_OS_ANDROID
@@ -78,8 +83,9 @@ int main(int argc, char *argv[])
 #endif
 
 
+
 #ifdef Q_OS_ANDROID
-    qmlRegisterType<AndroidImageCapture>("de.vitecvisual.native",1,0,"ImageCapture",
+    qmlRegisterType<AndroidImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
 #elif Q_OS_IOS
     qmlRegisterType<IImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
 #else

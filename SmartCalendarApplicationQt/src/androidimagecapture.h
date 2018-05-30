@@ -13,7 +13,7 @@ class AndroidImageCapture : public IImageCapture, public QAndroidActivityResultR
 
 
 public:
-    explicit AndroidImageCapture(QObject * parent);
+    explicit AndroidImageCapture(QObject * parent = nullptr);
 
     const QString& imageFilePath() const { return this->mImageFilePath; }
 

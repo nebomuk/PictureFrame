@@ -5,46 +5,17 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
-    property alias buttonChoosePicture: buttonChoosePicture
     property alias image: image
 
-    Button
-    {
-        anchors.top : parent.top
-        id : buttonChoosePicture
-        text : qsTr("Dynamic Picture");
-    }
-
-//    GridLayout
-//    {
-//        rows : 2
-//        columns: 1
-//        rowSpacing: 5
-//        columnSpacing: 5
-
-//        anchors.top : parent.top
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-
-
+     title: qsTr("Dynamic Picture")
 
         Image {
-            anchors.top : buttonChoosePicture.bottom
-            anchors.bottom: parent.bottom
-            width : parent.width // only thing which works
-            height: parent.width
+            anchors.fill: parent
+
             id: image
             asynchronous : true
             fillMode :  Image.PreserveAspectFit
             clip: true
         }
 
-
-//    }
-
-
-
-    
-
-    title: qsTr("Dynamic Picture")
 }

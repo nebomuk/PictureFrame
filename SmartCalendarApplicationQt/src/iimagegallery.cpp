@@ -1,7 +1,8 @@
 #include "iimagegallery.h"
 #include <QtDebug>
 
-IImageGallery::IImageGallery()
+
+IImageGallery::IImageGallery(QObject *parent) : QObject(parent)
 {
 
 }

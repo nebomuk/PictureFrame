@@ -1,7 +1,7 @@
 #include "androidimagegallery.h"
 #include <QAndroidJniObject>
 
-AndroidImageGallery::AndroidImageGallery(QObject *parent) : QObject(parent)
+AndroidImageGallery::AndroidImageGallery(QObject *parent) : IImageGallery(parent)
 {
 
 }
