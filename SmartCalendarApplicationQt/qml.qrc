@@ -62,5 +62,6 @@
         <file>src/TimeRangePicker.qml</file>
         <file>src/ArrayUtil.js</file>
         <file>src/TimeRangeWizard.qml</file>
+        <file>src/ImagePicker.qml</file>
     </qresource>
 </RCC>

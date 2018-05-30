@@ -33,6 +33,13 @@ DynamicPicturePageForm {
 
     }
 
+    ImagePicker
+    {
+        id : imagePicker
+        x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+    }
+
     function onDoneClicked() {
 
         var formData = {};
@@ -84,12 +91,14 @@ DynamicPicturePageForm {
 
     buttonChoosePicture.onClicked: {
 
-        if(Qt.platform.os === "android")
-        {
-            ImagePicker.openGallery();
-        }
-        else
-            fileDialog.open();
+//        if(Qt.platform.os === "android")
+//        {
+//            ImagePicker.openGallery();
+//        }
+//        else
+//            fileDialog.open();
+
+        imagePicker.open();
 
     }
 
