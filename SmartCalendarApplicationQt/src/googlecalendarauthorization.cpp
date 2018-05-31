@@ -7,7 +7,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <QtEventDispatcherSupport/private/qunixeventdispatcher_qpa_p.h>
 
 #include "src/o2/o0baseauth.h"
 
@@ -89,9 +88,6 @@ void GoogleCalendarAuthorization::onOpenBrowser(QUrl url)
 qDebug() << __FUNCTION__;
 
 QDesktopServices::openUrl(url);
-
-QAbstractEventDispatcher *dispatcher = QCoreApplication::instance()->eventDispatcher();
-dispatcher->wakeUp();
 
 
 // if the manifest flag for background processing causes issues, we need to

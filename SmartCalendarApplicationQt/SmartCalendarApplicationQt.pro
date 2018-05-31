@@ -20,20 +20,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 android {
-    QT += androidextras eventdispatcher_support_private
+    QT += androidextras
+
+
 
     HEADERS += src/androidhelper.h \
     src/androidimagegallery.h \
-     src/androidimagecapture.h \
-    src/androideventdispatcher.h \
-    src/androiddeadlockprotector.h
+     src/androidimagecapture.h
+
+# add QT+=  eventdispatcher_support_private when using custom event dispatcher
+#    src/androideventdispatcher.h  \
+#    src/androiddeadlockprotector.h
 
 
 
     SOURCES += src/androidhelper.cpp \
-    src/androidimagegallery.cpp \
-     src/androidimagecapture.cpp \
-    src/androideventdispatcher.cpp
+    src/androidimagegallery.cpp
+
+
+#     src/androidimagecapture.cpp  \
+#    src/androideventdispatcher.cpp
 
 }
 

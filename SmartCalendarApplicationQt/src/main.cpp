@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-#ifdef Q_OS_ANDROID
-    // background processing workaround
-    QCoreApplication::setEventDispatcher(new AndroidEventDispatcher());
-#endif
+//#ifdef Q_OS_ANDROID
+//    // background processing workaround
+//    QCoreApplication::setEventDispatcher(new AndroidEventDispatcher());
+//#endif
 
     QCoreApplication::setApplicationName("Smart Calendar Thync");
 

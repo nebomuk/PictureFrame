@@ -52,7 +52,7 @@ void AndroidImageGallery::handleActivityResult(int receiverRequestCode, int resu
         mImageFilePath = imagePath;
 
         QMetaObject::invokeMethod(this, [this](){
-            QTimer::singleShot(1000,this,[this](){emit this->imageFilePathChanged();});
+            QTimer::singleShot(1000,this,[this](){emit this->imageFilePathChanged(this->mImageFilePath);});
         }, Qt::QueuedConnection);
     }
 }

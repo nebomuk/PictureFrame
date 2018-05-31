@@ -1,9 +1,13 @@
 #include "androideventdispatcher.h"
 #include "androiddeadlockprotector.h"
+#include <QGuiApplication>
 
 AndroidEventDispatcher::AndroidEventDispatcher(QObject *parent) :
     QUnixEventDispatcherQPA(parent)
 {
+
+    connect(QGuiApplication::instance(),SIGNAL(applicationStateChanged(Qt::ApplicationState)),this,SLOT(updateApplicationState(Qt::ApplicationState)));
+
         AndroidEventDispatcherStopper::instance()->addEventDispatcher(this);
 }
 AndroidEventDispatcher::~AndroidEventDispatcher()
