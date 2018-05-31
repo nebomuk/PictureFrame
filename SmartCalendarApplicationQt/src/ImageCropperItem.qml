@@ -1,7 +1,5 @@
 import QtQuick 2.10
 import QtQuick.Window 2.10
-import QtQuick.Dialogs 1.0
-import QtMultimedia 5.8
 
 import QtQuick.Controls 2.4
 import de.vitecvisual.core 1.0;
@@ -73,7 +71,6 @@ Item {
         anchors.fill: parent
 
         id: container
-        border.color: "black"
         color: "transparent"
 
         property real inverseTargetAspectRatio: 600.0/1024.0
@@ -91,14 +88,7 @@ Item {
             anchors.fill: parent
         }
 
-        // debug border
-//        Rectangle {
-//            anchors.fill: img
-//            color : "transparent"
-//            border.color: "blue"
-//        }
-
-        // rect for panorama photos
+        // this is the cut mask rect
         Rectangle {
             id: draggableRect
             width: {

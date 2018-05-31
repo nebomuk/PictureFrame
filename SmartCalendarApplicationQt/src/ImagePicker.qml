@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.native 1.0;
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs 1.3 as QtQuickDialogs1
 import de.vitecvisual.core 1.0;
 
 // chooses a suitable image picker depending on the platform
@@ -58,8 +58,8 @@ Menu {
             }
         }
 
-        // 1.3 file dialog for ios
-        FileDialog
+        // 1.3 file dialog for ios and desktop
+        QtQuickDialogs1.FileDialog
         {
             id: fileDialog
             folder: shortcuts.pictures // will show native dialog on ios and desktop
