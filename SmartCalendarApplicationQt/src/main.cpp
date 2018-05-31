@@ -11,6 +11,7 @@
 #include <QLoggingCategory>
 
 #ifdef Q_OS_ANDROID
+#include "androideventdispatcher.h"
 #include "androidhelper.h"
 #include "androidimagecapture.h"
 #include "androidimagegallery.h"
@@ -49,6 +50,11 @@ QObject *newObject(QQmlEngine *engine, QJSEngine *scriptEngine)
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+#ifdef Q_OS_ANDROID
+    // background processing workaround
+    QCoreApplication::setEventDispatcher(new AndroidEventDispatcher());
+#endif
 
     QCoreApplication::setApplicationName("Smart Calendar Thync");
 

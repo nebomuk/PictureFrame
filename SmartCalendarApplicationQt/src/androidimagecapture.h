@@ -26,6 +26,7 @@ signals:
     void imageFilePathChanged();
 
 private:
+
     QAndroidJniObject savedImageUri;
 
     void startCameraActivity();

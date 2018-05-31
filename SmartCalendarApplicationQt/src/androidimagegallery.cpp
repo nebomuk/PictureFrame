@@ -50,6 +50,9 @@ void AndroidImageGallery::handleActivityResult(int receiverRequestCode, int resu
         qDebug() << "AndroidImagePicker path" << imagePath;
 
         mImageFilePath = imagePath;
-        emit imageFilePathChanged(imagePath);
+
+        QMetaObject::invokeMethod(this, [this](){
+            QTimer::singleShot(1000,this,[this](){emit this->imageFilePathChanged();});
+        }, Qt::QueuedConnection);
     }
 }

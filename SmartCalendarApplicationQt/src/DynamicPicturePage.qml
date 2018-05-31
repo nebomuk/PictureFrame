@@ -32,12 +32,16 @@ DynamicPicturePageForm {
     {
         if(!imageCropperItem.cropStarted)
         {
+            busyIndicator.visible = true;
             imageCropperItem.crop();
-            // TODO make input for descriptive text visible
+            busyIndicator.visible = false;
+
+            textField.visible = true;
         }
         else
         {
             formData.imageByteArray = imageCropperItem.imageBase64String;
+            formData.imageTitle = textField.text
             finished(formData);
             stackView.pop();
         }

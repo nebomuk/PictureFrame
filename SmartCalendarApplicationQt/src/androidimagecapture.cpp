@@ -7,6 +7,7 @@
 #include <QtAndroid>
 #include <QRandomGenerator>
 #include <QUrl>
+#include <QTimer>
 #endif
 
 #include <QDebug>
@@ -50,7 +51,9 @@ void AndroidImageCapture::handleActivityResult(int receiverRequestCode, int resu
         qDebug() << __FUNCTION__ << "imageFilePath.isValid()=" << imageFilePath.isValid();
 
         mImageFilePath = "file:" + imageFilePath.toString();
-        emit this->imageFilePathChanged();
+        QMetaObject::invokeMethod(this, [this](){
+            QTimer::singleShot(1000,this,[this](){emit this->imageFilePathChanged();});
+        }, Qt::QueuedConnection);
     }
 }
 

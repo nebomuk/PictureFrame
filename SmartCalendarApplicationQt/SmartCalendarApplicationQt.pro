@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent svg mqtt  xmlpatterns xml #required for xmlListModel?
+QT += quick core gui network concurrent svg mqtt  xmlpatterns xml core-private #required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -20,15 +20,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 android {
-    QT += androidextras
+    QT += androidextras eventdispatcher_support_private
 
     HEADERS += src/androidhelper.h \
     src/androidimagegallery.h \
-     src/androidimagecapture.h
+     src/androidimagecapture.h \
+    src/androideventdispatcher.h \
+    src/androiddeadlockprotector.h
+
+
 
     SOURCES += src/androidhelper.cpp \
     src/androidimagegallery.cpp \
-     src/androidimagecapture.cpp
+     src/androidimagecapture.cpp \
+    src/androideventdispatcher.cpp
 
 }
 
