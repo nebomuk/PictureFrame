@@ -1,4 +1,4 @@
-QT += quick core gui network concurrent svg mqtt  xmlpatterns xml core-private #required for xmlListModel?
+QT += quick core gui network concurrent svg mqtt  xmlpatterns xml #required for xmlListModel?
 
 win32|macx|linux {
 QT += widgets # for native message dialog in Qt quick labs
@@ -34,11 +34,10 @@ android {
 
 
 
-    SOURCES += src/androidhelper.cpp \
+    SOURCES += src/androidimagecapture.cpp \
+src/androidhelper.cpp \
     src/androidimagegallery.cpp
 
-
-#     src/androidimagecapture.cpp  \
 #    src/androideventdispatcher.cpp
 
 }
