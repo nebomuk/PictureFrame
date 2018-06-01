@@ -18,8 +18,10 @@ Dialog {
     contentItem :
     Rectangle{
 
+
         CustomTumbler
          {
+             anchors.horizontalCenter: parent.horizontalCenter
              id : hoursTumbler
 
              model:  tumblerModel

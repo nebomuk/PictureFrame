@@ -6,14 +6,10 @@ import QtQuick.Controls.Material 2.3
 
 Tumbler {
 
-
-
-
-
     // text formatting, the default method does nothing
     property var formatFunction : function(count,modelData) { return modelData;}
 
-    anchors.horizontalCenter: parent.horizontalCenter
+    //anchors.horizontalCenter: parent.horizontalCenter
     id: myTumbler
     model: 12
     delegate: delegateComponent
@@ -22,7 +18,7 @@ Tumbler {
     Rectangle {
               anchors.horizontalCenter: myTumbler.horizontalCenter
               y: myTumbler.height * 0.4
-              width: 40
+              width: myTumbler.width
               height: 1
               color: Material.accent
           }
@@ -30,7 +26,7 @@ Tumbler {
           Rectangle {
               anchors.horizontalCenter: myTumbler.horizontalCenter
               y: myTumbler.height * 0.6
-              width: 40
+              width: myTumbler.width
               height: 1
               color: Material.accent
           }

@@ -2,13 +2,14 @@ import QtQuick 2.8
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
 import QtQml.Models 2.2
+import QtQuick.Controls.Material 2.3
 
 Rectangle {
 
     property int maxYear : 2008
     property int minYear : 1908
     property int initialYear : 1980
-    readonly  property int year : parseInt(yearTumbler.currentItem.text) // the year 1908 ..2008
+    readonly  property int year : yearTumbler.currentItem !== null ? parseInt(yearTumbler.currentItem.text,10) : 0 // the year 1908 ..2008
     readonly  property int month: monthTumbler.currentIndex // starts with 0 for January .. 11 for December like javascript
     readonly  property int day : daysTumbler.currentIndex + 1 // the day of the month 1..31
 
@@ -62,72 +63,33 @@ Rectangle {
         return monthName === "Jänner" ? "Januar" : monthName; // January should be Januar in all german locales
     }
 
-    FontMetrics {
-        id: fontMetrics
-    }
-
-    Component {
-        id: daysInMonthDelegateComponent
-
-        Label {
-            text: formatDaysInMonth(Tumbler.tumbler.count, modelData)
-            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: fontMetrics.font.pixelSize * 1.25
-        }
-    }
-
-    Component {
-        id: monthDelegate
-
-        Label {
-            text: formatMonth(Tumbler.tumbler.count, modelData)
-            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: fontMetrics.font.pixelSize * 1.25
-        }
-    }
-
-    Component {
-        id: yearDelegate
-
-        Label {
-            text: formatYear(Tumbler.tumbler.count, modelData)
-            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: fontMetrics.font.pixelSize * 1.25
-        }
-    }
-
-
         Row {
             id: row
 
-            Tumbler {
+
+            CustomTumbler {
                 width: 120
                 id: monthTumbler
                 model: 12
-                delegate: monthDelegate
+                formatFunction:  formatMonth
                 wrap: false
             }
 
-            Tumbler {
+            CustomTumbler {
                 visible: dayVisible
                 id: daysTumbler
                 model: daysInMonth(monthTumbler.currentIndex+1,(new Date()).getFullYear()) // days are zero indexed here
-                delegate: daysInMonthDelegateComponent
+                formatFunction: formatDaysInMonth
                 wrap: false
 
             }
 
-            Tumbler {
+            CustomTumbler {
                 visible : yearVisible
                 id: yearTumbler
                 model: yearModel
-                delegate: yearDelegate
+                formatFunction: formatYear
+                wrap : false
             }
 
             ListModel
