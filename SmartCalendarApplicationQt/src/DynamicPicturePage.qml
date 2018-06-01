@@ -43,22 +43,22 @@ DynamicPicturePageForm {
             formData.imageByteArray = imageCropperItem.imageBase64String;
             formData.imageTitle = textField.text
             finished(formData);
-            stackView.pop();
         }
     }
 
+    addButton.onClicked:  imagePicker.popup(page,(parent.width - imagePicker.width) / 2,(parent.height - imagePicker.height) / 2);
 
+
+
+    // do not move this out of this class because we need to show an empty image/last loaded image
     ImagePicker
     {
         id : imagePicker
 
-        Component.onCompleted:
-        {
-            popup(page,(parent.width - width) / 2,(parent.height - height) / 2);
-        }
 
         onFilePathChanged: {
 
+           addButton.visible = false;
            imageCropperItem.visible = true;
            imageCropperItem.imageFilePath = filePath;
 

@@ -163,6 +163,7 @@ CalendarMainPageForm
                 pageToOpen = "FootballImagePage.qml"
                 break;
             case pictureTypeModel.imageFile:
+                LoggingFilter.setFilterRules("qt.qml.binding.removal.info=false");
                 pageToOpen = "DynamicPicturePage.qml"
                 break;
             default:
