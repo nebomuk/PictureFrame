@@ -67,6 +67,7 @@ Page {
                 value: 10
                 to: 100
                 stepSize: 10
+                Layout.preferredWidth: 150
             }
 
             RadioButton {

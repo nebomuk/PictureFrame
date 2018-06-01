@@ -24,7 +24,7 @@ Page {
     CenterColumn {
         id: column
 
-        anchors.topMargin: 80
+        anchors.topMargin: 40
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 200

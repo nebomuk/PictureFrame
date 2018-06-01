@@ -26,7 +26,7 @@ Item
     
     
     
-    TimeRangePicker
+    HourPicker
     {
         id : firstIntervalStart
         title : qsTr("First interval start")
@@ -48,7 +48,7 @@ Item
         }
 
     }
-    TimeRangePicker
+    HourPicker
     {
         id : firstIntervalEnd
         title : qsTr("First interval end")
@@ -83,7 +83,7 @@ Item
         
     }
     
-    TimeRangePicker
+    HourPicker
     {
         id : secondIntervalStart
         title : qsTr("Second interval start")
@@ -122,7 +122,7 @@ Item
         
     }
     
-    TimeRangePicker
+    HourPicker
     {
         id : secondIntervalEnd
         title : qsTr("Second interval end")

@@ -33,6 +33,7 @@ MessageDialog {
       onCancelClicked: stackView.pop();
 }
 
+// this happens when the SmartCalendar looses it's connection to the mqtt broker
 MessageDialog {
       id : msgDialogConnectionFailed
       title:  qsTr("Connection failed")

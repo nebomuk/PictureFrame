@@ -59,9 +59,10 @@
         <file>src/ListModelUtil.js</file>
         <file>src/SignalUtil.js</file>
         <file>src/ImageCropperItem.qml</file>
-        <file>src/TimeRangePicker.qml</file>
         <file>src/ArrayUtil.js</file>
         <file>src/TimeRangeWizard.qml</file>
         <file>src/ImagePicker.qml</file>
+        <file>src/CustomTumbler.qml</file>
+        <file>src/HourPicker.qml</file>
     </qresource>
 </RCC>
