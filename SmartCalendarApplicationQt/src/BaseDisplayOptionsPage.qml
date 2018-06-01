@@ -21,27 +21,41 @@ BaseDisplayOptionsPageForm {
         // FIXME on java app, fixedDisplayBrightness is always undefined
         //spinBoxfixedDisplayBrightness.value = dataContainer.displayOptions.fixedDisplayBrightness;
 
-        var firstIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
-        var firstIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
-        var secondIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeStartDate;
-        var secondIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeEndDate;
-        var firstIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeStartDate;
-        var firstIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeEndDate;
-        var secondIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeStartDate;
-        var secondIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeEndDate;
+        intervals.firstIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeStartDate;
+        intervals.firstIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWorkdayPowerSavingModeEndDate;
+        intervals.secondIntervallWorkdayPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeStartDate;
+        intervals.secondIntervallWorkdayPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWorkdayPowerSavingModeEndDate;
+        intervals.firstIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeStartDate;
+        intervals.firstIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.firstIntervallWeekendPowerSavingModeEndDate;
+        intervals.secondIntervallWeekendPowerSavingModeStartDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeStartDate;
+        intervals.secondIntervallWeekendPowerSavingModeEndDate = dataContainer.displayOptions.secondIntervallWeekendPowerSavingModeEndDate;
 
 
 
-        labelWorkingDay.text = createTimeLabelText(toLocaleTimeString(firstIntervallWorkdayPowerSavingModeStartDate),
-            toLocaleTimeString(firstIntervallWorkdayPowerSavingModeEndDate),
-            toLocaleTimeString(secondIntervallWorkdayPowerSavingModeStartDate),
-            toLocaleTimeString(secondIntervallWorkdayPowerSavingModeEndDate));
+        labelWorkingDay.text = createTimeLabelText(toLocaleTimeString(intervals.firstIntervallWorkdayPowerSavingModeStartDate),
+            toLocaleTimeString(intervals.firstIntervallWorkdayPowerSavingModeEndDate),
+            toLocaleTimeString(intervals.secondIntervallWorkdayPowerSavingModeStartDate),
+            toLocaleTimeString(intervals.secondIntervallWorkdayPowerSavingModeEndDate));
 
         labelWeekend.text = createTimeLabelText(
-             toLocaleTimeString(firstIntervallWeekendPowerSavingModeStartDate),
-            toLocaleTimeString(firstIntervallWeekendPowerSavingModeEndDate),
-            toLocaleTimeString(secondIntervallWeekendPowerSavingModeStartDate),
-             toLocaleTimeString(secondIntervallWeekendPowerSavingModeEndDate));
+             toLocaleTimeString(intervals.firstIntervallWeekendPowerSavingModeStartDate),
+            toLocaleTimeString(intervals.firstIntervallWeekendPowerSavingModeEndDate),
+            toLocaleTimeString(intervals.secondIntervallWeekendPowerSavingModeStartDate),
+             toLocaleTimeString(intervals.secondIntervallWeekendPowerSavingModeEndDate));
+    }
+
+    QtObject
+    {
+        // stores ISO date strings
+        id : intervals
+        property var firstIntervallWorkdayPowerSavingModeStartDate
+        property var firstIntervallWorkdayPowerSavingModeEndDate
+        property var secondIntervallWorkdayPowerSavingModeStartDate
+        property var secondIntervallWorkdayPowerSavingModeEndDate
+        property var firstIntervallWeekendPowerSavingModeStartDate
+        property var firstIntervallWeekendPowerSavingModeEndDate
+        property var secondIntervallWeekendPowerSavingModeStartDate
+        property var secondIntervallWeekendPowerSavingModeEndDate
     }
 
 
@@ -65,10 +79,18 @@ BaseDisplayOptionsPageForm {
         if(timeRangeWizardIsEditingWorkingDay)
         {
             labelWorkingDay.text =time
+            intervals.firstIntervallWorkdayPowerSavingModeStartDate      = DateUtil.toShortISOString( new Date(1,1,1,firstStart)  )
+            intervals.firstIntervallWorkdayPowerSavingModeEndDate       =  DateUtil.toShortISOString( new Date(1,1,1,firstEnd)    )
+            intervals.secondIntervallWorkdayPowerSavingModeStartDate    =  DateUtil.toShortISOString( new Date(1,1,1,secondStart) )
+            intervals.secondIntervallWorkdayPowerSavingModeEndDate       = DateUtil.toShortISOString( new Date(1,1,1,secondEnd)   )
         }
         else
         {
             labelWeekend.text = time;
+            intervals.firstIntervallWeekendPowerSavingModeStartDate    =  DateUtil.toShortISOString(new Date(1,1,1,firstStart)   )
+            intervals.firstIntervallWeekendPowerSavingModeEndDate       = DateUtil.toShortISOString(new Date(1,1,1,firstEnd)     )
+            intervals.secondIntervallWeekendPowerSavingModeStartDate    = DateUtil.toShortISOString(new Date(1,1,1,secondStart)  )
+            intervals.secondIntervallWeekendPowerSavingModeEndDate      = DateUtil.toShortISOString(new Date(1,1,1,secondEnd)    )
         }
     }
 
@@ -89,14 +111,6 @@ BaseDisplayOptionsPageForm {
         return new Date(dateString).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
     }
 
-    function fromLocaleTimeString(timeString)
-    {
-        var date =  new Date(Date.fromLocaleTimeString(Qt.locale(),timeString,Locale.ShortFormat));
-        // toIsoString() in qml would create 2018-02-19T12:12:00.000Z but we want the same as the input
-        var res = DateUtil.toShortISOString(date);
-        return res;
-    }
-
     function onDoneClicked() {
 
         // checked radio button is 1, the other one is 0
@@ -109,20 +123,19 @@ BaseDisplayOptionsPageForm {
         displayOptions.displaySensibilityLevel = !radioButtonpermanentActiveDisplay.checked  ? 1 : 0; // ui renamed to "auto"
         displayOptions.permanentActiveDisplay = radioButtonpermanentActiveDisplay.checked ? 1 : 0;
 
-            if(checkBoxButtonWorkingDay.checked)
+        if(checkBoxButtonWeekend.checked)
             {
-                displayOptions.firstIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart.text)
-                displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd.text)
-                displayOptions.firstIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart.text)
-                displayOptions.firstIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd.text)
-
+                displayOptions.secondIntervallWeekendPowerSavingModeStartDate = intervals.secondIntervallWeekendPowerSavingModeStartDate
+                displayOptions.secondIntervallWeekendPowerSavingModeEndDate = intervals.secondIntervallWeekendPowerSavingModeEndDate
+                displayOptions.firstIntervallWeekendPowerSavingModeStartDate = intervals.firstIntervallWeekendPowerSavingModeStartDate
+                displayOptions.firstIntervallWeekendPowerSavingModeEndDate = intervals.firstIntervallWeekendPowerSavingModeEndDate
             }
-            if(checkBoxButtonWeekend.checked)
+        if(checkBoxButtonWorkingDay.checked)
             {
-                displayOptions.secondIntervallWorkdayPowerSavingModeStartDate = fromLocaleTimeString(buttonWorkingDayStart2.text)
-                displayOptions.secondIntervallWorkdayPowerSavingModeEndDate = fromLocaleTimeString(buttonWorkingDayEnd2.text)
-                displayOptions.secondIntervallWeekendPowerSavingModeStartDate = fromLocaleTimeString(buttonWeekendStart2.text)
-                displayOptions.secondIntervallWeekendPowerSavingModeEndDate = fromLocaleTimeString(buttonWeekendEnd2.text)
+                displayOptions.secondIntervallWorkdayPowerSavingModeStartDate = intervals.secondIntervallWorkdayPowerSavingModeStartDate
+                displayOptions.secondIntervallWorkdayPowerSavingModeEndDate = intervals.secondIntervallWorkdayPowerSavingModeEndDate
+                displayOptions.firstIntervallWorkdayPowerSavingModeStartDate = intervals.firstIntervallWorkdayPowerSavingModeStartDate
+                displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = intervals.firstIntervallWorkdayPowerSavingModeEndDate
             }
 
         DeviceAccessor.controllerDataContainer.displayOptions = displayOptions;
