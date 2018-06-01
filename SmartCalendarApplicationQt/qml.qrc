@@ -23,7 +23,6 @@
         <file>src/FootballImagePageForm.ui.qml</file>
         <file>src/ManageBirthdaysPageForm.ui.qml</file>
         <file>src/ManageTrashPlanPageForm.ui.qml</file>
-        <file>src/MasterAccountPageForm.ui.qml</file>
         <file>src/NewsImagePageForm.ui.qml</file>
         <file>src/CalendarImagePageForm.ui.qml</file>
         <file>src/CalendarImagePage.qml</file>
@@ -34,7 +33,6 @@
         <file>src/FootballImagePage.qml</file>
         <file>src/ManageBirthdaysPage.qml</file>
         <file>src/ManageTrashPlanPage.qml</file>
-        <file>src/MasterAccountPage.qml</file>
         <file>src/NewsImagePage.qml</file>
         <file>src/WeatherImagePageForm.ui.qml</file>
         <file>src/WeatherImagePage.qml</file>

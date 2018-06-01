@@ -67,7 +67,6 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableMetaObject(QLocale::staticMetaObject,"QmlRegistered",1,0,"QLocale","Qt Core class registered for qml");
 
     // C++ singletons
-    qmlRegisterSingletonType<GoogleCalendarAuthorization>("de.vitecvisual.core",1,0,"GoogleCalendarAuthorization",&newObject<GoogleCalendarAuthorization>);
     qmlRegisterSingletonType<DeviceAccessorImpl>("de.vitecvisual.core",1,0,"DeviceAccessor",&newObject<DeviceAccessorImpl>);
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &newObject<SmartCalendarAccessImpl>);
     qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
@@ -83,7 +82,6 @@ int main(int argc, char *argv[])
 #endif
 
 
-
 #ifdef Q_OS_ANDROID
     qmlRegisterType<AndroidImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
 #elif Q_OS_IOS
@@ -91,6 +89,9 @@ int main(int argc, char *argv[])
 #else
     qmlRegisterType<IImageCapture>("de.vitecvisual.native",1,0,"ImageCapture");
 #endif
+
+    qmlRegisterType<GoogleCalendarAuthorization>("de.vitecvisual.core",1,0,"GoogleCalendarAuthorization");
+
 
     // uncreatable return types
     qmlRegisterType<O2Google>();

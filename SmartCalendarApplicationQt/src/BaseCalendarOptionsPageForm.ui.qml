@@ -8,8 +8,6 @@ Page {
 
     title: qsTr("Calendar Options")
 
-    property alias buttonMasterAccount: buttonMasterAccount
-
     property alias buttonDefinePersons: buttonDefinePersons
 
     property alias buttonManageBirthdays: buttonManageBirthdays
@@ -28,11 +26,6 @@ Page {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 200
-
-        CenterButton {
-            id: buttonMasterAccount
-            text: qsTr("Master Account")
-        }
 
         CenterButton {
             id: buttonDefinePersons

@@ -4,8 +4,6 @@ import de.vitecvisual.core 1.0;
 
 BaseCalendarOptionsPageForm {
 
-    buttonMasterAccount.onClicked: stackView.push("MasterAccountPage.qml")
-
     buttonDefinePersons.onClicked: stackView.push("DefinePersonsPage.qml")
 
     buttonManageBirthdays.onClicked: stackView.push("ManageBirthdaysPage.qml")

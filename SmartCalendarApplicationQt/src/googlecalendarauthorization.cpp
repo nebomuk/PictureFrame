@@ -36,7 +36,7 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
 
 
     mAuthorizationFlow = new O2Google(this);
-    mAuthorizationFlow->setScope("https://www.googleapis.com/auth/calendar");
+    mAuthorizationFlow->setScope("https://www.googleapis.com/auth/calendar email"); // space intentional
     mAuthorizationFlow->setClientId(clientId);
     mAuthorizationFlow->setClientSecret(clientSecret);
     QVariantMap map;
