@@ -158,6 +158,6 @@ Page {
     TimeRangeWizard
     {
         id : timeRangeWizard
-        anchors.centerIn: parent
+        anchors.fill: parent
     }
 }

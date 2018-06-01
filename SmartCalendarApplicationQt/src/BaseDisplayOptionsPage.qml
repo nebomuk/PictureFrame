@@ -46,7 +46,7 @@ BaseDisplayOptionsPageForm {
 
     QtObject
     {
-        // stores ISO date strings
+        // stores ISO date strings temporarily while the user changes settings
         id : intervals
         property var firstIntervallWorkdayPowerSavingModeStartDate
         property var firstIntervallWorkdayPowerSavingModeEndDate

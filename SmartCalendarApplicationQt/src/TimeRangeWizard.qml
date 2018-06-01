@@ -3,13 +3,11 @@ import QtQuick.Controls 2.1
 
 import "ArrayUtil.js" as ArrayUtil
 
-
+// display 4 dialogs in succession to select 2 start and 2 end intervals
+// must use anchors.fill : parent or similar so that the top level Item fills the screen
 Item
 {
     id : timeRangeWizard
-    
-    width: firstIntervalStart.width
-    height: firstIntervalStart.height
     
     function open()
     {
@@ -23,11 +21,13 @@ Item
     signal rejected();
 
     property alias firstIntervalStartDialog: firstIntervalStart
-    
+
     
     
     HourPicker
     {
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
         id : firstIntervalStart
         title : qsTr("First interval start")
         onRejected: timeRangeWizard.rejected();
@@ -50,6 +50,8 @@ Item
     }
     HourPicker
     {
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
         id : firstIntervalEnd
         title : qsTr("First interval end")
         onRejected: timeRangeWizard.rejected();
@@ -85,6 +87,8 @@ Item
     
     HourPicker
     {
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
         id : secondIntervalStart
         title : qsTr("Second interval start")
         onRejected: timeRangeWizard.rejected();
@@ -124,6 +128,8 @@ Item
     
     HourPicker
     {
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
         id : secondIntervalEnd
         title : qsTr("Second interval end")
         onRejected: timeRangeWizard.rejected();
