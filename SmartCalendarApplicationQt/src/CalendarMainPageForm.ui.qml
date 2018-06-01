@@ -49,24 +49,46 @@ Page {
 
                                 RowLayout {
                                     anchors.fill: parent
-                                    spacing: 5
+                                    spacing: 10
                                     Label {
                                         text: model.pictureType
                                         Layout.fillWidth: true
 
                                     }
-                                    SpinBox {
-                                        id : spinBox
-                                        value : model.displayTimeInSeconds
-                                        from : 5
-                                        to : 100
+                                    TextField{
+                                          Layout.preferredWidth: 40
+                                          id : numberInput
+                                          text : model.displayTimeInSeconds
+                                          validator: IntValidator{bottom: 1; top: 100;}
 
-                                        // bind two way
-                                        Connections {
-                                            target: spinBox
-                                            onValueChanged : model.displayTimeInSeconds = spinBox.value
-                                        }
-                                    }
+                                          inputMethodHints: Qt.ImhPreferNumbers |
+                                                            Qt.ImhDigitsOnly
+                                          Connections {
+                                                          target: numberInput
+                                                          onActiveFocusChanged : {
+                                                              if(!numberInput.activeFocus)
+                                                              {
+                                                                 if(numberInput.text.length == 0){
+                                                                     model.displayTimeInSeconds = 5;
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     var parsedNumber = parseInt(numberInput.text,10);
+                                                                     if(parsedNumber <= 5)
+                                                                     {
+                                                                         model.displayTimeInSeconds = 5;
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                         model.displayTimeInSeconds = parsedNumber;
+                                                                     }
+                                                                 }
+
+                                                              }
+                                                          }
+                                                      }
+
+                                      }
                                     Button
                                     {
                                         id : editButton

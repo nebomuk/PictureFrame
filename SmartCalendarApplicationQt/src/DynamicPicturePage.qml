@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick 2.4
-import QtQuick.Controls 2.4
+import QtQuick.Controls 2.3
 
 import de.vitecvisual.core 1.0;
 
