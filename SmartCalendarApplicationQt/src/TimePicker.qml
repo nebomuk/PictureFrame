@@ -32,38 +32,27 @@ Rectangle {
         id: fontMetrics
     }
 
-    Component {
-        id: delegateComponent
-
-        Label {
-            text: formatText(Tumbler.tumbler.count, modelData)
-            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: fontMetrics.font.pixelSize * 1.25
-        }
-    }
-
         Row {
             id: row
 
-            Tumbler {
+            CustomTumbler {
+                formatFunction: formatText
                 id: hoursTumbler
                 model: is24HourFormat ? 24 : 12
-                delegate: delegateComponent
             }
 
-            Tumbler {
+            CustomTumbler {
+                formatFunction: formatText
                 id: minutesTumbler
                 model: 60
-                delegate: delegateComponent
             }
 
-            Tumbler {
+            CustomTumbler {
+                formatFunction: formatText
                 id: amPmTumbler
                 visible:  !is24HourFormat
                 model: ["AM", "PM"]
-                delegate: delegateComponent
+
             }
         }
 
