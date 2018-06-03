@@ -62,5 +62,6 @@
         <file>src/ImagePicker.qml</file>
         <file>src/CustomTumbler.qml</file>
         <file>src/HourPicker.qml</file>
+        <file>src/SendDialog.qml</file>
     </qresource>
 </RCC>

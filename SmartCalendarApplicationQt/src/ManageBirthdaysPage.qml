@@ -128,71 +128,9 @@ ManageBirthdaysPageForm {
         }
     }
 
-    Dialog
-    {
-        id : sendDialog
-
-        property var sendFunction : function() { }
-
-        standardButtons:  Dialog.Ok
-
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-
-        BusyIndicator
-        {
-            id : busyIndicator
-        }
-
-        DSM.StateMachine {
-                      id: stateMachine
-                      initialState: dialogHidden
-                      running: true
-                      DSM.State {
-                          id: dialogHidden
-                          DSM.SignalTransition {
-                              targetState: dialogShown
-                              signal: sendDialog.aboutToShow
-                          }
-
-                          onEntered: {
-                              sendDialog.standardButton(Dialog.Ok).visible = false;
-                          }
-                      }
-                      DSM.State {
-                          id: dialogShown
-                          DSM.SignalTransition {
-                              targetState: successfull
-                              signal: DeviceAccessor.published
-                          }
-//                          DSM.TimeoutTransition
-//                          {
-//                              targetState: successfull
-//                              timeout: 2000
-
-//                          }
-
-                          onEntered: {
-                              busyIndicator.visible = true;
-                              sendDialog.sendFunction();
-                              sendDialog.title = qsTr("Sending");
-                          }
-                      }
-                      DSM.State {
-                          id: successfull
-                          onEntered: {
-                              busyIndicator.visible = false;
-                               sendDialog.standardButton(Dialog.Ok).visible = true;
-                              sendDialog.title = qsTr("Successfull");
-                          }
-                          DSM.SignalTransition
-                          {
-                              targetState: dialogHidden
-                              signal : sendDialog.aboutToHide
-                          }
-                      }
-                  }
-
+    SendDialog {
+        id: sendDialog
+        onAccepted: stackView.pop();
     }
 
 

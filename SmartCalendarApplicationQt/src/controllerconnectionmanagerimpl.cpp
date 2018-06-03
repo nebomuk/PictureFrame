@@ -17,6 +17,7 @@ ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QObject *parent
     blockingMqttConnection = new BlockingMqttConnection(this);
     connect(blockingMqttConnection,SIGNAL(received(QMQTT::Message)),this,SLOT(listenToPublishes(QMQTT::Message)));
     connect(blockingMqttConnection,&BlockingMqttConnection::published,this,&ControllerConnectionManagerImpl::published);
+    connect(blockingMqttConnection,&BlockingMqttConnection::error,this,&ControllerConnectionManagerImpl::error);
 
 }
 

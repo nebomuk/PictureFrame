@@ -10,6 +10,8 @@ DeviceAccessorImpl::DeviceAccessorImpl(QObject *parent) : QObject(parent), mIsCo
 {
     mControllerConnectionManager = new ControllerConnectionManagerImpl(this);
     connect(mControllerConnectionManager,&ControllerConnectionManagerImpl::published,this,&DeviceAccessorImpl::published);
+    connect(mControllerConnectionManager,&ControllerConnectionManagerImpl::error,this,&DeviceAccessorImpl::error);
+
 
     this->mClientID = QUuid::createUuid().toString().mid(1, 36).toUpper();
 }

@@ -26,6 +26,8 @@ public:
 
 signals:
     void published(const QMQTT::Message& message, quint16 msgid = 0);
+    void error(const QMQTT::ClientError error);
+
 
 
 public slots:

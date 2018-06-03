@@ -103,6 +103,7 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
     currentClientId = clientId;
 
     connect(client,&QMQTT::Client::published,this,&BlockingMqttConnection::published);
+    connect(client,&QMQTT::Client::error,this,&BlockingMqttConnection::error);
     return true;
 
 }
@@ -125,6 +126,7 @@ quint16 BlockingMqttConnection::publish(QMQTT::Message msg)
     }
 
     return client->publish(msg);
+
 }
 
 bool BlockingMqttConnection::closeConnection()
