@@ -15,6 +15,7 @@ BlockingMqttConnection::BlockingMqttConnection(QObject *parent) : QObject(parent
     qRegisterMetaType<QMQTT::Message>("QMQTT::Message"); // required for QueuedConnection
     qRegisterMetaType<QMQTT::ClientError>("QMQTT::ClientError"); // required for QueuedConnection
 
+
 }
 
 bool BlockingMqttConnection::waitForMqttConnected()
@@ -100,16 +101,18 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
 
     qDebug("first json received, other jsons will be received asynchronously");
     currentClientId = clientId;
+
+    connect(client,&QMQTT::Client::published,this,&BlockingMqttConnection::published);
     return true;
 
 }
 
-void BlockingMqttConnection::publish(QMQTT::Message msg)
+quint16 BlockingMqttConnection::publish(QMQTT::Message msg)
 {
     if(client == nullptr)
     {
         qDebug("BlockingMqttConnection::publish failed: Mqtt client is NULL");
-        return;
+        return 0;
     }
 
     // FIXME connection state stuck in "INIT" instead of CONNECTED
@@ -118,10 +121,10 @@ void BlockingMqttConnection::publish(QMQTT::Message msg)
 
         auto state = client->connectionState();
          qDebug("BlockingMqttConnection::publish failed: Mqtt client is not connected");
-        return;
+        return 0;
     }
 
-    client->publish(msg);
+    return client->publish(msg);
 }
 
 bool BlockingMqttConnection::closeConnection()

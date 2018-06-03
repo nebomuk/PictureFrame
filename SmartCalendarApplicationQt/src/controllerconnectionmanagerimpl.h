@@ -23,15 +23,16 @@ public:
 
      bool closeConnection();
 
-     void publishSimpleStringMessage(const QString& path, const QString& simpleMessage);
+     quint16 publishSimpleStringMessage(const QString& path, const QString& simpleMessage);
 
-     void publishJSONMessage(const QByteArray &jsonObjectString, const QString &objectPath);
+     quint16 publishJSONMessage(const QByteArray &jsonObjectString, const QString &objectPath);
 
      ControllerDataContainer *dataContainer() const;
 
      void clearLocalImageCache();
 
-public slots:
+signals:
+     void published(const QMQTT::Message& message, quint16 msgid = 0);
 
 private slots:
 

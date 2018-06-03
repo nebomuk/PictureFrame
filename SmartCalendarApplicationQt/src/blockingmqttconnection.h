@@ -23,11 +23,12 @@ public:
 
     bool establishConnectionBlocking(const QString &brokerAddress, const QString &clientId);
 
-    void publish(QMQTT::Message msg);
+    quint16 publish(QMQTT::Message msg);
     bool closeConnection();
 
 signals:
     void received(QMQTT::Message msg);
+    void published(const QMQTT::Message& message, quint16 msgid = 0);
 
 
 public slots:

@@ -16,6 +16,7 @@ ControllerConnectionManagerImpl::ControllerConnectionManagerImpl(QObject *parent
     this->mDataContainer = new ControllerDataContainer(this);
     blockingMqttConnection = new BlockingMqttConnection(this);
     connect(blockingMqttConnection,SIGNAL(received(QMQTT::Message)),this,SLOT(listenToPublishes(QMQTT::Message)));
+    connect(blockingMqttConnection,&BlockingMqttConnection::published,this,&ControllerConnectionManagerImpl::published);
 
 }
 
@@ -30,21 +31,24 @@ bool ControllerConnectionManagerImpl::closeConnection()
 }
 
 
-void ControllerConnectionManagerImpl::publishSimpleStringMessage(const QString& path, const QString& simpleMessage)
+quint16 ControllerConnectionManagerImpl::publishSimpleStringMessage(const QString& path, const QString& simpleMessage)
 {
    QMQTT::Message message;
    message.setTopic(path);
    message.setPayload(simpleMessage.toUtf8());
-    blockingMqttConnection->publish(message);
+   message.setQos(2); // exactly once
+   return blockingMqttConnection->publish(message);
 }
 
-void ControllerConnectionManagerImpl::publishJSONMessage(const QByteArray& jsonObjectString, const QString& objectPath)
+quint16 ControllerConnectionManagerImpl::publishJSONMessage(const QByteArray& jsonObjectString, const QString& objectPath)
 {
     QMQTT::Message message;
     message.setTopic(objectPath);
     message.setPayload(jsonObjectString);
-    blockingMqttConnection->publish(message);
+    message.setQos(2); // exactly once
+    quint16 msgid = blockingMqttConnection->publish(message);
     storeSendingMessageLocally(objectPath,jsonObjectString);
+    return msgid;
 
 }
 

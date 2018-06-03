@@ -24,30 +24,33 @@ public:
 
     bool isConnectedToBroker();
 
+signals:
+    void published(const QMQTT::Message& message, quint16 msgid = 0);
+
 
 public slots:
 
     bool establishConnectionBlocking(const QString &brokerAddress);
     bool closeConnection();
 
-    void sendCalendarImage(QJsonObject calendarImage);
+    quint16 sendCalendarImage(QJsonObject calendarImage);
 
-    void sendWeatherImage(QJsonObject weatherImage);
-    void sendNewsImage(QJsonObject newsImage);
-    void sendFootballImage(QJsonObject footballImage);
-    void sendCinemaImage(QJsonObject cinemaImage);
-    void sendImageFile(QJsonObject imageFile);
-    void sendCalendarBaseOptions(QJsonObject baseOptions);
-    void sendSmartCalendarDeviceOptions(QJsonObject deviceOptions);
-    void sendMasterAccount(QJsonObject masterAccount);
-    void sendDefinedPersonsData(QJsonArray accountList);
-    void sendBirthdayTable(QJsonArray birthdayList);
-    void sendTrashTable(QJsonArray trashList);
-    void sendImageCount(int imageCount);
-    void sendDeviceLanguage(QString language);
-    void sendCallBackAdress(QString callBackAddress);
-    void sendCalendarToken(QJsonObject refreshToken);
-    void sendFirstConfigurationOption(QJsonObject firstConfigOption);
+    quint16 sendWeatherImage(QJsonObject weatherImage);
+    quint16 sendNewsImage(QJsonObject newsImage);
+    quint16 sendFootballImage(QJsonObject footballImage);
+    quint16 sendCinemaImage(QJsonObject cinemaImage);
+    quint16 sendImageFile(QJsonObject imageFile);
+    quint16 sendCalendarBaseOptions(QJsonObject baseOptions);
+    quint16 sendSmartCalendarDeviceOptions(QJsonObject deviceOptions);
+    quint16 sendMasterAccount(QJsonObject masterAccount);
+    quint16 sendDefinedPersonsData(QJsonArray accountList);
+    quint16 sendBirthdayTable(QJsonArray birthdayList);
+    quint16 sendTrashTable(QJsonArray trashList);
+    quint16 sendImageCount(int imageCount);
+    quint16 sendDeviceLanguage(QString language);
+    quint16 sendCallBackAdress(QString callBackAddress);
+    quint16 sendCalendarToken(QJsonObject refreshToken);
+    quint16 sendFirstConfigurationOption(QJsonObject firstConfigOption);
 
     void clearLocalImageCache();
 

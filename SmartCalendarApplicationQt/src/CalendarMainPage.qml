@@ -231,7 +231,7 @@ CalendarMainPageForm
             jsonObject.totalImageCount = listModel.count;
             jsonObject.index = i;
             jsonObject.publishTimeStamp = DateUtil.toShortISOString(new Date());
-            jsonObject.clientID = "test_client42"
+            jsonObject.clientID = "test_client42" // FIXME client id added by controllerConnectionManager
 
             switch(listModel.get(i).pictureType)
             {

@@ -1,10 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
-import Qt.labs.platform 1.0
+import Qt.labs.platform 1.0 as QtLabs
 import de.vitecvisual.core 1.0;
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
 import "SignalUtil.js" as SignalUtil
+import QtQml.StateMachine 1.0 as DSM
 
 
 ManageBirthdaysPageForm {
@@ -32,9 +33,9 @@ ManageBirthdaysPageForm {
         );
     }
 
-    MessageDialog {
+    QtLabs.MessageDialog {
          id : dialogPersonExists
-         buttons: MessageDialog.Ok
+         buttons: QtLabs.MessageDialog.Ok
          title : qsTr("Error")
          text: qsTr("A person with the same name and birthdate already exists")
      }
@@ -77,8 +78,9 @@ ManageBirthdaysPageForm {
                 newBirthdayPlan.push({"ID":0, clientId:"","firstName":item.firstName,"name":item.lastName,"date":DateUtil.toShortISOString(item.dateObject)})
             }
             DeviceAccessor.controllerDataContainer.birthdayPlan = newBirthdayPlan;
-            DeviceAccessor.sendBirthdayTable(newBirthdayPlan);
-            stackView.pop();
+
+            sendDialog.sendFunction = function() { DeviceAccessor.sendBirthdayTable(newBirthdayPlan); }
+            sendDialog.open();
     }
 
     function addBirthdaysToModel()
@@ -124,6 +126,73 @@ ManageBirthdaysPageForm {
         {
             return lastName1 > lastName2;
         }
+    }
+
+    Dialog
+    {
+        id : sendDialog
+
+        property var sendFunction : function() { }
+
+        standardButtons:  Dialog.Ok
+
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+
+        BusyIndicator
+        {
+            id : busyIndicator
+        }
+
+        DSM.StateMachine {
+                      id: stateMachine
+                      initialState: dialogHidden
+                      running: true
+                      DSM.State {
+                          id: dialogHidden
+                          DSM.SignalTransition {
+                              targetState: dialogShown
+                              signal: sendDialog.aboutToShow
+                          }
+
+                          onEntered: {
+                              sendDialog.standardButton(Dialog.Ok).visible = false;
+                          }
+                      }
+                      DSM.State {
+                          id: dialogShown
+                          DSM.SignalTransition {
+                              targetState: successfull
+                              signal: DeviceAccessor.published
+                          }
+//                          DSM.TimeoutTransition
+//                          {
+//                              targetState: successfull
+//                              timeout: 2000
+
+//                          }
+
+                          onEntered: {
+                              busyIndicator.visible = true;
+                              sendDialog.sendFunction();
+                              sendDialog.title = qsTr("Sending");
+                          }
+                      }
+                      DSM.State {
+                          id: successfull
+                          onEntered: {
+                              busyIndicator.visible = false;
+                               sendDialog.standardButton(Dialog.Ok).visible = true;
+                              sendDialog.title = qsTr("Successfull");
+                          }
+                          DSM.SignalTransition
+                          {
+                              targetState: dialogHidden
+                              signal : sendDialog.aboutToHide
+                          }
+                      }
+                  }
+
     }
 
 
