@@ -233,38 +233,53 @@ CalendarMainPageForm
             jsonObject.publishTimeStamp = DateUtil.toShortISOString(new Date());
             jsonObject.clientID = "test_client42" // FIXME client id added by controllerConnectionManager
 
+            var functionArray = [];
+
+
             switch(listModel.get(i).pictureType)
             {
                 case pictureTypeModel.calendarImage:
-                    DeviceAccessor.sendCalendarImage(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendCalendarImage(jsonObject);})
                     break;
                 case pictureTypeModel.weatherImage :
-                    DeviceAccessor.sendWeatherImage(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendWeatherImage(jsonObject);})
                     break;
                 case pictureTypeModel.newsImage    :
-                    DeviceAccessor.sendNewsImage(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendNewsImage(jsonObject);})
                     break;
                 case pictureTypeModel.footballImage:
-                    DeviceAccessor.sendFootballImage(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendFootballImage(jsonObject);})
                     break;
                 case pictureTypeModel.cinemaImage  :
-                    DeviceAccessor.sendCinemaImage(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendCinemaImage(jsonObject);})
                     break;
                 case pictureTypeModel.imageFile    :
-                    DeviceAccessor.sendImageFile(jsonObject);
+                    functionArray.push(function()
+                    {DeviceAccessor.sendImageFile(jsonObject);})
                     break;
             }
+
+            sendDialog.open();
         }
-        listModel.clear();
-        stackView.pop();
+
 
         // FIXME, transaction when storing images? should not overwrite old ControllerDataContainer immediately but only part of it
         // 2 possibilities: use SQLite in memory :memory: database or overwrite old instance of ControllerDataContainer with new one
         // when the transaction finished (simpler)
     }
 
-
-
-
+    MultiSendDialog
+    {
+        id : sendDialog
+        onAccepted: {
+            listModel.clear();
+            stackView.pop();
+        }
+    }
 
 }
