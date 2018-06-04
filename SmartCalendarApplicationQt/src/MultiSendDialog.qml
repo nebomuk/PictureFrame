@@ -59,9 +59,9 @@ Dialog
 
                 onEntered: {
                     busyIndicator.running = true;
-                    dialog.sendFunctions[functionIndex]();
-                    dialog.title = qsTr("Sending " + functionIndex);
-                    functionIndex++;
+                    dialog.sendFunctions[dialogShown.functionIndex]();
+                    dialog.title = qsTr("Sending " + dialogShown.functionIndex);
+                    dialogShown.functionIndex++;
                 }
 
                 onExited: {
@@ -78,7 +78,7 @@ Dialog
                     targetState: sending
                     signal: DeviceAccessor.published
                     guard: {
-                        functionIndex < sendFunctions.length
+                        dialogShown.functionIndex < sendFunctions.length
                     }
                 }
 
@@ -87,7 +87,7 @@ Dialog
                     targetState: successfull
                     signal: DeviceAccessor.published
                     guard: {
-                        functionIndex >= sendFunctions.length
+                        dialogShown.functionIndex >= sendFunctions.length
                     }
                 }
 

@@ -7,7 +7,7 @@ BaseOptionsPageForm {
     function onDoneClicked()
     {
         var displayOptions = baseDisplayOptionsPage.getOptions();
-        var calendarOptions = baseCalendarOptionsPage.getOptions();
+        var baseOptions = baseCalendarOptionsPage.getOptions();
 
         dialog.sendFunctions = [function() {
             DeviceAccessor.controllerDataContainer.displayOptions = displayOptions;
@@ -18,6 +18,7 @@ BaseOptionsPageForm {
             DeviceAccessor.controllerDataContainer.baseOptions = baseOptions
             DeviceAccessor.sendCalendarBaseOptions(baseOptions);
         }];
+        dialog.open();
     }
 
     MultiSendDialog
