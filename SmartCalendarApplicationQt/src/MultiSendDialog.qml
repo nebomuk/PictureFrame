@@ -15,6 +15,8 @@ Dialog
 
     standardButtons:  Dialog.Ok
 
+    modal : true
+
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
 
@@ -71,19 +73,29 @@ Dialog
                     signal: DeviceAccessor.error
                 }
 
+                // more to send
                 DSM.SignalTransition {
                     targetState: sending
                     signal: DeviceAccessor.published
                     guard: {
-                        functionIndex < sendFunctions.length // more to send
+                        functionIndex < sendFunctions.length
                     }
                 }
+
+                // all send functions called
                 DSM.SignalTransition {
                     targetState: successfull
                     signal: DeviceAccessor.published
                     guard: {
-                        functionIndex >= sendFunctions.length // all send functions called
+                        functionIndex >= sendFunctions.length
                     }
+                }
+
+                // this can happen when the user presses back, but should not be possible
+                DSM.SignalTransition
+                {
+                    targetState: dialogHidden
+                    signal : dialog.aboutToHide
                 }
             }
         }

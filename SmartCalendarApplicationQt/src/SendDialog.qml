@@ -12,6 +12,8 @@ Dialog
     property var sendFunction
     
     standardButtons:  Dialog.Ok
+
+    modal : true
     
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
