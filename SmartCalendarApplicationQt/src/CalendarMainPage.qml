@@ -264,6 +264,7 @@ CalendarMainPageForm
                     break;
             }
 
+            sendDialog.sendFunctions = functionArray;
             sendDialog.open();
         }
 

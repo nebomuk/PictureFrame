@@ -57,11 +57,16 @@ Dialog
             DSM.State {
                 id : sending
 
-                onEntered: {
-                    busyIndicator.running = true;
+                function callNextSendFunction()
+                {
                     dialog.sendFunctions[dialogShown.functionIndex]();
                     dialog.title = qsTr("Sending " + dialogShown.functionIndex);
                     dialogShown.functionIndex++;
+                }
+
+                onEntered: {
+                    busyIndicator.running = true;
+                    callNextSendFunction();
                 }
 
                 onExited: {
@@ -75,20 +80,20 @@ Dialog
 
                 // more to send
                 DSM.SignalTransition {
-                    targetState: sending
                     signal: DeviceAccessor.published
-                    guard: {
-                        dialogShown.functionIndex < sendFunctions.length
+                    onTriggered: {
+                        sending.callNextSendFunction();
                     }
+
+                    guard: dialogShown.functionIndex < sendFunctions.length
                 }
 
                 // all send functions called
                 DSM.SignalTransition {
                     targetState: successfull
                     signal: DeviceAccessor.published
-                    guard: {
-                        dialogShown.functionIndex >= sendFunctions.length
-                    }
+                    guard: dialogShown.functionIndex >= sendFunctions.length
+
                 }
 
                 // this can happen when the user presses back, but should not be possible
