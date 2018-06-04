@@ -111,7 +111,7 @@ BaseDisplayOptionsPageForm {
         return new Date(dateString).toLocaleTimeString(Qt.locale(),Locale.ShortFormat);
     }
 
-    function onDoneClicked() {
+    function getOptions() {
 
         // checked radio button is 1, the other one is 0
 
@@ -138,8 +138,6 @@ BaseDisplayOptionsPageForm {
                 displayOptions.firstIntervallWorkdayPowerSavingModeEndDate = intervals.firstIntervallWorkdayPowerSavingModeEndDate
             }
 
-        DeviceAccessor.controllerDataContainer.displayOptions = displayOptions;
-
-        DeviceAccessor.sendSmartCalendarDeviceOptions(displayOptions);
+        return displayOptions;
     }
 }

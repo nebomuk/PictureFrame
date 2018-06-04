@@ -79,8 +79,7 @@ ManageTrashPlanPageForm {
                 newTrashPlan.push({"clientID":"", "trashType":item.trashType,"date":DateUtil.toShortISOString(item.dateObject)})
             }
             DeviceAccessor.controllerDataContainer.trashPlan = newTrashPlan;
-            DeviceAccessor.sendTrashTable(newTrashPlan);
-            stackView.pop();
+            sendDialog.sendFunction = function() { DeviceAccessor.sendTrashTable(newTrashPlan); }
     }
 
     function addTrashEntriesToModel()
@@ -120,6 +119,11 @@ ManageTrashPlanPageForm {
         button: buttonDate
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
+    }
+
+    SendDialog {
+        id: sendDialog
+        onAccepted: stackView.pop();
     }
 
 

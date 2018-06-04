@@ -2,6 +2,7 @@ import QtQuick 2.4
 import de.vitecvisual.core 1.0;
 
 
+
 BaseCalendarOptionsPageForm {
 
     buttonDefinePersons.onClicked: stackView.push("DefinePersonsPage.qml")
@@ -25,7 +26,7 @@ BaseCalendarOptionsPageForm {
 
     }
 
-    function onDoneClicked() {
+    function getOptions() {
 
         var baseOptions = DeviceAccessor.controllerDataContainer.baseOptions;
 
@@ -35,8 +36,6 @@ BaseCalendarOptionsPageForm {
 
         baseOptions.showNationalHolidays = checkBoxShowNationalHolidays.checked
 
-        DeviceAccessor.controllerDataContainer.baseOptions = baseOptions
-
-        DeviceAccessor.sendCalendarBaseOptions(baseOptions);
+        return baseOptions;
     }
 }
