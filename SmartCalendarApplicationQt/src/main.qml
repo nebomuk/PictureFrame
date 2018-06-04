@@ -22,11 +22,6 @@ ApplicationWindow {
             width = 480
             height = 800
         }
-
-        if(!SmartCalendarAccess.isConnectedToWifi)
-        {
-            msgDialogWifi.open()
-        }
     }
 
     // handle android back button
@@ -109,34 +104,4 @@ ApplicationWindow {
         event.accepted = true
         stackView.pop();
     }
-
-
-    MessageDialog {
-          id : msgDialogWifi
-          title:  qsTr("Wifi is disabled")
-          text: qsTr("Please enable WiFi")
-
-          onAccepted: {
-              if(typeof PlatformHelper.showWifiSettings === "function")
-              {
-                  PlatformHelper.showWifiSettings()
-              }
-          }
-
-          Connections {
-
-              target : SmartCalendarAccess
-
-              onIsConnectedToWifiChanged : {
-                  if(!SmartCalendarAccess.isConnectedToWifi)
-                  {
-                      msgDialogWifi.open()
-                  }
-
-              }
-
-              }
-
-
-          }
-      }
+}

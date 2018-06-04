@@ -104,6 +104,8 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
 
     connect(client,&QMQTT::Client::published,this,&BlockingMqttConnection::published);
     connect(client,&QMQTT::Client::error,this,&BlockingMqttConnection::error);
+    connect(client,&QMQTT::Client::error,this,&BlockingMqttConnection::onClientError);
+
     return true;
 
 }

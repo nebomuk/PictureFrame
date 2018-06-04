@@ -215,6 +215,9 @@ CalendarMainPageForm
      function onDoneClicked() {
 
         DeviceAccessor.clearLocalImageCache();
+
+         var functionArray = [];
+
         for(var i = 0; i < listModel.count; ++i)
         {
             var formData = listModel.get(i).formData;
@@ -232,9 +235,6 @@ CalendarMainPageForm
             jsonObject.index = i;
             jsonObject.publishTimeStamp = DateUtil.toShortISOString(new Date());
             jsonObject.clientID = "test_client42" // FIXME client id added by controllerConnectionManager
-
-            var functionArray = [];
-
 
             switch(listModel.get(i).pictureType)
             {
@@ -263,10 +263,9 @@ CalendarMainPageForm
                     {DeviceAccessor.sendImageFile(jsonObject);})
                     break;
             }
-
-            sendDialog.sendFunctions = functionArray;
-            sendDialog.open();
         }
+        sendDialog.sendFunctions = functionArray;
+        sendDialog.open();
 
 
         // FIXME, transaction when storing images? should not overwrite old ControllerDataContainer immediately but only part of it
@@ -277,7 +276,8 @@ CalendarMainPageForm
     MultiSendDialog
     {
         id : sendDialog
-        onAccepted: {
+        modal : true
+        onClosed: {
             listModel.clear();
             stackView.pop();
         }
