@@ -61,6 +61,7 @@ Page {
             id: label1
             text: qsTr("Configured Devices")
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            visible : savedDevicesListView.count > 0
         }
 
         ListView {
@@ -145,6 +146,7 @@ Page {
             id: label
             text: qsTr("Configure New Device")
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            visible : availableDevicesListView.count > 0
         }
 
         ListView {

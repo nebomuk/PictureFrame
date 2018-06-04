@@ -72,6 +72,7 @@ MainPageForm {
                 if(stackView.depth > 0 && stackView.currentItem.url !== "DeviceManagerPage.qml")
                 {
                     stackView.pop(null);
+                    selectedDevice = "";
                     msgDialogConnectionLost.open();
                 }
             }

@@ -81,8 +81,6 @@ bool BlockingMqttConnection::establishConnectionBlocking(const QString& brokerAd
         qDebug("mqtt connection failed: Connection timeout");
         return false;
     }
-    qDebug("mqtt connection established");
-
     registerSubscriptions();
     testConnection(); // this will cause the receiving end to respond with the first json
 

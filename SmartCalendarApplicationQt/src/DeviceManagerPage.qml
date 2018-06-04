@@ -4,6 +4,7 @@ import QtQuick.Controls 2.3 // required for stackView attached properties
 import de.vitecvisual.util 1.0
 import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
+import QtQml.StateMachine 1.11 as DSM
 
 
 // Workflow is a bit different than from the description in Modell zur Erstkonfiguration.ppt
@@ -13,45 +14,26 @@ DeviceManagerPageForm {
 
     id : page
 
-    Timer {
-        id : timer
-             interval: 2000; running: false; repeat: false
-             onTriggered: {
-
-                 busyIndicator.visible = false;
-                 gridLayout.visible = true;
-             }
-         }
-
 MessageDialog {
       id : msgDialogUdpFailed
       title:  qsTr("No SmartCalendar found")
       text: qsTr("Make sure your SmartCalendar is turned on and in the same network. Click OK to continue.")
-      buttons: MessageDialog.Ok | MessageDialog.Cancel
-
-      onOkClicked: findAndConnect();
-      onCancelClicked: stackView.pop();
+      buttons: MessageDialog.Ok
 }
 
 // this happens when the SmartCalendar looses it's connection to the mqtt broker
 MessageDialog {
       id : msgDialogConnectionFailed
       title:  qsTr("Connection failed")
-      text: qsTr("Please restart the SmartCalendar and press OK")
-      buttons: MessageDialog.Ok | MessageDialog.Cancel
-      onOkClicked: findAndConnect();
-      onCancelClicked: stackView.pop();
-
+      text: qsTr("Please turn on your SmartCalendar. If it is already turned on, you need to restart it.")
+      buttons: MessageDialog.Ok
 }
 
 MessageDialog {
       id : msgDialogOldVersion
       title:  qsTr("Version too old")
       text: qsTr("SmartCalendar response did not contain Product Id. Please update your Smart Calendar software")
-      buttons: MessageDialog.Ok | MessageDialog.Cancel
-      onOkClicked: findAndConnect();
-      onCancelClicked: stackView.pop();
-
+      buttons: MessageDialog.Ok
 }
 
 MessageDialog {
@@ -61,40 +43,94 @@ MessageDialog {
       buttons: MessageDialog.Ok
 }
 
-    Component.onCompleted:
-    {       
-        findAndConnect()
-    }
+property var devicesFromUdpBroadcast
 
-    refreshButton.onClicked: findAndConnect();
 
-    property var devicesFromUdpBroadcast
-
-    function findAndConnect()
+    DSM.StateMachine
     {
-        busyIndicator.visible = true;
-        gridLayout.visible = false;
-        timer.restart();
+        id : stateMachine
+        running: true
+        initialState : stateFindAndConnect
 
 
-        devicesFromUdpBroadcast = SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking(1000);
-        // token required here
-        if(devicesFromUdpBroadcast.length > 0)
+
+        Connections
         {
-            // productId is required
-            if(devicesFromUdpBroadcast[0].productId === "")
-               {
-                       msgDialogOldVersion.open();
-
-               }
-        }
-        else // length == 0
-        {
-            console.debug("SmartCalendarAccess.getControllerInNetworkFromBroadcastBlocking failed");
-            msgDialogUdpFailed.open();
+            target : SmartCalendarAccess
+            onControllerInNetworkReceived : devicesFromUdpBroadcast = controllers
         }
 
-        updateListViews();
+        DSM.FinalState
+        {
+            id: finalState
+        }
+        onFinished: stackView.pop();
+
+        DSM.State
+        {
+            id : stateFindAndConnect
+            onEntered:
+            {
+                busyIndicator.visible = true;
+                gridLayout.visible = false;
+                SmartCalendarAccess.getControllerInNetworkFromBroadcast();
+            }
+
+            onExited:
+            {
+                busyIndicator.visible = false;
+                gridLayout.visible = true;
+            }
+
+            DSM.SignalTransition
+            {
+                targetState: stateControllerMaybeFound
+                signal : SmartCalendarAccess.controllerInNetworkReceived
+            }
+
+            DSM.TimeoutTransition
+            {
+                timeout: 2000
+                targetState: stateControllerMaybeFound // go to the state anyways
+                onTriggered: msgDialogUdpFailed.open();
+            }
+
+        }
+
+        DSM.State
+        {
+            id : stateControllerMaybeFound
+
+            onEntered: {
+                // token required here
+                if(devicesFromUdpBroadcast.length > 0)
+                {
+                    // productId is required
+                    if(devicesFromUdpBroadcast[0].productId === "")
+                       {
+                          msgDialogOldVersion.open();
+
+                       }
+                    else
+                    {
+                        updateListViews();
+                    }
+                }
+                else // length == 0
+                {
+                    console.debug("SmartCalendarAccess.getControllerInNetworkFromBroadcast failed");
+                    msgDialogUdpFailed.open();
+                }
+
+            }
+
+            DSM.SignalTransition
+            {
+                signal : refreshButton.onClicked
+                targetState: stateFindAndConnect
+            }
+
+        }
     }
 
     // TODO remove from

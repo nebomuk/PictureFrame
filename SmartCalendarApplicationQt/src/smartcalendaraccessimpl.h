@@ -35,7 +35,7 @@ public:
     Q_INVOKABLE bool isCurrentlyRoaming();
 
 signals:
-    void controllerInNetworkReceived(QList<ResponderClient> controllers);
+    void controllerInNetworkReceived(QVariantList controllers);
 
     void networkConfigurationChanged(); // QNetworkConfigurationManager::configurationChanged forward
 

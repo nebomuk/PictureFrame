@@ -136,7 +136,7 @@ void SmartCalendarAccessImpl::getControllerInNetworkFromBroadcast()
 
     connect(receiver,&QUdpSocket::readyRead,this,[receiver,this]{
          QList<ResponderClient> resultAddresses = readResponderClientsFromUdpSocket(receiver);
-         emit controllerInNetworkReceived(resultAddresses);
+         emit controllerInNetworkReceived(QVariantListConversion::toVariantList(resultAddresses));
         receiver->deleteLater();
     });
 }
