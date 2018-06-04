@@ -63,5 +63,6 @@
         <file>src/CustomTumbler.qml</file>
         <file>src/HourPicker.qml</file>
         <file>src/SendDialog.qml</file>
+        <file>src/MultiSendDialog.qml</file>
     </qresource>
 </RCC>

@@ -1,13 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
-import Qt.labs.platform 1.0 as QtLabs
 import de.vitecvisual.core 1.0;
-import "DateUtil.js" as DateUtil
-import "ListModelUtil.js" as ListModelUtil
-import "SignalUtil.js" as SignalUtil
 import QtQml.StateMachine 1.0 as DSM
 
-
+// the dialog that is shown when the done button on a page is clicked and mqtt packets
+// are sent to the SmartCalendar
 Dialog
 {
     id : sendDialog
