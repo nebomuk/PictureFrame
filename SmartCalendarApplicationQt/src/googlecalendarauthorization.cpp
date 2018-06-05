@@ -104,6 +104,6 @@ qDebug() << __FUNCTION__;
 
 void GoogleCalendarAuthorization::startAuthorization()
 {
-    mAuthorizationFlow->unlink(); // for testing
-    mAuthorizationFlow->link(); // checks internally if already linked
+    //mAuthorizationFlow->link(); // checks internally if already linked
+    mAuthorizationFlow->refresh();
 }

@@ -7,23 +7,14 @@ import QtQuick.Controls.Material 2.3
 Page {
     id: page
 
-    padding: 20
-
-    property alias listModel: listModel
+    property var listModel
 
     property alias addButton: addButton
 
     title: qsTr("Define Persons")
 
-
-
     signal listIndexClicked(int index);
 
-
-
-    ListModel {
-            id: listModel
-        }
 
         Item {
             id: mainContent
@@ -38,45 +29,33 @@ Page {
                     ListView {
                         id: listView
                         model: listModel
-                        spacing: 10
                         delegate: DraggableItem {
                             id : draggableItem
                             Rectangle {
                                 height: 60
-                                width: listView.width * 0.8
+                                width: listView.width
                                 color: "white"
 
                                 RowLayout {
                                     anchors.fill: parent
                                     spacing: 20
+
+                                    CheckBox
+                                    {
+                                        id : checkBox
+                                        onCheckedChanged: modelData.checked = checkBox.checked
+                                    }
+
                                     Label {
                                         id: textFieldName
-                                        text: model.name
+                                        text: modelData.summary
                                     }
                                     Label {
                                         Layout.fillWidth: true
                                         id: textFieldEmail
-                                        text: model.email
-                                    }
-                                    Button
-                                    {
-                                        id : editButton
-                                        text : qsTr("Edit")
-
-                                    }
-
-                                    RemoveButton
-                                    {
-                                        listModel: listView.model
-                                    }
-                                    Connections
-                                    {
-                                        target : editButton
-                                        onClicked : listIndexClicked(index);
+                                        text: modelData.id
                                     }
                                 }
-
-
 
                                 // Bottom line border
                                 Rectangle {
@@ -93,7 +72,14 @@ Page {
                                 {
                                     target : draggableItem
                                     onMoveItemRequested: {
-                                        listModel.move(from, to, 1);
+                                        // old model must be overwritten to notify ListView to update itself
+                                        listModel = array_move(listModel,from, to);
+                                    }
+
+                                    // @disable-check M222
+                                    function array_move(arr,from, to) {
+                                        arr.splice(to, 0, arr.splice(from, 1)[0]);
+                                        return arr;
                                     }
 
                                 }
@@ -110,6 +96,8 @@ Page {
         // must be on top of other items
         RoundButton {
             id : addButton
+            anchors.rightMargin: 20
+            anchors.bottomMargin: 20
 
             icon
             {

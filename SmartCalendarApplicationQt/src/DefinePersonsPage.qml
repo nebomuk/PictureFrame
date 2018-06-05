@@ -6,82 +6,10 @@ import de.vitecvisual.core 1.0;
 
 DefinePersonsPageForm {
 
-
-
-    onListIndexClicked: {
-
-        var item = listModel.get(index);
-        dialog.textFieldEmail.text = item.email
-        dialog.textFieldName.text =  item.name
-        dialog.open();
-        dialog.editedItemIndex = index;
-
-    }
-
     addButton.onClicked: {
-        dialog.editedItemIndex = dialog.indexAddItem
-        dialog.open()
+        googleCalendarAuthorization.startAuthorization();
     }
 
-
-    MessageDialog {
-         id : dialogEmailExists
-         buttons: MessageDialog.Ok
-         title : qsTr("Error")
-         text: qsTr("The Email Address of the person you entered already exists")
-     }
-
-
-    NameEmailInputDialog
-    {
-        id : dialog
-
-        readonly property int indexUndefined  : -1
-        readonly property int indexAddItem : -2
-
-
-        property int editedItemIndex
-
-        Component.onCompleted: editedItemIndex = indexUndefined;
-
-
-        onAccepted: {
-
-            if(listModelContains(textFieldEmail.text))
-            {
-                dialogEmailExists.open();
-            }
-            else
-            {
-                if(editedItemIndex > 0)
-                {
-                    listModel.set(editedItemIndex,{"name":textFieldName.text, "email":textFieldEmail.text})
-                }
-                else if (editedItemIndex === indexAddItem)
-                {
-                    listModel.append({"name":textFieldName.text, "email":textFieldEmail.text});
-                }
-            }
-
-            editedItemIndex = indexUndefined;
-
-        }
-
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-    }
-
-    function listModelContains(emailAddress)
-    {
-      for(var i = 0; i < listModel.count; ++i)
-      {
-          if (listModel.get(i).email === emailAddress)
-          {
-              return true;
-          }
-      }
-      return false;
-    }
 
     GoogleCalendarAuthorization
     {
@@ -92,18 +20,24 @@ DefinePersonsPageForm {
     Component.onCompleted: {
         var personList = DeviceAccessor.controllerDataContainer.personList;
 
-        for(var i = 1; i< personList.length; i++)
+        getCalendarList(function(xhr)
         {
-            listModel.append({"name":personList[i].name, "email":personList[i].eMailAdress});
-        }
+            var data = JSON.parse(xhr.responseText);
+            var items = data.items;
+            listModel = items;
+            console.log(data);
+        });
 
-       // googleCalendarAuthorization.startAuthorization();
+    }
 
+    function getCalendarList(receivedFunction)
+    {
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log(xhr.responseText);
+              receivedFunction(xhr);
+
           }
         }
 
