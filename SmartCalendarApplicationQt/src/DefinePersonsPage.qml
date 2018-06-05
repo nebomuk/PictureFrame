@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import de.vitecvisual.core 1.0;
 import Qt.labs.platform 1.0
+import de.vitecvisual.core 1.0;
 
 
 DefinePersonsPageForm {
@@ -82,6 +83,11 @@ DefinePersonsPageForm {
       return false;
     }
 
+    GoogleCalendarAuthorization
+    {
+        id : googleCalendarAuthorization
+    }
+
 
     Component.onCompleted: {
         var personList = DeviceAccessor.controllerDataContainer.personList;
@@ -90,6 +96,21 @@ DefinePersonsPageForm {
         {
             listModel.append({"name":personList[i].name, "email":personList[i].eMailAdress});
         }
+
+       // googleCalendarAuthorization.startAuthorization();
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log(xhr.responseText);
+          }
+        }
+
+        xhr.open("GET", "https://www.googleapis.com/calendar/v3/users/me/calendarList");
+        xhr.setRequestHeader("authorization", "Bearer " + googleCalendarAuthorization.authorizationFlow.token);
+
+        xhr.send(null);
     }
 
 }

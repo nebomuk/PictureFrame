@@ -4,7 +4,7 @@ import QtQuick.Controls 2.3 // required for stackView attached properties
 import de.vitecvisual.util 1.0
 import Qt.labs.platform 1.0
 import de.vitecvisual.core 1.0;
-import QtQml.StateMachine 1.11 as DSM
+import QtQml.StateMachine 1.0 as DSM
 
 
 // Workflow is a bit different than from the description in Modell zur Erstkonfiguration.ppt
@@ -103,7 +103,7 @@ property var devicesFromUdpBroadcast
 
             onEntered: {
                 // token required here
-                if(devicesFromUdpBroadcast.length > 0)
+                if(devicesFromUdpBroadcast !== undefined && devicesFromUdpBroadcast.length > 0)
                 {
                     // productId is required
                     if(devicesFromUdpBroadcast[0].productId === "")
