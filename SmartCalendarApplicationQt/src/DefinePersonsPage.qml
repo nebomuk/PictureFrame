@@ -13,13 +13,13 @@ DefinePersonsPageForm {
     }
 
     addButton.onClicked: {
-        googleCalendarAuthorization.startAuthorization();
+        googleCalendarAuthorization.o2.link();
     }
 
     DSM.StateMachine
     {
         running: true
-        initialState: googleCalendarAuthorization.linked ? stateLinked : stateUnlinked
+        initialState: googleCalendarAuthorization.o2.linked ? stateLinked : stateUnlinked
 
         DSM.State
         {
@@ -90,14 +90,16 @@ DefinePersonsPageForm {
 
             DSM.SignalTransition
             {
-                signal : googleCalendarAuthorization.o2.linkingFailed
+                signal : googleCalendarAuthorization.o2.linkedChanged
                 targetState: stateUnlinked
+                guard : !googleCalendarAuthorization.o2.linked
             }
 
             DSM.SignalTransition
             {
-                signal : googleCalendarAuthorization.o2.linkingSucceeded
+                signal : googleCalendarAuthorization.o2.linkedChanged
                 targetState: stateLinked
+                guard : googleCalendarAuthorization.o2.linked
             }
         }
 
@@ -114,9 +116,9 @@ DefinePersonsPageForm {
     {
         id : calendarApi
 
-        signal success(XMLHttpRequest xhr);
+        signal success();
 
-        signal error(XMLHttpRequest xhr);
+        signal error();
 
         property var request
 

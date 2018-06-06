@@ -75,7 +75,7 @@ emit failed();
 
 void GoogleCalendarAuthorization::onLinkingSucceeded()
 {
-qDebug() << __FUNCTION__;
+qDebug() << __FUNCTION__ << "note: signal emitted on linked/unlinked";
 qDebug() << "refresh token: " + mO2Google->refreshToken();
 qDebug() << "access token: " + mO2Google->token();
 emit granted();
@@ -103,6 +103,6 @@ qDebug() << __FUNCTION__;
 
 void GoogleCalendarAuthorization::startAuthorization()
 {
+    qDebug() << "deprecated, call link by qml directly";
     //mAuthorizationFlow->link(); // checks internally if already linked
-    mO2Google->refresh();
 }
