@@ -54,7 +54,6 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
     QByteArrayLiteral("</body></html>");
     mO2Google->setReplyContent(html);
 
-
     connect(mO2Google, &O0BaseAuth::linkedChanged, this, &GoogleCalendarAuthorization::onLinkedChanged);
     connect(mO2Google, &O0BaseAuth::linkingFailed, this, &GoogleCalendarAuthorization::onLinkingFailed);
     connect(mO2Google, &O0BaseAuth::linkingSucceeded, this, &GoogleCalendarAuthorization::onLinkingSucceeded);

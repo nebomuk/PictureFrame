@@ -7,8 +7,6 @@ import QtQml.StateMachine 1.0 as DSM;
 
 DefinePersonsPageForm {
 
-
-
     GoogleCalendarAuthorization
     {
         id : googleCalendarAuthorization
@@ -26,25 +24,58 @@ DefinePersonsPageForm {
         DSM.State
         {
             id : stateLinked
+            initialState: stateGetCalendarList
 
-            onEntered: {
-                calendarApi.getCalendarList();
-            }
-            DSM.SignalTransition
-            {
-                signal : calendarApi.success
-                targetState: stateCalendarSuccess
-            }
-            DSM.SignalTransition
-            {
-                signal : calendarApi.error
-                targetState: stateCalendarError
-            }
             DSM.State
             {
-                id : stateCalendar
+                id : stateGetCalendarList
+                onEntered: {
+                    calendarApi.getCalendarList();
+                }
+                DSM.SignalTransition
+                {
+                    signal : calendarApi.success
+                    targetState: stateCalendarSuccess
+                }
+                DSM.SignalTransition
+                {
+                    signal : calendarApi.error
+                    targetState: stateCalendarError
+                }
             }
 
+            DSM.State
+            {
+                id : stateCalendarSuccess
+                onEntered:
+                {
+                    var data = JSON.parse(calendarApi.request.responseText);
+                    var items = data.items;
+                    listModel = items;
+                    console.log(data);
+                }
+            }
+
+            DSM.State
+            {
+                id : stateCalendarError
+                onEntered: {
+                    // 1.) refresh token expired or
+                    // 2.) user removed permission
+                    googleCalendarAuthorization.o2.refresh();
+                }
+                DSM.SignalTransition {
+                    signal : googleCalendarAuthorization.o2.refreshFinished
+                    guard : error === 0 // QNetworkReply::Error::NoError
+                    targetState: stateGetCalendarList
+                }
+                DSM.SignalTransition {
+                    signal : googleCalendarAuthorization.o2.refreshFinished
+                    guard : error !== 0
+                    targetState: stateUnlinked
+                }
+
+            }
 
         }
 
@@ -76,14 +107,6 @@ DefinePersonsPageForm {
 
     Component.onCompleted: {
         var personList = DeviceAccessor.controllerDataContainer.personList;
-
-        calendarApi.getCalendarList(function(xhr)
-        {
-            var data = JSON.parse(xhr.responseText);
-            var items = data.items;
-            listModel = items;
-            console.log(data);
-        });
 
     }
 

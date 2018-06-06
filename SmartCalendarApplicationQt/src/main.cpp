@@ -110,6 +110,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<ControllerDataContainer*>("ControllerDataContainer");
     qmlRegisterUncreatableType<ControllerDataContainer>("de.vitecvisual.core",1,0,"ControllerDataContainer","Property of DeviceAccessor singleton");
 
+    // enums
+    qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
+
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/src/main.qml")));
     if (engine.rootObjects().isEmpty())
