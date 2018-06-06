@@ -9,7 +9,7 @@
 class GoogleCalendarAuthorization : public QObject
 {
 
-    Q_PROPERTY(O2Google* authorizationFlow MEMBER mAuthorizationFlow)
+    Q_PROPERTY(O2Google* o2 MEMBER mO2Google)
 
     Q_OBJECT
 public:
@@ -30,7 +30,7 @@ private slots:
     void onOpenBrowser(QUrl url);
     void onCloseBrowser();
 private:
-    O2Google * mAuthorizationFlow;
+    O2Google * mO2Google;
 };
 
 #endif // GOOGLECALENDARAUTHORIZATION_H

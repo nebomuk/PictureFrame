@@ -35,31 +35,31 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
     const int port = static_cast<quint16>(redirectUri.port()); // Get the port
 
 
-    mAuthorizationFlow = new O2Google(this);
-    mAuthorizationFlow->setScope("https://www.googleapis.com/auth/calendar email"); // space intentional
-    mAuthorizationFlow->setClientId(clientId);
-    mAuthorizationFlow->setClientSecret(clientSecret);
+    mO2Google = new O2Google(this);
+    mO2Google->setScope("https://www.googleapis.com/auth/calendar email"); // space intentional
+    mO2Google->setClientId(clientId);
+    mO2Google->setClientSecret(clientSecret);
     QVariantMap map;
     map.insert("access_type",QVariant::fromValue(QString("offline")));
-    mAuthorizationFlow->setExtraRequestParams(map);
+    mO2Google->setExtraRequestParams(map);
 
     // causes QString::arg error message in O2 lib which can be ignored
-    mAuthorizationFlow->setLocalhostPolicy(redirectUri.toString());
+    mO2Google->setLocalhostPolicy(redirectUri.toString());
 
-    mAuthorizationFlow->setLocalPort(port);
+    mO2Google->setLocalPort(port);
 
     const QByteArray html = QByteArrayLiteral("<html><head><title>") +
     QByteArrayLiteral("</title></head><body>") +
     "Successfull. You can close this page now and return to the app." +
     QByteArrayLiteral("</body></html>");
-    mAuthorizationFlow->setReplyContent(html);
+    mO2Google->setReplyContent(html);
 
 
-    connect(mAuthorizationFlow, &O0BaseAuth::linkedChanged, this, &GoogleCalendarAuthorization::onLinkedChanged);
-    connect(mAuthorizationFlow, &O0BaseAuth::linkingFailed, this, &GoogleCalendarAuthorization::onLinkingFailed);
-    connect(mAuthorizationFlow, &O0BaseAuth::linkingSucceeded, this, &GoogleCalendarAuthorization::onLinkingSucceeded);
-    connect(mAuthorizationFlow, &O0BaseAuth::openBrowser, this, &GoogleCalendarAuthorization::onOpenBrowser);
-    connect(mAuthorizationFlow, &O0BaseAuth::closeBrowser, this, &GoogleCalendarAuthorization::onCloseBrowser);
+    connect(mO2Google, &O0BaseAuth::linkedChanged, this, &GoogleCalendarAuthorization::onLinkedChanged);
+    connect(mO2Google, &O0BaseAuth::linkingFailed, this, &GoogleCalendarAuthorization::onLinkingFailed);
+    connect(mO2Google, &O0BaseAuth::linkingSucceeded, this, &GoogleCalendarAuthorization::onLinkingSucceeded);
+    connect(mO2Google, &O0BaseAuth::openBrowser, this, &GoogleCalendarAuthorization::onOpenBrowser);
+    connect(mO2Google, &O0BaseAuth::closeBrowser, this, &GoogleCalendarAuthorization::onCloseBrowser);
 }
 
 void GoogleCalendarAuthorization::onLinkedChanged()
@@ -77,8 +77,8 @@ emit failed();
 void GoogleCalendarAuthorization::onLinkingSucceeded()
 {
 qDebug() << __FUNCTION__;
-qDebug() << "refresh token: " + mAuthorizationFlow->refreshToken();
-qDebug() << "access token: " + mAuthorizationFlow->token();
+qDebug() << "refresh token: " + mO2Google->refreshToken();
+qDebug() << "access token: " + mO2Google->token();
 emit granted();
 
 }
@@ -105,5 +105,5 @@ qDebug() << __FUNCTION__;
 void GoogleCalendarAuthorization::startAuthorization()
 {
     //mAuthorizationFlow->link(); // checks internally if already linked
-    mAuthorizationFlow->refresh();
+    mO2Google->refresh();
 }
