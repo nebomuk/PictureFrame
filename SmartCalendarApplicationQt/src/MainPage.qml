@@ -20,13 +20,6 @@ MainPageForm {
         stackView.push("CalendarMainPage.qml")
     }
 
-    buttonImagePicker.onClicked: {
-
-        LoggingFilter.setFilterRules("qt.qml.binding.removal.info=false");
-        stackView.push("DynamicPicturePage.qml",{formData:{}});
-    }
-
-
     Component.onCompleted:
     {
         if(!SmartCalendarAccess.isConnectedToWifi)

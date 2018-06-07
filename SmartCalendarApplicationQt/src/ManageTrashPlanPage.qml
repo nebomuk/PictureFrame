@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 import de.vitecvisual.core 1.0;
 import Qt.labs.platform 1.0
+import QtQml.StateMachine 1.0 as DSM;
 
 import "DateUtil.js" as DateUtil
 import "ListModelUtil.js" as ListModelUtil
@@ -14,23 +15,34 @@ ManageTrashPlanPageForm {
 
         buttonDate.text =  qsTr("Date")
 
-        var dataContainer = DeviceAccessor.controllerDataContainer;
-
-        // trash plans already received before
-        if(Object.keys(dataContainer.trashPlan).length !== 0)
-        {
-            addTrashEntriesToModel()
-        }
-        else
-        {
-            DeviceAccessor.queryTrashPlan();
-            SignalUtil.connectOnce(dataContainer.trashPlanChanged,addTrashEntriesToModel);
-        }
-
         buttonAddEntry.enabled = Qt.binding(function() {
           return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
         }
         );
+    }
+
+    DSM.StateMachine
+    {
+        running: true
+
+        initialState: Object.keys(DeviceAccessor.controllerDataContainer.trashPlan).length === 0 ? stateQueryingTrashPlan : stateTrashPlanQueryFinished
+
+        DSM.State
+        {
+            id : stateQueryingTrashPlan
+
+            onEntered:  DeviceAccessor.queryTrashPlan();
+            DSM.SignalTransition
+            {
+                targetState: stateTrashPlanQueryFinished
+            }
+        }
+
+        DSM.State
+        {
+            id : stateTrashPlanQueryFinished
+            onEntered: addTrashEntriesToModel()
+        }
     }
 
     MessageDialog {
@@ -80,6 +92,7 @@ ManageTrashPlanPageForm {
             }
             DeviceAccessor.controllerDataContainer.trashPlan = newTrashPlan;
             sendDialog.sendFunction = function() { DeviceAccessor.sendTrashTable(newTrashPlan); }
+            sendDialog.open();
     }
 
     function addTrashEntriesToModel()

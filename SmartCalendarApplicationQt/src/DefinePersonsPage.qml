@@ -11,16 +11,28 @@ DefinePersonsPageForm {
     GoogleCalendarAuthorization
     {
         id : googleCalendarAuthorization
+
     }
 
+    property var o2: googleCalendarAuthorization.o2
+
     addButton.onClicked: {
-        googleCalendarAuthorization.o2.link();
+        o2.link();
     }
+
+
 
     DSM.StateMachine
     {
+        Component.onCompleted:
+        {
+            addButton.visible = Qt.binding(function() {
+                return stateUnlinked.active
+            });
+        }
+
         running: true
-        initialState: googleCalendarAuthorization.o2.linked === true ? stateLinked : stateUnlinked
+        initialState: o2.linked === true ? stateLinked : stateUnlinked
 
         DSM.State
         {
@@ -68,18 +80,18 @@ DefinePersonsPageForm {
                 id : stateCalendarError
                 onEntered: {
                     console.info("O2 DSM sub stateCalendarError.onEntered calling o2.refresh()");
-                    googleCalendarAuthorization.o2.refresh();
+                    o2.refresh();
                 }
                 DSM.SignalTransition {
-                    signal : googleCalendarAuthorization.o2.refreshFinished
+                    signal : o2.refreshFinished
                     guard : error === 0 // QNetworkReply::Error::NoError
                     targetState: stateGetCalendarList
                 }
                 // when there's any network error (that is a server reply error, not a network timeout)
                 // the  O2 library will send the linkedChanged signal with linked === false and internally call unlink()
                 DSM.SignalTransition {
-                    signal : googleCalendarAuthorization.o2.linkedChanged
-                    guard : googleCalendarAuthorization.o2.linked === false
+                    signal : o2.linkedChanged
+                    guard : o2.linked === false
                     targetState: stateUnlinked
                 }
 
@@ -91,11 +103,6 @@ DefinePersonsPageForm {
         {
             id : stateUnlinked
 
-            onActiveChanged:
-            {
-                addButton.visible = active;
-            }
-
             onEntered: {
                 console.info("O2 DSM  stateUnlinked.onEntered open msg dialog");
                    msgDialogNoGoogleCalendarAccount.open();
@@ -103,16 +110,16 @@ DefinePersonsPageForm {
 
             DSM.SignalTransition
             {
-                signal : googleCalendarAuthorization.o2.linkedChanged
+                signal : o2.linkedChanged
                 targetState: stateUnlinked
-                guard : !googleCalendarAuthorization.o2.linked
+                guard : !o2.linked
             }
 
             DSM.SignalTransition
             {
-                signal : googleCalendarAuthorization.o2.linkedChanged
+                signal : o2.linkedChanged
                 targetState: stateLinked
-                guard : googleCalendarAuthorization.o2.linked
+                guard : o2.linked
             }
         }
     }
@@ -161,7 +168,7 @@ DefinePersonsPageForm {
             }
 
             xhr.open("GET", "https://www.googleapis.com/calendar/v3/users/me/calendarList");
-            xhr.setRequestHeader("authorization", "Bearer " + googleCalendarAuthorization.o2.token);
+            xhr.setRequestHeader("authorization", "Bearer " + o2.token);
 
             xhr.send(null);
         }

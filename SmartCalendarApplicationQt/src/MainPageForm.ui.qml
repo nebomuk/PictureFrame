@@ -19,8 +19,6 @@ Page {
 
     property string selectedDevice // written to in DeviceManagerPage
 
-    property alias buttonImagePicker: buttonImagePicker
-
     CenterColumn {
         id: column
 
@@ -55,11 +53,5 @@ Page {
             id: baseConfigurationButton
             text: qsTr("Base Configuration")
        }
-
-        Button
-        {
-            id : buttonImagePicker
-            text : "image picker test"
-        }
     }
 }
