@@ -40,6 +40,7 @@ DynamicPicturePageForm {
         }
         else
         {
+            // json can only handle base64, and the SmartCalendar java app uses Base64.decodeBase64 to decode this
             formData.imageByteArray = imageCropperItem.imageBase64String;
             formData.imageTitle = textField.text
             finished(formData);

@@ -21,6 +21,7 @@ signals:
     void imageFilePathChanged();
 
 public slots:
+    // return value must be base64 for json and smartcalendar java app
     QString crop(QRectF rect);
 
 

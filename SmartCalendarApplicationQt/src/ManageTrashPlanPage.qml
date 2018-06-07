@@ -38,7 +38,7 @@ ManageTrashPlanPageForm {
             }
         }
 
-        DSM.State
+        DSM.FinalState
         {
             id : stateTrashPlanQueryFinished
             onEntered: addTrashEntriesToModel()
