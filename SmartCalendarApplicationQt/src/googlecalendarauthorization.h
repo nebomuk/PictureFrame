@@ -15,14 +15,6 @@ class GoogleCalendarAuthorization : public QObject
 public:
     explicit GoogleCalendarAuthorization(QObject *parent = nullptr);
 
-public slots:
-
-    void startAuthorization();
-
-signals:
-    void granted();
-    void failed();
-
 private slots:
     void onLinkedChanged();
     void onLinkingFailed();

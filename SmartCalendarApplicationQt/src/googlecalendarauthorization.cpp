@@ -63,13 +63,12 @@ GoogleCalendarAuthorization::GoogleCalendarAuthorization(QObject *parent) : QObj
 
 void GoogleCalendarAuthorization::onLinkedChanged()
 {
-qDebug() << __FUNCTION__;
+qDebug() << __FUNCTION__ << "linked  == " << mO2Google->linked();
 }
 
 void GoogleCalendarAuthorization::onLinkingFailed()
 {
 qDebug() << __FUNCTION__;
-emit failed();
 
 }
 
@@ -78,7 +77,6 @@ void GoogleCalendarAuthorization::onLinkingSucceeded()
 qDebug() << __FUNCTION__ << "note: signal emitted on linked/unlinked";
 qDebug() << "refresh token: " + mO2Google->refreshToken();
 qDebug() << "access token: " + mO2Google->token();
-emit granted();
 
 }
 
@@ -99,10 +97,4 @@ void GoogleCalendarAuthorization::onCloseBrowser()
 {
 qDebug() << __FUNCTION__;
 
-}
-
-void GoogleCalendarAuthorization::startAuthorization()
-{
-    qDebug() << "deprecated, call link by qml directly";
-    //mAuthorizationFlow->link(); // checks internally if already linked
 }
