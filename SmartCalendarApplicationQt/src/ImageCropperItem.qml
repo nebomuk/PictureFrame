@@ -16,6 +16,8 @@ Item {
 
     property bool cropStarted: false
 
+    property alias draggableRect: draggableRect
+
     function crop()
     {
         if(cropStarted)

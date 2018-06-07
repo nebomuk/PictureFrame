@@ -15,7 +15,6 @@ Page {
     ImageCropperItem
     {
         anchors.fill: parent
-        visible: false
         id : imageCropperItem
     }
 

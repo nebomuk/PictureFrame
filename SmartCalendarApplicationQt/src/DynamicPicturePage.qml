@@ -22,6 +22,16 @@ DynamicPicturePageForm {
     property var formData
 
 
+    Component.onCompleted:
+    {
+        if(formData.imageByteArray !== undefined)
+        {
+            imageCropperItem.image.source = "data:image/jpg;base64," + formData.imageByteArray;
+            imageCropperItem.draggableRect.visible = false; // TODO make visible again when existing picture changed
+            // FIXME overrides source binding when existing picture changed
+        }
+
+    }
 
     Component.onDestruction: {
         // must set qt.qml.binding.removal.info=false on stackView.push
@@ -41,7 +51,7 @@ DynamicPicturePageForm {
         else
         {
             // json can only handle base64, and the SmartCalendar java app uses Base64.decodeBase64 to decode this
-            formData.imageByteArray = imageCropperItem.imageBase64String;
+            formData.imageByteArray = imageCropperItem.imageBase64String.substring("data:image/jpg;base64,".length);
             formData.imageTitle = textField.text
             finished(formData);
         }
