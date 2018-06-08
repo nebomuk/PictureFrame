@@ -8,8 +8,6 @@ Item {
 
     property string title: qsTr("Crop Image") // for toolbar
 
-    property string imageFilePath
-
     property alias image : img
 
     property string imageBase64String : ""
@@ -28,7 +26,7 @@ Item {
         cropStarted = true;
 
 
-        ImageCropper.imageFileUrl = imageFilePath
+        ImageCropper.imageFileUrl = img.source;
         var distX = Math.abs(img.paintedX - draggableRect.x);
         var distY = Math.abs(img.paintedY - draggableRect.y);
 
@@ -86,7 +84,6 @@ Item {
             property real paintedY: y  + distancePaintedYToY
             fillMode: Image.PreserveAspectFit
             id : img
-            source: imageFilePath
             anchors.fill: parent
         }
 

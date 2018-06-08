@@ -27,8 +27,7 @@ DynamicPicturePageForm {
         if(formData.imageByteArray !== undefined)
         {
             imageCropperItem.image.source = "data:image/jpg;base64," + formData.imageByteArray;
-            imageCropperItem.draggableRect.visible = false; // TODO make visible again when existing picture changed
-            // FIXME overrides source binding when existing picture changed
+            imageCropperItem.draggableRect.visible = false;
         }
 
     }
@@ -71,7 +70,8 @@ DynamicPicturePageForm {
 
            addButton.visible = false;
            imageCropperItem.visible = true;
-           imageCropperItem.imageFilePath = filePath;
+           imageCropperItem.image.source = filePath;
+           imageCropperItem.draggableRect.visible = true;
 
         }
 

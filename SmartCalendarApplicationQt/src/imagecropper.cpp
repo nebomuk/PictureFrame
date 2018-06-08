@@ -19,7 +19,7 @@ QString ImageCropper::crop(QRectF rect)
         return "";
     }
 
-    QImage image(mImageFileUrl.path());
+    QImage image(mImageFileUrl.toLocalFile());
     if(image.isNull())
     {
         qDebug() << __FUNCTION__ << "failed to load image from path" << mImageFileUrl.path();
