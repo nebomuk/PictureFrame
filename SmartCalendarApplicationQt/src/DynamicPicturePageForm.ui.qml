@@ -21,7 +21,6 @@ Page {
     TextField
     {
         id : textField
-        visible: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top : parent.top
         anchors.topMargin: 20

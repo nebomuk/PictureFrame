@@ -26,9 +26,13 @@ DynamicPicturePageForm {
     {
         if(formData.imageByteArray !== undefined)
         {
-            imageCropperItem.image.source = "data:image/jpg;base64," + formData.imageByteArray;
+            // this must be stored separately, because it cannot be read from the source property after it has been set
+            imageCropperItem.imageBase64String = "data:image/jpg;base64," + formData.imageByteArray;
+
+            imageCropperItem.image.source = imageCropperItem.imageBase64String;
             imageCropperItem.draggableRect.visible = false;
         }
+        textField.text = formData.imageTitle
 
     }
 
@@ -39,7 +43,7 @@ DynamicPicturePageForm {
 
     function onDoneClicked() // for toolbar done icon
     {
-        if(!imageCropperItem.cropStarted)
+        if(!imageCropperItem.cropStarted && imageCropperItem.draggableRect.visible)
         {
             busyIndicator.visible = true;
             imageCropperItem.crop();
@@ -72,33 +76,10 @@ DynamicPicturePageForm {
            imageCropperItem.visible = true;
            imageCropperItem.image.source = filePath;
            imageCropperItem.draggableRect.visible = true;
+            textField.visible = false;
 
         }
 
-    }
-
-    function loadImageIntoArrayBuffer() {
-
-                // combo box option shows a different user string from what should be sent via json
-
-        // convert file to byte array
-        var request = new XMLHttpRequest()
-                   request.responseType = 'arraybuffer'
-                   request.onreadystatechange = function() {
-                           if (request.readyState === XMLHttpRequest.DONE) {
-                               if (request.status == 200 || request.status == 0) {
-                                   var arrayBuffer = request.response
-                                   if (arrayBuffer) {
-                                       onImageLoadedIntoArrayBuffer(arrayBuffer)
-                                     }
-                               } else {
-                                   console.warn("Couldn't load magnitude data for bars.")
-                               }
-                               request = null
-                           }
-                       };
-        request.open('GET', Qt.resolvedUrl(imagePicker.filePath), true) // TODO this has been changed from url to string
-        request.send(null)
     }
 }
 
