@@ -43,13 +43,13 @@ Page {
         }
 
         CenterButton {
-            //enabled: label.text.length > 0
+            enabled: label.text.length > 0
             id: calendarViewButton
             text: qsTr("Calendar View")
         }
 
         CenterButton {
-            //enabled: label.text.length > 0
+            enabled: label.text.length > 0
             id: baseConfigurationButton
             text: qsTr("Base Configuration")
        }
