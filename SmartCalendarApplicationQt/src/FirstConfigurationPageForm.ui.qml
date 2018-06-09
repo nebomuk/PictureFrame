@@ -43,6 +43,8 @@ Page {
 
         TextField {
             id : textFieldProductPassword
+            echoMode: TextInput.Password
+            passwordCharacter: "*" // default character too large on some devices
         }
 
         Label {

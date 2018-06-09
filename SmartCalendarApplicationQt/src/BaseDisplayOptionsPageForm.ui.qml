@@ -55,6 +55,13 @@ Page {
             }
 
             RadioButton {
+                id: radioButtonautomatedDisplayBrightness
+                Layout.columnSpan: 2
+                text: qsTr("Auto")
+                ButtonGroup.group: displayBrightnessGroup
+            }
+
+            RadioButton {
                 id: radioButtonfixedDisplayBrightness
                 text: qsTr("Fixed")
                 ButtonGroup.group: displayBrightnessGroup
@@ -68,13 +75,6 @@ Page {
                 to: 100
                 stepSize: 10
                 Layout.preferredWidth: 150
-            }
-
-            RadioButton {
-                id: radioButtonautomatedDisplayBrightness
-                Layout.columnSpan: 2
-                text: qsTr("Auto")
-                ButtonGroup.group: displayBrightnessGroup
             }
 
             Label {

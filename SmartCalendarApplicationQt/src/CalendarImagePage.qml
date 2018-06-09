@@ -29,11 +29,13 @@ CalendarImagePageForm {
 
         formData.timeScale = getTimeScaleKeyForIndex(comboBoxTimeView.currentIndex);
 
-        var year = new Date().getFullYear();
+        var year = 1999;
 
-        formData.startTimeInterval  = DateUtil.toShortISOString(new Date(year,0,0,spinBoxStartTime.value));;
+        var startTimeValue = spinBoxStartTime.value;
+        formData.startTimeInterval  = DateUtil.toShortISOString(new Date(year,0,0,startTimeValue+1)); // +1 to fix date formatting issue
 
-        formData.endTimeInterval = DateUtil.toShortISOString(new Date(year,0,0,spinBoxEndTime.value));;
+        var endTimeValue = spinBoxEndTime.value;
+        formData.endTimeInterval = DateUtil.toShortISOString(new Date(year,0,0,endTimeValue+1)); // +1 to fix date formatting issue
 
         formData.monthTimeInterval = DateUtil.toShortISOString(new Date(year,comboBoxMonth.currentIndex,0));
 

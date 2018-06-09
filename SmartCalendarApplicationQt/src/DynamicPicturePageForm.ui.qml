@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.3
 
 Page {
-    title: qsTr("Dynamic Picture")
+    title: qsTr("Own Image")
 
     property alias imageCropperItem : imageCropperItem
     property alias textField: textField

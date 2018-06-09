@@ -10,7 +10,6 @@ import QtQuick.Controls.Material 2.3
 Page {
     id: page
 
-    padding: 20
 
     property alias listModel: listModel
 
@@ -48,15 +47,18 @@ Page {
                                 color: "white"
 
                                 RowLayout {
+                                    anchors.leftMargin: 10
+                                    anchors.rightMargin: 10
                                     anchors.fill: parent
                                     spacing: 10
                                     Label {
                                         text: model.pictureType
-                                        Layout.fillWidth: true
-
+                                        Layout.preferredWidth:  100
                                     }
                                     TextField{
                                           Layout.preferredWidth: 40
+
+                                          Layout.alignment: Qt.AlignHCenter
                                           id : numberInput
                                           text : model.displayTimeInSeconds
                                           validator: IntValidator{bottom: 1; top: 100;}
@@ -93,18 +95,20 @@ Page {
                                     {
                                         id : editButton
                                         text : qsTr("Edit")
-
+                                        Layout.alignment: Qt.AlignRight
+                                        Connections
+                                        {
+                                            target : editButton
+                                            onClicked : listIndexClicked(index);
+                                        }
                                     }
 
                                     RemoveButton
                                     {
                                         listModel: listView.model
+                                        Layout.alignment: Qt.AlignRight
                                     }
-                                    Connections
-                                    {
-                                        target : editButton
-                                        onClicked : listIndexClicked(index);
-                                    }
+
                                 }
 
 

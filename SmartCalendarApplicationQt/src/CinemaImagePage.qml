@@ -10,6 +10,7 @@ CinemaImagePageForm {
     // for the control's initial values
     property var formData
 
+
     Component.onCompleted:
     {
         var keys = Object.keys(formData);

@@ -7,6 +7,9 @@ Page {
 
     title: qsTr("Cinema Image")
 
+    padding: 20
+
+
     property alias comboBoxoption: comboBoxoption
     property alias comboBoxgenre: comboBoxgenre
     property alias comboBoxcountry: comboBoxcountry
@@ -14,9 +17,9 @@ Page {
 
     //property alias publishTimeStamp : publishStamp;
     GridLayout {
-        anchors.left : parent.left
+        anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top : parent.top
+        anchors.top: parent.top
         columns: 2
         rows: 5
         rowSpacing: 5
@@ -26,10 +29,10 @@ Page {
             text: qsTr("Option")
         }
 
-        StringXmlResourceComboBox
-        {
-            id : comboBoxoption
-            attributeName:  "cinemaViewSpinnerArray"
+        StringXmlResourceComboBox {
+            id: comboBoxoption
+            Layout.preferredWidth: 200
+            attributeName: "cinemaViewSpinnerArray"
         }
 
         Label {
@@ -38,12 +41,13 @@ Page {
 
         ExtendedComboBox {
             id: comboBoxgenre
+            Layout.preferredWidth: 200
             model: StringXmlResourceModel {
                 attributeName: "cinemaGenreSpinnerArray"
             }
             // TODO must be a checkable combo box
-//            delegate: CheckBox {
-//            }
+            //            delegate: CheckBox {
+            //            }
             Component.onCompleted: currentIndex = 0
         }
 
@@ -56,10 +60,10 @@ Page {
             text: qsTr("Country")
         }
 
-
         StringXmlResourceComboBox {
             id: comboBoxcountry
-                attributeName: "countrySpinnerArray"
+            Layout.preferredWidth: 200
+            attributeName: "countrySpinnerArray"
         }
 
         Label {
@@ -68,7 +72,8 @@ Page {
 
         StringXmlResourceComboBox {
             id: comboBoxdesign
-                attributeName: "cinemaDesignSpinnerArray"
+            Layout.preferredWidth: 200
+            attributeName: "cinemaDesignSpinnerArray"
         }
     }
 }

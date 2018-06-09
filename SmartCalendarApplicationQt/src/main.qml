@@ -86,7 +86,7 @@ ApplicationWindow {
     }
 
     footer: Label {
-            text : "Copyright © 2018 ViTec - Visual Solutions"
+            text : "Copyright @ 2018 ViTec - Visual Technology"
             horizontalAlignment:  Text.AlignHCenter
             bottomPadding: 10
 

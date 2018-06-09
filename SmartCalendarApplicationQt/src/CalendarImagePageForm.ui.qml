@@ -76,11 +76,11 @@ Page {
         SpinBox {
             visible: isDayViewOption3
             id: spinBoxStartTime
-            up.indicator.enabled: spinBoxEndTime.value > value
+            up.indicator.enabled: spinBoxEndTime.value > value +4
             down.indicator.enabled: spinBoxEndTime.value - value < 12
             from: 0
             to: 24
-            value: 8
+            value: 6
         }
 
         Label {
@@ -96,9 +96,9 @@ Page {
         SpinBox {
             visible: isDayViewOption3
             id: spinBoxEndTime
-            down.indicator.enabled: spinBoxStartTime.value < value
+            down.indicator.enabled: spinBoxStartTime.value  +4 < value
             up.indicator.enabled: value - spinBoxStartTime.value < 12
-            from: 0
+            from: 4
             to: 24
             value: 12
         }
