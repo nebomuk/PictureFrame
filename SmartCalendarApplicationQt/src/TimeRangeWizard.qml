@@ -11,7 +11,7 @@ Item
     
     function open()
     {
-        firstIntervalStartDialog.tumblerModel = ArrayUtil.range(0,24);
+        firstIntervalStartDialog.tumblerModel = ArrayUtil.range(0,23);
         firstIntervalStartDialog.open();
         
     }
