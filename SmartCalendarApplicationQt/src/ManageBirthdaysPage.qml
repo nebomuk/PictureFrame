@@ -14,23 +14,38 @@ ManageBirthdaysPageForm {
 
         buttonBirthdate.text = qsTr("Birthdate");
 
-        var dataContainer = DeviceAccessor.controllerDataContainer;
-
-        // birthdays already received before
-        if(Object.keys(dataContainer.birthdayPlan).length !== 0)
-        {
-            addBirthdaysToModel()
-        }
-        else
-        {
-            DeviceAccessor.queryBirthdayPlan();
-            SignalUtil.connectOnce(dataContainer.birthdayPlanChanged,addBirthdaysToModel);
-        }
-
         buttonAddEntry.enabled = Qt.binding(function() {
           return buttonBirthdate.text !== qsTr("Birthdate") && textFieldLastName.text.length > 0 && textFieldFirstName.text.length > 0;
         }
         );
+    }
+
+    DSM.StateMachine
+    {
+        running: true
+
+        initialState: stateQuerying
+
+        DSM.State
+        {
+            id : stateQuerying
+
+            onEntered:  DeviceAccessor.queryBirthdayPlan();
+            DSM.SignalTransition
+            {
+                signal : DeviceAccessor.controllerDataContainer.birthdayTableReceivedChanged
+                targetState: stateQueryFinished
+            }
+        }
+
+        DSM.FinalState
+        {
+            id : stateQueryFinished
+            onEntered: {
+                DeviceAccessor.controllerDataContainer.birthdayTableReceived = false; // reset state for next time
+                addBirthdaysToModel();
+            }
+        }
     }
 
     QtLabs.MessageDialog {

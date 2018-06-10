@@ -19,13 +19,15 @@ ManageTrashPlanPageForm {
           return buttonDate.text !== qsTr("Date") && textFieldTrashType.text.length > 0;
         }
         );
+
+
     }
 
     DSM.StateMachine
     {
         running: true
 
-        initialState: Object.keys(DeviceAccessor.controllerDataContainer.trashPlan).length === 0 ? stateQueryingTrashPlan : stateTrashPlanQueryFinished
+        initialState: stateQueryingTrashPlan
 
         DSM.State
         {
@@ -34,6 +36,7 @@ ManageTrashPlanPageForm {
             onEntered:  DeviceAccessor.queryTrashPlan();
             DSM.SignalTransition
             {
+                signal : DeviceAccessor.controllerDataContainer.trashTableReceivedChanged
                 targetState: stateTrashPlanQueryFinished
             }
         }
@@ -41,7 +44,10 @@ ManageTrashPlanPageForm {
         DSM.FinalState
         {
             id : stateTrashPlanQueryFinished
-            onEntered: addTrashEntriesToModel()
+            onEntered: {
+                DeviceAccessor.controllerDataContainer.trashTableReceived = false; // reset state for next time
+                addTrashEntriesToModel()
+            }
         }
     }
 
@@ -99,7 +105,6 @@ ManageTrashPlanPageForm {
     {
 
         var dataContainer = DeviceAccessor.controllerDataContainer;
-        //dataContainer.disconnect(addTrashEntriesToModel);
         var trashPlan = dataContainer.trashPlan;
 
         listView.model.clear();

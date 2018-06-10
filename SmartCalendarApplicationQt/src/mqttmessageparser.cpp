@@ -200,13 +200,11 @@ void MqttMessageParser::storeSendingMessageLocally(QString subscriptionPath, QBy
     {
         QJsonArray birthdayList=QJsonDocument::fromJson(jsonString).array();
         mDataContainer->birthdayPlan(birthdayList);
-        mDataContainer->birthdayTableReceived(true);
     }
     else if (ControllerConnectionConstants::TRASHPLANPATH== subscriptionPath)
     {
         QJsonArray trashList=QJsonDocument::fromJson(jsonString).array();
         mDataContainer->trashPlan(trashList);
-        mDataContainer->trashTableReceived(true);
     }
     else if (ControllerConnectionConstants::PERSONACCOUNTPATH== subscriptionPath)
     {
