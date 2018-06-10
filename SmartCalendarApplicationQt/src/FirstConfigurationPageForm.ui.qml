@@ -56,7 +56,7 @@ Page {
         }
 
         Label {
-            text: qsTr("Wifi Password")
+            text: qsTr("SSID-Password")
         }
 
         TextField {

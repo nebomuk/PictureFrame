@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
+import Qt.labs.platform 1.0
 
 import "ArrayUtil.js" as ArrayUtil
 
@@ -78,11 +79,33 @@ Item
                 }
                 );
             }
+            msgDialogFirstIntervalFinished.open();
             
-            
-            secondIntervalStart.open();
         }
         
+    }
+
+    MessageDialog
+    {
+        id : msgDialogFirstIntervalFinished
+        title : qsTr("First Interval successfully selected");
+        text : qsTr("Do you want to choose a second interval?");
+        buttons: MessageDialog.Yes | MessageDialog.No
+
+        onYesClicked:
+        {
+            secondIntervalStart.open();
+        }
+
+        onNoClicked:
+        {
+            // final result for first interval only
+
+            console.info("TimeRangeWizard first interval only accepted(firstStart: " + firstIntervalStart.hour + ", firstEnd: " + firstIntervalEnd.hour +
+                         ", secondStart: " + -1 + ", secondEnd: " + -1 + ")");
+            timeRangeWizard.accepted(firstIntervalStart.hour,firstIntervalEnd.hour,-1,-1);
+        }
+
     }
     
     HourPicker

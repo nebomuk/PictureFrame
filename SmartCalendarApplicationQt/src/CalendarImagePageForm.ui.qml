@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.3
 Page {
     id: page
 
+    padding : 20
+
     title: qsTr("Calendar Image")
     property alias comboBoxoption: comboBoxoption
     property alias comboBoxTimeView: comboBoxTimeView
@@ -40,7 +42,7 @@ Page {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        columns: 3
+        columns: 2
         rows: 6
         rowSpacing: 5
         columnSpacing: 5
@@ -50,7 +52,6 @@ Page {
         }
 
         StringXmlResourceComboBox {
-            Layout.columnSpan: 2
             attributeName: "timeViewSpinnerArray"
             id: comboBoxTimeView
             Layout.preferredWidth: 200
@@ -63,7 +64,6 @@ Page {
         StringXmlResourceComboBox {
             id: comboBoxoption
             Layout.preferredWidth: 200
-            Layout.columnSpan: 2
             attributeName: isDayOrWeek ? "calendarFormatViewSpinnerArrayWithThreeOptions" : "calendarFormatViewSpinnerArrayWithTwoOptions"
         }
 
@@ -73,6 +73,8 @@ Page {
             visible: isDayViewOption3
         }
 
+        RowLayout
+        {
         SpinBox {
             visible: isDayViewOption3
             id: spinBoxStartTime
@@ -81,11 +83,13 @@ Page {
             from: 0
             to: 24
             value: 6
+            Layout.preferredWidth: 150
         }
 
         Label {
             text: qsTr("In 24 hours")
             visible: isDayViewOption3
+        }
         }
 
         Label {
@@ -93,6 +97,8 @@ Page {
             visible: isDayViewOption3
         }
 
+        RowLayout
+        {
         SpinBox {
             visible: isDayViewOption3
             id: spinBoxEndTime
@@ -101,11 +107,13 @@ Page {
             from: 4
             to: 24
             value: 12
+            Layout.preferredWidth: 150
         }
 
         Label {
             text: qsTr("In 24 hours")
             visible: isDayViewOption3
+        }
         }
 
         Label {
@@ -118,13 +126,12 @@ Page {
             id: comboBoxWeekType
             Layout.preferredWidth: 200
             model: [qsTr("Work Week"), qsTr("Week")]
-            Layout.columnSpan: 2
         }
 
         Label {
             visible: isWeekViewOption3 || isMonthViewOption2
             text: qsTr("Time Interval")
-            Layout.columnSpan: isWeekViewOption3 ? 3 : 1 // displayed as heading for week, but on the right for month
+            Layout.columnSpan: isWeekViewOption3 ? 2 : 1 // displayed as heading for week, but on the right for month
         }
 
         Label {
@@ -135,18 +142,18 @@ Page {
         Button {
             visible: isWeekViewOption3
             id: buttonStartDate
-            Layout.columnSpan: 2
         }
 
         Label {
             visible: isWeekViewOption2 || isWeekViewOption3
             text: qsTr("Additional number of days")
+            Layout.preferredWidth: 100
+            wrapMode: Text.WordWrap
         }
 
         SpinBox {
             id: spinBoxAdditionalNumberOfDays
             visible: isWeekViewOption2 || isWeekViewOption3
-            Layout.columnSpan: 2
             from: 0
             to: 6
         }
@@ -156,7 +163,6 @@ Page {
             id: comboBoxMonth
             Layout.minimumWidth: 0
             Layout.preferredWidth: 200
-            Layout.columnSpan: 2
             model: ListModel {
             }
             textRole: "name"
@@ -167,7 +173,6 @@ Page {
         }
 
         ComboBox {
-            Layout.columnSpan: 2
             id: comboBoxDesign
             Layout.preferredWidth: 200
         }
