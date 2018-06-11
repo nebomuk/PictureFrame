@@ -13,6 +13,8 @@ Dialog
 
     property /*js array*/ var sendFunctions
 
+    property /*js array*/ var sendArguments
+
     standardButtons:  Dialog.Ok
 
     modal : true
@@ -51,6 +53,11 @@ Dialog
 
             onEntered:
             {
+                if(sendFunctions.length !== sendArguments.length)
+                {
+                    console.error("MultiSendDialog.qml sendFunctions.length != sendArguments.length but must be same size");
+                }
+
                 functionIndex = 0;
             }
 
@@ -59,7 +66,7 @@ Dialog
 
                 function callNextSendFunction()
                 {
-                    dialog.sendFunctions[dialogShown.functionIndex]();
+                    dialog.sendFunctions[dialogShown.functionIndex](sendArguments[functionIndex]);
                     dialog.title = qsTr("Sending " + dialogShown.functionIndex);
                     dialogShown.functionIndex++;
                 }

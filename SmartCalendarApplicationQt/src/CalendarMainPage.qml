@@ -217,6 +217,7 @@ CalendarMainPageForm
         DeviceAccessor.clearLocalImageCache();
 
          var functionArray = [];
+         var argumentArray = [];
 
         for(var i = 0; i < listModel.count; ++i)
         {
@@ -236,34 +237,42 @@ CalendarMainPageForm
             jsonObject.publishTimeStamp = DateUtil.toShortISOString(new Date());
             jsonObject.clientID = "test_client42" // FIXME client id added by controllerConnectionManager
 
+
             switch(listModel.get(i).pictureType)
             {
                 case pictureTypeModel.calendarImage:
-                    functionArray.push(function()
-                    {DeviceAccessor.sendCalendarImage(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendCalendarImage(arg);})
                     break;
                 case pictureTypeModel.weatherImage :
-                    functionArray.push(function()
-                    {DeviceAccessor.sendWeatherImage(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendWeatherImage(arg);})
                     break;
                 case pictureTypeModel.newsImage    :
-                    functionArray.push(function()
-                    {DeviceAccessor.sendNewsImage(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendNewsImage(arg);})
                     break;
                 case pictureTypeModel.footballImage:
-                    functionArray.push(function()
-                    {DeviceAccessor.sendFootballImage(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendFootballImage(arg);})
                     break;
                 case pictureTypeModel.cinemaImage  :
-                    functionArray.push(function()
-                    {DeviceAccessor.sendCinemaImage(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendCinemaImage(arg);})
                     break;
                 case pictureTypeModel.imageFile    :
-                    functionArray.push(function()
-                    {DeviceAccessor.sendImageFile(jsonObject);})
+                    argumentArray.push(jsonObject);
+                    functionArray.push(function(arg)
+                    {DeviceAccessor.sendImageFile(arg);})
                     break;
             }
         }
+        sendDialog.sendArguments = argumentArray; // the function arguments
         sendDialog.sendFunctions = functionArray;
         sendDialog.open();
 
