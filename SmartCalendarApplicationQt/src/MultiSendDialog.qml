@@ -66,7 +66,7 @@ Dialog
 
                 function callNextSendFunction()
                 {
-                    dialog.sendFunctions[dialogShown.functionIndex](sendArguments[functionIndex]);
+                    dialog.sendFunctions[dialogShown.functionIndex](sendArguments[dialogShown.functionIndex]);
                     dialog.title = qsTr("Sending " + dialogShown.functionIndex);
                     dialogShown.functionIndex++;
                 }
