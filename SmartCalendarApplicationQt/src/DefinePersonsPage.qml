@@ -45,7 +45,23 @@ DefinePersonsPageForm {
                 onEntered: {
                     console.info("O2 DSM stateLinked.onEntered calling calendarApi.getCalendarList()");
                     calendarApi.getCalendarList();
+                    busyIndicator.visible = true;
+                    mainContent.visible = false;
+
                 }
+
+                onExited:
+                {
+                    busyIndicator.visible = false;
+                    mainContent.visible = true;
+                }
+
+                DSM.TimeoutTransition
+                {
+                    timeout: 4000
+                    targetState: stateCalendarTimeout
+                }
+
                 DSM.SignalTransition
                 {
                     signal : calendarApi.success
@@ -55,6 +71,31 @@ DefinePersonsPageForm {
                 {
                     signal : calendarApi.error
                     targetState: stateCalendarError
+                }
+                DSM.SignalTransition
+                {
+                    signal : calendarApi.timeout
+                    targetState:stateCalendarTimeout
+                }
+            }
+
+            DSM.State
+            {
+                id : stateCalendarTimeout
+                onEntered: {
+                    console.info("O2 DSM stateCalendarTimeout.onEntered");
+                    retryButtonAndTextVisible = true;
+                    mainContent.visible = false;
+                }
+                onExited:
+                {
+                    retryButtonAndTextVisible = false;
+                    mainContent.visible = true;
+                }
+                DSM.SignalTransition
+                {
+                    signal: retryButton.clicked
+                    targetState: stateGetCalendarList
                 }
             }
 
@@ -83,10 +124,10 @@ DefinePersonsPageForm {
                     o2.refresh();
                 }
                 DSM.SignalTransition {
-                    signal : o2.refreshFinished
-                    guard : error === 0 // QNetworkReply::Error::NoError
+                    signal : o2.linkingSucceeded // this is emitted alongside refreshFinished, but refreshFinished would require guard
                     targetState: stateGetCalendarList
                 }
+
                 // when there's any network error (that is a server reply error, not a network timeout)
                 // the  O2 library will send the linkedChanged signal with linked === false and internally call unlink()
                 DSM.SignalTransition {
@@ -146,6 +187,9 @@ DefinePersonsPageForm {
 
         signal error();
 
+        signal timeout();   // note that qml XMLHttpRequest does not support timeout
+
+
         property var request
 
         function getCalendarList()
@@ -158,11 +202,16 @@ DefinePersonsPageForm {
                   console.debug("getCalendarList http status code " + xhr.status);
                   if(xhr.status === 200)
                   {
-                      success(xhr);
+                      success();
                   }
+                  else if(xhr.status === 0)
+                  {
+                      timeout();
+                  }
+
                   else
                   {
-                      error(xhr);
+                      error();
                   }
               }
             }

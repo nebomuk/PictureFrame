@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import de.vitecvisual.core 1.0;
 import "OptionComboBoxUtil.js" as OptionComboBoxUtil;
+import Qt.labs.platform 1.0
 
 
 
@@ -26,7 +27,21 @@ WeatherImagePageForm {
     }
 
 
+    MessageDialog
+    {
+        title : qsTr("City missing");
+        id : msgDialogNoCity
+        text : qsTr("You must enter a valid city name.");
+    }
+
     function onDoneClicked()  {
+
+        if(textFieldcityName.text.length === 0)
+        {
+            msgDialogNoCity.open();
+            return;
+        }
+
 
         var formData = {};
         formData.timeScale = OptionComboBoxUtil.mapToOption(comboBoxOption.currentIndex); // uses option according to xamarin app

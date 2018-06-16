@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setApplicationName("Smart Calendar Thync");
     QCoreApplication::setOrganizationName("Vitec Visual");
+    QCoreApplication::setOrganizationDomain("vitec-visual.de");
 
     // QApplication is required for the QWidget based Qml.labs message dialog on desktops,
     // but QApplication will use desktop style instead of material style
@@ -111,7 +112,11 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<ControllerDataContainer>("de.vitecvisual.core",1,0,"ControllerDataContainer","Property of DeviceAccessor singleton");
 
     // enums
-    qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
+    //qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
+
+    qmlRegisterType<QNetworkReply>();
+    //qmlRegisterUncreatableType<QNetworkReply>("someimport", 1, 0, "QNetworkReply", "none");
+
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/src/main.qml")));
