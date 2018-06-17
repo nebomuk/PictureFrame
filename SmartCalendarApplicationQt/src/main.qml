@@ -104,4 +104,17 @@ ApplicationWindow {
         event.accepted = true
         stackView.pop();
     }
+
+    MessageDialog
+    {
+        text : "Loaded from Local fs"
+
+        Component.onCompleted:
+        {
+            if(loadedFromLocalFs === true)
+            {
+                open();
+            }
+        }
+    }
 }

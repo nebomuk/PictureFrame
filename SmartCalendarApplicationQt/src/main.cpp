@@ -10,7 +10,9 @@
 #include "messagehandler.h"
 #include "simplesettings.h"
 
+
 #include <QLoggingCategory>
+#include <QQmlContext>
 
 #ifdef Q_OS_ANDROID
 #include "androidhelper.h"
@@ -27,6 +29,7 @@
 #include <QGuiApplication>
 #endif
 
+#include <QDir>
 #include <QFontDatabase>
 #include <QQmlApplicationEngine>
 
@@ -76,6 +79,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
     qmlRegisterSingletonType<LoggingFilter>("de.vitecvisual.core",1,0,"LoggingFilter",&newObject<LoggingFilter>);
     qmlRegisterSingletonType<LoggingFilter>("de.vitecvisual.core",1,0,"MessageHandler",&newObject<MessageHandler>);
+    qmlRegisterSingletonType<SimpleSettings>("de.vitecvisual.core",1,0,"SimpleSettings",&newObject<SimpleSettings>);
 
 
     // instantiable C++ types
@@ -87,7 +91,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<IImageGallery>("de.vitecvisual.native",1,0,"ImageGallery");
 #endif
 
-    qmlRegisterType<SimpleSettings>("de.vitecvisual.core",1,0,"SimpleSettings");
 
 
 #ifdef Q_OS_ANDROID
@@ -124,7 +127,21 @@ int main(int argc, char *argv[])
 
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/src/main.qml")));
+
+    QString qmlFsPath = QUrl(QSettings().value("qmlFsPath","").toString()).toLocalFile();
+    QString mainQmlFile = QDir(qmlFsPath).filePath("main.qml");
+    if(QFile::exists(mainQmlFile) && QFileInfo(mainQmlFile).isReadable() && QSettings().value("checkBoxLoadQmlFromFs",false).toBool())
+    {
+        qDebug("loading main.qml from local file system");
+        engine.rootContext()->setContextProperty("loadedFromLocalFs",true);
+        engine.load(mainQmlFile);
+    }
+    else
+    {
+        qDebug("loading main.qml from embedded resources");
+        engine.rootContext()->setContextProperty("loadedFromLocalFs",false);
+        engine.load(QUrl(QStringLiteral("qrc:/src/main.qml")));
+    }
     if (engine.rootObjects().isEmpty())
         return -1;
 

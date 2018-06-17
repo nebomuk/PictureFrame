@@ -28,7 +28,13 @@ DeveloperPageForm {
         buttonRedirectLog.enabled = !MessageHandler.redirectActive;
         buttonLogView.enabled = MessageHandler.redirectActive;
 
+        checkBoxLoadQmlFromFs.checked = SimpleSettings.value("checkBoxLoadQmlFromFs",false);
+    }
 
+    checkBoxLoadQmlFromFs.onCheckedChanged:
+    {
+            SimpleSettings.setValue("checkBoxLoadQmlFromFs",checkBoxLoadQmlFromFs.checked);
+            SimpleSettings.setValue("qmlFsPath",labelQmlFsPath.text);
     }
 
     Component

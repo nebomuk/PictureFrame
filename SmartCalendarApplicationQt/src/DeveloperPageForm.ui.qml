@@ -2,12 +2,19 @@ import QtQuick 2.5
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import Qt.labs.platform 1.0
 
 Page {
+
+    id : page
 
     property alias buttonRedirectLog: buttonRedirectLog
 
     property alias buttonLogView: buttonLogView
+
+    property alias checkBoxLoadQmlFromFs: checkBoxLoadQmlFromFs
+
+    property alias labelQmlFsPath: labelQmlFsPath
 
     GridLayout {
         columns: 1
@@ -38,7 +45,23 @@ Page {
 
         CheckBox
         {
+            id : checkBoxLoadQmlFromFs
+            text: "Use path below to load qml source code (requires restart and runtime permission)"
 
+        }
+
+
+
+        Label
+        {
+            id : labelQmlFsPath
+            // @disable-check M222
+            text : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0] + "/scaqt"
+        }
+
+        Label
+        {
+            text : "current component url: " + page.url
         }
 
 
