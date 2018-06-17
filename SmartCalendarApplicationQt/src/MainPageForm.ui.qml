@@ -17,6 +17,9 @@ Page {
 
     property alias buttonBaseConfiguration : baseConfigurationButton
 
+    property alias buttonDeveloperPage : developerPageButton
+
+
     property string selectedDevice // written to in DeviceManagerPage
 
     CenterColumn {
@@ -52,6 +55,12 @@ Page {
            // enabled: label.text.length > 0
             id: baseConfigurationButton
             text: qsTr("Base Configuration")
+       }
+
+        CenterButton {
+           // enabled: label.text.length > 0
+            id: developerPageButton
+            text: qsTr("Developer Options")
        }
     }
 }

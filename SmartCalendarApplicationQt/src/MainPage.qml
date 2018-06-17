@@ -20,6 +20,10 @@ MainPageForm {
         stackView.push("CalendarMainPage.qml")
     }
 
+    buttonDeveloperPage.onClicked: {
+        stackView.push("DeveloperPage.qml")
+    }
+
     Component.onCompleted:
     {
         if(!SmartCalendarAccess.isConnectedToWifi)

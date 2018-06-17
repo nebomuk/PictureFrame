@@ -7,6 +7,7 @@
 #include "imagecropper.h"
 #include "loggingfilter.h"
 #include "smartcalendaraccessimpl.h"
+#include "messagehandler.h"
 
 #include <QLoggingCategory>
 
@@ -73,6 +74,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<SmartCalendarAccessImpl>("de.vitecvisual.core", 1, 0, "SmartCalendarAccess", &newObject<SmartCalendarAccessImpl>);
     qmlRegisterSingletonType<ImageCropper>("de.vitecvisual.core",1,0,"ImageCropper",&newObject<ImageCropper>);
     qmlRegisterSingletonType<LoggingFilter>("de.vitecvisual.core",1,0,"LoggingFilter",&newObject<LoggingFilter>);
+    qmlRegisterSingletonType<LoggingFilter>("de.vitecvisual.core",1,0,"MessageHandler",&newObject<MessageHandler>);
+
 
     // instantiable C++ types
 #ifdef Q_OS_ANDROID
@@ -115,7 +118,6 @@ int main(int argc, char *argv[])
     //qRegisterMetaType<QNetworkReply::NetworkError>("QNetworkReply::NetworkError");
 
     qmlRegisterType<QNetworkReply>();
-    //qmlRegisterUncreatableType<QNetworkReply>("someimport", 1, 0, "QNetworkReply", "none");
 
 
     QQmlApplicationEngine engine;
