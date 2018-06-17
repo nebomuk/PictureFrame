@@ -25,7 +25,7 @@ Page {
         anchors.top: parent.top
         rowSpacing: 10
         columnSpacing: 10
-        rows: 3
+        rows: 5
         columns: 2
 
         Label {
@@ -38,13 +38,20 @@ Page {
 
         Label
         {
-            text : qsTr("Product Password")
+            text : qsTr("Product Password (Minimum Length: 8, at least one number and special character)")
+            wrapMode: Text.WordWrap
         }
 
         TextField {
             id : textFieldProductPassword
             echoMode: TextInput.Password
             passwordCharacter: "*" // default character too large on some devices
+        }
+
+        PasswordStrengthMeter
+        {
+            Layout.columnSpan: 2
+            password: textFieldProductPassword.text
         }
 
         Label {

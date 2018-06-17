@@ -58,7 +58,8 @@ SOURCES += src/main.cpp \
     src/iimagecapture.cpp \
     src/iimagegallery.cpp \
     src/loggingfilter.cpp \
-    src/messagehandler.cpp
+    src/messagehandler.cpp \
+    src/simplesettings.cpp
 
 
 
@@ -82,7 +83,8 @@ HEADERS += \
     src/iimagecapture.h \
     src/iimagegallery.h \
     src/loggingfilter.h \
-    src/messagehandler.h
+    src/messagehandler.h \
+    src/simplesettings.h
 
 
 # O2 OAuth2 authorization library, License: BSD,

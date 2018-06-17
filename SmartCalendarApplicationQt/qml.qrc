@@ -66,5 +66,6 @@
         <file>src/MultiSendDialog.qml</file>
         <file>src/DeveloperPage.qml</file>
         <file>src/DeveloperPageForm.ui.qml</file>
+        <file>src/PasswordStrengthMeter.qml</file>
     </qresource>
 </RCC>

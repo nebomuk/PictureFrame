@@ -8,6 +8,7 @@
 #include "loggingfilter.h"
 #include "smartcalendaraccessimpl.h"
 #include "messagehandler.h"
+#include "simplesettings.h"
 
 #include <QLoggingCategory>
 
@@ -85,6 +86,8 @@ int main(int argc, char *argv[])
 #else
     qmlRegisterType<IImageGallery>("de.vitecvisual.native",1,0,"ImageGallery");
 #endif
+
+    qmlRegisterType<SimpleSettings>("de.vitecvisual.core",1,0,"SimpleSettings");
 
 
 #ifdef Q_OS_ANDROID

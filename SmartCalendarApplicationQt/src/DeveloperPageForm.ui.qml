@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.5
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
@@ -24,6 +24,23 @@ Page {
             id : buttonLogView
             text : "show log"
         }
+
+        TextField {
+            id : textFieldProductPassword
+            echoMode: TextInput.Password
+            passwordCharacter: "*" // default character too large on some devices
+        }
+
+        PasswordStrengthMeter {
+            password:  textFieldProductPassword.text
+        }
+
+
+        CheckBox
+        {
+
+        }
+
 
     }
 

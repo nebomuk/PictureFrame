@@ -27,6 +27,8 @@ DeveloperPageForm {
     {
         buttonRedirectLog.enabled = !MessageHandler.redirectActive;
         buttonLogView.enabled = MessageHandler.redirectActive;
+
+
     }
 
     Component
