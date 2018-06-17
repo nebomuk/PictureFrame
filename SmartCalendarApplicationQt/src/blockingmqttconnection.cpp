@@ -125,6 +125,7 @@ quint16 BlockingMqttConnection::publish(QMQTT::Message msg)
         return 0;
     }
 
+
     return client->publish(msg);
 
 }

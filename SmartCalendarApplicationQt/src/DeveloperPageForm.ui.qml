@@ -59,11 +59,6 @@ Page {
             text : StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0] + "/scaqt"
         }
 
-        Label
-        {
-            text : "current component url: " + page.url
-        }
-
 
     }
 
